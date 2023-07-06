@@ -13,27 +13,27 @@
             <div class="sidebar">
                 <a href="#">
                     <span class="material-symbols-outlined">grid_view</span>
-                    <h3>Dashboard</h3>
+                    <h4>administracion</h4>
                 </a>
                 <a href="#">
                     <span class="material-symbols-outlined">person</span>
-                    <h3>Secc1</h3>
+                    <h4>Secc1</h4>
                 </a>
                 <a href="#">
                     <span class="material-symbols-outlined">receipt_long</span>
-                    <h3>Secc2</h3>
+                    <h4>Secc2</h4>
                 </a>
                 <a href="#">
                     <span class="material-symbols-outlined">insights</span>
-                    <h3>Secc3</h3>
+                    <h4>Secc3</h4>
                 </a>
                 <a href="#">
                     <span class="material-symbols-outlined">mail_outline</span>
-                    <h3>Secc4</h3>
+                    <h4>Secc4</h4>
                 </a>
                 <a href="#">
                     <span class="material-symbols-outlined">logout</span>
-                    <h3>Salir</h3>
+                    <h4>Salir</h4>
                 </a>
             </div>
         </aside>
@@ -54,7 +54,7 @@
 
 h1,
 h2,
-h3,
+h4,
 h4,
 h5,
 h6 {
@@ -93,13 +93,8 @@ h2 {
     font-size: 1.4;
 }
 
-h3 {
-    color: #7380ec;
-    font-size: 0.87;
-}
-
 h4 {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 h5 {
@@ -160,11 +155,6 @@ aside .sidebar {
     top: 3rem;
 }
 
-aside h3 {
-    font-weight: 500;
-}
-
-
 aside .sidebar a {
     display: flex;
     color: var(--color-info-dark);
@@ -203,31 +193,16 @@ aside .sidebar {
     border-radius: var(--border-radius-1);
 }
 
-
-
-
-
 :root {
     --color-primary: #7380ec;
     --color-danger: #ff7782;
-    --color-succes: #41f1b6;
-    --color-warning: #ffbb55;
-    --color-white: #fff;
-    --color-info-dark: #7d8da1;
-    --color-info-light: #dce1eb;
+    
     --color-dark: #363949;
     --color-light: rgba(132, 139, 200, 0.18);
-    --color-primary-variant: #677484;
     --color-dark-variant: #677483;
     --color-background: #f6f6f9;
-
-    --card-border-radious: 2rem;
+    
     --border-radius-1: 0.4rem;
-    --border-radius-2: 0.8rem;
-    --border-radius-3: 1.2rem;
-
-    --card-padding: 1.8rem;
-    --padding-1: 1.2rem;
 
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
@@ -245,7 +220,7 @@ aside .sidebar {
         display: none;
     }
 
-    aside .sidebar h3 {
+    aside .sidebar h4 {
         display: none;
     }
 
@@ -287,7 +262,7 @@ aside .sidebar {
         display: none;
     }
 
-    aside .sidebar h3 {
+    aside .sidebar h4 {
         display: inline;
     }
 
