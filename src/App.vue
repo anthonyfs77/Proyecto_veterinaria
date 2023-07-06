@@ -1,5 +1,7 @@
 <template>
-<div class="app">
-  hola mundo 
-</div>  
+  <SideBarMenu/>
 </template>
+
+<script setup>
+import SideBarMenu from '../src/components/SideBarMenu.vue'
+</script>
