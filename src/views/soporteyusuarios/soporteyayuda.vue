@@ -3,15 +3,24 @@
       <h2 class="title">¿En qué podemos ayudarte?</h2>
       <p class="message">Nuestro equipo de soporte está listo para asistirte.</p>
       <button class="help-button" @click="openHelpCenter">Centro de Ayuda</button>
+      <centroayuda v-show="act"/>
     </div>
   </template>
   
   <script setup>
   import { ref } from 'vue'
-  
+  import centroayuda from '../../components/centroayuda.vue';
+  const act = ref(false)
   
   const openHelpCenter = () => {
-    alert('Centro de ayuda abierto. Esta función debería ser reemplazada por tu propia implementación.');
+    if (act.value === false)
+    {
+        act.value = true;
+    }
+    else if (act.value === true)
+    { 
+        act.value = false;
+    }
   }
   </script>
   
