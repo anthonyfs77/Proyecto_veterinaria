@@ -1,5 +1,11 @@
 <template>
-  <SideBarMenu/>
+  <div class="app">
+    <div class="aside">
+      <SideBarMenu/>
+    </div>
+    <div class="main">
+    </div>
+  </div>
 </template>
 
 <script setup>

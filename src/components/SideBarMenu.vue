@@ -11,10 +11,10 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="#">
+                <router-link :to="{name: 'administracion'}">
                     <span class="material-symbols-outlined">grid_view</span>
                     <h4>administracion</h4>
-                </a>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">person</span>
                     <h4>Secc1</h4>
@@ -37,10 +37,16 @@
                 </a>
             </div>
         </aside>
+        <div class="vista">
+            <router-view/>
+        </div>
     </div>
 </template>
     
 <style scoped>
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -51,6 +57,9 @@
     list-style: none;
     box-sizing: border-box;
 }
+
+
+
 
 h1,
 h2,
@@ -114,12 +123,13 @@ b {
 }
 
 .containerNorm {
-    display: grid;
-    width: 95%;
-    margin: 0 auto;
-    gap: 1.8rem;
-    grid-template-columns: 14rem auto 23rem;
+  display: grid;
+  width: 95%;
+  margin: 0 auto;
+  gap: 1.8rem;
+  grid-template-columns: 15rem 1fr;
 }
+
 
 aside {
     height: 100vh;
@@ -186,7 +196,6 @@ aside .sidebar a:hover span {
 }
 
 aside .sidebar {
-    background: var(--color-danger);
     color: var(--color-white);
     padding: 2px 10px;
     font-size: 11px;
@@ -201,7 +210,7 @@ aside .sidebar {
     --color-light: rgba(132, 139, 200, 0.18);
     --color-dark-variant: #677483;
     --color-background: #f6f6f9;
-    
+
     --border-radius-1: 0.4rem;
 
     --box-shadow: 0 2rem 3rem var(--color-light);
