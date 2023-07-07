@@ -44,11 +44,6 @@
   
   }
   
-  img {
-    display: block;
-    width: 100%;
-  }
-  
   h1 {
     font-weight: 800;
     font-size: 1.8rem;
@@ -77,19 +72,17 @@
   }
   
   
-  main .insights {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6rem;
-  }
+
   
   main .insights>div {
     background: #fff;
-    padding: 1.8rem;
+    padding: 1rem;
     border-radius: 2rem;
-    margin-top: 1rem;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
+    width: 22em;
+    max-width:35em ;
+    margin-right: 1em;
   }
   
   main .insights>div:hover {
