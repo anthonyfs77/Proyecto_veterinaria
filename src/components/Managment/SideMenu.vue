@@ -11,14 +11,14 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="#">
+                <router-link :to="{ name: 'control'}">
                     <span class="material-symbols-outlined">person</span>
-                    <h4>Secc1</h4>
-                </a>
-                <a href="#">
+                    <h4>Dashboard</h4>
+                </router-link>
+                <router-link :to="{name: 'productos'}">
                     <span class="material-symbols-outlined">person</span>
-                    <h4>Secc1</h4>
-                </a>
+                    <h4>Productos</h4>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">receipt_long</span>
                     <h4>Secc2</h4>
@@ -38,6 +38,7 @@
             </div>
         </aside>
         <div class="vista">
+            <router-view/>
         </div>
     </div>
 </template>
@@ -45,7 +46,9 @@
  
 <style scoped>
 
-
+.vista{
+    width: 93em;
+}
 
 * {
     margin: 0;

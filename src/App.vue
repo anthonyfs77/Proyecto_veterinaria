@@ -4,7 +4,7 @@
       <SideMenu/>
     </div>
     <div class="main">
-      <vista/>
+      
     </div>
   </div>
 
@@ -12,7 +12,6 @@
 
 <script setup>
 import SideMenu from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/SideMenu.vue'
-import vista from '/proyecto_veterinaria/proyecto/veterinaria/src/views/Administracion/MenuManagmentView.vue'
 </script>
 
 <style scoped>

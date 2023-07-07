@@ -51,7 +51,7 @@
                       </tr>
                   </tbody>
               </table>
-              <a href="#">Show all</a>
+              <router-link :to="{name: 'productos'}">Show all</router-link>
           </div>
         </main>
   </template>
