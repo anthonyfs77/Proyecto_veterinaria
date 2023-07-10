@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import SideMenu from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/SideMenu.vue'
+import SideMenu from './components/Managment/SideMenu.vue'
 </script>
 
 <style scoped>

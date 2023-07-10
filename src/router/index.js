@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import control from '/proyecto_veterinaria/proyecto/veterinaria/src/views/Administracion/MenuManagmentView.vue'; 
-import productos from '/proyecto_veterinaria/proyecto/veterinaria/src/views/Productos/TablaProductsPublicsView.vue'; 
-import productosInternos from '/proyecto_veterinaria/proyecto/veterinaria/src/views/Productos/TablaProductsInternosView.vue'; 
-import productosPublicos from '/proyecto_veterinaria/proyecto/veterinaria/src/views/Productos/TablaProductsPublicsView.vue'; 
-import productosApartados from '/proyecto_veterinaria/proyecto/veterinaria/src/views/Productos/TablaProductApartView.vue'; 
+import control from '../views/Administracion/MenuManagmentView.vue'; 
+import productos from '../views/Productos/TablaProductsPublicsView.vue'; 
+import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
+import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
+import productosApartados from '../views/Productos/TablaProductApartView.vue'; 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

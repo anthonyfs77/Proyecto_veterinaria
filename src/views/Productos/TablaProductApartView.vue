@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import Rows from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Tabla/RowTablesProducts.vue' 
+import Rows from '@/components/Tabla/RowTablesProducts.vue' 
 </script>
 
 <style scoped>
