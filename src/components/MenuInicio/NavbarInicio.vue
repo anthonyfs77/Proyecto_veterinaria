@@ -1,0 +1,103 @@
+<template>
+    <div class="app">
+        <div class="ctn">
+            <div class="nomb">
+                    <span class="material-symbols-outlined">
+                        sound_detection_dog_barking
+                    </span>
+                <h3>Veterinaria</h3>
+            </div>
+            <div class="middle">
+                <RouterLink :to="{name: 'control'}">
+                    <p>sobre nosotros</p>
+                </RouterLink>
+                <p>Citas</p>
+            </div>
+            <div class="aside">
+                <p>registrarse</p>
+                <p>iniciar sesion</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<style scoped>
+.ctn {
+    margin-top: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.nomb,
+.middle,
+.aside {
+    display: flex;
+}
+
+
+.nomb {
+    margin-left: 40px;
+}
+
+.middle,
+.aside {
+    gap: 100px;
+}
+
+.aside {
+    margin-right: 40px;
+}
+
+.app {
+    font-family: 'Comfortaa';
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    transition: all 3.2s ease;
+}
+
+p:hover {
+    border-bottom: 1px solid #f6bb46;
+    cursor: pointer;
+}
+span{
+    font-size: 2em;
+}
+
+
+
+
+
+
+/*==========================Resoluciones=============================*/
+
+@media screen and (max-width: 768px) {
+    /*====================Small tablets y mobil======================*/
+    .ctn{
+        justify-content: center;
+        align-items: center;
+    }
+    .middle,
+    .aside {
+        display: none;
+    }
+  
+}
+
+@media screen and (max-width: 1268px) {
+    /*====================Small tablets y mobil======================*/
+    .ctn{
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .middle, .aside{
+        margin-left: 5em;
+    }
+}
+
+</style>

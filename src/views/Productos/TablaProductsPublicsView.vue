@@ -1,21 +1,21 @@
 <template>
     <div class="app">
         <div class="header">
-            <router-link :to="{name: 'publicos'}">
+            <router-link :to="{name: 'productosPublicos'}" class="custom-link">
                 <h3>
                     <span class="material-symbols-outlined">dynamic_form</span>
                     <strong>Productos publicos</strong>
                 </h3>
             </router-link>
 
-            <router-link :to="{name: 'internos'}">
+            <router-link :to="{name: 'productosInternos'}" class="custom-link">
                 <h3>
                     <span class="material-symbols-outlined">trending_up</span>
                     Productos internos
                 </h3>
             </router-link>
 
-            <router-link :to="{name: 'apartados'}">
+            <router-link :to="{name: 'productosApartados'}" class="custom-link">
                 <h3>
                     <span class="material-symbols-outlined">query_stats</span>
                     Apartados
@@ -74,10 +74,11 @@
 </template>
 
 <script setup>
-import Rows from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Tabla/RowTablesProducts.vue'; 
+import Rows from '../../components/Tabla/RowTablesProducts.vue';
 </script>
 
 <style scoped>
+
 .headerTable {
 
     display: flex;

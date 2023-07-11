@@ -36,19 +36,12 @@
                     <h4>Salir</h4>
                 </a>
             </div>
-        </aside>
-        <div class="vista">
-            <router-view/>
-        </div>
+        </aside>  
     </div>
 </template>
 
  
 <style scoped>
-
-.vista{
-    width: 93em;
-}
 
 * {
     margin: 0;

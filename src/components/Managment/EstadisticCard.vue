@@ -90,7 +90,7 @@
   }
   
   main .insights>div span {
-    background: #7380ec;
+    background: #ffd800;
     padding: 0.5rem;
     border-radius: 50%;
     color: #fff;

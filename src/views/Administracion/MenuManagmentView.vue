@@ -33,15 +33,18 @@
 </template>
 
 <script setup>
-import AddProduct from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/AddProduct.vue'
-import EstadisticCard from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/EstadisticCard.vue'
-import InfoCard from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/InfoCard.vue'
-import Notificaciones from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/Notificaciones.vue'
-import TablaComp from '/proyecto_veterinaria/proyecto/veterinaria/src/components/Managment/TablaComp.vue'
+
+import AddProduct from '../../components/Managment/AddProduct.vue'
+import EstadisticCard from '../../components/Managment/EstadisticCard.vue'
+import InfoCard from '../../components/Managment/InfoCard.vue'
+import Notificaciones from '../../components/Managment/Notificaciones.vue'
+import TablaComp from '../../components/Managment/TablaComp.vue'
 </script>
 
 
 <style scoped>
+
+
 .cont {
     margin-bottom: 10px;
     margin-top: 10px;

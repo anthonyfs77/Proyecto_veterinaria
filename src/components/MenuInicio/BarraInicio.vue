@@ -1,0 +1,95 @@
+<template>
+    <div class="app">
+        <div class="sec1">
+            <h5>
+                <span class="material-symbols-outlined">
+                    inventory_2
+                </span>Productos
+            </h5>
+            <p>Descubre nuestros productos! </p>
+
+        </div>
+        <div class="sec2">
+            <h5>
+                <span class="material-symbols-outlined">
+                    upload_file
+                </span>
+                Citas
+            </h5>
+            <p>Realiza una cita! </p>
+        </div>
+        <div class="sec3">
+            <h5>
+                <span class="material-symbols-outlined">
+                    location_on
+                </span>Ubicacion
+            </h5>
+            <p>Descubre nuestra ubicacion!</p>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 6em;
+    width: 50em;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
+}
+
+.sec2{
+    display: flex;
+    justify-content: center;
+    border-left: 1px solid rgb(224, 216, 216);
+    border-right: 1px solid rgb(224, 216, 216);
+    width: 15em;
+    
+}
+
+.sec1, .sec3{
+    width: 15em;
+    display: flex;
+    justify-content: center;
+}
+
+.sec1, .sec2 , .sec3{
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    transition: all 300ms ease;
+}
+
+.sec1:hover{
+    transform: scale(1.1);
+}
+.sec2:hover{
+    transform: scale(1.1);
+}
+.sec3:hover{
+    transform: scale(1.1);
+}
+
+
+/*==========================Resoluciones=============================*/
+
+@media screen and (max-width: 768px) {
+    /*====================Small tablets y mobil======================*/
+    span{
+        font-size: 20px;
+    }
+    .app{
+        font-size: 10px;
+        margin-top: 10;
+        width: 100%;
+        height: 10em;
+    }
+}
+
+
+
+
+</style>
