@@ -15,7 +15,9 @@
             </div>
             <div class="aside">
                 <p>registrarse</p>
-                <p>iniciar sesion</p>
+                <RouterLink :to="{name: 'login'}">
+                    <p>iniciar sesion</p>    
+                </RouterLink>
             </div>
         </div>
     </div>

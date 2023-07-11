@@ -6,6 +6,7 @@ import productos from '../views/Productos/TablaProductsPublicsView.vue';
 import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
 import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
 import productosApartados from '../views/Productos/TablaProductApartView.vue'; 
+import login from '../views/forms/loginView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -13,7 +14,13 @@ const routes = [
   {
     path: '/',
     name: 'principalMain',
-    component: principalMain
+    component: principalMain,
+  },
+  
+  {
+    path: '/login',
+    name: 'login',
+    component: login
   },
 
   {
