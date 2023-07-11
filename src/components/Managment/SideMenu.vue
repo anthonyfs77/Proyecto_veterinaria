@@ -31,10 +31,10 @@
                     <span class="material-symbols-outlined">mail_outline</span>
                     <h4>Secc4</h4>
                 </a>
-                <a href="#">
+                <router-link :to="{name: 'principalMain'}">
                     <span class="material-symbols-outlined">logout</span>
                     <h4>Salir</h4>
-                </a>
+                </router-link>
             </div>
         </aside>  
     </div>
