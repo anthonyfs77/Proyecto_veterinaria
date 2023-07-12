@@ -7,6 +7,7 @@ import productosInternos from '../views/Productos/TablaProductsInternosView.vue'
 import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
 import productosApartados from '../views/Productos/TablaProductApartView.vue'; 
 import login from '../views/forms/loginView.vue';
+import register from '../views/forms/RegisterView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -21,6 +22,12 @@ const routes = [
     path: '/login',
     name: 'login',
     component: login
+  },
+
+  {
+    path: '/register',
+    name: 'register',
+    component: register,
   },
 
   {
@@ -57,38 +64,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/productos',
-  //   name: 'Panel',
-  //   component: productos,
-  //   children: [
-  //     // Rutas anidadas dentro de /productos
-  //     {
-  //       path: 'internos',
-  //       name: 'internos',
-  //       component: productosInternos
-  //     },
-  //     {
-  //       path: 'publicos',
-  //       name: 'publicos',
-  //       component: productosPublicos
-  //     },
-  //     {
-  //       path: 'apartados',
-  //       name: 'apartados',
-  //       component: productosApartados
-  //     }
-  //   ]
-  // },
-
-//   //links para Dashboard
-
-//   {
-//     path: '/app',
-//     name: 'app',
-//     component: app
-//   }
-// 
 ]
 
 

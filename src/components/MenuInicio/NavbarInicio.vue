@@ -8,14 +8,16 @@
                 <h3>Veterinaria</h3>
             </div>
             <div class="middle">
-                <RouterLink :to="{name: 'control'}">
+                <RouterLink :to="{name: 'control'}" class="custom-link">
                     <p>sobre nosotros</p>
                 </RouterLink>
                 <p>Citas</p>
             </div>
             <div class="aside">
-                <p>registrarse</p>
-                <RouterLink :to="{name: 'login'}">
+                <router-link :to="{name: 'register'}" class="custom-link">
+                    <p>registrarse</p>
+                </router-link>
+                <RouterLink :to="{name: 'login'}" class="custom-link">
                     <p>iniciar sesion</p>    
                 </RouterLink>
             </div>
@@ -100,6 +102,11 @@ span{
     .middle, .aside{
         margin-left: 5em;
     }
+}
+
+.custom-link{
+    text-decoration: none !important;
+    color: black;
 }
 
 </style>

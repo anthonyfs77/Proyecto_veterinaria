@@ -1,10 +1,12 @@
 <template>
-    <button class="learn-more">
-        <span class="circle" aria-hidden="true">
-            <span class="icon arrow"></span>
-        </span>
-        <span class="button-text">Iniciar sesion</span>
-    </button>
+    <router-link :to="{ name: 'login' }" class="custom-link">
+        <button class="learn-more">
+            <span class="circle" aria-hidden="true">
+                <span class="icon arrow"></span>
+            </span>
+            <span class="button-text">Iniciar sesion</span>
+        </button>
+    </router-link>
 </template>
 
 <style scoped>
