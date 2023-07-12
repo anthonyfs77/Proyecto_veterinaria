@@ -13,6 +13,8 @@ import consultasHechas from '../views/Reportes/ConsultasRealizadasView.vue';
 import consultasRechazadas from '../views/Reportes/ConsultasRechazadasView.vue';
 import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
 import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
+import login from '../views/forms/loginView.vue';
+import register from '../views/forms/RegisterView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -20,9 +22,19 @@ const routes = [
   {
     path: '/',
     name: 'principalMain',
-    component: principalMain
+    component: principalMain,
   },
-
+  
+  {
+    path: '/login',
+    name: 'login',
+    component: login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: register,
+  },
   {
 
     // el router view 
@@ -92,38 +104,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/productos',
-  //   name: 'Panel',
-  //   component: productos,
-  //   children: [
-  //     // Rutas anidadas dentro de /productos
-  //     {
-  //       path: 'internos',
-  //       name: 'internos',
-  //       component: productosInternos
-  //     },
-  //     {
-  //       path: 'publicos',
-  //       name: 'publicos',
-  //       component: productosPublicos
-  //     },
-  //     {
-  //       path: 'apartados',
-  //       name: 'apartados',
-  //       component: productosApartados
-  //     }
-  //   ]
-  // },
-
-//   //links para Dashboard
-
-//   {
-//     path: '/app',
-//     name: 'app',
-//     component: app
-//   }
-// 
 ]
 
 
