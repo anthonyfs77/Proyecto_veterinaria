@@ -39,6 +39,9 @@ import EstadisticCard from '../../components/Managment/EstadisticCard.vue'
 import InfoCard from '../../components/Managment/InfoCard.vue'
 import Notificaciones from '../../components/Managment/Notificaciones.vue'
 import TablaComp from '../../components/Managment/TablaComp.vue'
+
+
+
 </script>
 
 
@@ -103,3 +106,4 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
     position: relative;
 }
 </style>
+

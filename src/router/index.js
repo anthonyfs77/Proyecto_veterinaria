@@ -6,6 +6,13 @@ import productos from '../views/Productos/TablaProductsPublicsView.vue';
 import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
 import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
 import productosApartados from '../views/Productos/TablaProductApartView.vue'; 
+import  inventarioInterno from '../views/Reportes/ProductosInternosView.vue';
+import inventario from '../views/Reportes/ReporteInventarioView.vue';
+import historialMedico from '../views/Reportes/HistorialMedicoView.vue';
+import consultasHechas from '../views/Reportes/ConsultasRealizadasView.vue';
+import consultasRechazadas from '../views/Reportes/ConsultasRechazadasView.vue';
+import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
+import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -47,6 +54,41 @@ const routes = [
         path: '/productosApartados',
         name: 'productosApartados',
         component: productosApartados
+      },
+      {
+        path:'/inventarioInterno',
+        name:'reportinvetnariointerno',
+        component:inventarioInterno
+      },
+      {
+        path:'/inventario',
+        name:'reportinventario',
+        component:inventario
+      },
+      {
+        path: '/historialMedico',
+        name:'reportehistorialmedico',
+        component: historialMedico
+      },
+      {
+        path: '/consultasHechas',
+        name : 'reportconsultasrealizadas',
+        component: consultasHechas
+      },
+      {
+        path: '/consultasRechazadas',
+        name: 'reportconsultasrechazadas',
+        component: consultasRechazadas
+      },
+      {
+        path: '/ordenesCompra',
+        name: 'reportordenescompra',
+        component: ordenesCompra
+      },
+      {
+        path: '/reporteVentas',
+        name: 'reporteventas',
+        component: reporteVentas
       }
     ]
   },
