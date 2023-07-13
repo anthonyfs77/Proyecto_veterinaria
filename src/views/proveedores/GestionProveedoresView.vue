@@ -1,13 +1,14 @@
 <template>
     <div class="container">
-      <div class="nomb"><span class="material-symbols-outlined" style="font-size: 50px;" >
+      <div class="titulo">
+              <span class="material-symbols-outlined"  style="font-size: 50px;">
                         sound_detection_dog_barking
-                    </span>
-                    
+                </span>
+                <div>proveedores</div>    
                 
             </div>
-      
-  
+          
+    
       <!-- Lista de proveedores -->
       <ul class="mt-5">
         <li v-for="proveedor in proveedores" :key="proveedor.id" class="mb-2">
@@ -97,10 +98,14 @@
   padding:0%;
   margin: 0%;
   }
-  span{
-    margin: 20px;
-    
-    
+  
+  .titulo{
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  margin: 20px;
+  font-size: 35px;
+  padding: 15px;
   }
   </style>
   
