@@ -15,6 +15,7 @@ import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
 import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
 import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
+import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [

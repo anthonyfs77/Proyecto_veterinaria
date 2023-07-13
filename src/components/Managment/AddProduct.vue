@@ -14,7 +14,6 @@
   </template>
   
   <style scoped>
-  /*=====================Sales analytics=======================00*/
   
   .right .sales-analytics {
     margin-top: 2rem;

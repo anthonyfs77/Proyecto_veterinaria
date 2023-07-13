@@ -9,7 +9,7 @@
   
   <script setup>
   import { ref } from 'vue'
-  import centroayuda from '../../components/centroayuda.vue';
+  import centroayuda from '../../components/gestionusuarios/centroayuda.vue';
   const act = ref(false)
   
   const openHelpCenter = () => {
