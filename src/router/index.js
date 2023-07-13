@@ -16,6 +16,7 @@ import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
 import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
+import catalogo from '../views/Productos/catalogoView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -39,7 +40,12 @@ const routes = [
   {
     path: '/GestionProveedores',
     name: 'GestionProveedores',
-    component: GestionProveedores,
+    component: GestionProveedores
+  },
+  {
+    path: '/catalogo',
+    name: 'catalogo',
+    component: catalogo
   },
   {
 
