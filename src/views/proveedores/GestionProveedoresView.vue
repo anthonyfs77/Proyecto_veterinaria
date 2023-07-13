@@ -1,8 +1,11 @@
 <template>
     <div class="container">
-      <div class="text-left">
-      <h1 class="mt-5">Gestión de Proveedores</h1>
-      </div>
+      <div class="nomb"><span class="material-symbols-outlined" style="font-size: 50px;" >
+                        sound_detection_dog_barking
+                    </span>
+                    
+                
+            </div>
       
   
       <!-- Lista de proveedores -->
@@ -93,6 +96,11 @@
   height: 650px;
   padding:0%;
   margin: 0%;
+  }
+  span{
+    margin: 20px;
+    
+    
   }
   </style>
   

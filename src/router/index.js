@@ -15,7 +15,7 @@ import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
 import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
 import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
-
+import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -35,6 +35,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: register,
+  },
+  {
+    path: '/GestionProveedores',
+    name: 'GestionProveedores',
+    component: GestionProveedores,
   },
   {
 

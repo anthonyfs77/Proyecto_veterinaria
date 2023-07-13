@@ -12,6 +12,9 @@
                     <p>sobre nosotros</p>
                 </RouterLink>
                 <p>Citas</p>
+                <RouterLink :to="{name: 'GestionProveedores'}" class="custom-link">
+                    <p>proveedores</p>
+                </RouterLink>
             </div>
             <div class="aside">
                 <router-link :to="{name: 'register'}" class="custom-link">
