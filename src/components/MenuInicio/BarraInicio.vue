@@ -6,7 +6,9 @@
                     inventory_2
                 </span>Productos
             </h5>
-            <p>Descubre nuestros productos! </p>
+            <RouterLink :to="{name: 'catalogo'}" class="custom-link">
+                    <p style="color: black;">descrube nuestros productos!</p>
+                </RouterLink>
 
         </div>
         <div class="sec2">
