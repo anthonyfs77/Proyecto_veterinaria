@@ -16,8 +16,7 @@
   //import productos from '../Productos/TablaProductsPublicsView.vue'
   </script>
   
-  <style scoped>
-  
+  <style scoped>  
   .container-fluid {
       display: grid;
       grid-template-columns: 1fr 5fr;
@@ -28,5 +27,10 @@
       width: 100%;
       height: 100vh;
    }
-  
+   .main{
+    position: relative;
+    box-shadow: 0 1px 25px rgba(0,0,0,0.2);
+    background-color: white;
+    border-radius: 20px 20px 0px 0px;
+   }
   </style>

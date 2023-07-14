@@ -133,11 +133,16 @@ b {
 }
 
 .containerNorm {
+    position: relative;
   display: grid;
-  width: 95%;
+  width: 21.8em;
   margin: 0 auto;
   gap: 1.8rem;
   grid-template-columns: 15rem 1fr;
+  position: fixed;
+  background-color: #f6bb46;
+  margin-left: -24px;
+
 }
 
 
@@ -177,7 +182,7 @@ aside .sidebar {
 
 aside .sidebar a {
     display: flex;
-    color: #7d8da1;
+    color: black;
     margin-left: 2rem;
     gap: 1rem;
     align-items: center;
@@ -207,20 +212,21 @@ aside .sidebar a:hover span {
 
 aside .sidebar {
     color: #fff;
-    padding: 2px 10px;
+    padding: 2px 24px;
     font-size: 11px;
     border-radius: 0.4rem;
 }
 
 .sidebar-select {
     display: flex;
-    color: #7d8da1;
+    color: black;
     gap: 1rem;
     align-items: center;
     position: relative;
     height: 3.7rem;
     transition: all 300ms ease;
     font-size: 16px;
+    background-color: #f6bb46;
 }
 
 .sidebar-select:hover {

@@ -7,9 +7,8 @@
                 </span>Productos
             </h5>
             <RouterLink :to="{name: 'catalogo'}" class="custom-link">
-                    <p style="color: black;">descrube nuestros productos!</p>
-                </RouterLink>
-
+                    <p>Nuestros productos!</p>
+            </RouterLink>
         </div>
         <div class="sec2">
             <h5>
@@ -73,6 +72,11 @@
 }
 .sec3:hover{
     transform: scale(1.1);
+}
+
+p{
+    color: black;
+    text-align: center;
 }
 
 

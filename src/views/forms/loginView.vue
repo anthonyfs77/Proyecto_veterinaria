@@ -53,8 +53,10 @@
                     <span class="span">Olvidaste tu contraseña?</span>
                 </div>
                 <button class="button-submit">Sign In</button>
-                <p class="p">No tienes una cuenta? <span class="span">inicia sesion</span>
-
+                <p class="p">No tienes una cuenta? 
+                    <router-link :to="{name: 'register'}" class="custom-link">
+                        <span class="span">registrate</span>
+                    </router-link>
                 </p>
                 <p class="p line">O inicia con</p>
 
@@ -76,11 +78,8 @@
                             <path d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012
 	c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
 	C318.115,0,375.068,22.126,419.404,58.936z" style="fill:#F14336;"></path>
-
                         </svg>
-
                         Google
-
                     </button>
                 </div>
             </form>

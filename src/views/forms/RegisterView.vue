@@ -96,7 +96,10 @@
                         <span class="span">Olvidaste tu contraseña?</span>
                     </div>
                     <button class="button-submit">Sign In</button>
-                    <p class="p">Ya tienes una cuenta? <span class="span">inicia sesion</span>
+                    <p class="p">Ya tienes una cuenta? 
+                        <router-link :to="{name: 'login'}" class="custom-link">
+                            <span class="span">inicia sesion</span>
+                        </router-link>
                     </p>
                 </form>
             </div>

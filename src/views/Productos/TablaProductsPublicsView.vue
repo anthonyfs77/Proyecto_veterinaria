@@ -1,26 +1,20 @@
 <template>
+    <div class="title">
+        <encabezado />
+    </div>
     <div class="app">
-        <div class="header">
-            <router-link :to="{name: 'productosPublicos'}" class="custom-link">
-                <h3>
-                    <span class="material-symbols-outlined">dynamic_form</span>
-                    <strong>Productos publicos</strong>
-                </h3>
-            </router-link>
-
-            <router-link :to="{name: 'productosInternos'}" class="custom-link">
-                <h3>
-                    <span class="material-symbols-outlined">trending_up</span>
-                    Productos internos
-                </h3>
-            </router-link>
-
-            <router-link :to="{name: 'productosApartados'}" class="custom-link">
-                <h3>
-                    <span class="material-symbols-outlined">query_stats</span>
-                    Apartados
-                </h3>
-            </router-link>
+        <div class="controles">
+            <div class="botones">
+                <btn tittle="Stock"/>
+                <btn tittle="Sin stock"/>
+                <add/>
+            </div>
+            <div class="rango">
+                <precios tittle1="$min" tittle2="$max"/> 
+            </div>
+            <div class="izquierdo">
+                <search/>
+            </div>
         </div>
         <div class="table">
             <div class="headerTable">
@@ -75,22 +69,50 @@
 
 <script setup>
 import Rows from '../../components/Tabla/RowTablesProducts.vue';
+import encabezado from '../../components/Tabla/header.vue'
+import search from '../../components/ControlesIndividuales/searchInput.vue'
+import add from '../../components/ControlesIndividuales/ingresar.vue'
+import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
+import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
 </script>
 
 <style scoped>
 
-.headerTable {
+.controles{
+    display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1.1fr 1.6fr 0.8fr; 
+  gap: 0px 0px; 
+  height: 100px;
+}
 
+.izquierdo{
+    display: flex;
+    align-items: flex-end;
+}
+
+.rango{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.botones{
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.headerTable {
     display: flex;
     justify-content: space-around;
     margin-top: 3em;
     margin-bottom: 2em;
+    
 }
-
-
-
 span {
     color: #ffd800;
+    
 }
 
 .app {
@@ -100,6 +122,7 @@ span {
     gap: 0px 0px;
     width: 100%;
     height: 100vh;
+    
 }
 
 
@@ -107,14 +130,12 @@ span {
     display: flex;
     justify-content: center;
     gap: 7em;
-    border-bottom: 1px solid rgba(132, 139, 200, 0.18);
     margin-top: 3em;
 }
 
 h4 {
     font-size: 20px;
     cursor: pointer;
-
 }
 
 
@@ -129,5 +150,9 @@ h3 {
 strong {
     color: #818694;
     border-bottom: 3px solid #ffd800;
+}
+
+.header {
+    margin-top: 0px;
 }
 </style>
