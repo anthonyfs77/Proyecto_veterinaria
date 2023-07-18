@@ -82,7 +82,7 @@ p{
 
 /*==========================Resoluciones=============================*/
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 567.98px) {
     /*====================Small tablets y mobil======================*/
     span{
         font-size: 20px;
@@ -90,12 +90,13 @@ p{
     .app{
         font-size: 10px;
         margin-top: 10;
-        width: 100%;
-        height: 10em;
+        width: 90%;
+        height: 9em;
+    }
+    p{
+        display: none;
     }
 }
-
-
 
 
 </style>

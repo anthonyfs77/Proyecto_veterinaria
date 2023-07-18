@@ -1,6 +1,6 @@
 <template>
     <div class="containerNorm">
-        <aside>
+        <aside :class="{ 'expanded': isExpanded }" @mouseenter="expandSidebar" @mouseleave="collapseSidebar">
             <div class="top">
                 <div class="logo">
                     <span class="material-symbols-outlined">sound_detection_dog_barking</span>
@@ -52,6 +52,43 @@
         </aside>  
     </div>
 </template>
+
+
+
+<script setup>
+import { ref } from 'vue';
+
+const isExpanded = ref(false);
+
+const expandSidebar = () => {
+  isExpanded.value = true;
+  console.log(isExpanded.value);
+}
+
+const collapseSidebar = () => {
+  isExpanded.value = false;
+  console.log(isExpanded.value);
+}
+
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const selectedOption = ref ('');
+
+const resetSelect = () => {
+    selectedOption.value = '';
+}
+
+const onReportChange = (event) => {
+    const selectedReport = event.target.value;
+    router.push({ name: selectedReport }).then(() => {
+        resetSelect();
+    })
+}
+
+</script>
+
 
  
 <style scoped>
@@ -140,7 +177,7 @@ b {
   gap: 1.8rem;
   grid-template-columns: 15rem 1fr;
   position: fixed;
-  background-color: #f6bb46;
+  
   margin-left: -24px;
 
 }
@@ -226,7 +263,6 @@ aside .sidebar {
     height: 3.7rem;
     transition: all 300ms ease;
     font-size: 16px;
-    background-color: #f6bb46;
 }
 
 .sidebar-select:hover {
@@ -234,22 +270,3 @@ aside .sidebar {
 }
 
 </style>
-
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-
-const selectedOption = ref ('');
-
-const resetSelect = () => {
-    selectedOption.value = '';
-}
-
-const onReportChange = (event) => {
-    const selectedReport = event.target.value;
-    router.push({ name: selectedReport }).then(() => {
-        resetSelect();
-    })
-}
-</script>

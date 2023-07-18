@@ -1,7 +1,6 @@
 <template>
     <main>
     <div class="recent-orders">
-              <h2>Recent order</h2>
               <br><br>
               <table>
                   <thead>
@@ -123,6 +122,10 @@
       display: block;
       margin: 1rem auto;
       color:#7380ec;
+  }
+
+  .recent-orders h2{
+    font-size: 30px;
   }
   
   </style>

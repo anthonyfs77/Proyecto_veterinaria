@@ -34,14 +34,12 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 0.7rem;
     padding: 1.4rem 1.8rem;
     border-radius: 1.2rem;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
     height: 100px;
-    width: 24em;
-    max-width: 25em;
+    width: 100%;
   }
   
   .right .sales-analytics .item:hover {
@@ -52,7 +50,6 @@
     display: flex;
     justify-content: space-between;
     align-items: start;
-    margin: 0;
     width: 100%;
   }
   

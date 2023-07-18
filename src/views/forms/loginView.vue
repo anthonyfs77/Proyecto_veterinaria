@@ -1,11 +1,7 @@
 <template>
     <div class="app">
         <div class="img">
-            <div class="imagen">
-                <div class="cardfoto">
-                    <div class="foto"></div>
-                </div>
-            </div>
+            <div class="imagen"></div>
         </div>
         <div class="login">
             <div class="header">
@@ -52,7 +48,9 @@
                     </div>
                     <span class="span">Olvidaste tu contraseña?</span>
                 </div>
-                <button class="button-submit">Sign In</button>
+                <router-link :to="{name: 'clientHeader'}">
+                    <button class="button-submit">Sign In</button>
+                </router-link>
                 <p class="p">No tienes una cuenta? 
                     <router-link :to="{name: 'register'}" class="custom-link">
                         <span class="span">registrate</span>
@@ -110,7 +108,7 @@
     gap: 0px 0px;
     grid-template-areas:
         ". .";
-    background-color: #151717;
+    background-color: #fac134;
 }
 
 .form {
@@ -254,7 +252,6 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-image: url('../../assets/img/incono.png');
     background-size: cover;
     margin-left: 10px;
     margin-right: 10px;
@@ -262,35 +259,21 @@
     
 }
 
-.imagen{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.app{
+    position: relative;
+    right: 12px;
 }
-
-.foto{
-    height: 24em;
- width: 20em;
- background-image: url('../../assets/img/imgPerro.png'); 
- background-repeat: no-repeat;
- background-size: cover;
-}
-
-.cardfoto{
+.img {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
-    width: 36em;
-    height: 30em;
-    background-color: #656565;
-    border-radius: 2em;
+    height: 100vh;
+    background-image: url('../../assets/img/loginSinFondo.png');
+    background-size: 30em;
+    background-repeat: no-repeat;
+    background-position: center bottom;
 }
 
-.imagen{
-    background-color: #151717;
-    height: 100vh;
-}
 
 
 @media screen and (max-width: 768px) {
@@ -305,5 +288,6 @@
     .form{
         width: 27.7em;
     }
+
 }
 </style>
