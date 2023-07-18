@@ -18,6 +18,9 @@ import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
 import citas from '../views/Citas/CitasView.vue';
+
+// cliente
+import header from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -27,7 +30,11 @@ const routes = [
     name: 'principalMain',
     component: principalMain,
   },
-  
+  {
+    path: '/header',
+    name: 'clientHeader',
+    component: header,
+  },
   {
     path: '/login',
     name: 'login',

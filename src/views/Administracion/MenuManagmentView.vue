@@ -11,7 +11,9 @@
                     <EstadisticCard />
                 </div>
             </div>
+            
             <div class="tabla">
+                <h1>Recent orders</h1>
                 <TablaComp />
             </div>
         </div>
@@ -46,11 +48,9 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
 
 
 <style scoped>
-
-
 .cont {
     margin-bottom: 10px;
-    margin-top: 10px;
+    margin-top: 0px;
     background: #fff;
     padding: 1.2rem;
     border-radius: 0rem 0rem 2rem 2rem;
@@ -62,32 +62,30 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
 .cards {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(0, 2fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-template-rows: repeat(auto-fit, minmax(2fr, 1fr));
+    grid-gap: 10px;
 }
 
 .panel {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(0, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-template-rows: auto;
+    grid-gap: 10px;
 }
 
 .estadisticas {
     display: flex;
+    justify-content: space-around;
+    width: 100%;
 }
-
-
 
 .vista {
     display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    grid-template-rows: 3fr;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 2.2fr 0.5fr;
+    gap: 10px;
     justify-items: stretch;
     align-items: stretch;
-
     width: 100%;
     height: 100vh;
 }
@@ -95,15 +93,23 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
 .right {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(0, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-template-rows: auto;
+    grid-gap: 10px;
 }
-
-
 
 .not {
     position: relative;
 }
+
+.ordenes-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h1{
+    font-size: 30px;
+}
+
 </style>
 

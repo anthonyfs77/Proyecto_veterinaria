@@ -32,5 +32,9 @@
     box-shadow: 0 1px 25px rgba(0,0,0,0.2);
     background-color: white;
     border-radius: 20px 20px 0px 0px;
+    width: 103%;
+    right: 23px;
+    overflow-x: hidden;
+    
    }
   </style>
