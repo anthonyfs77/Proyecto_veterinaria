@@ -93,7 +93,9 @@ body {
     overflow-x: hidden;
     color: #363949;
 }
-
+option{
+    background-color: white;
+}
 a {
     color: #363949;
 }

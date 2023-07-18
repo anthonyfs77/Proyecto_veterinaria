@@ -11,7 +11,9 @@
                 <RouterLink :to="{name: 'control'}" class="custom-link">
                     <p>sobre nosotros</p>
                 </RouterLink>
-                <p>Citas</p>
+                <RouterLink :to="{name: 'citas'}" class="custom-link">
+                    <p>citas</p>
+                </RouterLink>
                 <RouterLink :to="{name: 'GestionProveedores'}" class="custom-link">
                     <p>proveedores</p>
                 </RouterLink>

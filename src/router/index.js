@@ -17,6 +17,7 @@ import register from '../views/forms/RegisterView.vue';
 import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
+import citas from '../views/Citas/CitasView.vue';
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -51,6 +52,11 @@ const routes = [
     path: '/soporteyayuda',
     name: 'soporteyayuda',
     component: soporteyayuda
+  },
+  {
+    path:'/citas',
+    name: 'citas',
+    component: citas
   },
 
   {

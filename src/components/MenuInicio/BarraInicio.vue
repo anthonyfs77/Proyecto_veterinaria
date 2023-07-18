@@ -17,7 +17,7 @@
                 </span>
                 Citas
             </h5>
-            <p>Realiza una cita! </p>
+            <RouterLink  :to="{name: 'citas'}" class="custom-link"><p>Agenda una cita!</p></RouterLink>
         </div>
         <div class="sec3">
             <h5>
