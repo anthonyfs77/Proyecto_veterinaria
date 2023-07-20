@@ -27,7 +27,10 @@
   
   <style scoped>
   /*=====================Carta de estadistica=======================00*/
-  
+  main{
+    width: 32%;
+    margin-left: 10px;
+  }
   * {
     margin: 0;
     padding: 0;
@@ -66,22 +69,13 @@
   }
   
   /*----------------MAIN--------------*/
-  
-  main {
-    margin-top: 1.4rem;
-  }
-  
-  
-
-  
   main .insights>div {
     background: #fff;
     padding: 1rem;
     border-radius: 2rem;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
-    width: 22em;
-    max-width:35em ;
+    width: 100%;
     margin-right: 1em;
   }
   

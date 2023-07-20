@@ -7,9 +7,8 @@
                 </span>Productos
             </h5>
             <RouterLink :to="{name: 'catalogo'}" class="custom-link">
-                    <p style="color: black;">descrube nuestros productos!</p>
-                </RouterLink>
-
+                    <p>Nuestros productos!</p>
+            </RouterLink>
         </div>
         <div class="sec2">
             <h5>
@@ -18,7 +17,7 @@
                 </span>
                 Citas
             </h5>
-            <p>Realiza una cita! </p>
+            <RouterLink  :to="{name: 'citas'}" class="custom-link"><p>Agenda una cita!</p></RouterLink>
         </div>
         <div class="sec3">
             <h5>
@@ -75,10 +74,15 @@
     transform: scale(1.1);
 }
 
+p{
+    color: black;
+    text-align: center;
+}
+
 
 /*==========================Resoluciones=============================*/
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 567.98px) {
     /*====================Small tablets y mobil======================*/
     span{
         font-size: 20px;
@@ -86,12 +90,13 @@
     .app{
         font-size: 10px;
         margin-top: 10;
-        width: 100%;
-        height: 10em;
+        width: 90%;
+        height: 9em;
+    }
+    p{
+        display: none;
     }
 }
-
-
 
 
 </style>

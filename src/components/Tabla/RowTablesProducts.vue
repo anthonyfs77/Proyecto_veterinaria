@@ -1,16 +1,42 @@
 <template>
     <div class="app">
       <div class="column">
-        <p>collar</p>
-        <p>12093</p>
-        <p>49 $</p>
-        <p>29 $</p>
-        <p>4 $</p>
-        <div type="button" class="btn btn-success">Stock</div>
+        <p>{{ name }}</p>
+        <p>{{stock}}</p>
+        <p>{{priceV}} </p>
+        <p>{{priceC}} </p>
+        <p>{{iva}} </p>
+        <p id="stock">{{status}}</p>
       </div>
     </div>
   </template>
   
+<script setup>
+import {defineProps} from 'vue'
+
+defineProps({
+  name:{
+    type:String
+  },
+  stock:{
+    type:Number
+  },
+  priceV:{
+    type:Number
+  },
+  priceC:{
+    type:Number
+  },
+  iva:{
+    type:Number
+  },
+  status:{
+    type:String
+  }
+})
+
+</script>
+
   <style scoped>
   .app {
     display: flex;
@@ -25,33 +51,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    width: 100%;
 
   }
   
-  .btn-danger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Comfortaa', cursive;
-    border-radius: 0.6rem;
-    background-color: rgb(223, 53, 53);
-    color: white;
-    width: 7em;
-    height: 1.5em;
+  #stock{
+    color: green ;
   }
-  
-  .btn-success {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Comfortaa', cursive;
-    border-radius: 0.6rem;
-    background-color: green;
-    color: white;
-    width: 5em;
-    height: 1.5em;
-  }
-  
   p {
     display: flex;
     height: 40px;

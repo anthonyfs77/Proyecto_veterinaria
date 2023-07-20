@@ -1,6 +1,6 @@
 <template>
     <div class="containerNorm">
-        <aside>
+        <aside :class="{ 'expanded': isExpanded }" @mouseenter="expandSidebar" @mouseleave="collapseSidebar">
             <div class="top">
                 <div class="logo">
                     <span class="material-symbols-outlined">sound_detection_dog_barking</span>
@@ -53,6 +53,43 @@
     </div>
 </template>
 
+
+
+<script setup>
+import { ref } from 'vue';
+
+const isExpanded = ref(false);
+
+const expandSidebar = () => {
+  isExpanded.value = true;
+  console.log(isExpanded.value);
+}
+
+const collapseSidebar = () => {
+  isExpanded.value = false;
+  console.log(isExpanded.value);
+}
+
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const selectedOption = ref ('');
+
+const resetSelect = () => {
+    selectedOption.value = '';
+}
+
+const onReportChange = (event) => {
+    const selectedReport = event.target.value;
+    router.push({ name: selectedReport }).then(() => {
+        resetSelect();
+    })
+}
+
+</script>
+
+
  
 <style scoped>
 
@@ -93,7 +130,9 @@ body {
     overflow-x: hidden;
     color: #363949;
 }
-
+option{
+    background-color: white;
+}
 a {
     color: #363949;
 }
@@ -133,11 +172,16 @@ b {
 }
 
 .containerNorm {
+    position: relative;
   display: grid;
-  width: 95%;
+  width: 21.8em;
   margin: 0 auto;
   gap: 1.8rem;
   grid-template-columns: 15rem 1fr;
+  position: fixed;
+  
+  margin-left: -24px;
+
 }
 
 
@@ -177,7 +221,7 @@ aside .sidebar {
 
 aside .sidebar a {
     display: flex;
-    color: #7d8da1;
+    color: black;
     margin-left: 2rem;
     gap: 1rem;
     align-items: center;
@@ -207,14 +251,14 @@ aside .sidebar a:hover span {
 
 aside .sidebar {
     color: #fff;
-    padding: 2px 10px;
+    padding: 2px 24px;
     font-size: 11px;
     border-radius: 0.4rem;
 }
 
 .sidebar-select {
     display: flex;
-    color: #7d8da1;
+    color: black;
     gap: 1rem;
     align-items: center;
     position: relative;
@@ -228,22 +272,3 @@ aside .sidebar {
 }
 
 </style>
-
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-
-const selectedOption = ref ('');
-
-const resetSelect = () => {
-    selectedOption.value = '';
-}
-
-const onReportChange = (event) => {
-    const selectedReport = event.target.value;
-    router.push({ name: selectedReport }).then(() => {
-        resetSelect();
-    })
-}
-</script>

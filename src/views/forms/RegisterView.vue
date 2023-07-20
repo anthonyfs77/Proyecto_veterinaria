@@ -1,3 +1,4 @@
+
 <template>
     <div class="app">
         <div class="img">
@@ -5,14 +6,10 @@
             </div>
         </div>
         <div class="login">
-            <div class="header">
-                <h5>Veterinaria cachorros</h5>
-                <div class="logo"></div>
-            </div>
             <div class="formulario">
                 <form class="form">
-                    <h1>Hola!</h1>
-                    <p>porfavor ingrese sus credenciales.</p>
+                    <h1>Bienvenido!</h1>
+                    <p>Por favor ingrese sus credenciales.</p>
                     <div class="flex-column">
                         <label>Nombre </label>
                     </div>
@@ -96,7 +93,10 @@
                         <span class="span">Olvidaste tu contraseña?</span>
                     </div>
                     <button class="button-submit">Sign In</button>
-                    <p class="p">Ya tienes una cuenta? <span class="span">inicia sesion</span>
+                    <p class="p">Ya tienes una cuenta? 
+                        <router-link :to="{name: 'login'}" class="custom-link">
+                            <span class="span">inicia sesion</span>
+                        </router-link>
                     </p>
                 </form>
             </div>
@@ -105,15 +105,19 @@
 </template>
 
 
+
 <style scoped>
 * {
     box-sizing: border-box;
 }
 
 .login {
+    display: flex;
+    justify-content: center;
     border-radius: 2em 0 0 2em;
     background-color: white;
-    height: 99.9vh;
+    height: 100vh;
+    
 }
 
 .app {
@@ -126,7 +130,6 @@
     gap: 0px 0px;
     grid-template-areas:
         ". .";
-    background-color: #bbe3eb;
 }
 
 
@@ -135,13 +138,11 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background-color: #ffffff;
+    gap: 4px;
     padding: 30px;
-    width: 550px;
+    width: 450px;
     border-radius: 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
 }
 
 ::placeholder {
@@ -165,6 +166,7 @@
     align-items: center;
     padding-left: 10px;
     transition: 0.2s ease-in-out;
+    
 }
 
 .input {
@@ -222,55 +224,9 @@
     margin: 5px 0;
 }
 
-
-.login {
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-template-columns: 1.7fr;
-    grid-template-rows: 0.2fr 1.8fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "."
-        ".";
-}
-
-.formulario {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.header {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 10px;
-    align-items: center;
-}
-
-.logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-image: url('../img/incono.png');
-    background-size: cover;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-repeat: no-repeat;
-
-}
-
 .imagen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.imagen {
-    background-color: #bbe3eb;
     height: 100vh;
 }
-
-
 
 .nombres {
     display: flex;
@@ -284,9 +240,9 @@
     display: flex;
 }
 
-.imagen {
-    background-image: url('../../assets/img/imgRegister.jpg');
-    background-size: 40em;
+.imagen {    
+    background-image: url('../../assets/img/perroRegister.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -297,7 +253,7 @@
 
     .login {
         border-radius: 0;
-        width: 100%;
+        width: 130%;
     }
 
     .form {
@@ -307,10 +263,19 @@
     .imagen{
         display: none;
     }
+}
 
-    .app{
-        min-width: 100%;
-        min-height: 100%;
+@media screen and (min-resolution: 70dpi) and (max-resolution: 120dpi) {
+  /* Estilos para el rango de zoom entre el 80% y el 120% */
+    .app {
+        width: 100%;
+        right: 1em;
+        position: fixed;
+    }
+
+    .formulario {
+        max-height: 45rem; /* Altura máxima del formulario */
+        overflow-y: auto; 
     }
 }
 </style>

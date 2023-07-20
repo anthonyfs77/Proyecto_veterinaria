@@ -5,7 +5,7 @@
         <p>12093</p>
         <p>49 $</p>
         <p>29 $</p>
-        <div type="button" class="btn btn-success">Stock</div>
+        <p id="stock">Stock</p>
       </div>
     </div>
   </template>
@@ -27,31 +27,9 @@
     width: 100%;
 
   }
-  
-  .btn-danger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Comfortaa', cursive;
-    border-radius: 0.6rem;
-    background-color: rgb(223, 53, 53);
-    color: white;
-    width: 7em;
-    height: 1.5em;
-  }
-  
-  .btn-success {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Comfortaa', cursive;
-    border-radius: 0.6rem;
-    background-color: green;
-    color: white;
-    width: 5em;
-    height: 1.5em;
-  }
-  
+  #stock{
+    color: green ;
+  }  
   p {
     display: flex;
     height: 40px;

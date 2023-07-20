@@ -5,7 +5,6 @@ import panelAdmin from '../views/Administracion/PanelAdminView.vue';
 import productos from '../views/Productos/TablaProductsPublicsView.vue'; 
 import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
 import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
-import productosApartados from '../views/Productos/TablaProductApartView.vue'; 
 import  inventarioInterno from '../views/Reportes/ProductosInternosView.vue';
 import inventario from '../views/Reportes/ReporteInventarioView.vue';
 import historialMedico from '../views/Reportes/HistorialMedicoView.vue';
@@ -15,8 +14,18 @@ import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
 import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
 import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
+<<<<<<< HEAD
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
+=======
+import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
+import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
+import catalogo from '../views/Productos/catalogoView.vue';
+import citas from '../views/Citas/CitasView.vue';
+
+// cliente
+import header from '../views/Cliente/Menu/MenuClienteView.vue'
+>>>>>>> 3250776e2103d3b84bf7eb615b22f8640dc9c241
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
@@ -26,7 +35,11 @@ const routes = [
     name: 'principalMain',
     component: principalMain,
   },
-  
+  {
+    path: '/header',
+    name: 'clientHeader',
+    component: header,
+  },
   {
     path: '/login',
     name: 'login',
@@ -35,7 +48,7 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: register,
+    component: register
   },
   {
     path: '/GestionProveedores',
@@ -47,6 +60,17 @@ const routes = [
     name: 'catalogo',
     component: catalogo
   },
+  {
+    path: '/soporteyayuda',
+    name: 'soporteyayuda',
+    component: soporteyayuda
+  },
+  {
+    path:'/citas',
+    name: 'citas',
+    component: citas
+  },
+
   {
 
     // el router view 
@@ -73,11 +97,6 @@ const routes = [
         path: '/productosPublicos',
         name: 'productosPublicos',
         component: productosPublicos
-      },
-      {
-        path: '/productosApartados',
-        name: 'productosApartados',
-        component: productosApartados
       },
       {
         path:'/inventarioInterno',

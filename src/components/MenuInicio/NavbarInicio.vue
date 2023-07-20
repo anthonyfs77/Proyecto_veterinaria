@@ -7,11 +7,14 @@
                     </span>
                 <h3>Veterinaria</h3>
             </div>
+            <MenuDesplegable/>
             <div class="middle">
                 <RouterLink :to="{name: 'control'}" class="custom-link">
                     <p>sobre nosotros</p>
                 </RouterLink>
-                <p>Citas</p>
+                <RouterLink :to="{name: 'citas'}" class="custom-link">
+                    <p>citas</p>
+                </RouterLink>
                 <RouterLink :to="{name: 'GestionProveedores'}" class="custom-link">
                     <p>proveedores</p>
                 </RouterLink>
@@ -27,7 +30,6 @@
         </div>
     </div>
 </template>
-
 
 <style scoped>
 .ctn {
@@ -85,8 +87,7 @@ span{
 @media screen and (max-width: 768px) {
     /*====================Small tablets y mobil======================*/
     .ctn{
-        justify-content: center;
-        align-items: center;
+        margin-left: 15%;
     }
     .middle,
     .aside {
