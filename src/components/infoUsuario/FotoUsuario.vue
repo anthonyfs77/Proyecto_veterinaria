@@ -4,7 +4,6 @@
         @click="selectImage" 
         class="user-image hover-image"
       />
-      <img src="../src/assets/img/pencil.png" class="icon"/>
       <input 
         type="file" 
         ref="fileInput" 
