@@ -15,12 +15,8 @@ import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
 import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
 import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
-<<<<<<< HEAD
-import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
-=======
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
->>>>>>> 1bff7c245e72f56a40590a7403d2dde0dd248fd9
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 const routes = [
