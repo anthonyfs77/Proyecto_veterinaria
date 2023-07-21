@@ -7,9 +7,9 @@ const routes = [
     component: principalMain,
   },
   {
-    path: '/header',
-    name: 'clientHeader',
-    component: header,
+    path: '/Home',
+    name: 'MenuCliente',
+    component: MenuCliente,
   },
   {
     path: '/login',
@@ -139,5 +139,5 @@ import catalogo from '../views/Productos/catalogoView.vue';
 import citas from '../views/Citas/CitasView.vue';
 
 // cliente
-import header from '../views/Cliente/Menu/MenuClienteView.vue'
+import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
