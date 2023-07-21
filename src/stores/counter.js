@@ -10,3 +10,21 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+
+import { defineStore } from 'pinia';
+
+export const useStore = defineStore('store', () => {
+  const state = {
+    variable: false, // Inicializar la variable en false
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});

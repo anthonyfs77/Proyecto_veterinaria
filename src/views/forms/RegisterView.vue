@@ -67,7 +67,7 @@
                                 d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                             </path>
                         </svg>
-                        <input placeholder="Confirma tu contraseña" class="input" type="password">
+                        <input v-model="confirmacion" placeholder="Confirma tu contraseña" class="input" type="password">
                     </div>
                     <div class="flex-column">
                         <label>Telefono </label>
@@ -92,60 +92,124 @@
                         </div>
                         <span class="span">Olvidaste tu contraseña?</span>
                     </div>
-                    <button @click="registrar" class="button-submit">Sign In</button>
-                    <p class="p">Ya tienes una cuenta? 
-                        <router-link :to="{name: 'login'}" class="custom-link">
+                    <button @click="registro" class="button-submit">Sign In</button>
+                    <p class="p">Ya tienes una cuenta?
+                        <router-link :to="{ name: 'login' }" class="custom-link">
                             <span class="span">inicia sesion</span>
                         </router-link>
                     </p>
                 </div>
             </div>
         </div>
+        <!--Mensaje de error-->
+
+            <div v-if="mostrarError" class="err">
+                <error title="No se registro el usuario" />
+            </div>
+
+
+            <div v-if="mostrarSuccess" class="err">
+                <success />
+            </div>
+
     </div>
 </template>
 
 
+
+
 <script setup>
+import error from '../../components/Mensajes/Error.vue'
+import success from '../../components/Mensajes/Success.vue'
 import { ref } from 'vue';
-import axios from 'axios'
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-const nombre = ref('');
-const last = ref('');
-const contrasena = ref('');
-const correo = ref('');
-const tel1 = ref('');
-const tel2 = ref('');
+const nombre =          ref('');
+const last =            ref('');
+const correo =          ref('');
+const tel1 =            ref('');
+const tel2 =            ref('');
+const contrasena =      ref('');
+const confirmacion =    ref('');
+var mostrarError =      ref();
+var mostrarSuccess =    ref();
+const router =          useRouter();
 
 
-const registrar = () => {
-  data();
+
+const registro = () => {
+    if (
+        contrasena.value === confirmacion.value &&
+        nombre.value != '' &&
+        last.value != '' &&
+        correo.value != '' &&
+        tel1.value != ''
+    ) {
+        console.log("Registro");
+        data();
+        mostrarSuccess.value = true;
+
+        setTimeout(() => {
+            mostrarSuccess.value = false;
+            redirectToPage();
+        }, 5000);
+
+
+    } else {
+        mostrarError.value = true;
+
+        setTimeout(() => {
+            mostrarError.value = false;
+        }, 5000);
+
+        console.log("campos sin verificar", mostrarError.value);
+    }
 };
-
 
 const data = async () => {
-const reg = {
-  nombre: nombre.value,
-  last: last.value,
-  contrasena: contrasena.value,
-  correo: correo.value,
-  tel1: tel1.value,
-  tel2: tel2.value,
+    const reg = {
+        nombre: nombre.value,
+        last: last.value,
+        contrasena: contrasena.value,
+        correo: correo.value,
+        tel1: tel1.value,
+        tel2: tel2.value,
+    };
+
+    try {
+        const response = await axios.post('http://web.backend.com/registro', reg);
+        console.log(response.data);
+    } catch (error) {
+        console.error(error);
+    }
 };
 
-try {
-  const response = await axios.post('http://web.backend.com/registro', reg);
-  console.log(response.data);
-} catch (error) {
-  console.error(error)
-}
+const redirectToPage = () => {                                                      // Router
+    router.push('/login');
 };
 
 </script>
 
 
+
+
+
+
 <style scoped>
 * {
     box-sizing: border-box;
+}
+
+
+.err {
+    margin-left: 41.3%;
+    margin-top: 15.6%;
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login {
@@ -154,7 +218,7 @@ try {
     border-radius: 2em 0 0 2em;
     background-color: white;
     height: 100vh;
-    
+
 }
 
 .app {
@@ -203,7 +267,7 @@ try {
     align-items: center;
     padding-left: 10px;
     transition: 0.2s ease-in-out;
-    
+
 }
 
 .input {
@@ -277,7 +341,7 @@ try {
     display: flex;
 }
 
-.imagen {    
+.imagen {
     background-image: url('../../assets/img/perroRegister.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -297,13 +361,14 @@ try {
         width: 27.7em;
     }
 
-    .imagen{
+    .imagen {
         display: none;
     }
 }
 
 @media screen and (min-resolution: 70dpi) and (max-resolution: 120dpi) {
-  /* Estilos para el rango de zoom entre el 80% y el 120% */
+
+    /* Estilos para el rango de zoom entre el 80% y el 120% */
     .app {
         width: 100%;
         right: 1em;
@@ -311,8 +376,8 @@ try {
     }
 
     .formulario {
-        max-height: 45rem; /* Altura máxima del formulario */
-        overflow-y: auto; 
+        max-height: 45rem;
+        /* Altura máxima del formulario */
+        overflow-y: auto;
     }
-}
-</style>
+}</style>
