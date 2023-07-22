@@ -26,38 +26,9 @@
                 <h4>Status</h4>
             </div>
             <div class="cont-table">
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
+                <div v-for="productos in productos" :key="productos.id" class="fila">
+                    <Rows :name="productos.nom_producto" :stock="productos.existencias" 
+                    :precio="productos.precio_venta" :iva="productos.iva" :status="productos.estado"/>
                 </div>
             </div>
         </div>
@@ -72,6 +43,23 @@ import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
+import axios from 'axios'
+import {ref, onMounted} from 'vue'
+
+const productos = ref([])
+
+const fetchData = async () => {
+    try{
+        const response = await axios.get('http://web.backend.com/productosInternos');
+        productos.value = response.data.data; 
+        console.log(productos.value)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+onMounted(fetchData);
+
 </script>
 
 

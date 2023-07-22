@@ -5,15 +5,15 @@
     <div class="app">
         <div class="controles">
             <div class="botones">
-                <btn tittle="Stock"/>
-                <btn tittle="Sin stock"/>
-                <add/>
+                <btn tittle="Stock" />
+                <btn tittle="Sin stock" />
+                <add />
             </div>
             <div class="rango">
-                <precios tittle1="$min" tittle2="$max"/> 
+                <precios tittle1="$min" tittle2="$max" />
             </div>
             <div class="izquierdo">
-                <search/>
+                <search />
             </div>
         </div>
         <div class="table">
@@ -26,41 +26,10 @@
                 <h4>Status</h4>
             </div>
             <div class="cont-table">
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
+                <div v-for="productos in productos" :key="productos.id">
+                    <Rows :name="productos.nom_producto" :stock="productos.existencias" :priceV="productos.precio_venta" 
+                    :priceC="productos.precio_compra" :iva="9999"
+                    :status="productos.estado" />
                 </div>
             </div>
         </div>
@@ -74,30 +43,46 @@ import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
+import axios from 'axios'
+import { ref, onMounted } from 'vue';
+
+const productos = ref([])
+
+const fetchData = async () =>{
+    try{
+        const response = await axios.get('http://web.backend.com/productos');
+        productos.value = response.data.data; 
+        console.log(productos.value)
+    } catch(error){
+        console.log(error)
+    }
+}
+
+onMounted(fetchData);
+
 </script>
 
 <style scoped>
-
-.controles{
-    display: grid; 
-  grid-auto-columns: 1fr; 
-  grid-template-columns: 1.1fr 1.6fr 0.8fr; 
-  gap: 0px 0px; 
-  height: 100px;
+.controles {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1.1fr 1.6fr 0.8fr;
+    gap: 0px 0px;
+    height: 100px;
 }
 
-.izquierdo{
+.izquierdo {
     display: flex;
     align-items: flex-end;
 }
 
-.rango{
+.rango {
     display: flex;
     justify-content: center;
     align-items: flex-end;
 }
 
-.botones{
+.botones {
     display: flex;
     gap: 10px;
     align-items: flex-end;
@@ -108,11 +93,12 @@ import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
     justify-content: space-around;
     margin-top: 3em;
     margin-bottom: 2em;
-    
+
 }
+
 span {
     color: #ffd800;
-    
+
 }
 
 .app {
@@ -122,7 +108,7 @@ span {
     gap: 0px 0px;
     width: 100%;
     height: 100vh;
-    
+
 }
 
 
