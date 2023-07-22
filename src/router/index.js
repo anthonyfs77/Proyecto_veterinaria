@@ -17,6 +17,7 @@ import register from '../views/forms/RegisterView.vue';
 import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
+import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
 
 // cliente
@@ -64,6 +65,11 @@ const routes = [
     path:'/citas',
     name: 'citas',
     component: citas
+  },
+  {
+    path:'/AgregarProducto',
+    name: 'AgregarProducto',
+    component: AgregarProducto
   },
 
   {
