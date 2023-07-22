@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createRouter, createWebHistory } from 'vue-router'
 import principalMain from '../../src/views/Inicio/MainInicio.vue'
 import control from '../views/Administracion/MenuManagmentView.vue'; 
@@ -23,6 +24,8 @@ import citas from '../views/Citas/CitasView.vue';
 // cliente
 import header from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
+=======
+>>>>>>> 649c45cb22f8e41e2f950604378338070805f1db
 
 const routes = [
   // Vistas predeterminadas
@@ -32,9 +35,9 @@ const routes = [
     component: principalMain,
   },
   {
-    path: '/header',
-    name: 'clientHeader',
-    component: header,
+    path: '/Home',
+    name: 'MenuCliente',
+    component: MenuCliente,
   },
   {
     path: '/login',
@@ -145,3 +148,29 @@ const router = createRouter({
 })
 
 export default router
+
+
+import { createRouter, createWebHistory } from 'vue-router'
+import principalMain from '../../src/views/Inicio/MainInicio.vue'
+import control from '../views/Administracion/MenuManagmentView.vue'; 
+import panelAdmin from '../views/Administracion/PanelAdminView.vue';
+import productos from '../views/Productos/TablaProductsPublicsView.vue'; 
+import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
+import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
+import  inventarioInterno from '../views/Reportes/ProductosInternosView.vue';
+import inventario from '../views/Reportes/ReporteInventarioView.vue';
+import historialMedico from '../views/Reportes/HistorialMedicoView.vue';
+import consultasHechas from '../views/Reportes/ConsultasRealizadasView.vue';
+import consultasRechazadas from '../views/Reportes/ConsultasRechazadasView.vue';
+import ordenesCompra from '../views/Reportes/OrdenesDeCompraView.vue';
+import reporteVentas from '../views/Reportes/ReporteVentasView.vue';
+import login from '../views/forms/loginView.vue';
+import register from '../views/forms/RegisterView.vue';
+import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
+import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
+import catalogo from '../views/Productos/catalogoView.vue';
+import citas from '../views/Citas/CitasView.vue';
+
+// cliente
+import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
+//import sidebar from '../views/Administracion/PanelAdminView.vue'

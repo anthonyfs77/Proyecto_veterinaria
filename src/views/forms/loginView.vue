@@ -9,7 +9,7 @@
                 <div class="logo"></div>
             </div>
             <div class="formulario">
-                <form class="form">
+                <div class="form">
                 <h1>Welcome Back!</h1>
                 <p>porfavor ingrese sus credenciales.</p><br>
                 <div class="flex-column">
@@ -23,7 +23,7 @@
                             </path>
                         </g>
                     </svg>
-                    <input placeholder="Ingresa tu Email" class="input" type="text">
+                    <input v-model="email" placeholder="Ingresa tu Email" class="input" type="text">
                 </div>
 
                 <div class="flex-column">
@@ -38,7 +38,7 @@
                             d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                         </path>
                     </svg>
-                    <input placeholder="Ingresa tu contrasela" class="input" type="password">
+                    <input v-model="pass" placeholder="Ingresa tu contrasela" class="input" type="password">
                 </div>
 
                 <div class="flex-row">
@@ -48,9 +48,9 @@
                     </div>
                     <span class="span">Olvidaste tu contraseña?</span>
                 </div>
-                <router-link :to="{name: 'clientHeader'}">
-                    <button class="button-submit">Sign In</button>
-                </router-link>
+                <!-- <router-link :to="{name: 'MenuCliente'}"> -->
+                    <button @click="login" class="button-submit">Sign In</button>
+                <!-- </router-link> -->
                 <p class="p">No tienes una cuenta? 
                     <router-link :to="{name: 'register'}" class="custom-link">
                         <span class="span">registrate</span>
@@ -80,11 +80,64 @@
                         Google
                     </button>
                 </div>
-            </form>
+            </div>
             </div>
         </div>
     </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import {useRouter} from 'vue-router'
+import axios from 'axios';
+
+const email = ref('');
+const pass = ref('');
+const acceso = ref(false); // Inicializamos acceso como false
+const result = '';
+const login = () => {
+  data();
+};
+
+const data = async () => {
+  const log = {
+    correo: email.value,
+    contrasena: pass.value,
+  };
+
+  try {
+    const response = await axios.post('http://web.backend.com/verificacion', log);
+    console.log(response.data);
+
+    const result = response.data;
+
+    if (result.status === 200) {
+      // acceso confirmado
+      acceso.value = true;
+    } else if (result.status === 401) {
+      // acceso denegado
+      console.log('Mi rey pierdete');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+console.log(acceso.value);
+const redirectToPage = () => {
+  const router = useRouter();
+  router.push({ name: 'MenuCliente' });
+};
+
+// Agregamos esta función para asegurarnos de que se active el redireccionamiento
+// después de que el componente se haya montado
+onMounted(() => {
+  if (acceso.value) {
+    redirectToPage();
+  }
+});
+
+</script>
 
 
 

@@ -7,7 +7,7 @@
         </div>
         <div class="login">
             <div class="formulario">
-                <form class="form">
+                <div class="form">
                     <h1>Bienvenido!</h1>
                     <p>Por favor ingrese sus credenciales.</p>
                     <div class="flex-column">
@@ -17,12 +17,12 @@
                         <div class="flex-column">
                         </div>
                         <div class="inputForm personal">
-                            <input class="input nombre" type="text" placeholder="Nombre">
+                            <input v-model="nombre" class="input nombre" type="text" placeholder="Nombre">
                         </div>
                         <div class="flex-column ">
                         </div>
                         <div class="inputForm personal">
-                            <input class="input password" type="text" placeholder="Apellido">
+                            <input v-model="last" class="input" type="text" placeholder="Apellido">
                         </div>
                     </div>
                     <div class="flex-column">
@@ -36,7 +36,7 @@
                                 </path>
                             </g>
                         </svg>
-                        <input placeholder="Ingresa tu Email" class="input" type="text">
+                        <input v-model="correo" placeholder="Ingresa tu Email" class="input" type="text">
                     </div>
 
                     <div class="flex-column">
@@ -52,7 +52,7 @@
                                 d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                             </path>
                         </svg>
-                        <input placeholder="Ingresa tu contraseña" class="input" type="password">
+                        <input v-model="contrasena" placeholder="Ingresa tu contraseña" class="input" type="password">
                     </div>
                     <div class="flex-column">
                         <label>Confirmar contraseña </label>
@@ -76,12 +76,12 @@
                         <div class="flex-column">
                         </div>
                         <div class="inputForm personal">
-                            <input class="input nombre" type="text" placeholder="Telefono 1">
+                            <input v-model="tel1" class="input nombre" type="text" placeholder="Telefono 1">
                         </div>
                         <div class="flex-column ">
                         </div>
                         <div class="inputForm personal">
-                            <input class="input password" type="text" placeholder="Telefono 2 (opcional)">
+                            <input v-model="tel2" class="input password" type="text" placeholder="Telefono 2 (opcional)">
                         </div>
                     </div>
 
@@ -92,18 +92,55 @@
                         </div>
                         <span class="span">Olvidaste tu contraseña?</span>
                     </div>
-                    <button class="button-submit">Sign In</button>
+                    <button @click="registrar" class="button-submit">Sign In</button>
                     <p class="p">Ya tienes una cuenta? 
                         <router-link :to="{name: 'login'}" class="custom-link">
                             <span class="span">inicia sesion</span>
                         </router-link>
                     </p>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
+
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios'
+
+const nombre = ref('');
+const last = ref('');
+const contrasena = ref('');
+const correo = ref('');
+const tel1 = ref('');
+const tel2 = ref('');
+
+
+const registrar = () => {
+  data();
+};
+
+
+const data = async () => {
+const reg = {
+  nombre: nombre.value,
+  last: last.value,
+  contrasena: contrasena.value,
+  correo: correo.value,
+  tel1: tel1.value,
+  tel2: tel2.value,
+};
+
+try {
+  const response = await axios.post('http://web.backend.com/registro', reg);
+  console.log(response.data);
+} catch (error) {
+  console.error(error)
+}
+};
+
+</script>
 
 
 <style scoped>
