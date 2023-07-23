@@ -1,19 +1,22 @@
 <template>
     <div class="title">
         <encabezado />
+        <div class="btns">
+        <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
+      </div>
     </div>
     <div class="app">
         <div class="controles">
             <div class="botones">
-                <btn tittle="Stock"/>
-                <btn tittle="Sin stock"/>
-                <add/>
+                <btn tittle="Stock" @click="Stock"/>
+                <btn tittle="Sin stock" @click="sinStock"/>
+                <add />
             </div>
             <div class="rango">
-                <precios tittle1="$min" tittle2="$max"/> 
+                <precios tittle1="$min" tittle2="$max" />
             </div>
             <div class="izquierdo">
-                <search/>
+                <search />
             </div>
         </div>
         <div class="table">
@@ -26,41 +29,10 @@
                 <h4>Status</h4>
             </div>
             <div class="cont-table">
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
-                </div>
-                <div class="fila">
-                    <Rows />
+                <div v-for="productos in productos" :key="productos.id">
+                    <Rows :name="productos.nom_producto" :stock="productos.existencias" :priceV="productos.precio_venta" 
+                    :priceC="productos.precio_compra" :iva="9999"
+                    :status="productos.estado" />
                 </div>
             </div>
         </div>
@@ -73,31 +45,91 @@ import encabezado from '../../components/Tabla/header.vue'
 import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
-import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
+import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
+import precios from '../../components/ControlesIndividuales/RangoPrecioPublicos.vue'
+import axios from 'axios'
+import { ref, onMounted } from 'vue';
+import {StorePublics} from '@/stores/counter.js'
+
+const store = StorePublics();
+const productos = ref([])
+
+const fetchData = async () =>{
+    try{
+        const response = await axios.get('http://web.backend.com/productosPublicos');
+        productos.value = response.data.data; 
+    } catch(error){
+        console.log(error)
+    }
+}
+onMounted(fetchData);
+
+
+// Logica de filtracion Stock y sin Stock de productos 
+const sinStock = () =>{
+  console.log("sin stock")
+}
+
+
+const Stock = () =>{
+  console.log("stock")
+}
+
+const filtrar = () =>{
+    productos.value = store.state.variable
+}
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style scoped>
 
+.btns{
+    display: flex;
+}
 .controles{
     display: grid; 
   grid-auto-columns: 1fr; 
   grid-template-columns: 1.1fr 1.6fr 0.8fr; 
   gap: 0px 0px; 
   height: 100px;
+  width: 94%;
+  margin-left: 50px;
 }
-
-.izquierdo{
+.izquierdo {
     display: flex;
     align-items: flex-end;
 }
 
-.rango{
+.rango {
     display: flex;
     justify-content: center;
     align-items: flex-end;
 }
 
-.botones{
+.botones {
     display: flex;
     gap: 10px;
     align-items: flex-end;
@@ -108,11 +140,12 @@ import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
     justify-content: space-around;
     margin-top: 3em;
     margin-bottom: 2em;
-    
+
 }
+
 span {
     color: #ffd800;
-    
+
 }
 
 .app {
@@ -122,7 +155,7 @@ span {
     gap: 0px 0px;
     width: 100%;
     height: 100vh;
-    
+
 }
 
 

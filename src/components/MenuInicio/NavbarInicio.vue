@@ -15,8 +15,13 @@
                 <RouterLink :to="{name: 'citas'}" class="custom-link">
                     <p>citas</p>
                 </RouterLink>
+<<<<<<< HEAD
+                <RouterLink :to="{name: 'AgregarProducto'}" class="custom-link">
+                    <p>Agregar Productos</p>
+=======
                 <RouterLink :to="{name: 'GestionProveedores'}" class="custom-link">
                     <p>proveedores</p>
+>>>>>>> 7e0bdaa447ae65b6a7af782ab723cb0bff8a4138
                 </RouterLink>
             </div>
             <div class="aside">

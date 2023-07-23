@@ -1,6 +1,7 @@
 
 <template>
-  <button class="button" type="button" @click="toggleCheckbox">
+  
+    <button class="button" type="button" @click="toggleCheckbox">
     <span class="button__text">{{ tittle }}</span>
     <span class="button__icon">
       <div class="content">
@@ -21,7 +22,7 @@ import { ref, defineProps } from 'vue';
 defineProps({
     tittle:{
         type: String,
-    }
+    },
 })
 
 const isChecked = ref(false);

@@ -1,14 +1,25 @@
 <template>
     <div class="app">
       <div class="column">
-        <p>collar</p>
-        <p>12093</p>
-        <p>49 $</p>
-        <p>29 $</p>
-        <p id="stock">Stock</p>
+        <p>{{ name }}</p>
+        <p>{{ stock }}</p>
+        <p>{{ precio }} <span>$</span></p>
+        <p>{{ iva }}</p>
+        <p id="stock">{{ status }}</p>
       </div>
     </div>
   </template>
+
+
+<script setup>
+import {defineProps} from 'vue';
+
+defineProps({
+  name:{type:String}, stock:{type:Number}, precio:{type:Number}, iva:{type:Number}, status:{type:String}
+}) 
+
+
+</script>
   
   <style scoped>
   .app {
@@ -19,6 +30,10 @@
     color: #677483;
     max-height: 3em !important;
   }
+
+span{
+  color: green;
+}  
   
   .column {
     display: flex;
@@ -34,7 +49,9 @@
     display: flex;
     height: 40px;
     align-items: center;
-    
+    width: 100%;
+    margin-left: 100px;
+    text-align: center;
   }
   </style>
   

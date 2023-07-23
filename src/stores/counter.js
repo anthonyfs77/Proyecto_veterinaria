@@ -10,3 +10,41 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+
+
+
+
+// pinia
+// hacemos esto para cambiar la variable 
+export const useStore = defineStore('store', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+export const StorePublics = defineStore('store', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+

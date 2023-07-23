@@ -1,6 +1,6 @@
 <template>
     <div class="containerNorm">
-        <aside :class="{ 'expanded': isExpanded }" @mouseenter="expandSidebar" @mouseleave="collapseSidebar">
+        <aside>
             <div class="top">
                 <div class="logo">
                     <span class="material-symbols-outlined">sound_detection_dog_barking</span>
@@ -19,10 +19,10 @@
                     <span class="material-symbols-outlined">person</span>
                     <h4>Productos</h4>
                 </router-link>
-                <a href="#">
+                    <router-link :to="{name: 'GestionProveedores'}">
                     <span class="material-symbols-outlined">receipt_long</span>
-                    <h4>Secc2</h4>
-                </a>
+                    <h4>Proveedores</h4>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">insights</span>
                     <h4>Secc3</h4>
@@ -57,18 +57,6 @@
 
 <script setup>
 import { ref } from 'vue';
-
-const isExpanded = ref(false);
-
-const expandSidebar = () => {
-  isExpanded.value = true;
-  console.log(isExpanded.value);
-}
-
-const collapseSidebar = () => {
-  isExpanded.value = false;
-  console.log(isExpanded.value);
-}
 
 
 import { useRouter } from 'vue-router';

@@ -1,0 +1,100 @@
+<template>
+    <div class="container">
+      <div class="controls">
+            <btn class="add-button" tittle="Añadir Usuario"/>
+            <buscador type="text" v-model="search" @focus="clearSearch" title="Buscar Usuario..."/>
+          <label for="filterBy">Por:</label>
+          <select class="search-box" id="filterBy" v-model="filter">
+            <option value="true">Nombre</option>
+            <option value="false">ID</option>
+          </select>
+      </div>
+
+      <div class="content">
+        <div class="message">Aquí se mostrarán los usuarios</div>
+      </div>
+
+    </div>
+  </template>
+  
+  <script setup>
+  import { ref } from 'vue';
+  import btn from '../../components/ControlesIndividuales/BotonConEstilo.vue'
+  import buscador from '../../components/ControlesIndividuales/SearchGeneral.vue'
+  const search = ref("Buscar Usuario...");
+  
+const filter = ref(true);
+  
+  const clearSearch = () => {
+    search.value = "";
+  }
+  </script>
+  
+  <style scoped>
+  .container {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .controls {
+    display: grid;
+    grid-template-columns: auto 30% auto auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+  }
+  
+  .controls > * {
+    border-radius: 5px;
+  }
+  
+  .add-button {
+    background-color: rgb(65, 151, 65);
+    color: white;
+    padding: 10px;
+  }
+  
+  
+  .remove-button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+  
+  .edit-button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+  }
+
+  .search-box{
+    font-family: inherit;
+  font-size: inherit;
+  box-shadow: 0 0 1em #00000013;
+  border: none;
+  color: #646464;
+  padding: 0.7rem 1rem;
+  border-radius: 30px;
+  width: 8em;
+  transition: all ease-in-out .5s;
+  margin-right: -2rem;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+  }
+  
+  .message {
+    text-align: center;
+  }
+
+
+  </style>
+  
