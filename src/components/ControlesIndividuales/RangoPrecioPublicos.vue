@@ -45,7 +45,7 @@
     }
   
     try {
-      const response = await axios.post('http://web.backend.com/precios', rango);
+      const response = await axios.post('http://web.backend.com/preciosPublicos', rango);
       filtData.value = response.data;
       updateVariable()
     } catch (error) {

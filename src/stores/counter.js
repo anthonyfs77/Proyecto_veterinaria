@@ -12,11 +12,14 @@ export const useCounterStore = defineStore('counter', () => {
 })
 
 
-import { defineStore } from 'pinia';
 
+
+
+// pinia
+// hacemos esto para cambiar la variable 
 export const useStore = defineStore('store', () => {
   const state = {
-    variable: false, // Inicializar la variable en false
+    variable: '',
   };
 
   const setVariable = (newValue) => {
@@ -28,3 +31,20 @@ export const useStore = defineStore('store', () => {
     setVariable,
   };
 });
+
+
+export const StorePublics = defineStore('store', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
