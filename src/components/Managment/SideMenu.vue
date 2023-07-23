@@ -19,10 +19,10 @@
                     <span class="material-symbols-outlined">person</span>
                     <h4>Productos</h4>
                 </router-link>
-                <a href="#">
+                    <router-link :to="{name: 'GestionProveedores'}">
                     <span class="material-symbols-outlined">receipt_long</span>
-                    <h4>Secc2</h4>
-                </a>
+                    <h4>Proveedores</h4>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">insights</span>
                     <h4>Secc3</h4>

@@ -28,7 +28,7 @@
             <div class="ordenes-container">
                 <InfoCard />
                 <InfoCard />
-                <AddProduct />
+                <AddProduct  />
             </div>
         </div>
     </div>
