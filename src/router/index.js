@@ -41,11 +41,6 @@ const routes = [
     name: 'citas',
     component: citas
   },
-  {
-    path:'/AgregarProducto',
-    name: 'AgregarProducto',
-    component: AgregarProducto
-  },
 
   {
 
@@ -68,6 +63,11 @@ const routes = [
         path: '/productosInternos',
         name: 'productosInternos',
         component: productosInternos
+      },
+      {
+        path:'/AgregarProducto',
+        name: 'AgregarProducto',
+        component: AgregarProducto
       },
       {
         path: '/productosPublicos',
@@ -142,7 +142,7 @@ import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
 import citas from '../views/Citas/CitasView.vue';
-
+import AgregarProducto from '../views/Productos/AgregarProductoView.vue'
 // cliente
 import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'

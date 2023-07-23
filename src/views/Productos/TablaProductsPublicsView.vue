@@ -1,12 +1,15 @@
 <template>
     <div class="title">
         <encabezado />
+        <div class="btns">
+        <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
+      </div>
     </div>
     <div class="app">
         <div class="controles">
             <div class="botones">
-                <btn tittle="Stock" />
-                <btn tittle="Sin stock" />
+                <btn tittle="Stock" @click="Stock"/>
+                <btn tittle="Sin stock" @click="sinStock"/>
                 <add />
             </div>
             <div class="rango">
@@ -42,35 +45,79 @@ import encabezado from '../../components/Tabla/header.vue'
 import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
-import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
+import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
+import precios from '../../components/ControlesIndividuales/RangoPrecioPublicos.vue'
 import axios from 'axios'
 import { ref, onMounted } from 'vue';
+import {StorePublics} from '@/stores/counter.js'
 
+const store = StorePublics();
 const productos = ref([])
 
 const fetchData = async () =>{
     try{
-        const response = await axios.get('http://web.backend.com/productos');
+        const response = await axios.get('http://web.backend.com/productosPublicos');
         productos.value = response.data.data; 
-        console.log(productos.value)
     } catch(error){
         console.log(error)
     }
 }
-
 onMounted(fetchData);
 
-</script>
 
-<style scoped>
-.controles {
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-template-columns: 1.1fr 1.6fr 0.8fr;
-    gap: 0px 0px;
-    height: 100px;
+// Logica de filtracion Stock y sin Stock de productos 
+const sinStock = () =>{
+  console.log("sin stock")
 }
 
+
+const Stock = () =>{
+  console.log("stock")
+}
+
+const filtrar = () =>{
+    productos.value = store.state.variable
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style scoped>
+
+.btns{
+    display: flex;
+}
+.controles{
+    display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1.1fr 1.6fr 0.8fr; 
+  gap: 0px 0px; 
+  height: 100px;
+  width: 94%;
+  margin-left: 50px;
+}
 .izquierdo {
     display: flex;
     align-items: flex-end;

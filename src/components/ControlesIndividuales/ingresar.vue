@@ -1,4 +1,5 @@
 <template>
+    <RouterLink :to="{name: 'AgregarProducto'}" class="custom-link">
     <button class="button" type="button">
         <span class="button__text">Add Item</span>
         <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
@@ -7,6 +8,7 @@
                 <line x1="5" x2="19" y1="12" y2="12"></line>
             </svg></span>
     </button>
+</RouterLink>
 </template>
 
 
