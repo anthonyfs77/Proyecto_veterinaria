@@ -39,7 +39,7 @@
                     <option value="reportinventario">Inventario.</option>
                     <option value="reportehistorialmedico">Historial medico.</option>
                     <option value="reportconsultasrealizadas">Consultas realizadas.</option>
-                    <option value="reportconsultasrechazadas">Consultas rechazadas.</option>
+                    <option value="reportconsultasrechazadas">Citas rechazadas.</option>
                     <option value="reportordenescompra">Ordenes de compra.</option>
                     <option value="reporteventas">Productos vendidos.</option>
                     </select>
