@@ -28,12 +28,16 @@ defineProps({
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(39, 231, 0);
+    border-radius: 30px;
     overflow: hidden;
-    border: none;
+    border: 2px;
+    border-color: black;
     box-shadow: 0 0 1em #00000013;
     transition: transform 0.5s;
+    text-align: center;
+    padding: 8px;
+    
 }
 
 .button:hover{
@@ -46,7 +50,7 @@ defineProps({
 
 .button .button__text {
     transform: translateX(22px);
-    color: #999999;
+    color: #fdfdfd;
     font-weight: 600;
 }
 

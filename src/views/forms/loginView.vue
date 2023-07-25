@@ -106,7 +106,7 @@ const data = async () => {
   };
 
   try {
-    const response = await axios.post('http://web.backend.com/verificacion', log);
+    const response = await axios.post('http://web.VeterinariaBack.com/verificacion', log);
     console.log(response.data);
 
     const result = response.data;
@@ -114,6 +114,7 @@ const data = async () => {
     if (result.status === 200) {
       // acceso confirmado
       acceso.value = true;
+      
     } else if (result.status === 401) {
       // acceso denegado
       console.log('Mi rey pierdete');
