@@ -6,7 +6,10 @@
         <p>{{priceV}} <span>$</span></p>
         <p>{{priceC}} <span>$</span></p>
         <p>{{iva}} <span>$</span></p>
-        <p id="stock">{{ status }}</p>
+        <p id="stock" :class="{
+          'text-red': status === 'sin stock',
+          'text-green': status === 'con stock'
+        }">{{ status }}</p>
       </div>
     </div>
   </template>
@@ -21,6 +24,15 @@ defineProps({
 </script>
 
   <style scoped>
+
+  .text-red{
+    color: red;
+    border-bottom: 1px solid red;
+  }
+
+  .text-green{
+    color: green;
+  }
   .app {
     display: flex;
     justify-content: space-evenly;
@@ -39,11 +51,10 @@ span{
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
+
   }
   
-  #stock{
-    color: green ;
-  }
+
   p {
     display: flex;
     height: 40px;

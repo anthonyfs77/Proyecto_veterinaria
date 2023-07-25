@@ -5,8 +5,10 @@
 </template>
 
 <style scoped>
+
 .container-fluid {
   height: 100vh;
   width: 100%;
 }
+
 </style>

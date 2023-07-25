@@ -3,12 +3,10 @@
         <div class="panel">
             <div class="cards">
                 <div class="top-menu">
-                    <h1>Dasboard</h1>
+                    <h1>Estadistica</h1>
                 </div>
                 <div class="estadisticas">
-                    <EstadisticCard />
-                    <EstadisticCard />
-                    <EstadisticCard />
+                    <grafica/>
                 </div>
             </div>
             
@@ -41,8 +39,7 @@ import EstadisticCard from '../../components/Managment/EstadisticCard.vue'
 import InfoCard from '../../components/Managment/InfoCard.vue'
 import Notificaciones from '../../components/Managment/Notificaciones.vue'
 import TablaComp from '../../components/Managment/TablaComp.vue'
-
-
+import grafica from '../../components/managment/grafica.vue'
 
 </script>
 
@@ -76,7 +73,8 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
 .estadisticas {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 90%;
+    
 }
 
 .vista {
@@ -95,6 +93,7 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-gap: 10px;
+
 }
 
 .not {
