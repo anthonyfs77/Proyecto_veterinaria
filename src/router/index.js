@@ -22,11 +22,6 @@ const routes = [
     component: register
   },
   {
-    path: '/GestionProveedores',
-    name: 'GestionProveedores',
-    component: GestionProveedores
-  },
-  {
     path: '/catalogo',
     name: 'catalogo',
     component: catalogo
@@ -108,6 +103,11 @@ const routes = [
         path: '/reporteVentas',
         name: 'reporteventas',
         component: reporteVentas
+      },
+      {
+        path: '/GestionProveedores',
+        name: 'GestionProveedores',
+        component: GestionProveedores
       }
     ]
   },

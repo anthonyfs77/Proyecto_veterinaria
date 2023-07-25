@@ -26,7 +26,7 @@
             <div class="ordenes-container">
                 <InfoCard />
                 <InfoCard />
-                <AddProduct />
+                <AddProduct  />
             </div>
         </div>
     </div>
@@ -35,7 +35,6 @@
 <script setup>
 
 import AddProduct from '../../components/Managment/AddProduct.vue'
-import EstadisticCard from '../../components/Managment/EstadisticCard.vue'
 import InfoCard from '../../components/Managment/InfoCard.vue'
 import Notificaciones from '../../components/Managment/Notificaciones.vue'
 import TablaComp from '../../components/Managment/TablaComp.vue'

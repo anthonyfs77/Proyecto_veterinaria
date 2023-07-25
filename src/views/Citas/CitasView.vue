@@ -40,6 +40,7 @@
   
   <script setup>
   import { ref } from 'vue';
+  import axios from 'axios';
   
   const fechaAlta = ref('');
   const fechaCita = ref('');
@@ -48,7 +49,7 @@
   const servicio = ref('');
   const motivo = ref('');
   
-  const submitForm = () => {
+  /* const submitForm = () => {
     const cita = {
       fechaAlta: fechaAlta.value,
       fechaCita: fechaCita.value,
@@ -58,7 +59,7 @@
       motivo: motivo.value,
     };
     console.log(cita);
-  };
+  }; */
   
   const cleanForm = () => {
     fechaAlta.value = "";
@@ -70,9 +71,29 @@
   };
   
   const Functions = () => {
-    submitForm();
-    cleanForm();
+    agendarCita();
   };
+ 
+  const agendarCita = async () => {
+  const cita = {
+    fechaAlta: fechaAlta.value,
+    fechaCita: fechaCita.value,
+    nombreMascota: nombreMascota.value,
+    estatus: estatus.value,
+    servicio: servicio.value,
+    motivo: motivo.value,
+    id_cliente: 1, // Aquí debe ir el id_cliente obtenido del servidor
+    id_mascota: 1, // Aquí debe ir el id_mascota obtenido del servidor
+  };
+
+  try {
+    const response = await axios.post('http://www.backendorg.com/agendarcita', cita);
+    console.log(response.data);
+    cleanForm();
+  } catch (error) {
+    console.error(error)
+  }
+};
   </script>
   
   <style scoped>

@@ -19,6 +19,10 @@
                     <span class="material-symbols-outlined">person</span>
                     <h4>Productos</h4>
                 </router-link>
+                    <router-link :to="{name: 'GestionProveedores'}">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <h4>Proveedores</h4>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">insights</span>
                     <h4>Secc3</h4>
@@ -35,7 +39,7 @@
                     <option value="reportinventario">Inventario.</option>
                     <option value="reportehistorialmedico">Historial medico.</option>
                     <option value="reportconsultasrealizadas">Consultas realizadas.</option>
-                    <option value="reportconsultasrechazadas">Consultas rechazadas.</option>
+                    <option value="reportconsultasrechazadas">Citas rechazadas.</option>
                     <option value="reportordenescompra">Ordenes de compra.</option>
                     <option value="reporteventas">Productos vendidos.</option>
                     </select>

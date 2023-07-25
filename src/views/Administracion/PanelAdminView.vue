@@ -13,7 +13,7 @@
   
   <script setup>
   import SideMenu from '../../components/Managment/SideMenu.vue'
-  //import productos from '../Productos/TablaProductsPublicsView.vue'
+
   </script>
   
   <style scoped>  

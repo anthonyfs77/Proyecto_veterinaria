@@ -14,28 +14,102 @@
   
       <div class="filtro2" v-show="status1">
         <label for="busqueda" class="label-busqueda">Busque la categoría:</label>
-        <input type="search" name="busquedaCat" id="busqueda" class="input-search"><br>
-        <button class="btn-generar">Generar</button>
+        <input type="search" name="busquedaCat" id="busqueda" class="input-search" v-model="Cat"><br>
+        <button class="btn-generar" @click="obtenerReporteInventarioCat">Generar 1</button>
       </div>
   
       <div class="filtro3" v-show="status2">
-        <button class="btn-generar">Generar</button>
+        <button class="btn-generar" @click="obtenerReporteInventario">Generar 2</button>
       </div>
   
       <div class="filtro4" v-show="status3">
-        <button class="btn-generar">Generar</button>
+        <button class="btn-generar"  @click="obtenerReporteInventarioSinStock">Generar 3</button>
       </div>
     </div>
   
     <div class="pantalla">
-      La consulta con el resultado de la búsqueda se verá aquí.
-    </div>
-</div>
+      <!-- Tabla de reporte general de inventario -->
+      <table class="table table-success table-striped" v-if="selectedOption === 'opcion3' && InvGeneral.length > 0">
+        <thead class="table-dark">
+          <tr>
+            <th>Producto</th>
+            <th>Descripcion</th>
+            <th>Existencia</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Proveedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in InvGeneral" :key="item.Descripcion">
+            <td>{{ item.Producto }}</td>
+            <td>{{ item.Descripcion }}</td>
+            <td>{{ item.Existencia }}</td>
+            <td>{{ item.Precio }}</td>
+            <td>{{ item.Categoria }}</td>
+            <td>{{ item.Proveedor }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p v-else-if="selectedOption === 'opcion3'">No hay datos disponibles.</p>
 
+      <!-- Tabla de reporte por categoría -->
+      <table class="table table-success table-striped" v-if="selectedOption === 'opcion1' && InvCat.length > 0">
+        <thead class="table-dark">
+          <tr>
+            <th>Producto</th>
+            <th>Descripcion</th>
+            <th>Existencia</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Proveedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="producto in InvCat" :key="producto.Descripcion">
+            <td>{{ producto.Producto }}</td>
+            <td>{{ producto.Descripcion }}</td>
+            <td>{{ producto.Existencia }}</td>
+            <td>{{ producto.Precio }}</td>
+            <td>{{ producto.Categoria }}</td>
+            <td>{{ producto.Proveedor }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p v-else-if="selectedOption === 'opcion1'">No hay datos disponibles.</p>
+
+      <!-- Tabla de reporte de productos sin stock -->
+      <table class="table table-success table-striped" v-if="selectedOption === 'opcion2' && InvSinStock.length > 0">
+        <thead class="table-dark">
+          <tr>
+            <th>Producto</th>
+            <th>Descripcion</th>
+            <th>Existencia</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Proveedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="stock in InvSinStock" :key="stock.Descripcion">
+            <td>{{ stock.Producto }}</td>
+            <td>{{ stock.Descripcion }}</td>
+            <td>{{ stock.Existencia }}</td>
+            <td>{{ stock.Precio }}</td>
+            <td>{{ stock.Categoria }}</td>
+            <td>{{ stock.Proveedor }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
+    </div>
+  </div>
+  
   </template>
   
   <script setup>
   import { ref, watch } from 'vue';
+  import axios from 'axios';
   
   const selectedOption = ref('opcion3');
   const status1 = ref(false);
@@ -47,7 +121,7 @@
       status1.value = true;
       status2.value = false;
       status3.value = false;
-    } else if (newValue === 'opcion2') {
+    } else if (newValue === 'opcion2') { 
       status1.value = false;
       status2.value = false;
       status3.value = true;
@@ -57,6 +131,47 @@
       status3.value = false;
     }
   });
+
+  const InvGeneral = ref([]);
+
+const obtenerReporteInventario = async () => {
+ try {
+ const response = await axios.post('http://www.backendorg.com/ReporteInvGeneral')
+ InvGeneral.value = response.data.data;
+ console.log(response.data);
+} catch (error) {
+ console.error("Error al obtener el reporte de inventario", error);
+}
+
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+const Cat = ref("");
+const InvCat = ref ([]);
+
+const obtenerReporteInventarioCat = async () => {
+try {
+  const response = await axios.post('http://www.backendorg.com/ReporteInvCat', {Categoria: Cat.value})
+  InvCat.value = response.data.data;
+  console.log(response.data);
+} catch (error) {
+  console.error("Error al obtener el reporte de inventario", error);
+}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+const InvSinStock = ref([]);
+const obtenerReporteInventarioSinStock = async () => {
+ try {
+ const response = await axios.post('http://www.backendorg.com/ReporteSinStockInv')
+ InvSinStock.value = response.data.data;
+ console.log(response.data);
+} catch (error) {
+ console.error("Error al obtener el reporte de inventario", error);
+}
+}
   </script>
   
   <style>
