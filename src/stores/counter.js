@@ -32,7 +32,7 @@ export const useStore = defineStore('store', () => {
   };
 });
 
-
+// variable de productos internos 
 export const StorePublics = defineStore('store', () => {
   const state = {
     variable: '',
@@ -47,4 +47,25 @@ export const StorePublics = defineStore('store', () => {
     setVariable,
   };
 });
+
+
+
+export const useCheckboxStore = defineStore('checkbox', () => {
+  const state = {
+    isChecked: false,
+  };
+
+  const setCheckboxChecked = () => {
+    state.isChecked = true;
+  };
+
+  const setCheckboxUnchecked = () => {
+    state.isChecked = false;
+  };
+
+  return { state, setCheckboxChecked, setCheckboxUnchecked };
+});
+
+
+
 

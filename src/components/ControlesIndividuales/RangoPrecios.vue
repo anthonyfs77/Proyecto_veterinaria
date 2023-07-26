@@ -1,61 +1,68 @@
 <template>
-    <div class="precios">
-      <p>Rango de precios</p>
-      <div class="inputGroup">
-        <input type="number" autocomplete="off" v-model="minPrice" :placeholder="tittle1">
-        <span class="material-symbols-outlined">
-          chevron_right
-        </span>
-        <input type="number" autocomplete="off" v-model="maxPrice" :placeholder="tittle2">
-      </div>
+  <div class="precios">
+    <p>Rango de precios</p>
+    <div class="inputGroup">
+      <input type="number" autocomplete="off" v-model="minPrice" :placeholder="tittle1">
+      <span class="material-symbols-outlined">
+        chevron_right
+      </span>
+      <input type="number" autocomplete="off" v-model="maxPrice" :placeholder="tittle2">
     </div>
-  </template>
-  
-  <script setup>
-  import {useStore} from '@/stores/counter.js'
-  import { ref, defineProps} from 'vue'
-  import axios from 'axios'
-  
-  defineProps({
-    tittle1: {
-      type: String
-    },
-    tittle2: {
-      type: String
-    }
-  })
-  
-  const minPrice = ref('');
-  const maxPrice = ref('');
+  </div>
+</template>
 
-  
-  
-  const filtData = ref();
-  const store = useStore()
+<script setup>
+import { useStore } from '@/stores/counter.js';
+import { ref, defineProps, onMounted, onBeforeUnmount } from 'vue';
+import axios from 'axios';
 
+defineProps({
+  tittle1: {
+    type: String,
+  },
+  tittle2: {
+    type: String,
+  },
+});
 
-  const data = async () => {
-    const rango = {
-      minPrice: minPrice.value,
-      maxPrice: maxPrice.value
-    }
+const minPrice = ref('');
+const maxPrice = ref('');
+const filtData = ref();
+const store = useStore();
 
-    const updateVariable = () =>{
-    store.setVariable(filtData)
-    }
-  
-    try {
-      const response = await axios.post('http://web.backend.com/precios', rango);
-      filtData.value = response.data;
-      updateVariable()
-    } catch (error) {
-      console.error(error)
-    }
-}
+const data = async () => {
+  const rango = {
+    minPrice: minPrice.value,
+    maxPrice: maxPrice.value,
+  };
 
-setInterval(data, 100)
+  const updateVariable = () => {
+    store.setVariable(filtData);
+  };
+
+  try {
+    const response = await axios.post('http://web.backend.com/precios', rango);
+    filtData.value = response.data;
+    updateVariable();
+    console.log(response.data);
+    console.log('internos');
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Ejecutar la función data al montar el componente
+onMounted(data);
+
+// Limpiar el intervalo cuando el componente se desmonta
+onBeforeUnmount(() => {
+  clearInterval(intervalId);
+});
+
+// Definir el intervalo fuera del bloque setup
+const intervalId = setInterval(data, 1000);
 </script>
-  
+
 
 
 

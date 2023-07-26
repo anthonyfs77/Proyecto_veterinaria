@@ -50,6 +50,11 @@ const routes = [
         component: control
       },
       {
+        path: '/compras',
+        name: 'compras',
+        component: compras
+      },
+      {
         path: '/productos',
         name: 'productos',
         component: productos,
@@ -142,7 +147,7 @@ import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue'
 import catalogo from '../views/Productos/catalogoView.vue';
 import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
-
+import compras from '../views/compras/ComprasManagmen.vue'
 // cliente
 import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'

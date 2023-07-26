@@ -21,14 +21,11 @@ defineProps({
 <style scoped>
 .button {
     position: relative;
-    margin-left: 50px;
-    width: 150px;
+    width: 100px;
     height: 40px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    background-color: rgb(39, 231, 0);
-    border-radius: 30px;
+    background-color: white;
+    border-radius: 10px;
     overflow: hidden;
     border: 2px;
     border-color: black;
@@ -51,5 +48,9 @@ defineProps({
     transition: all 0.3s;
 }
 
+.button .button__text {
+    transform: translateX(22px);
+    font-weight: 590;
+}
 
 </style>

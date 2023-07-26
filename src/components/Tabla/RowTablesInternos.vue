@@ -1,57 +1,64 @@
 <template>
-    <div class="app">
-      <div class="column">
-        <p>{{ name }}</p>
-        <p>{{ stock }}</p>
-        <p>{{ precio }} <span>$</span></p>
-        <p>{{ iva }}</p>
-        <p id="stock">{{ status }}</p>
-      </div>
+  <div class="app">
+    <div class="column">
+      <p>{{ name }}</p>
+      <p>{{ stock }}</p>
+      <p>{{ precio }} <span>$</span></p>
+      <p>{{ iva }}</p>
+      <p id="stock" :class="{
+        'text-red': status === 'sin stock',
+        'text-green': status === 'con stock'
+      }">{{ status }}</p>
     </div>
-  </template>
+  </div>
+</template>
 
 
 <script setup>
-import {defineProps} from 'vue';
+import { defineProps } from 'vue';
 
 defineProps({
-  name:{type:String}, stock:{type:Number}, precio:{type:Number}, iva:{type:Number}, status:{type:String}
-}) 
+  name: { type: String }, stock: { type: Number }, precio: { type: Number }, iva: { type: Number }, status: { type: String }
+})
 
 
 </script>
   
-  <style scoped>
-  .app {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(132, 139, 200, 0.18);
-    color: #677483;
-    max-height: 3em !important;
-  }
+<style scoped>
+.text-red {
+  color: red;
+  border-bottom: 1px solid red;
+}
 
-span{
+.text-green {
   color: green;
-}  
-  
-  .column {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
+}
 
-  }
-  #stock{
-    color: green ;
-  }  
-  p {
-    display: flex;
-    height: 40px;
-    align-items: center;
-    width: 100%;
-    margin-left: 100px;
-    text-align: center;
-  }
-  </style>
+
+.app {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+  color: #677483;
+  max-height: 3em !important;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+
+}
+
+p {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  width: 100%;
+  margin-left: 100px;
+  text-align: center;
+}
+</style>
   
