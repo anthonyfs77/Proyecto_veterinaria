@@ -22,11 +22,6 @@ const routes = [
     component: register
   },
   {
-    path: '/GestionProveedores',
-    name: 'GestionProveedores',
-    component: GestionProveedores
-  },
-  {
     path: '/catalogo',
     name: 'catalogo',
     component: catalogo
@@ -63,6 +58,11 @@ const routes = [
         path: '/productosInternos',
         name: 'productosInternos',
         component: productosInternos
+      },
+      {
+        path:'/AgregarProducto',
+        name: 'AgregarProducto',
+        component: AgregarProducto
       },
       {
         path: '/productosPublicos',
@@ -103,6 +103,11 @@ const routes = [
         path: '/reporteVentas',
         name: 'reporteventas',
         component: reporteVentas
+      },
+      {
+        path: '/GestionProveedores',
+        name: 'GestionProveedores',
+        component: GestionProveedores
       }
     ]
   },
@@ -115,7 +120,6 @@ const router = createRouter({
 })
 
 export default router
-
 
 import { createRouter, createWebHistory } from 'vue-router'
 import principalMain from '../../src/views/Inicio/MainInicio.vue'
@@ -136,8 +140,10 @@ import register from '../views/forms/RegisterView.vue';
 import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
 import catalogo from '../views/Productos/catalogoView.vue';
+import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
 
 // cliente
 import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
+

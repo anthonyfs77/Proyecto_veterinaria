@@ -1,17 +1,15 @@
 
 <template>
   <button class="button" type="button" @click="toggleCheckbox">
-    <span class="button__text">{{ tittle }}</span>
+    <span class="button__text">{{ title }}</span>
   </button>
 </template>
-
-
 
 <script setup>
 import { defineProps } from 'vue';
  
 defineProps({
-    tittle:{
+    title:{
         type: String,
     }
 })
@@ -23,7 +21,8 @@ defineProps({
 <style scoped>
 .button {
     position: relative;
-    width: 190px;
+    margin-left: 50px;
+    width: 150px;
     height: 40px;
     cursor: pointer;
     display: flex;
@@ -34,24 +33,23 @@ defineProps({
     border: 2px;
     border-color: black;
     box-shadow: 0 0 1em #00000013;
-    transition: transform 0.5s;
+    font-size: 15px;
+    transition: 0.5s;
     text-align: center;
-    padding: 8px;
+    color: white;
+    padding: 15px;
     
 }
 
 .button:hover{
   box-shadow: 0 0 2em #00000013;
   transform: scale(1.03);
+  background-color: rgb(8, 114, 163);
+  color: white;
 }
 .button__text {
     transition: all 0.3s;
 }
 
-.button .button__text {
-    transform: translateX(22px);
-    color: #fdfdfd;
-    font-weight: 600;
-}
 
 </style>

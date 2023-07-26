@@ -4,7 +4,7 @@
     <div class="parametros">
       <div class="Titulo"><span class="material-symbols-outlined">
   medical_information
-  </span>  <h2>Consultas Rechazadas</h2></div>
+  </span>  <h2>Citas Rechazadas</h2></div>
       <div class="filtro">
         <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
         <select v-model="selectedOption" id="tipo" class="select-tipo">
@@ -151,7 +151,7 @@
   
   .pantalla {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     height: 85vh;
     font-size: 1.2rem;

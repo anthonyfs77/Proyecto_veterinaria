@@ -2,7 +2,7 @@
   <div class="container-fluid">
       <router-view></router-view>
   </div>
-  <gestionus/>
+  <GestionusAdmin/>
 </template>
 
 <style scoped>
@@ -12,7 +12,9 @@
 }
 </style>
 <script setup>
+import GestionusAdmin from './views/soporteyusuarios/gestionusAdmin.vue';
+
 //import ubicacion from '@/views/Ubicación/MapaUbicacion.vue';
 //import gestionusAdmin from './views/soporteyusuarios/gestionusAdmin.vue';
-import gestionus from '@/views/soporteyusuarios/gestionusuario.vue'
+//import gestionus from '@/views/soporteyusuarios/gestionusuario.vue'
 </script>

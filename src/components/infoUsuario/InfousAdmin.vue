@@ -2,16 +2,15 @@
     <div class="user-card">
       <div class="profile-picture">
         <div class="foto">
-            <FotoEstaticaUs/>
+            <FotoEstaticaUs :URL="Foto"/>
         </div>
      </div>
       <div class="user-info">
-        <h5>ID del Usuario: {{ Id }}</h5>
+        <h5>{{ Nombre }}</h5>
         <div class="detail-grid">
-          <div><h6>Correo: {{ Correo }}</h6></div> 
-          <div><h6>Nombre: {{ Nombre }}</h6></div> 
-          <div><h6>Apellidos: {{ Apellidos }}</h6></div>
-          <div><button class="buton">Ver Perfil</button></div> 
+          <div class="renglon"><h6>ID de usuario: {{ Id }}</h6></div> 
+          <div class="renglon"><h6>Correo: {{ Correo }}</h6></div> 
+          <button class="buton">Ver Usuario</button>
         </div>
       </div>
     </div>
@@ -53,11 +52,10 @@ let { Nombre, Apellidos, Correo, Id, Foto } = props;
     grid-template-columns: 2fr 3fr;
     height: 22vh;
     width: 45vh;
-    border-radius: 10px; /* bordes redondeados */
-    box-shadow: 0px 4px 20px 0px rgba(0,0,0,0.75); /* sombra negra */
+    border-radius: 2rem;
+    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     padding: 1rem;
     box-sizing: border-box;
-    overflow:auto;
   }
   
   .profile-picture {
@@ -71,14 +69,38 @@ let { Nombre, Apellidos, Correo, Id, Foto } = props;
     width: 80%;
   }
 
+  .renglon{
+    overflow-y:auto;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
   .buton{
     height: 3vh;
     width: 100%;
     border-radius: 3px;
-    border-color: black;
-    background-color: rgb(201, 229, 255);
+    border-color: rgb(101, 255, 63);
+    background-color: rgb(201, 255, 201);
     border-radius: 10px;
+    grid-row-start: 4;
+    transition: 0.5s;
   }
+
+  .buton:hover{
+    border-color: rgb(141, 137, 137);
+    background-color: rgb(52, 119, 124);
+    color: rgb(255, 255, 255);
+  }
+  .renglon::-webkit-scrollbar {
+    width: 10px;
+}
+.renglon::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.renglon::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
   
   .user-info {
     display: grid;
@@ -87,7 +109,8 @@ let { Nombre, Apellidos, Correo, Id, Foto } = props;
   
   .detail-grid {
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: 25% 25% 12.5% 25% 12.5%;
+    
   }
   </style>
   
