@@ -23,12 +23,9 @@ defineProps({
 <style scoped>
 .button {
     position: relative;
-    margin-left: 50px;
     width: 100px;
     height: 40px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -48,7 +45,6 @@ defineProps({
 
 .button .button__text {
     transform: translateX(22px);
-    color: black;
     font-weight: 590;
 }
 

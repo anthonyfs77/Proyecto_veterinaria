@@ -40,7 +40,6 @@
 <script setup>
 import Rows from '../../components/Tabla/RowTablesProducts.vue';
 import encabezado from '../../components/Tabla/header.vue'
-import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
 import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
@@ -109,7 +108,9 @@ const filtrar = () =>{
 }
 
 .izquierdo{
-    margin-right: 100px;
+    display: flex;
+  gap: 20px;
+  margin-right: 100px;
 }
 .controles{
     display: grid; 

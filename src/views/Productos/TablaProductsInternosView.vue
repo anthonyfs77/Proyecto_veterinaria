@@ -17,8 +17,9 @@
         </div>
         <div class="izquierdo">
           <div class="btns"></div>
-                <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
-        </div>
+                <btn2 @click="filtrar" title="Aplicar"/> 
+                <btn2  @click="fetchData" title="Limpiar"/>
+          </div>
       </div>
       <div class="table">
         <div class="headerTable">
@@ -91,12 +92,11 @@ const filtrar = () =>{
 
 <style scoped>
 
-.btns{
-    display: flex;
-}
 
 .izquierdo{
-    margin-right: 100px;
+  display: flex;
+  gap: 20px;
+  margin-right: 100px;
 }
 
 .controles{

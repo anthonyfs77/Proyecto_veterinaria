@@ -23,10 +23,10 @@
                     <span class="material-symbols-outlined">receipt_long</span>
                     <h4>Proveedores</h4>
                 </router-link>
-                <a href="#">
+                <router-link :to="{name: 'compras'}">
                     <span class="material-symbols-outlined">insights</span>
-                    <h4>Secc3</h4>
-                </a>
+                    <h4>Ventas</h4>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">mail_outline</span>
                     <h4>Secc4</h4>
