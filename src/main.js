@@ -14,10 +14,3 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
-
-
-// router links importacion
-new vue({
-    router,
-    render: h => h(App)
-}).$mount('#app');

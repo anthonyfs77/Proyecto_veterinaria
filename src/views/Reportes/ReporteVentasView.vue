@@ -132,7 +132,7 @@ const ReporteGralVentas = async () => {
 };
 </script>
 
-<style>
+<style scoped>
 /* Estilos generales y estilos para tamaños de pantalla más pequeños ... */
 
 .first-container {
