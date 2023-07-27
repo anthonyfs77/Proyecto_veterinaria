@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="controls">
-            <btn class="add-button" title="Añadir Usuario"/>
+            <btn title="Añadir Usuario"/>
             <div class="search">
     <input :type="inputType" class="search__input" v-model="search" :placeholder="texto" @input="buscar">
     <button class="search__button" @click="buscar">
@@ -11,14 +11,14 @@
             </g>
         </svg>
     </button>
-</div>
+         </div>
           <label for="filterBy">Por:</label>
           <select class="search-box" id="filterBy" v-model="filter">
             <option :value="true">correo</option>
             <option :value="false">ID</option>
           </select>
       </div>
-      <div class="content">
+        <div class="content">
         <div class="user-grid">
         <InfousAdmin
           v-for="user in users"
@@ -28,8 +28,9 @@
           :Correo="user.correo"
           :Foto="user.fotourl"
         />
-      </div>
     </div>
+      </div>
+   
 
     </div>
   </template>
@@ -39,13 +40,11 @@
   import axios from 'axios';
   import btn from '../../components/ControlesIndividuales/BotonConEstilo.vue'
   import InfousAdmin from '../../components/infoUsuario/InfousAdmin.vue';
-
   const search = ref('');
   const texto = ref("Buscar Usuario...");
   const filter = ref(true);
   const users = ref([]);
   const inputType = ref("text");
-  const pantalla = ref(true);
 
 watch(filter, (newValue) => {
   inputType.value = newValue ? "text" : "number";
@@ -60,8 +59,6 @@ watch(filter, (newValue) => {
     await UsersCorreo();
   }
 }
-
-
 
   //usuario x id
   const UsersID = async () => {
@@ -130,6 +127,14 @@ onMounted(fetchUsers);
   </script>
   
   <style scoped>
+
+  .router{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
   .container {
     display: grid;
     grid-template-rows: 20% 80%;
@@ -146,9 +151,6 @@ onMounted(fetchUsers);
     gap: 25px;
   }
   
-  .controls > * {
-    border-radius: 5px;
-  }
     
   
   .search-box{
