@@ -6,12 +6,12 @@
             <p>{{ precio }} <span>$</span></p>
             <p>{{ cant }}</p>
             <div class="btns">
-                <button>
+                <button @click="mandarTrue">
                     <span class="material-symbols-outlined">
                         add
                     </span>
                 </button>
-                <button>
+                <button @click="mandarFalse">
                     <span class="material-symbols-outlined">
                         remove
                     </span>
@@ -23,11 +23,32 @@
   
   
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
+import { StorePublics } from '@/stores/counter.js'
+
 
 defineProps({
-    name: { type: String }, precio: { type: Number }, img: { type: String }, cant:{ type: Number}
+    name: { type: String },
+    precio: { type: Number }, 
+    img: { type: String }, 
+    cant:{ type: Number}
 })
+
+const store = StorePublics();
+var numero = ref(0)
+
+
+const mandarTrue =  () =>{
+    numero.value ++;
+    store.setVariable(numero)
+    console.log(store)
+}
+
+const mandarFalse =  () =>{
+    numero.value --;
+    store.setVariable(numero)
+    console.log(store)
+}
 
 
 </script>

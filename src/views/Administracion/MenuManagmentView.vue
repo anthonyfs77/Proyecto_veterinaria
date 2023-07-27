@@ -11,7 +11,7 @@
             </div>
             
             <div class="tabla">
-                <h1>Recent orders</h1>
+                <h1>Ventas hoy</h1>
                 <TablaComp />
             </div>
         </div>
@@ -108,6 +108,7 @@ import grafica from '../../components/managment/grafica.vue'
 h1{
     font-size: 30px;
 }
+
 
 </style>
 

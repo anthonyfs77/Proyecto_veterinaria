@@ -2,13 +2,13 @@
     <div class="ctn">
         <div class="column">
             <div class="name">
-                <p>{{name}}</p>
+                <p>{{nomClient}}</p>
             </div>
             <div class="cant">
-                <p>{{cantidad}}</p>
+                <p>{{metodo}}</p>
             </div>
             <div class="pice">
-                <p>{{precioU}}</p>
+                <p>{{monto}} <span>$</span></p>
             </div>
             <div class="tot">
                 <p>{{date}}</p>
@@ -22,9 +22,9 @@
 import {defineProps} from 'vue'
 
 defineProps({
-    name:{type:String}, 
-    cantidad:{type:Number}, 
-    precioU:{type:Number}, 
+    nomClient:{type:String}, 
+    metodo:{type:String}, 
+    monto:{type:Number}, 
     date:{type:String}    
 })
 
