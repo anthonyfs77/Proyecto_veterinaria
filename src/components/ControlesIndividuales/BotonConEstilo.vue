@@ -5,8 +5,6 @@
   </button>
 </template>
 
-
-
 <script setup>
 import { defineProps } from 'vue';
  
@@ -23,29 +21,39 @@ defineProps({
 <style scoped>
 .button {
     position: relative;
-    width: 100px;
+    margin-left: 50px;
+    width: 150px;
     height: 40px;
     cursor: pointer;
-    background-color: white;
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(33, 197, 0);
+    border-radius: 30px;
     overflow: hidden;
-    border: none;
+    border: 2px;
+    border-color: black;
     box-shadow: 0 0 1em #00000013;
     font-size: 15px;
-    transition: transform 0.5s;
+    transition: 0.5s;
+    text-align: center;
+    color: white;
+    
 }
 
 .button:hover{
   box-shadow: 0 0 2em #00000013;
   transform: scale(1.03);
+  background-color: rgb(8, 114, 163);
+  color: white;
 }
 .button__text {
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
-.button .button__text {
-    transform: translateX(22px);
-    font-weight: 590;
-}
 
 </style>

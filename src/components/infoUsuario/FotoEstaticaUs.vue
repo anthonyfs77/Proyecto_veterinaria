@@ -1,15 +1,20 @@
 <template>
     <div 
-      :style="{ backgroundImage: `url(${image})` }" 
+      :style="{ backgroundImage: `url(${URL})` }" 
       class="user-image hover-image"
     />
 
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { defineProps } from 'vue';
 
-let image = ref('../src/assets/img/images.png');
+const props = defineProps({
+  URL: {
+    type: String,
+    default: ''
+  }
+});
 
 </script>
 
@@ -28,10 +33,10 @@ height: 50px;
   width: 100%; 
   height: 0;
   padding-bottom: 100%; 
-  border-radius: 50%;
   background-size: cover;
   background-position: center;
-  box-shadow: 0 0 60px #00000085;
+  border-radius: 50%;
+  box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
 }
 .hover-image {
 transition: filter 0.5s ease-in-out;

@@ -2,8 +2,7 @@
   <div class="first-container">
     <div class="parametros">
       <div class="Titulo">
-        <span class="material-symbols-outlined">payments</span>
-        <h2>Ventas Realizadas.</h2>
+        <span class="material-symbols-outlined">paid</span><h2>Ventas Realizadas.</h2>
       </div>
       <div class="filtro">
         <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
@@ -24,10 +23,11 @@
     </div>
 
     <div class="pantalla">
+      <div class="table-container">
       <!-- Tabla de ventas generales -->
       <div class="responsive-table" v-if="selectedOption === 'opcion1' && gralVenta.length > 0">
-        <table class="table table-success table-striped">
-          <thead class="table-dark">
+        <table class="table table-hover custom-table">
+        <thead>
             <tr>
               <th>Fecha</th>
               <th>Cliente</th>
@@ -41,7 +41,7 @@
           </thead>
           <tbody>
             <tr v-for="item in gralVenta" :key="item.Fecha">
-              <td>{{ item.Fecha }}</td>
+              <td id="Fecha">{{ item.Fecha }}</td>
               <td>{{ item.Cliente }}</td>
               <td>{{ item.Tipo_pago }}</td>
               <td>{{ item.Monto_pagado }}</td>
@@ -57,8 +57,8 @@
 
       <!-- Tabla de ventas por fecha -->
       <div class="responsive-table" v-if="selectedOption === 'opcion2' && ventaFecha.length > 0">
-        <table class="table table-success table-striped">
-          <thead class="table-dark">
+        <table class="table table-hover custom-table">
+        <thead>
             <tr>
               <th>Fecha</th>
               <th>Cliente</th>
@@ -72,7 +72,7 @@
           </thead>
           <tbody>
             <tr v-for="item in ventaFecha" :key="item.Fecha">
-              <td>{{ item.Fecha }}</td>
+              <td id="Fecha">{{ item.Fecha }}</td>
               <td>{{ item.Cliente }}</td>
               <td>{{ item.Tipo_pago }}</td>
               <td>{{ item.Monto_pagado }}</td>
@@ -86,6 +86,7 @@
       </div>
       <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
     </div>
+  </div>
   </div>
 </template>
 
@@ -182,7 +183,6 @@ const ReporteGralVentas = async () => {
 .btn-generar {
   border: none;
   background-color: transparent;
-  border-bottom: 2px solid black;
   color: black;
   transition: border-color 0.3s, transform 0.3s;
   cursor: pointer;
@@ -192,8 +192,8 @@ const ReporteGralVentas = async () => {
 }
 
 .btn-generar:hover {
-  border-color: var(--color-primary);
-  transform: translateX(5px);
+  color: var(--color-primary);
+  transform: translateX(15px);
 }
 
 .btn-generar:focus {
@@ -207,7 +207,7 @@ const ReporteGralVentas = async () => {
 .pantalla {
   display: flex;
   justify-content: center;
-  align-items: center;
+
   height: 85vh;
   font-size: 1.2rem;
 }
@@ -241,4 +241,40 @@ const ReporteGralVentas = async () => {
     font-size: 0.9rem;
   }
 }
+ /* Estilos personalizados para la tabla */
+ .custom-table {
+    font-size: 0.9rem;
+  }
+  .custom-table thead th {
+    font-weight: bold;
+    background-color: white;
+  }
+  .custom-table td,
+  .custom-table th {
+    border: 1px solid #dee2e6;
+  }
+
+  .table-container {
+    height: 500px;
+    overflow: auto;
+  }
+
+  @media (max-width: 767px) {
+    .custom-table thead {
+      display: none;
+    }
+    .custom-table td {
+      display: block;
+      text-align: right;
+    }
+    .custom-table td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    #Fecha {
+    font-weight: bold;
+  }
+  }
 </style>

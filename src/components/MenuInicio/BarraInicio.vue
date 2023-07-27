@@ -17,7 +17,7 @@
                 </span>
                 Citas
             </h5>
-            <RouterLink  :to="{name: 'citas'}" class="custom-link"><p>Agenda una cita!</p></RouterLink>
+            <RouterLink  :to="{name: 'citas'}" class="custom-link"><p>Agenda una cita o registra a tu mascota!</p></RouterLink>
         </div>
         <div class="sec3">
             <h5>

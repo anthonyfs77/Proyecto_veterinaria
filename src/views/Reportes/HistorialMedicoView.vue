@@ -2,8 +2,8 @@
   <div class="first-container">
 
     <div class="parametros">
-      <div class="Titulo"><span class="material-symbols-outlined">ecg</span>
-        <h2>Hisotorial Medico</h2>
+      <div class="Titulo"> 
+        <span class="material-symbols-outlined">respiratory_rate</span><h2>Hisotorial Medico</h2>
       </div>
       <div class="filtro">
         <label for="busquedaMas" class="label-mascota">Nombre de la mascota:</label>
@@ -13,51 +13,52 @@
     </div>
 
     <div class="pantalla">
+      <div class="table-container">
       <div class="responsive-table" v-if="historialMedico.length > 0">
-        <table class="table table-success table-striped">
-          <thead class="table-dark">
-            <tr>
-              <th>Nombre</th>
-              <th>Raza</th>
-              <th>Genero</th>
-              <th>Dueño</th>
-              <th>Fecha</th>
-              <th>Motivo</th>
-              <th>Servicio</th>
-              <th>Tipo de servicio solicitado</th>
-              <th>Peso</th>
-              <th>Altura</th>
-              <th>Edad</th>
-              <th>Observaciones medicas</th>
-              <th>Medicacion</th>
-              <th>Tipo de medicamento</th>
-              <th>Dosis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in historialMedico" :key="item.Fecha">
-              <td>{{ item.Nombre }}</td>
-              <td>{{ item.Raza }}</td>
-              <td>{{ item.Genero }}</td>
-              <td>{{ item.Dueño }}</td>
-              <td>{{ item.Fecha }}</td>
-              <td>{{ item.Motivo }}</td>
-              <td>{{ item.Servicios }}</td>
-              <td>{{ item.Servicio_solicitado }}</td>
-              <td>{{ item.Peso }} Kg</td>
-              <td>{{ item.Altura }} Mts</td>
-              <td>{{ item.Edad }} Meses</td>
-              <td>{{ item.Observaciones }}</td>
-              <td>{{ item.Medicacion }}</td>
-              <td>{{ item.Tipo_de_medicamento }}</td>
-              <td>{{ item.Dosis }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
+        <table class="table table-hover custom-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Raza</th>
+            <th>Genero</th>
+            <th>Dueño</th>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Servicio</th>
+            <th>Tipo de servicio solicitado</th>
+            <th>Peso</th>
+            <th>Altura</th>
+            <th>Edad</th>
+            <th>Observaciones medicas</th>
+            <th>Medicacion</th>
+            <th>Tipo de medicamento</th>
+            <th>Dosis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in historialMedico" :key="item.Fecha">
+            <td>{{ item.Nombre }}</td>
+            <td>{{ item.Raza }}</td>
+            <td>{{ item.Genero }}</td>
+            <td>{{ item.Dueño }}</td>
+            <td>{{ item.Fecha }}</td>
+            <td>{{ item.Motivo }}</td>
+            <td>{{ item.Servicios }}</td>
+            <td>{{ item.Servicio_solicitado }}</td>
+            <td>{{ item.Peso }} Kg</td>
+            <td>{{ item.Altura }} Mts</td>
+            <td>{{ item.Edad }} Meses</td>
+            <td>{{ item.Observaciones }}</td>
+            <td>{{ item.Medicacion }}</td>
+            <td>{{ item.Tipo_de_medicamento }}</td>
+            <td>{{ item.Dosis }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
+    <p v-else id="Mensaje">No hay datos disponibles.</p>
+    </div>
+  </div>
   </div>
 </template>
   
@@ -120,7 +121,6 @@ const generarHistorial = async () => {
 .btn-generar {
   border: none;
   background-color: transparent;
-  border-bottom: 2px solid black;
   color: black;
   transition: border-color 0.3s, transform 0.3s;
   cursor: pointer;
@@ -130,9 +130,8 @@ const generarHistorial = async () => {
 }
 
 .btn-generar:hover {
-  border-color: var(--color-primary);
   color: var(--color-primary);
-  transform: translateX(5px);
+  transform: translateX(15px);
 }
 
 .btn-generar:focus {
@@ -146,7 +145,7 @@ const generarHistorial = async () => {
 .pantalla {
   display: flex;
   justify-content: center;
-  align-items: center;
+
   height: 85vh;
   font-size: 1.2rem;
 }
@@ -184,5 +183,39 @@ const generarHistorial = async () => {
   display: flex;
   gap: 8px;
 }
+
+  /* Estilos personalizados para la tabla */
+  .custom-table {
+    font-size: 0.9rem;
+  }
+  .custom-table thead th {
+    font-weight: bold;
+    background-color: white;
+  }
+  .custom-table td,
+  .custom-table th {
+    border: 1px solid #dee2e6;
+  }
+
+  .table-container {
+    height: 500px;
+    overflow: auto;
+  }
+
+  @media (max-width: 767px) {
+    .custom-table thead {
+      display: none;
+    }
+    .custom-table td {
+      display: block;
+      text-align: right;
+    }
+    .custom-table td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 </style>
   

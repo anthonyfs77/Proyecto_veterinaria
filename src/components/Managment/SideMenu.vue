@@ -27,16 +27,14 @@
                     <span class="material-symbols-outlined">insights</span>
                     <h4>Ventas</h4>
                 </router-link>
-                <a href="#">
-                    <span class="material-symbols-outlined">mail_outline</span>
-                    <h4>Secc4</h4>
-                </a>
+                <router-link :to="{name: 'GestionUsuarios'}">
+                    <span class="material-symbols-outlined">person</span>
+                    <h4>Usuarios</h4>
+                </router-link>
                 <a href="#">
                     <span class="material-symbols-outlined">summarize</span>
                     <select  v-model="selectedOption" class="sidebar-select"  @change="onReportChange">
                     <option value="" disabled selected>Reportes</option>
-                    <option value="reportinvetnariointerno">Invtentario interno.</option>
-                    <option value="reportinventario">Inventario.</option>
                     <option value="reportehistorialmedico">Historial medico.</option>
                     <option value="reportconsultasrealizadas">Consultas realizadas.</option>
                     <option value="reportconsultasrechazadas">Citas rechazadas.</option>
@@ -44,10 +42,19 @@
                     <option value="reporteventas">Productos vendidos.</option>
                     </select>
                 </a>
+                <router-link :to="{name: 'consultas'}">
+                    <span class="material-symbols-outlined">clinical_notes</span>
+                    <h4>Consultas</h4>
+                </router-link>
+                <router-link :to="{name: 'AdminServicios'}">
+                    <span class="material-symbols-outlined">clinical_notes</span>
+                    <h4>Servicios</h4>
+                </router-link>
                 <router-link :to="{name: 'principalMain'}">
                     <span class="material-symbols-outlined">logout</span>
                     <h4>Salir</h4>
                 </router-link>
+
             </div>
         </aside>  
     </div>
