@@ -123,7 +123,7 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
 };
 </script>
   
-  <style>
+  <style scoped>
   * {
     padding: 0;
     margin: 0;

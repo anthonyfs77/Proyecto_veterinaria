@@ -14,46 +14,46 @@
 
     <div class="pantalla">
       <div class="responsive-table" v-if="historialMedico.length > 0">
-        <table class="table table-success table-striped">
-          <thead class="table-dark">
-            <tr>
-              <th>Nombre</th>
-              <th>Raza</th>
-              <th>Genero</th>
-              <th>Dueño</th>
-              <th>Fecha</th>
-              <th>Motivo</th>
-              <th>Servicio</th>
-              <th>Tipo de servicio solicitado</th>
-              <th>Peso</th>
-              <th>Altura</th>
-              <th>Edad</th>
-              <th>Observaciones medicas</th>
-              <th>Medicacion</th>
-              <th>Tipo de medicamento</th>
-              <th>Dosis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in historialMedico" :key="item.Fecha">
-              <td>{{ item.Nombre }}</td>
-              <td>{{ item.Raza }}</td>
-              <td>{{ item.Genero }}</td>
-              <td>{{ item.Dueño }}</td>
-              <td>{{ item.Fecha }}</td>
-              <td>{{ item.Motivo }}</td>
-              <td>{{ item.Servicios }}</td>
-              <td>{{ item.Servicio_solicitado }}</td>
-              <td>{{ item.Peso }} Kg</td>
-              <td>{{ item.Altura }} Mts</td>
-              <td>{{ item.Edad }} Meses</td>
-              <td>{{ item.Observaciones }}</td>
-              <td>{{ item.Medicacion }}</td>
-              <td>{{ item.Tipo_de_medicamento }}</td>
-              <td>{{ item.Dosis }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Raza</th>
+        <th>Genero</th>
+        <th>Dueño</th>
+        <th>Fecha</th>
+        <th>Motivo</th>
+        <th>Servicio</th>
+        <th>Tipo de servicio solicitado</th>
+        <th>Peso</th>
+        <th>Altura</th>
+        <th>Edad</th>
+        <th>Observaciones medicas</th>
+        <th>Medicacion</th>
+        <th>Tipo de medicamento</th>
+        <th>Dosis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in historialMedico" :key="item.Fecha">
+        <td>{{ item.Nombre }}</td>
+        <td>{{ item.Raza }}</td>
+        <td>{{ item.Genero }}</td>
+        <td>{{ item.Dueño }}</td>
+        <td>{{ item.Fecha }}</td>
+        <td>{{ item.Motivo }}</td>
+        <td>{{ item.Servicios }}</td>
+        <td>{{ item.Servicio_solicitado }}</td>
+        <td>{{ item.Peso }} Kg</td>
+        <td>{{ item.Altura }} Mts</td>
+        <td>{{ item.Edad }} Meses</td>
+        <td>{{ item.Observaciones }}</td>
+        <td>{{ item.Medicacion }}</td>
+        <td>{{ item.Tipo_de_medicamento }}</td>
+        <td>{{ item.Dosis }}</td>
+      </tr>
+    </tbody>
+  </table>
       </div>
       <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
     </div>
@@ -80,7 +80,7 @@ const generarHistorial = async () => {
 
 </script>
   
-<style>
+<style scoped>
 * {
   padding: 0;
   margin: 0;
@@ -145,8 +145,6 @@ const generarHistorial = async () => {
 
 .pantalla {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 85vh;
   font-size: 1.2rem;
 }

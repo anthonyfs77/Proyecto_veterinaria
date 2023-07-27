@@ -40,6 +40,7 @@ const routes = [
     path:'/citas',
     name: 'citas',
     component: citas
+    
   },
 
   {
@@ -75,16 +76,6 @@ const routes = [
         component: productosPublicos
       },
       {
-        path:'/inventarioInterno',
-        name:'reportinvetnariointerno',
-        component:inventarioInterno
-      },
-      {
-        path:'/inventario',
-        name:'reportinventario',
-        component:inventario
-      },
-      {
         path: '/historialMedico',
         name:'reportehistorialmedico',
         component: historialMedico
@@ -108,6 +99,11 @@ const routes = [
         path: '/reporteVentas',
         name: 'reporteventas',
         component: reporteVentas
+      },
+      {
+        path:'/consultas',
+        name: 'consultas',
+        component: consultas
       }
     ]
   },
@@ -128,8 +124,6 @@ import panelAdmin from '../views/Administracion/PanelAdminView.vue';
 import productos from '../views/Productos/TablaProductsPublicsView.vue'; 
 import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
 import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
-import  inventarioInterno from '../views/Reportes/ProductosInternosView.vue';
-import inventario from '../views/Reportes/ReporteInventarioView.vue';
 import historialMedico from '../views/Reportes/HistorialMedicoView.vue';
 import consultasHechas from '../views/Reportes/ConsultasRealizadasView.vue';
 import consultasRechazadas from '../views/Reportes/ConsultasRechazadasView.vue';
@@ -147,3 +141,4 @@ import citas from '../views/Citas/CitasView.vue';
 import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
+import consultas from '../views/Consultas/ConsultasView.vue';
