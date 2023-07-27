@@ -37,4 +37,13 @@
     overflow-x: hidden;
     
    }
+   .main::-webkit-scrollbar {
+    width: 20px;
+}
+.main::-webkit-scrollbar-track {
+  background-color: white;
+}
+.main::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+}
   </style>

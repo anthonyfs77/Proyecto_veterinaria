@@ -113,6 +113,16 @@ const routes = [
         path: '/GestionProveedores',
         name: 'GestionProveedores',
         component: GestionProveedores
+      },
+      {
+        path: '/GestionUsuarios',
+        name: 'GestionUsuarios',
+        component: gestionusAdmin
+      },
+      {
+        path: '/AdminServicios',
+        name: 'AdminServicios',
+        component: Adminservicios
       }
     ]
   },
@@ -147,7 +157,10 @@ import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue'
 import catalogo from '../views/Productos/catalogoView.vue';
 import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
-import compras from '../views/compras/ComprasManagmen.vue'
+import compras from '../views/compras/ComprasManagmen.vue';
+import gestionusAdmin from '../views/soporteyusuarios/gestionusAdmin.vue';
+import gestionusuario from '../views/soporteyusuarios/gestionusuario.vue';
+import Adminservicios from '../views/servicios/AdminServicios.vue';
 // cliente
 import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
