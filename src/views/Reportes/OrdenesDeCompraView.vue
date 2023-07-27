@@ -12,18 +12,19 @@
         </select>
       </div>
       <div class="filtro2" v-show="status1">
-        <button class="btn-generar" @click="ReporteGeneralOrdenesCompra">Generar 1</button>
+        <button class="btn-generar" @click="ReporteGeneralOrdenesCompra">Generar</button>
       </div>
       <div class="filtro3" v-show="status3">
-        <button class="btn-generar" @click="ReporteGeneralOrdenesCompraPagadas">Generar 2</button>
+        <button class="btn-generar" @click="ReporteGeneralOrdenesCompraPagadas">Generar</button>
       </div>
     </div>
 
     <div class="pantalla">
+      <div class="table-container">
       <!-- Tabla de ordenes de compra generales -->
       <div class="responsive-table" v-if="selectedOption === 'opcion1' && General.length > 0">
-        <table class="table table-success table-striped">
-          <thead class="table-dark">
+        <table class="table table-hover custom-table">
+        <thead>
             <tr>
               <th>Fecha de compra</th>
               <th>Fecha de pago</th>
@@ -36,7 +37,7 @@
           </thead>
           <tbody>
             <tr v-for="item in General" :key="item.Motivo">
-              <td>{{ item.Fecha_Compra }}</td>
+              <td id="Fecha">{{ item.Fecha_Compra }}</td>
               <td>{{ item.Fecha_Pago }}</td>
               <td>{{ item.Nombre }}</td>
               <td>{{ item.Cantidad }}</td>
@@ -51,8 +52,8 @@
 
       <!-- Tabla de ordenes de compra pagadas -->
       <div class="responsive-table" v-if="selectedOption === 'opcion2' && Pagadas.length > 0">
-        <table class="table table-success table-striped">
-          <thead class="table-dark">
+        <table class="table table-hover custom-table">
+        <thead>
             <tr>
               <th>Fecha de compra</th>
               <th>Fecha de pago</th>
@@ -65,7 +66,7 @@
           </thead>
           <tbody>
             <tr v-for="item in Pagadas" :key="item.Motivo">
-              <td>{{ item.Fecha_Compra }}</td>
+              <td id="Fecha">{{ item.Fecha_Compra }}</td>
               <td>{{ item.Fecha_Pago }}</td>
               <td>{{ item.Nombre }}</td>
               <td>{{ item.Cantidad }}</td>
@@ -79,6 +80,7 @@
       <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -160,7 +162,6 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
   .btn-generar {
     border: none;
     background-color: transparent;
-    border-bottom: 2px solid black;
     color: black;
     transition: border-color 0.3s, transform 0.3s;
     cursor: pointer;
@@ -170,8 +171,8 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
   }
   
   .btn-generar:hover {
-    border-color: var(--color-primary);
-    transform: translateX(5px);
+    color: var(--color-primary);
+  transform: translateX(15px);
   } 
   
   .btn-generar:focus {
@@ -185,7 +186,7 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
   .pantalla {
     display: flex;
     justify-content: center;
-    align-items: center;
+
     height: 85vh;
     font-size: 1.2rem;
   }
@@ -221,6 +222,42 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
   .Titulo{
     display: flex;
     gap: 8px;
+  }
+      /* Estilos personalizados para la tabla */
+      .custom-table {
+    font-size: 0.9rem;
+  }
+  .custom-table thead th {
+    font-weight: bold;
+    background-color: white;
+  }
+  .custom-table td,
+  .custom-table th {
+    border: 1px solid #dee2e6;
+  }
+
+  .table-container {
+    height: 500px;
+    overflow: auto;
+  }
+
+  @media (max-width: 767px) {
+    .custom-table thead {
+      display: none;
+    }
+    .custom-table td {
+      display: block;
+      text-align: right;
+    }
+    .custom-table td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    #Fecha {
+    font-weight: bold;
+  }
   }
   </style>
   
