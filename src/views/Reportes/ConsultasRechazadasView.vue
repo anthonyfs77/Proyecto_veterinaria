@@ -2,8 +2,8 @@
   <div class="first-container">
 
     <div class="parametros">
-        <div class="Titulo"><span class="material-symbols-outlined">medical_information</span>
-        <h2>Citas Rechazadas</h2></div>
+        <div class="Titulo">
+          <span class="material-symbols-outlined">delete_forever</span><h2>Citas Rechazadas</h2></div>
       <div class="filtro">
         <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
         <select v-model="selectedOption" id="tipo" class="select-tipo">
@@ -205,7 +205,7 @@ try {
 
   </script>
   
-  <style scoped>
+  <style>
   * {
     padding: 0;
     margin: 0;

@@ -225,6 +225,7 @@
   <style scoped>
   
   .card {
+    font-family: 'Comfortaa';
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
@@ -284,6 +285,7 @@
   }
   @media (max-width: 600px) {
     .card {
+      font-family: 'Comfortaa';
       margin: 20px;
       box-shadow: none;
       border-radius: 0;
@@ -293,6 +295,7 @@
   }
 
   .overlay {
+  font-family: 'Comfortaa';
   position: fixed;
   top: 0;
   left: 0;

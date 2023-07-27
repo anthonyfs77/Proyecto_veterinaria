@@ -2,8 +2,7 @@
   <div class="first-container">
     <div class="parametros">
       <div class="Titulo">
-        <span class="material-symbols-outlined">shopping_cart</span>
-        <h2>Ordenes de Compra</h2>
+        <span class="material-symbols-outlined">shopping_cart</span><h2>Ordenes de Compra</h2>
       </div>
       <div class="filtro">
         <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
@@ -123,7 +122,7 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
 };
 </script>
   
-  <style scoped>
+  <style>
   * {
     padding: 0;
     margin: 0;

@@ -2,8 +2,7 @@
   <div class="first-container">
     <div class="parametros">
       <div class="Titulo">
-        <span class="material-symbols-outlined">payments</span>
-        <h2>Ventas Realizadas.</h2>
+        <span class="material-symbols-outlined">paid</span><h2>Ventas Realizadas.</h2>
       </div>
       <div class="filtro">
         <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
@@ -132,7 +131,7 @@ const ReporteGralVentas = async () => {
 };
 </script>
 
-<style scoped>
+<style>
 /* Estilos generales y estilos para tamaños de pantalla más pequeños ... */
 
 .first-container {

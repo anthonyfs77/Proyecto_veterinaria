@@ -2,8 +2,8 @@
   <div class="first-container">
 
     <div class="parametros">
-      <div class="Titulo"><span class="material-symbols-outlined">ecg</span>
-        <h2>Hisotorial Medico</h2>
+      <div class="Titulo"> 
+        <span class="material-symbols-outlined">respiratory_rate</span><h2>Hisotorial Medico</h2>
       </div>
       <div class="filtro">
         <label for="busquedaMas" class="label-mascota">Nombre de la mascota:</label>
@@ -80,7 +80,7 @@ const generarHistorial = async () => {
 
 </script>
   
-<style scoped>
+<style>
 * {
   padding: 0;
   margin: 0;
