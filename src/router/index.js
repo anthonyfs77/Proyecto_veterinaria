@@ -22,11 +22,6 @@ const routes = [
     component: register
   },
   {
-    path: '/GestionProveedores',
-    name: 'GestionProveedores',
-    component: GestionProveedores
-  },
-  {
     path: '/catalogo',
     name: 'catalogo',
     component: catalogo
@@ -54,6 +49,11 @@ const routes = [
         path: '/control',
         name: 'control',
         component: control
+      },
+      {
+        path: '/compras',
+        name: 'compras',
+        component: compras
       },
       {
         path: '/productos',
@@ -104,6 +104,11 @@ const routes = [
         path:'/consultas',
         name: 'consultas',
         component: consultas
+      },
+      {   
+        path: '/GestionProveedores',
+        name: 'GestionProveedores',
+        component: GestionProveedores
       }
     ]
   },
@@ -136,7 +141,7 @@ import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue'
 import catalogo from '../views/Productos/catalogoView.vue';
 import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
-
+import compras from '../views/compras/ComprasManagmen.vue'
 // cliente
 import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'

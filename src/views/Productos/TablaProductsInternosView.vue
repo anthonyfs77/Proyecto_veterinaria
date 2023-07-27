@@ -2,16 +2,13 @@
   <div class="app">
     <div class="title">
       <encabezado />
-      <div class="btns">
-        <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
-      </div>
     </div>
     <div class="app">
       <div class="controles">
         <div class="botones">
           <!-- Cada btn individual tiene su propia función stockLogic o sinStockLogic -->
-          <btn tittle="Stock" @click="Stock"/>
-          <btn tittle="Sin stock" @click="sinStock"/>
+          <btnStock tittle="Stock" @click="Stock"/>
+          <btnSinStock tittle="Sin stock" @click="sinStock"/>
           <add/>
         </div>
         <div class="rango">
@@ -19,8 +16,10 @@
           
         </div>
         <div class="izquierdo">
-          <search/>
-        </div>
+          <div class="btns"></div>
+                <btn2 @click="filtrar" title="Aplicar"/> 
+                <btn2  @click="fetchData" title="Limpiar"/>
+          </div>
       </div>
       <div class="table">
         <div class="headerTable">
@@ -47,7 +46,8 @@ import Rows from '../../components/Tabla/RowTablesInternos.vue'
 import encabezado from '../../components/Tabla/header.vue'
 import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
-import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
+import btnStock from '../../components/ControlesIndividuales/BotonSencillo.vue'
+import btnSinStock from '../../components/ControlesIndividuales/BotonSencillo2.vue'
 import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecios.vue'
 import axios from 'axios'
@@ -92,8 +92,11 @@ const filtrar = () =>{
 
 <style scoped>
 
-.btns{
-    display: flex;
+
+.izquierdo{
+  display: flex;
+  gap: 20px;
+  margin-right: 100px;
 }
 
 .controles{

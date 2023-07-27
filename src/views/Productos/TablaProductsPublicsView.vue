@@ -1,10 +1,7 @@
 <template>
     <div class="title">
         <encabezado />
-        <div class="btns">
-        <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
       </div>
-    </div>
     <div class="app">
         <div class="controles">
             <div class="botones">
@@ -16,7 +13,8 @@
                 <precios tittle1="$min" tittle2="$max" />
             </div>
             <div class="izquierdo">
-                <search />
+                <div class="btns"></div>
+                <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
             </div>
         </div>
         <div class="table">
@@ -31,7 +29,7 @@
             <div class="cont-table">
                 <div v-for="productos in productos" :key="productos.id">
                     <Rows :name="productos.nom_producto" :stock="productos.existencias" :priceV="productos.precio_venta" 
-                    :priceC="productos.precio_compra" :iva="9999"
+                    :priceC="productos.precio_compra" :iva="productos.iva"
                     :status="productos.estado" />
                 </div>
             </div>
@@ -42,7 +40,6 @@
 <script setup>
 import Rows from '../../components/Tabla/RowTablesProducts.vue';
 import encabezado from '../../components/Tabla/header.vue'
-import search from '../../components/ControlesIndividuales/searchInput.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
 import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
@@ -108,6 +105,12 @@ const filtrar = () =>{
 
 .btns{
     display: flex;
+}
+
+.izquierdo{
+    display: flex;
+  gap: 20px;
+  margin-right: 100px;
 }
 .controles{
     display: grid; 
