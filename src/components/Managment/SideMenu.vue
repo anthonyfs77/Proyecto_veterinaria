@@ -50,6 +50,10 @@
                     <span class="material-symbols-outlined">clinical_notes</span>
                     <h4>Servicios</h4>
                 </router-link>
+                <router-link :to="{name: 'ordenes'}">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <h4>Ordenes de compra</h4>
+                </router-link>
                 <router-link :to="{name: 'principalMain'}">
                     <span class="material-symbols-outlined">logout</span>
                     <h4>Salir</h4>
