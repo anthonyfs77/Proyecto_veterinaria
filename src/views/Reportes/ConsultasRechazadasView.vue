@@ -5,7 +5,7 @@
         <div class="Titulo">
           <span class="material-symbols-outlined">delete_forever</span><h2>Citas Rechazadas</h2></div>
       <div class="filtro">
-        <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
+        <label for="tipo" class="label-tipo">Filtrar por:</label>
         <select v-model="selectedOption" id="tipo" class="select-tipo">
           <option value="opcion1">Cliente</option>
           <option value="opcion2">Fecha</option>
@@ -206,12 +206,15 @@ try {
 
   </script>
   
-  <style>
+  <style scoped>
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Comfortaa', cursive;
+  }
+
+  .first-container, .pantalla{
+    font-family: 'Comfortaa';
   }
 
   .first-container{

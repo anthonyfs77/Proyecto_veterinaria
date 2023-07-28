@@ -5,7 +5,7 @@
         <span class="material-symbols-outlined">shopping_cart</span><h2>Ordenes de Compra</h2>
       </div>
       <div class="filtro">
-        <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
+        <label for="tipo" class="label-tipo">Filtrar por:</label>
         <select v-model="selectedOption" id="tipo" class="select-tipo">
           <option value="opcion1" selected>General</option>
           <option value="opcion2">Pagadas</option>
@@ -124,12 +124,15 @@ const ReporteGeneralOrdenesCompraPagadas = async () => {
 };
 </script>
   
-  <style>
+  <style scoped>
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Comfortaa', cursive;
+  }
+
+  .first-container, .pantalla{
+    font-family: 'Comfortaa';
   }
   
   .first-container{

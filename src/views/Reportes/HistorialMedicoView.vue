@@ -81,13 +81,16 @@ const generarHistorial = async () => {
 
 </script>
   
-<style>
+<style scoped>
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Comfortaa', cursive;
 }
+
+.first-container, .pantalla{
+    font-family: 'Comfortaa';
+  }
 
 .first-container {
   width: 100%;
