@@ -1,6 +1,6 @@
 <script setup>
 import {ref, defineProps} from 'vue';
-import BotonConEstilo from '../ControlesIndividuales/BotonConEstilo.vue';
+import BotonConEstilo from '../ControlesIndividuales/BotonAntho.vue';
 const props = defineProps({
   Service: {
     type: String,
@@ -11,12 +11,12 @@ const props = defineProps({
     default: ''
   },
   Type: {
-    type: String,
-    default: ''
+    type: Number,
+    default: 0
   },
   Id: {
     type: Number,
-    default: 0
+    default: 1
   },
   Foto: {
     type: String,

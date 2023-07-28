@@ -1,6 +1,6 @@
 
   
-  <script setup>
+<script setup>
   import navegacion from '../../components/MenuInicio/NavbarInicio.vue'
   import btn from '../../components/MenuInicio/BtnInicio.vue'
   import barras from '../../components/MenuInicio/BarraInicio.vue'
@@ -8,7 +8,7 @@
   import menu from '../../components/ControlesIndividuales/MenuDesplegable.vue'
   </script>
   
-  <style scoped>
+<style scoped>
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;

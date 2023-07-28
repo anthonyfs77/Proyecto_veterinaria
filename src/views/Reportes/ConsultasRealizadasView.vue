@@ -5,7 +5,7 @@
           <div class="Titulo">
             <span class="material-symbols-outlined">pet_supplies</span><h2>Consultas Realizadas</h2></div>
         <div class="filtro">
-          <label for="tipo" class="label-tipo">Seleccione el tipo de reporte que desea realizar:</label>
+          <label for="tipo" class="label-tipo">Filtrar por:</label>
           <select v-model="selectedOption" id="tipo" class="select-tipo">
             <option value="opcion1">Cliente</option>
             <option value="opcion2">Fecha</option>
@@ -17,25 +17,26 @@
           <input type="search" name="busquedaCat" id="busqueda" class="input-search" v-model="Nombres"><br><br>
           <label for="busquedaP" class="label-busqueda">Apellidos del cliente:</label>
           <input type="search" name="busquedaCat" id="busquedaP" class="input-search" v-model="Apellidos"><br>
-          <button class="btn-generar" @click="obtenerConsultasClientes">Generar 1</button>
+          <button class="btn-generar" @click="obtenerConsultasClientes">Generar</button>
         </div>
     
         <div class="filtro3" v-show="status2">
-          <button class="btn-generar" @click="obtenerReporteConsultas">Generar 2</button>
+          <button class="btn-generar" @click="obtenerReporteConsultas">Generar</button>
         </div>
     
         <div class="filtro4" v-show="status3">
           <label for="busquedafecha" class="label-fecha">Ingrese la fecha:</label>
           <input type="search" name="fecha" id="busquedafecha" class="input-fecha" placeholder="       Formato: aaaa-mm-dd" v-model="FechaCons"><br>
-          <button class="btn-generar" @click="obtenerConsultasFecha">Generar 3</button>
+          <button class="btn-generar" @click="obtenerConsultasFecha">Generar</button>
         </div>
       </div>
     
       <div class="pantalla">
+        <div class="table-container">
         <!-- Tabla de consultas generales -->
         <div class="responsive-table" v-if="selectedOption === 'opcion3' && General.length > 0">
-          <table class="table table-success table-striped">
-            <thead class="table-dark">
+          <table class="table table-hover custom-table">
+        <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Especie</th>
@@ -57,7 +58,7 @@
             </thead>
             <tbody>
               <tr v-for="item in General" :key="item.Motivo">
-                <td>{{ item.Nombre }}</td>
+                <td id="Nombre">{{ item.Nombre }}</td>
                 <td>{{ item.Especie }}</td>
                 <td>{{ item.Raza }}</td>
                 <td>{{ item.Genero }}</td>
@@ -81,8 +82,8 @@
   
         <!-- Tabla de consultas por fecha -->
         <div class="responsive-table" v-if="selectedOption === 'opcion2' && consFecha.length > 0">
-          <table class="table table-success table-striped">
-            <thead class="table-dark">
+          <table class="table table-hover custom-table">
+        <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Especie</th>
@@ -104,7 +105,7 @@
             </thead>
             <tbody>
               <tr v-for="item in consFecha" :key="item.Motivo">
-                <td>{{ item.Nombre }}</td>
+                <td id="Nombre">{{ item.Nombre }}</td>
                 <td>{{ item.Especie }}</td>
                 <td>{{ item.Raza }}</td>
                 <td>{{ item.Genero }}</td>
@@ -128,8 +129,8 @@
   
         <!-- Tabla de consultas por cliente -->
         <div class="responsive-table" v-if="selectedOption === 'opcion1' && constCliente.length > 0">
-          <table class="table table-success table-striped">
-            <thead class="table-dark">
+          <table class="table table-hover custom-table">
+            <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Especie</th>
@@ -151,7 +152,7 @@
             </thead>
             <tbody>
               <tr v-for="item in constCliente" :key="item.Motivo">
-                <td>{{ item.Nombre }}</td>
+                <td id="Nombre">{{ item.Nombre }}</td>
                 <td>{{ item.Especie }}</td>
                 <td>{{ item.Raza }}</td>
                 <td>{{ item.Genero }}</td>
@@ -174,7 +175,7 @@
         <p v-else-if="selectedOption === 'opcion1'">No hay datos disponibles.</p>
       </div>
       </div>
-  
+    </div>
     </template>
     
     <script setup>
@@ -247,18 +248,21 @@
   
     </script>
     
-    <style>
+    <style scoped>
     * {
       padding: 0;
       margin: 0;
       box-sizing: border-box;
-      font-family: 'Comfortaa', cursive;
     }
+
+    .first-container, .pantalla{
+      font-family: 'Comfortaa';
+  }
   
     .first-container{
       width: 100%;
       height: 100vh;
-  
+
     }
     
     :root {
@@ -311,7 +315,6 @@
     .btn-generar {
       border: none;
       background-color: transparent;
-      border-bottom: 2px solid black;
       color: black;
       transition: border-color 0.3s, transform 0.3s;
       cursor: pointer;
@@ -321,8 +324,8 @@
     }
     
     .btn-generar:hover {
-      border-color: var(--color-primary);
-      transform: translateX(5px);
+      color: var(--color-primary);
+  transform: translateX(15px);
     }
     
     .btn-generar:focus {
@@ -336,7 +339,7 @@
     .pantalla {
       display: flex;
       justify-content: center;
-      align-items: center;
+ 
       height: 85vh;
       font-size: 1.2rem;
     }
@@ -379,5 +382,41 @@
       display: flex;
       gap: 8px;
     }
+     /* Estilos personalizados para la tabla */
+  .custom-table {
+    font-size: 0.9rem;
+  }
+  .custom-table thead th {
+    font-weight: bold;
+    background-color: white;
+  }
+  .custom-table td,
+  .custom-table th {
+    border: 1px solid #dee2e6;
+  }
+
+  .table-container {
+    height: 500px;
+    overflow: auto;
+  }
+
+  @media (max-width: 767px) {
+    .custom-table thead {
+      display: none;
+    }
+    .custom-table td {
+      display: block;
+      text-align: right;
+    }
+    .custom-table td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    #Nombre {
+    font-weight: bold;
+  }
+  }
     </style>
     

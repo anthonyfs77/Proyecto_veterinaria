@@ -3,11 +3,11 @@
         <header>
             <div class="vet"><span class="logo material-symbols-outlined">sound_detection_dog_barking <p>Veterinaria</p></span></div>
             <ul class="navbar normal">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Citas</a></li>
-                <li><a href="#">Ubicacion</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><router-link :to="{name: 'cuerpo'}" href="#" class="active">Home</router-link></li>
+                <li><router-link :to="{name: 'catalogo'}" href="#">Productos</router-link></li>
+                <li><router-link :to="{name: 'cita'}">Citas</router-link></li>
+                <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
+                <li><a href="#">contacto</a></li>
             </ul>
             <div class="main">
                 <span @click="menu" class="material-symbols-outlined">
@@ -37,6 +37,9 @@
 
 <script setup>
 import { ref } from 'vue'
+
+
+
 var despliegue = ref(false);
 
 const menu = () => {

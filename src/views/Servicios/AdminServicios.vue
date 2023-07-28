@@ -48,7 +48,7 @@
   </template>
   
   <script setup>
-  import { ref, reactive } from 'vue';
+  import { ref } from 'vue';
   import axios from 'axios';
   import CardService from '../../components/servicios/CardService.vue';
   import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';

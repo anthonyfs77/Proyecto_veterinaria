@@ -12,6 +12,8 @@
   width: 100%;
 }
 
+
+
 </style>
 <script setup>
 //import GestionusAdmin from './views/soporteyusuarios/gestionusAdmin.vue';

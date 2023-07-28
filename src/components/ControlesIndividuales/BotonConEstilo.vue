@@ -19,36 +19,28 @@ defineProps({
 
 
 <style scoped>
+
 .button {
     position: relative;
-    margin-left: 50px;
     width: 150px;
     height: 40px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(33, 197, 0);
-    border-radius: 30px;
+    background-color: white;
+    border-radius: 10px;
     overflow: hidden;
-    border: 2px;
-    border-color: black;
+    border: none;
     box-shadow: 0 0 1em #00000013;
-    font-size: 15px;
-    transition: 0.5s;
-    text-align: center;
-    color: white;
-    
+    transition: all 0.3s;
+    font-weight: 500;
 }
 
 .button:hover{
   box-shadow: 0 0 2em #00000013;
   transform: scale(1.03);
-  background-color: rgb(8, 114, 163);
-  color: white;
+  color: black;
+  font-weight: 600;
 }
 .button__text {
-    transition: all 0.3s;
     display: flex;
     align-items: center;
     text-align: center;

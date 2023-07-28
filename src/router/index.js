@@ -10,6 +10,28 @@ const routes = [
     path: '/Home',
     name: 'MenuCliente',
     component: MenuCliente,
+    children:[
+      {
+        path: '/Home',
+        name: 'cuerpo',
+        component: bodyCliente,
+      },
+      {
+        path: '/cita',
+        name: 'cita',
+        component: citas,
+      },
+      {
+        path: '/ubicacion',
+        name: 'ubicacion',
+        component: ubicacion,
+      },
+      {
+        path: '/catalogo',
+        name: 'catalogo',
+        component: catalogo
+      },
+    ]
   },
   {
     path: '/login',
@@ -20,11 +42,6 @@ const routes = [
     path: '/register',
     name: 'register',
     component: register
-  },
-  {
-    path: '/catalogo',
-    name: 'catalogo',
-    component: catalogo
   },
   {
     path: '/soporteyayuda',
@@ -148,7 +165,6 @@ import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
 import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
-import catalogo from '../views/Productos/catalogoView.vue';
 import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
 import compras from '../views/compras/ComprasManagmen.vue';
@@ -156,7 +172,10 @@ import gestionusAdmin from '../views/soporteyusuarios/gestionusAdmin.vue';
 import gestionusuario from '../views/soporteyusuarios/gestionusuario.vue';
 import Adminservicios from '../views/servicios/AdminServicios.vue';
 // cliente
-import MenuCliente from '../views/Cliente/Menu/MenuClienteView.vue'
+import MenuCliente from '../views/cliente/ClienteView.vue'
+import bodyCliente from '../views/cliente/menu/menuclienteview.vue'
+import ubicacion from '../views/ubicacion/MapaUbicacion.vue'
+import catalogo from '../views/productos/catalogoView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 import consultas from '../views/Consultas/ConsultasView.vue';
