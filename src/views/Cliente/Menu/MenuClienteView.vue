@@ -1,6 +1,5 @@
 
 <script setup>
-import headerClient from '../../../components/cliente/menuComponents/header.vue'
 import footerClient from '../../../components/cliente/menuComponents/footer.vue'
 import { ref, onMounted } from 'vue'
 
