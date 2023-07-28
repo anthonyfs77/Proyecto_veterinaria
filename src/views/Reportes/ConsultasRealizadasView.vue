@@ -248,18 +248,17 @@
   
     </script>
     
-    <style>
+    <style scoped>
     * {
       padding: 0;
       margin: 0;
       box-sizing: border-box;
-      font-family: 'Comfortaa', cursive;
     }
   
     .first-container{
       width: 100%;
       height: 100vh;
-  
+
     }
     
     :root {

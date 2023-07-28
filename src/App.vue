@@ -10,7 +10,10 @@
 .container-fluid {
   height: 100vh;
   width: 100%;
+  overflow: hidden;
 }
+
+
 
 </style>
 <script setup>
