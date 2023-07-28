@@ -38,7 +38,7 @@
   <script setup>
   import { ref, onMounted, watch } from 'vue';
   import axios from 'axios';
-  import btn from '../../components/ControlesIndividuales/BotonConEstilo.vue'
+  import btn from '../../components/ControlesIndividuales/BotonAntho.vue'
   import InfousAdmin from '../../components/infoUsuario/InfousAdmin.vue';
   const search = ref('');
   const texto = ref("Buscar Usuario...");
