@@ -41,7 +41,7 @@
           <textarea id="motivo" v-model="motivo"></textarea>
         </div>
         <button type="submit">Agendar cita</button><br>
-        <RouterLink  :to="{name: 'principalMain'}" class="custom-link"><p id="Exit">Volver al inicio</p></RouterLink>
+        <RouterLink  :to="{name: 'cuerpo'}" class="custom-link"><p id="Exit">Volver al inicio</p></RouterLink>
       </form>
     </div>
 

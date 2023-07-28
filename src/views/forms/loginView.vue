@@ -130,7 +130,7 @@ const data = async () => {
 
 };
 
-const redirectToPage = () => {                                                      // Router
+const redirectToPage = () => {                                            
     router.push('/Home');
 };
 

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="controls">
-            <btn title="Añadir Usuario"/>
+            <btn title="Buscar Usuario" @click="buscar"/>
             <div class="search">
     <input :type="inputType" class="search__input" v-model="search" :placeholder="texto" @input="buscar">
     <button class="search__button" @click="buscar">
@@ -38,7 +38,7 @@
   <script setup>
   import { ref, onMounted, watch } from 'vue';
   import axios from 'axios';
-  import btn from '../../components/ControlesIndividuales/BotonConEstilo.vue'
+  import btn from '../../components/ControlesIndividuales/BotonAntho.vue'
   import InfousAdmin from '../../components/infoUsuario/InfousAdmin.vue';
   const search = ref('');
   const texto = ref("Buscar Usuario...");
