@@ -32,8 +32,25 @@ export const useStore = defineStore('store', () => {
   };
 });
 
+
 // variable de productos internos 
-export const StorePublics = defineStore('store', () => {
+export const StorePublics = defineStore('stores', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+// variable de productos internos 
+export const StoreSearch = defineStore('search', () => {
   const state = {
     variable: '',
   };
@@ -49,22 +66,36 @@ export const StorePublics = defineStore('store', () => {
 });
 
 
-
-export const useCheckboxStore = defineStore('checkbox', () => {
+export const StoreProdInternos = defineStore('prodInterno', () => {
   const state = {
-    isChecked: false,
+    variable: '',
   };
 
-  const setCheckboxChecked = () => {
-    state.isChecked = true;
+  const setVariable = (newValue) => {
+    state.variable = newValue;
   };
 
-  const setCheckboxUnchecked = () => {
-    state.isChecked = false;
+  return {
+    state,
+    setVariable,
   };
-
-  return { state, setCheckboxChecked, setCheckboxUnchecked };
 });
+
+export const StoreProdPublics = defineStore('prodPublico', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
 
 
 

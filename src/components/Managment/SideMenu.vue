@@ -4,62 +4,78 @@
             <div class="top">
                 <div class="logo">
                     <span class="material-symbols-outlined">sound_detection_dog_barking</span>
-                    <h2>Veterinaria</h2>
+                    <p>Administrador</p>
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-symbols-outlined">close</span>
                 </div>
             </div>
             <div class="sidebar">
-                <router-link :to="{ name: 'control'}">
-                    <span class="material-symbols-outlined">person</span>
-                    <h4>Dashboard</h4>
-                </router-link>
-                <router-link :to="{name: 'productos'}">
-                    <span class="material-symbols-outlined">person</span>
-                    <h4>Productos</h4>
-                </router-link>
-                    <router-link :to="{name: 'GestionProveedores'}">
-                    <span class="material-symbols-outlined">receipt_long</span>
-                    <h4>Proveedores</h4>
-                </router-link>
-                <router-link :to="{name: 'compras'}">
-                    <span class="material-symbols-outlined">insights</span>
-                    <h4>Ventas</h4>
-                </router-link>
-                <router-link :to="{name: 'GestionUsuarios'}">
-                    <span class="material-symbols-outlined">person</span>
-                    <h4>Usuarios</h4>
-                </router-link>
-                <a href="#">
-                    <span class="material-symbols-outlined">summarize</span>
-                    <select  v-model="selectedOption" class="sidebar-select"  @change="onReportChange">
-                    <option value="" disabled selected>Reportes</option>
-                    <option value="reportehistorialmedico">Historial medico.</option>
-                    <option value="reportconsultasrealizadas">Consultas realizadas.</option>
-                    <option value="reportconsultasrechazadas">Citas rechazadas.</option>
-                    <option value="reportordenescompra">Ordenes de compra.</option>
-                    <option value="reporteventas">Productos vendidos.</option>
-                    </select>
-                </a>
-                <router-link :to="{name: 'consultas'}">
-                    <span class="material-symbols-outlined">clinical_notes</span>
-                    <h4>Consultas</h4>
-                </router-link>
-                <router-link :to="{name: 'AdminServicios'}">
-                    <span class="material-symbols-outlined">clinical_notes</span>
-                    <h4>Servicios</h4>
-                </router-link>
-                <router-link :to="{name: 'principalMain'}">
+                <div class="general">
+                    <div class="admin">
+                    <router-link :to="{ name: 'control' }">
+                        <span class="material-symbols-outlined">space_dashboard</span>
+                        <h4>Dashboard</h4>
+                    </router-link>
+
+                    <router-link :to="{ name: 'productos' }">
+                        <span class="material-symbols-outlined">inventory</span>
+                        <h4>Productos</h4>
+                    </router-link>
+
+                    <router-link :to="{ name: 'GestionProveedores' }">
+                        <span class="material-symbols-outlined">productivity</span>
+                        <h4>Proveedores</h4>
+                    </router-link>
+                </div>
+
+                <div class="com">
+                    <router-link :to="{ name: 'compras' }">
+                        <span class="material-symbols-outlined">insights</span>
+                        <h4>Ventas</h4>
+                    </router-link>
+
+                    <router-link :to="{ name: 'GestionUsuarios' }">
+                        <span class="material-symbols-outlined">person</span>
+                        <h4>Usuarios</h4>
+                    </router-link>
+                </div>
+
+                <div class="reportes">
+                    <router-link :to="{ name: 'consultas' }">
+                        <span class="material-symbols-outlined">clinical_notes</span>
+                        <h4>Consultas</h4>
+                    </router-link>
+
+                    <router-link :to="{ name: 'AdminServicios' }">
+                        <span class="material-symbols-outlined">clinical_notes</span>
+                        <h4>Servicios</h4>
+                    </router-link>
+
+                    <a href="#">
+                        <span class="material-symbols-outlined">summarize</span>
+                        <select v-model="selectedOption" class="sidebar-select" @change="onReportChange">
+                            <option value="" disabled selected>Reportes</option>
+                            <option value="reportehistorialmedico">Historial medico.</option>
+                            <option value="reportconsultasrealizadas">Consultas realizadas.</option>
+                            <option value="reportconsultasrechazadas">Citas rechazadas.</option>
+                            <option value="reportordenescompra">Ordenes de compra.</option>
+                            <option value="reporteventas">Productos vendidos.</option>
+                        </select>
+                    </a>
+                </div>
+
+                </div>
+
+                <router-link :to="{ name: 'principalMain' }" id="salir">
                     <span class="material-symbols-outlined">logout</span>
                     <h4>Salir</h4>
                 </router-link>
 
             </div>
-        </aside>  
+        </aside>
     </div>
 </template>
-
 
 
 <script setup>
@@ -69,7 +85,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
-const selectedOption = ref ('');
+const selectedOption = ref('');
 
 const resetSelect = () => {
     selectedOption.value = '';
@@ -81,13 +97,11 @@ const onReportChange = (event) => {
         resetSelect();
     })
 }
-
 </script>
 
 
  
 <style scoped>
-
 * {
     margin: 0;
     padding: 0;
@@ -100,19 +114,17 @@ const onReportChange = (event) => {
 }
 
 
-
-
 h1,
 h2,
 h4,
 h4,
 h5,
-h6, 
-select{
+h6,
+select {
     font-family: 'Comfortaa', cursive;
 }
 
-html{
+html {
     font-size: 14px;
 }
 
@@ -125,9 +137,11 @@ body {
     overflow-x: hidden;
     color: #363949;
 }
-option{
+
+option {
     background-color: white;
 }
+
 a {
     color: #363949;
 }
@@ -168,20 +182,20 @@ b {
 
 .containerNorm {
     position: relative;
-  display: grid;
-  width: 21.8em;
-  margin: 0 auto;
-  gap: 1.8rem;
-  grid-template-columns: 15rem 1fr;
-  position: fixed;
-  
-  margin-left: -24px;
+    display: grid;
+    width: 21.8em;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 15rem 1fr;
+    position: fixed;
+    margin-left: -24px;
 
 }
 
 
 aside {
     height: 100vh;
+    width: 123%; 
 }
 
 aside .top {
@@ -191,9 +205,17 @@ aside .top {
     margin-top: 1.4rem;
 }
 
-aside .logo {
+.logo {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 0.8rem;
+    width: 100%;
+    height: 45px;
+    padding: 1rem;
+    transition: all 300ms ease;
+      border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+
 }
 
 aside .logo img {
@@ -203,16 +225,11 @@ aside .logo img {
 
 aside .close {
     display: none;
+    
 }
 
 /*======================side bar===========================*/
-aside .sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 86vh;
-    position: relative;
-    top: 3rem;
-}
+
 
 aside .sidebar a {
     display: flex;
@@ -230,7 +247,7 @@ aside .sidebar a span {
     transition: all 300ms ease;
 }
 
-aside .sidebar a:last-child {
+#salir {
     position: absolute;
     bottom: 2rem;
     width: 100%;
@@ -260,10 +277,46 @@ aside .sidebar {
     height: 3.7rem;
     transition: all 300ms ease;
     font-size: 16px;
+    background-color: transparent;
 }
 
 .sidebar-select:hover {
     color: #7380ec;
+}
+
+.admin{
+    padding: 1rem;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: .7rem;
+  transition: all ease .3s;
+  border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+
+}
+
+.com{
+    padding: 1rem;
+  backdrop-filter: blur(20px);
+  border-radius: .7rem;
+  transition: all ease .3s;
+  border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+}
+
+.reportes{
+    padding: 1rem;
+  backdrop-filter: blur(20px);
+  border-radius: .7rem;
+  transition: all ease .3s;
+  border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+
+}
+
+.general{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 73vh;
+    
 }
 
 </style>

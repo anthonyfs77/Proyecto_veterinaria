@@ -5,10 +5,10 @@
     <div class="app">
         <div class="controles">
             <div class="botones">
-                <btn tittle="Stock" @click="Stock"/>
-                <btn tittle="Sin stock" @click="sinStock"/>
-                <add />
-            </div>
+          <!-- Cada btn individual tiene su propia función stockLogic o sinStockLogic -->
+          <search @input="onInput"/>
+          <add/>
+        </div>
             <div class="rango">
                 <precios tittle1="$min" tittle2="$max" />
             </div>
@@ -39,22 +39,29 @@
 
 <script setup>
 import Rows from '../../components/Tabla/RowTablesProducts.vue';
+import search from '../../components/ControlesIndividuales/BuscarInterno.vue'
 import encabezado from '../../components/Tabla/header.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
 import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecioPublicos.vue'
 import axios from 'axios'
-import { ref, onMounted } from 'vue';
-import {StorePublics} from '@/stores/counter.js'
+import { ref, onMounted, watch } from 'vue';
+import {useStore} from '@/stores/counter.js'
+import {StoreProdPublics} from '@/stores/counter.js'
 
-const store = StorePublics();
+const prodPublico = StoreProdPublics();
+const store = useStore();
 const productos = ref([])
+const nombre = ref('');
+
 
 const fetchData = async () =>{
     try{
         const response = await axios.get('http://web.backend.com/productosPublicos');
         productos.value = response.data.data; 
+        nombre.value =  response.data.data;
+
     } catch(error){
         console.log(error)
     }
@@ -62,42 +69,30 @@ const fetchData = async () =>{
 onMounted(fetchData);
 
 
-// Logica de filtracion Stock y sin Stock de productos 
-const sinStock = () =>{
-  console.log("sin stock")
-}
-
-
-const Stock = () =>{
-  console.log("stock")
-}
-
 const filtrar = () =>{
     productos.value = store.state.variable
 }
+
+const buscar = () =>{
+  productos.value = prodPublico.state.variable;
+}
+
+const onInput = () =>{
+    buscar();
+}
+
+
+
+
+
+
+// Agregar un watcher para la variable "nombre"
+// watch(nombre, (newValue) => {
+//   buscar()
+//   fetchData()
+// });
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -134,7 +129,7 @@ const filtrar = () =>{
 
 .botones {
     display: flex;
-    gap: 10px;
+    gap: 40px;
     align-items: flex-end;
 }
 
