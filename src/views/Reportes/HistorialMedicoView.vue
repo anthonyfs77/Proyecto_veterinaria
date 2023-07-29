@@ -31,7 +31,6 @@
             <th>Edad</th>
             <th>Observaciones medicas</th>
             <th>Medicacion</th>
-            <th>Tipo de medicamento</th>
             <th>Dosis</th>
           </tr>
         </thead>
@@ -50,7 +49,6 @@
             <td>{{ item.Edad }} Meses</td>
             <td>{{ item.Observaciones }}</td>
             <td>{{ item.Medicacion }}</td>
-            <td>{{ item.Tipo_de_medicamento }}</td>
             <td>{{ item.Dosis }}</td>
           </tr>
         </tbody>
