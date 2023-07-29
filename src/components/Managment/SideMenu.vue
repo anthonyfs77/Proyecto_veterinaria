@@ -189,7 +189,9 @@ b {
     grid-template-columns: 15rem 1fr;
     position: fixed;
     margin-left: -24px;
-
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.897);
 }
 
 
