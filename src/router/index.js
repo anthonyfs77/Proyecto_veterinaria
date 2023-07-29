@@ -136,6 +136,11 @@ const routes = [
         path: '/AdminServicios',
         name: 'AdminServicios',
         component: Adminservicios
+      },
+      {
+        path: '/ordenes',
+        name: 'ordenes',
+        component: ordenes
       }
     ]
   },
@@ -179,3 +184,4 @@ import catalogo from '../views/productos/catalogoView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 
 import consultas from '../views/Consultas/ConsultasView.vue';
+import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'

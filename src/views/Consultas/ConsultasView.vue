@@ -154,9 +154,11 @@
           <label for="medicamentos">Medicamento a usar: </label>
           <select  id="medicamentos" v-model="id_medicamentos">
             <option v-for="medicamento in medicamentos" :key="medicamento.id" :value="medicamento.id">
-              {{ medicamento.nombre }}
+              {{ medicamento.nom_producto }}
             </option>
           </select>
+          <label for="dosis">Dosis:</label>
+          <input type="text" id="dosis" v-model="dosis">
           <br>
           <button type="submit">Guardar Consulta.</button><br>
         <p id="Atras" @click="Atras">Salir</p>
@@ -180,6 +182,7 @@
   const altura = ref("");
   const edad = ref("");
   const id_cita = ref("");
+  const dosis = ref("");
 
   const medicamentos = ref([]);
   const BuscarMedicamentos = async (id) => {
@@ -198,11 +201,12 @@
   const RegistroConsulta = async () => {
     const Consulta = {
       observaciones: observaciones.value,
-      id_medicamentos: id_medicamentos.value,
+      id_productosInternos: id_medicamentos.value,
       peso: peso.value,
       altura: altura.value,
       edad: edad.value,
       id_cita: id_cita.value,
+      dosis: dosis.value
     };
     try {
       const response = await axios.post(

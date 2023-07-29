@@ -14,9 +14,9 @@
         </div>
         <div class="filtro2" v-show="status1">
           <label for="busqueda" class="label-busqueda">Nombre(s) del cliente:</label>
-          <input type="search" name="busquedaCat" id="busqueda" class="input-search" v-model="Nombres"><br><br>
+          <input type="search" name="busquedaCat" id="busqueda" class="input-search" v-model="Nombres" @input="obtenerConsultasClientes"><br><br>
           <label for="busquedaP" class="label-busqueda">Apellidos del cliente:</label>
-          <input type="search" name="busquedaCat" id="busquedaP" class="input-search" v-model="Apellidos"><br>
+          <input type="search" name="busquedaCat" id="busquedaP" class="input-search" v-model="Apellidos" @input="obtenerConsultasClientes"><br>
           <button class="btn-generar" @click="obtenerConsultasClientes">Generar</button>
         </div>
     
@@ -26,7 +26,7 @@
     
         <div class="filtro4" v-show="status3">
           <label for="busquedafecha" class="label-fecha">Ingrese la fecha:</label>
-          <input type="search" name="fecha" id="busquedafecha" class="input-fecha" placeholder="       Formato: aaaa-mm-dd" v-model="FechaCons"><br>
+          <input type="search" name="fecha" id="busquedafecha" class="input-fecha" placeholder="       Formato: aaaa-mm-dd" v-model="FechaCons" @input="obtenerConsultasFecha"><br>
           <button class="btn-generar" @click="obtenerConsultasFecha">Generar</button>
         </div>
       </div>
@@ -52,7 +52,6 @@
                 <th>Edad</th>
                 <th>Observaciones</th>
                 <th>Medicacion</th>
-                <th>Tipo de medicamento</th>
                 <th>Dosis</th>
               </tr>
             </thead>
@@ -72,7 +71,6 @@
                 <td>{{ item.Edad }} meses</td>
                 <td>{{ item.Observaciones }}</td>
                 <td>{{ item.Medicacion }}</td>
-                <td>{{ item.Tipo_de_medicamento }}</td>
                 <td>{{ item.Dosis }}</td>
               </tr>
             </tbody>
@@ -99,7 +97,6 @@
                 <th>Edad</th>
                 <th>Observaciones</th>
                 <th>Medicacion</th>
-                <th>Tipo de medicamento</th>
                 <th>Dosis</th>
               </tr>
             </thead>
@@ -119,7 +116,6 @@
                 <td>{{ item.Edad }} meses</td>
                 <td>{{ item.Observaciones }}</td>
                 <td>{{ item.Medicacion }}</td>
-                <td>{{ item.Tipo_de_medicamento }}</td>
                 <td>{{ item.Dosis }}</td>
               </tr>
             </tbody>
@@ -146,7 +142,6 @@
                 <th>Edad</th>
                 <th>Observaciones</th>
                 <th>Medicacion</th>
-                <th>Tipo de medicamento</th>
                 <th>Dosis</th>
               </tr>
             </thead>
@@ -166,7 +161,6 @@
                 <td>{{ item.Edad }} meses</td>
                 <td>{{ item.Observaciones }}</td>
                 <td>{{ item.Medicacion }}</td>
-                <td>{{ item.Tipo_de_medicamento }}</td>
                 <td>{{ item.Dosis }}</td>
               </tr>
             </tbody>
@@ -204,7 +198,6 @@
     });
   
     const General = ref([]);
-  
   const obtenerReporteConsultas = async () => {
    try {
    const response = await axios.post('http://www.backendorg.com/ReporteConsultasGeneral')
