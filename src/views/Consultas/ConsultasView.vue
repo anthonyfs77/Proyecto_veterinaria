@@ -87,7 +87,7 @@
           </thead>
           <tbody>
             <tr v-for="item in consFecha" :key="item.id">
-              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos">local_hospital</span></td>
+              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos(item.id)">local_hospital</span></td>
               <td id="Nombre">{{ item.Nombre }}</td>
               <td>{{ item.Especie }}</td>
               <td>{{ item.Raza }}</td>
@@ -122,7 +122,7 @@
           </thead>
           <tbody>
             <tr v-for="item in constCliente" :key="item.id">
-              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos">local_hospital</span></td>
+              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos(item.id)">local_hospital</span></td>
               <td id="Nombre">{{ item.Nombre }}</td>
               <td>{{ item.Especie }}</td>
               <td>{{ item.Raza }}</td>
@@ -157,7 +157,8 @@
               {{ medicamento.nom_producto }}
             </option>
           </select>
-          <label for="dosis">Dosis:</label>
+          <br>
+         <label for="dosis">Dosis:</label>
           <input type="text" id="dosis" v-model="dosis">
           <br>
           <button type="submit">Guardar Consulta.</button><br>
@@ -165,6 +166,7 @@
       </form>
     </div>
   </div>
+
   </template>
   
   <script setup>
@@ -206,7 +208,8 @@
       altura: altura.value,
       edad: edad.value,
       id_cita: id_cita.value,
-      dosis: dosis.value
+      dosis: dosis.value,
+      
     };
     try {
       const response = await axios.post(
@@ -214,11 +217,10 @@
         Consulta
       );
       console.log(response.data);
-      cleanForm();
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const showRegistrarMascota = ref(false);
   const FormFlotante = () => {
@@ -436,6 +438,11 @@ try {
 
   .table-container {
     height: 500px;
+    overflow: auto;
+  }
+
+  .table-container2 {
+    height: 100px;
     overflow: auto;
   }
 
