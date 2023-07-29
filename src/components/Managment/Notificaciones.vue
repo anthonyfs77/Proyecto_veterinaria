@@ -5,13 +5,11 @@
                 <!--Carta de reciente individial-->
                 <div class="update">
                     <div class="profile-photo">
-                        <span class="material-symbols-outlined">person</span>
+                      <span class="material-symbols-outlined">receipt_long</span>
                     </div>
                     <div class="message">
-                        <p><b>Usuario</b></p>
-                        <p>descripcion</p>
-                        <!--Hora de realizacion-->
-                        <small class="text-muted">Hace 2 minutos</small>
+                        <p>{{fecha}}</p>
+                        <p>{{descripcion}}</p>
                     </div>
                 </div>
             </div>
@@ -19,8 +17,23 @@
     </div>
   </template>
   
+
+<script setup>
+import {defineProps} from 'vue'
+
+defineProps({
+  fecha:{
+    type:String,
+  },
+descripcion: {
+  type:String,
+}
+})
+
+
+</script>
   
-  <style scoped>
+<style scoped>
 
   .updates{
     display: flex;
@@ -47,6 +60,14 @@
     display: grid;
     grid-template-columns: 2.5rem auto;
     gap: 1rem;
+  }
+
+  span{
+    color: red;
+  }
+
+  .message p:first-child{
+    font-weight: 600;
   }
   
   </style>

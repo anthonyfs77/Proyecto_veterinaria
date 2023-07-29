@@ -36,18 +36,17 @@ const fetchData = async () => {
     const response = await axios.post('http://web.backend.com/data', rango);
     data.value = response.data;
     console.log(data.value);
-    updateChartData(); // Llama a la función para actualizar los datos de la gráfica
+    updateChartData();
   } catch (error) {
     console.error(error);
   }
 };
 
 const extractDayFromDate = (dateString) => {
-  // La función extrae el día de una fecha con formato 'YYYY-MM-DD'
   return dateString.substring(8);
 };
 
-const chartData = reactive({ // Convierte chartData en una variable reactiva
+const chartData = reactive({ 
   labels: [],
   datasets: [
     {
@@ -82,8 +81,8 @@ const chartOptions = {
 };
 
 const updateChartData = () => {
-  chartData.labels = data.value.map((item) => extractDayFromDate(item.fecha)); // Crea un arreglo de etiquetas (días) desde los datos de 'data'
-  chartData.datasets[0].data = data.value.map((item) => parseInt(item.cantidad)); // Crea un arreglo de valores (cantidades) desde los datos de 'data'
+  chartData.labels = data.value.map((item) => extractDayFromDate(item.fecha)); 
+  chartData.datasets[0].data = data.value.map((item) => parseInt(item.cantidad));
 };
 
 const updateChart = () => {
@@ -108,5 +107,10 @@ div {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  background: #fff;
+    padding: 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
+    transition: all 300ms ease;
 }
 </style>

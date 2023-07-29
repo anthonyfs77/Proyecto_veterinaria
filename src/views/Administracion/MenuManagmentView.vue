@@ -6,40 +6,48 @@
                     <h1>Estadistica</h1>
                 </div>
                 <div class="estadisticas">
-                    <grafica/>
+                    <grafica />
                 </div>
             </div>
-            
             <div class="tabla">
                 <h1>Ventas hoy</h1>
                 <TablaComp />
             </div>
         </div>
-
         <div class="right">
-            <div class="notificaciones">
-                <div class="cont">
-                    <Notificaciones class="not" />
-                    <Notificaciones class="not" />
+            <div class="cont">
+                <div class="title">
+                    <h1>Citas pendientes</h1>
                 </div>
-            </div>
-            <div class="ordenes-container">
-                <InfoCard />
-                <InfoCard />
-                <AddProduct  />
+                <div class="citas" v-for="cita in citas" :key="cita.id">
+                    <Notificaciones  class="not"
+                    :fecha="cita.fecha_cita" :descripcion="cita.motivo" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-
-import AddProduct from '../../components/Managment/AddProduct.vue'
-import InfoCard from '../../components/Managment/InfoCard.vue'
+import { ref, onMounted, } from 'vue'
+import axios from 'axios'
 import Notificaciones from '../../components/Managment/Notificaciones.vue'
 import TablaComp from '../../components/Managment/TablaComp.vue'
 import grafica from '../../components/managment/grafica.vue'
 
+
+const citas = ref([])
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('http://web.backend.com/citasPendientes');
+    citas.value = response.data.data; 
+  } catch(error) {
+    console.log(error)
+  }
+}
+
+onMounted(fetchData);
 </script>
 
 
@@ -53,6 +61,21 @@ import grafica from '../../components/managment/grafica.vue'
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
     max-width: 25em;
+    height: 95vh;
+}
+
+.tabla h1{
+    font-weight: 300;
+    width: 95.7%;
+    display: flex;
+    justify-content: center;
+}
+
+.top-menu h1{
+    font-weight: 300;
+    width: 82.4%;
+    display: flex;
+    justify-content: center;
 }
 
 .cards {
@@ -73,13 +96,13 @@ import grafica from '../../components/managment/grafica.vue'
     display: flex;
     justify-content: space-around;
     width: 90%;
-    
+
 }
 
 .vista {
     display: grid;
     grid-auto-columns: 1fr;
-    grid-template-columns: 2.2fr 0.5fr;
+    grid-template-columns: 2.2fr 0.8fr;
     gap: 10px;
     justify-items: stretch;
     align-items: stretch;
@@ -87,28 +110,18 @@ import grafica from '../../components/managment/grafica.vue'
     height: 100vh;
 }
 
-.right {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 10px;
-
-}
-
 .not {
     position: relative;
 }
 
-.ordenes-container{
+.title{
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
-h1{
+h1 {
     font-size: 30px;
 }
-
-
 </style>
 

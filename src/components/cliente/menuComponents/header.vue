@@ -1,9 +1,9 @@
 <template>
     <div class="cont">
         <header>
-            <div class="vet"><span class="logo material-symbols-outlined">sound_detection_dog_barking <p>Veterinaria</p></span></div>
+            <div class="vet"> <router-link :to="{path: '/'}" ><span class="logo material-symbols-outlined">sound_detection_dog_barking <p>Veterinaria</p></span></router-link></div>
             <ul class="navbar normal">
-                <li><router-link :to="{name: 'cuerpo'}" href="#" class="active">Home</router-link></li>
+                <li><router-link :to="{name: 'cuerpo'}" class="active">Home</router-link></li>
                 <li><router-link :to="{name: 'catalogo'}" href="#">Productos</router-link></li>
                 <li><router-link :to="{name: 'cita'}">Citas</router-link></li>
                 <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
@@ -14,16 +14,16 @@
                     menu
                 </span>
                 <ul v-if="despliegue" class=" despliegue">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Citas</a></li>
-                    <li><a href="#">Ubicacion</a></li>
+                    <li><router-link :to="{name: 'cuerpo'}" href="#" class="active">Home</router-link></li>
+                    <li><router-link :to="{name: 'catalogo'}" href="#">Productos</router-link></li>
+                    <li><router-link :to="{name: 'cita'}">Citas</router-link></li>
+                    <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Perfil</a></li>
                 </ul>
             </div>
             <div class="profile">
-                <p>nombre</p><span class="material-symbols-outlined">
+                <p>{{ nombre }}</p><span class="material-symbols-outlined">
                     account_circle
                 </span>
             </div>
@@ -37,7 +37,10 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import {useStore} from '@/stores/counter.js'
+var store = useStore()
+var nombre = ref('')
+nombre = store.state.variable;
 
 
 var despliegue = ref(false);

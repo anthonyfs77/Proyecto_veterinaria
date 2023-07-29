@@ -62,7 +62,7 @@ onMounted(fetchData);
 /*=================Tabla==================*/
 
 main .recent-orders {
-    margin-top: 2rem;
+    margin-top: -5rem;
 }
 
 main .recent-orders h2 {
@@ -73,7 +73,7 @@ main .recent-orders h2 {
     background-color: #fff;
     width: 98%;
     border-radius: 2rem;
-    padding: 1.8rem;
+    padding: 1rem;
     text-align: center;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;

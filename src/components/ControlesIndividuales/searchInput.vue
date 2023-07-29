@@ -16,10 +16,10 @@ import axios from 'axios'
 import { ref, watch} from 'vue'
 import {useStore} from '@/stores/counter.js'
 
-
 var nombre = ref();
 var productos = ref([]);
 const store = useStore()
+
 
 
 const fetchData = async () => {
