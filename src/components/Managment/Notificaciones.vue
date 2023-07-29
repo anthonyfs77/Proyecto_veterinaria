@@ -8,7 +8,7 @@
                       <span class="material-symbols-outlined">receipt_long</span>
                     </div>
                     <div class="message">
-                        <p><b>{{fecha}}</b></p>
+                        <p>{{fecha}}</p>
                         <p>{{descripcion}}</p>
                     </div>
                 </div>
@@ -64,6 +64,10 @@ descripcion: {
 
   span{
     color: red;
+  }
+
+  .message p:first-child{
+    font-weight: 600;
   }
   
   </style>
