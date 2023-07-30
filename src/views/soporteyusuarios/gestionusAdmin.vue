@@ -110,7 +110,7 @@ const UsersCorreo = async () => {
   const fetchUsers = async () => {
     users.value = [];
   try {
-    const response = await axios.get('http://web.VeterinariaBack.com/mostrarR');
+    const response = await axios.get('http://web.VeterinariaBack.com/clientes/All');
     users.value = response.data.data; // Coloca la respuesta en el arreglo 'users'
   } catch (error) {
     console.error('Hubo un error al obtener los usuarios:', error);
