@@ -1,170 +1,155 @@
 <template>
-    <div class="container">
-      <div>
-        <div class="color">
-      <div class="titulo">
-              <span class="material-symbols-outlined"  style="font-size: 50px;">
-                        sound_detection_dog_barking
-                </span>
-      <div>Proveedores</div>  
+  <div class="container">
+    <div class="form-container">
+      <div class="card">
+        <form @submit.prevent="RegistroProveedor">
+          <span class="material-symbols-outlined">contacts</span><label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" v-model="nombre"><br><br>
+          <span class="material-symbols-outlined">map</span><label for="address">Dirección:</label>
+          <input type="text" id="address" name="address" v-model="direccion"><br><br>
+          <span class="material-symbols-outlined">contact_phone</span><label for="phone1">Teléfono 1:</label>
+          <input type="text" id="phone1" name="phone1" placeholder="Obligatorio" v-model="phone"><br><br>
+          <span class="material-symbols-outlined">contact_phone</span><label for="phone2">Teléfono 2:</label>
+          <input type="text" id="phone2" name="phone2" v-model="phone2"><br><br>
+          <button>Registrar proveedor.</button>
+        </form>
+      </div>
+    </div>
+    <div class="container2">
+    <div class="table-container">
+      <div class="responsive-table">
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>Direccion</th>
+              <th>Telefono 1</th>
+              <th>Telefono 2</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr v-for="item in proveedores" :key="item.telefono1">
+              <td id="Nombre">{{ item.proveedor }}</td>
+              <td>{{ item.direccion }}</td>
+              <td>{{ item.telefono1 }}</td>
+              <td>{{ item.telefono2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-                
-                <div class="container2">
-                       <!-- Lista de proveedores -->
-                   <ul class="mt-5">
-                      <li v-for="proveedor in proveedores" :key="proveedor.id" class="mb-2">
-                        <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ proveedor.nombre }}</h5>
-                            <br>
-                                <p class="card-text">{{ proveedor.direccion }}</p>
-                                <br>
-                                <p class="card-text">{{ proveedor.telefono }}</p>
-                          </div>
-                         </div>
-                      </li>
-                   </ul>
-                </div> 
-              </div> 
+</div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+const nombre = ref ("");
+const phone = ref("");
+const phone2 = ref("");
+const direccion = ref("");
 
 
-              <div>
-                <div class="color">
-                 <div class="titulo">
-                    <span class="material-symbols-outlined"  style="font-size: 50px;">
-                        sound_detection_dog_barking
-                    </span>
-                    <div>Añadir proveedor</div>  
-                  </div> 
-                </div>
-                    <div class="container2">
-                       <!-- Formulario para agregar un nuevo proveedor -->
-                        <form @submit.prevent="agregarProveedor" class="mt-4">
-                          <div class="form-group">
-                             <label for="nombre">Nombre:</label>
-                              <input type="text" id="nombre" v-model="nuevoProveedor.nombre" required class="form-control" autocomplete="off">
-                          </div>
-                          <br>
-                          <br>
-                          <div class="form-group">
-                             <label for="direccion">Dirección:</label>
-                             <input type="text" id="direccion" v-model="nuevoProveedor.direccion" class="form-control" autocomplete="off">
-                          </div>
-                          <br>
-                          <br>
-                        
-                          <div class="form-group">
-                           <label for="direccion">telefono:</label>
-                           <input type="text" id="telefono" v-model="nuevoProveedor.telefono" class="form-control" autocomplete="off">
-                          </div>
-                          <br>  
-                          <button type="submit" class="btn btn-primary">Agregar Proveedor</button>
-                        </form>
-                    </div>   
-              </div>
-          
+const RegistroProveedor = async () => {
+    const Proveedor = {
+      nombre: nombre.value,
+      direccion: direccion.value,
+      telefono1: phone.value,
+      telefono2: phone2.value
+    };
+    try {
+      const response = await axios.post(
+        'http://www.backendorg.com/registrarProveedor',
+        Proveedor
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  
-      <!-- Formulario para agregar un nuevo proveedor -->
-      
-    </div>
-  </template>
-  
-  <script setup>
-import { ref } from 'vue';
-import 'bootstrap/dist/css/bootstrap.css';
-
-const proveedores = ref([
-  { id: 1, nombre: "Amazon", direccion: "Tienda en línea", telefono: "8745963582" },
-  { id: 2, nombre: "Hábitat Laguna", direccion: "Blvrd Independencia 109 Ote, Los Ángeles, 27140 Torreón, Coah.", telefono: "871 713 0959" },
-]);
-
-const nuevoProveedor = ref({
-  nombre: "",
-  direccion: "",
-  telefono: "",
-});
-
-const agregarProveedor = () => {
-  proveedores.value.push({
-    id: Date.now(),
-    nombre: nuevoProveedor.value.nombre,
-    direccion: nuevoProveedor.value.direccion,
-    telefono: nuevoProveedor.value.telefono,
-  });
-
-  nuevoProveedor.value.nombre = "";
-  nuevoProveedor.value.direccion = "";
-  nuevoProveedor.value.telefono = "";
-};
+  const proveedores = ref([]);
+  const TablaProveedor = async () => {
+  try {
+  const response = await axios.post('http://www.backendorg.com/TablaProveedor')
+  proveedores.value = response.data.data;
+  console.log(response.data);
+  } catch (error) {
+  console.error("Error al obtener el reporte de inventario", error);
+  }
+  };
+  onMounted(TablaProveedor);
 </script>
-  
-  <style scoped>
-  
-  *{
-    padding: 0%;
-    margin:0%
-  }
-  .container{
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  width: 1000vh ;
-  height: 650px;
-  padding:0%;
-  margin: 0%;
 
-  }
-  .container2{
+<style scoped>
+  .container {
     display: flex;
     flex-direction: column;
-    justify-content:start;
-    align-items: start;
-    
-    margin: 20px;
-    widows: 500px;
+    height: 100vh;
+  }
+  .form-container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    width: 80%;
+    max-width: 500px;
+  }
+  form label {
+    margin-right: 10px;
+  }
+  form input {
+    margin-bottom: 10px;
+  }
+  form span {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  .container2 {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .table-container {
     height: 500px;
+    overflow: auto;
   }
-  
-  .titulo{
-  display: flex;
-  justify-content: start;
-  flex-direction: row;
-  margin: 10px;
-  font-size: 35px;
-  padding: 20px;
+  .custom-table {
+    font-size: 0.9rem;
   }
-  .color{
-    background-color: #fdb720;
-    width: 672px
+  .custom-table thead th {
+    font-weight: bold;
+    background-color: white;
   }
-  .card{
-    width: 300px;
-    height: 150px;
-    margin-bottom: 30px;
-    border: 2px solid #292b29;
-    
+  .custom-table td,
+  .custom-table th {
+    border: 1px solid #dee2e6;
   }
-  button{
-    position: absolute;
-    left: 70%;
-    top: 90%;
-    transform: translate(-50%, -50%);
-    height: 35px;
-    background-color: #fdb720;
-    border: 1px solid #0b0c0b;
-    color:#0b0c0b;
+  @media (max-width: 767px) {
+    .custom-table thead {
+      display: none;
+    }
+    .custom-table td {
+      display: block;
+      text-align: right;
+    }
+    .custom-table td:before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    #Nombre {
+    font-weight: bold;
   }
-  label{
-    font-size:25px;
   }
- input{
-  width: 400px;
-  height: 50px;
-  border: 2px solid #0b0c0b; /* Borde de tamaño 2px y color verde (#00ff00) */
-  padding: 8px;
- }
-  </style>
-  
-  
+</style>
