@@ -158,6 +158,27 @@
             </option>
           </select>
           <br>
+          <div class="table-container2">
+            <div class="responsive-table">
+        <table class="table table-hover custom-table">
+        <thead>
+            <tr>
+              <th></th>
+              <th>Nombre</th>
+              <th>Dosis</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr v-for="medicamento in medicamentos" :key="medicamento.id">
+              <td><input type="checkbox" name="" id=""></td>
+              <td>{{ medicamento.nom_producto }}</td>
+              <td><input type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+          </div>
+          <br>
          <label for="dosis">Dosis:</label>
           <input type="text" id="dosis" v-model="dosis">
           <br>

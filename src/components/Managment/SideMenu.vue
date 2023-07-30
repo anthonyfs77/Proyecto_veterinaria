@@ -48,7 +48,7 @@
                     </router-link>
 
                     <router-link :to="{ name: 'AdminServicios' }">
-                        <span class="material-symbols-outlined">clinical_notes</span>
+                        <span class="material-symbols-outlined">medical_services</span>
                         <h4>Servicios</h4>
                     </router-link>
                     

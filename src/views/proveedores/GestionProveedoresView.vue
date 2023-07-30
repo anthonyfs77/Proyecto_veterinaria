@@ -1,170 +1,183 @@
 <template>
-    <div class="container">
-      <div>
-        <div class="color">
-      <div class="titulo">
-              <span class="material-symbols-outlined"  style="font-size: 50px;">
-                        sound_detection_dog_barking
-                </span>
-      <div>Proveedores</div>  
+  <div class="container">
+    <div class="inner-container">
+      <div class="form-container">
+        <div class="card">
+          <form @submit.prevent="RegistroProveedor">
+            <span class="material-symbols-outlined">contacts</span><label for="name">Nombre:</label>
+            <inputs type="text" id="name" name="name" v-model="nombre" placeholder="Nombre" /><br><br>
+            <span class="material-symbols-outlined">map</span><label for="address">Dirección:</label>
+            <inputs type="text" id="address" name="address" v-model="direccion"  placeholder="Localizacion"/><br><br>
+            <span class="material-symbols-outlined">contact_phone</span><label for="phone1">Teléfono 1:</label>
+            <inputs type="text" id="phone1" name="phone1" placeholder="Obligatorio" v-model="phone" /><br><br>
+            <span class="material-symbols-outlined">contact_phone</span><label for="phone2">Teléfono 2:</label>
+            <inputs type="text" id="phone2" name="phone2" v-model="phone2" placeholder="Telefono 2" /><br><br>
+            <Buttons  title="Registrar proveedor" />
+          </form> 
+        </div>
+      </div>
+      <div class="container2">
+        <div class="table-container">
+          <div class="responsive-table">
+            <table class="table table-hover custom-table">
+              <thead>
+                <tr>
+                  <th><span class="material-symbols-outlined">contacts</span>Proveedor</th>
+                  <th> <span class="material-symbols-outlined">map</span>Direccion</th>
+                  <th><span class="material-symbols-outlined">contact_phone</span>Telefono 1</th>
+                  <th><span class="material-symbols-outlined">contact_phone</span>Telefono 2</th>
+                </tr>
+              </thead>
+              <tbody> 
+                <tr v-for="item in proveedores" :key="item.telefono1">
+                  <td id="Nombre">{{ item.proveedor }}</td>
+                  <td>{{ item.direccion }}</td>
+                  <td>{{ item.telefono1 }}</td>
+                  <td>{{ item.telefono2 }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-                
-                <div class="container2">
-                       <!-- Lista de proveedores -->
-                   <ul class="mt-5">
-                      <li v-for="proveedor in proveedores" :key="proveedor.id" class="mb-2">
-                        <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title">{{ proveedor.nombre }}</h5>
-                            <br>
-                                <p class="card-text">{{ proveedor.direccion }}</p>
-                                <br>
-                                <p class="card-text">{{ proveedor.telefono }}</p>
-                          </div>
-                         </div>
-                      </li>
-                   </ul>
-                </div> 
-              </div> 
+</template>
 
+<style scoped>
 
-              <div>
-                <div class="color">
-                 <div class="titulo">
-                    <span class="material-symbols-outlined"  style="font-size: 50px;">
-                        sound_detection_dog_barking
-                    </span>
-                    <div>Añadir proveedor</div>  
-                  </div> 
-                </div>
-                    <div class="container2">
-                       <!-- Formulario para agregar un nuevo proveedor -->
-                        <form @submit.prevent="agregarProveedor" class="mt-4">
-                          <div class="form-group">
-                             <label for="nombre">Nombre:</label>
-                              <input type="text" id="nombre" v-model="nuevoProveedor.nombre" required class="form-control" autocomplete="off">
-                          </div>
-                          <br>
-                          <br>
-                          <div class="form-group">
-                             <label for="direccion">Dirección:</label>
-                             <input type="text" id="direccion" v-model="nuevoProveedor.direccion" class="form-control" autocomplete="off">
-                          </div>
-                          <br>
-                          <br>
-                        
-                          <div class="form-group">
-                           <label for="direccion">telefono:</label>
-                           <input type="text" id="telefono" v-model="nuevoProveedor.telefono" class="form-control" autocomplete="off">
-                          </div>
-                          <br>  
-                          <button type="submit" class="btn btn-primary">Agregar Proveedor</button>
-                        </form>
-                    </div>   
-              </div>
-          
-
-  
-      <!-- Formulario para agregar un nuevo proveedor -->
-      
-    </div>
-  </template>
-  
-  <script setup>
-import { ref } from 'vue';
-import 'bootstrap/dist/css/bootstrap.css';
-
-const proveedores = ref([
-  { id: 1, nombre: "Amazon", direccion: "Tienda en línea", telefono: "8745963582" },
-  { id: 2, nombre: "Hábitat Laguna", direccion: "Blvrd Independencia 109 Ote, Los Ángeles, 27140 Torreón, Coah.", telefono: "871 713 0959" },
-]);
-
-const nuevoProveedor = ref({
-  nombre: "",
-  direccion: "",
-  telefono: "",
-});
-
-const agregarProveedor = () => {
-  proveedores.value.push({
-    id: Date.now(),
-    nombre: nuevoProveedor.value.nombre,
-    direccion: nuevoProveedor.value.direccion,
-    telefono: nuevoProveedor.value.telefono,
-  });
-
-  nuevoProveedor.value.nombre = "";
-  nuevoProveedor.value.direccion = "";
-  nuevoProveedor.value.telefono = "";
-};
-</script>
-  
-  <style scoped>
-  
-  *{
-    padding: 0%;
-    margin:0%
-  }
-  .container{
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  width: 1000vh ;
-  height: 650px;
-  padding:0%;
-  margin: 0%;
-
-  }
-  .container2{
+  .container {
     display: flex;
     flex-direction: column;
-    justify-content:start;
-    align-items: start;
-    
-    margin: 20px;
-    widows: 500px;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .inner-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  }
+  .form-container {
+    padding: 1%;
+    flex: 1;
+    max-width: 40%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    width: 93%;
+    max-width: 500px;
+  }
+  form label {
+    margin-right: 10px;
+  }
+  form input {
+    margin-bottom: 10px;
+  }
+  form span {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  th span {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  .container2 {
+    flex: 1;
+    max-width: 70%;
+
+  }
+  
+  .table-container {
     height: 500px;
+    overflow: auto;
+    -ms-overflow-style: none; /*La oculta en Internet E. y Edge */
+    scrollbar-width: none; /* Oculta la barra deslizadora en Firefox */
   }
-  
-  .titulo{
-  display: flex;
-  justify-content: start;
-  flex-direction: row;
-  margin: 10px;
-  font-size: 35px;
-  padding: 20px;
-  }
-  .color{
-    background-color: #fdb720;
-    width: 672px
-  }
-  .card{
-    width: 300px;
-    height: 150px;
-    margin-bottom: 30px;
-    border: 2px solid #292b29;
+  .custom-table {
     
+    font-size: 0.9rem;
   }
-  button{
-    position: absolute;
-    left: 70%;
-    top: 90%;
-    transform: translate(-50%, -50%);
-    height: 35px;
-    background-color: #fdb720;
-    border: 1px solid #0b0c0b;
-    color:#0b0c0b;
+  .custom-table thead th {
+    font-weight: bold;
+    background-color: white;
   }
-  label{
-    font-size:25px;
+
+
+  @media (max-width: 767px) {
+  .inner-container {
+    flex-direction: column;
   }
- input{
-  width: 400px;
-  height: 50px;
-  border: 2px solid #0b0c0b; /* Borde de tamaño 2px y color verde (#00ff00) */
-  padding: 8px;
- }
-  </style>
-  
-  
+  .form-container,
+  .container2 {
+    max-width: 100%;
+  }
+
+  .form-container::-webkit-scrollbar{ /*Oculta la barra deslizadora en navegadores como Chrome, Safari, Internet Explorer y Edge */
+    display: none;
+  }
+
+  .table-container::-webkit-scrollbar{ /*Oculta la barra deslizadora en navegadores como Chrome, Safari, Internet Explorer y Edge */
+    display: none;
+  }
+}
+
+</style>
+
+
+
+
+<script setup>
+/*'../../components/ControlesIndividuales/BuscarInterno.vue'*/
+import Inputs from '../../components/ControlesSencillos/Inputs.vue'
+import Buttons from '../../components/ControlesSencillos/Buttons.vue'
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+const nombre = ref ("");
+const phone = ref("");
+const phone2 = ref("");
+const direccion = ref("");
+
+const RegistroProveedor = async () => {
+    const Proveedor = {
+      nombre: nombre.value,
+      direccion: direccion.value,
+      telefono1: phone.value,
+      telefono2: phone2.value
+    };
+    try {
+      const response = await axios.post(
+        'http://www.backendorg.com/registrarProveedor',
+        Proveedor
+      );
+      console.log(response.data);
+      location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const proveedores = ref([]);
+  const TablaProveedor = async () => {
+  try {
+  const response = await axios.post('http://www.backendorg.com/TablaProveedor')
+  proveedores.value = response.data.data;
+  console.log(response.data);
+  } catch (error) {
+  console.error("Error al obtener el reporte de inventario", error);
+  }
+  };
+  onMounted(TablaProveedor);
+</script>
+
+

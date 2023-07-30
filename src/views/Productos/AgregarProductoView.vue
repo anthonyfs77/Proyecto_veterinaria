@@ -1,28 +1,25 @@
 <template>
   <div class="cont">
     <div class="header">
-      <encabezado />
+      <p>Manage Product</p>
+
     </div>
     <div class="body">
       <div class="checkout">
         <div class="cuerpo">
           <div class="header-check">
             <div class="title">
-              <h3>Revicion</h3>
-              <p>Detalles de empleado</p>
+              <div class="g">
+                <h3>AGREGAR PRODUCTO NUEVO</h3>
+              <p>Se agregara un producto no existente</p>
+              </div>
+              <div class="more">
+                <RouterLink :to="{name: 'add'}" class="custom-link">
+                   <add title="Existente"/>
+                </RouterLink>
+    
+              </div>
             </div>
-          </div>
-          <div class="data">
-            <div class="sec1">
-              <p>Juan</p>
-              <p>Perez</p>
-            </div>
-            <div class="sec2">
-              <p>correoEjemplo@gmail.com</p>
-            </div>
-          </div>
-          <div class="seccion">
-            Detalles de productos
           </div>
           <div class="detalle-productos">
             <div class="input">
@@ -34,30 +31,38 @@
               <input type="text" v-model="descripcion_producto">
             </div>
             <div class="input">
+              <span>NOMBRE DEL PROVEEDOR</span>
+              <input type="text" v-model="proveedor">
+            </div>
+            <div class="input">
               <span>CATEGORIA DEL PRODUCTO</span>
-              <select name="categorias" id="1">
-                <option value="disable">Seleccion de categirias</option>
-                <option value="1">Transportadoras</option>
-                <option value="2">Pecheras</option>
-                <option value="3">Accesorios</option>
-                <option value="4">Juegeteria</option>
-                <option value="5">Alimentos</option>
-                <option value="5">Medicamentos</option>
-                <option value="5">Articulos de aseo</option>
+              <select name="categorias" id="1" v-model="categoria_producto">
+                <option value="Disable">Seleccion de categirias</option>
+                <option value="Transportadoras">Transportadoras</option>
+                <option value="Pecheras">Pecheras</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Juegeteria">Juegeteria</option>
+                <option value="Alimentos">Alimentos</option>
+                <option value="Medicamentos">Medicamentos</option>
+                <option value="Articulos de aseo">Articulos de aseo</option>
 
               </select>
             </div>
             <div class="precios">
               <div class="input">
                 <span>PRECIO VENTA</span>
-                <input type="text" v-model="precio_venta">
+                <input type="number" v-model="precio_venta" placeholder="$">
               </div>
               <div class="input">
                 <span>PRECIO COMPRA</span>
-                <input type="text">
+                <input type="number" v-model="precio_compra" placeholder="$">
+              </div>
+              <div class="input">
+                <span>CANTIDAD DE PRODUCTOS</span>
+                <input type="number" v-model="cantidad_pructos" placeholder="0">
               </div>
             </div>
-            <button><span>Agregar producto</span></button>
+            <button @click="agregar"><span>Agregar producto</span></button>
           </div>
         </div>
       </div>
@@ -123,15 +128,45 @@
 </template>
 
 <script setup>
-import encabezado from '../../components/tabla/header.vue'
+import add from '../../components/ControlesIndividuales/ingresar.vue'
 import { ref } from 'vue'
+import axios from 'axios'
 
 const nombre_producto = ref('');
-const descripcion_producto = ref('');
+const descripcion_producto = ref();
 const precio_venta = ref();
+const categoria_producto = ref();
+const precio_compra = ref();
+const proveedor = ref();
+const cantidad_pructos = ref();
+const productos = ref({});
+const img_producto = ref();
 
+const fetchData = async () =>{
+  const data = {
+    nombre_producto: nombre_producto.value,
+    descripcion_producto: descripcion_producto.value,
+    precio_venta: precio_venta.value,
+    precio_compra: precio_compra.value,
+    categoria_producto: categoria_producto.value,
+    proveedor: proveedor.value,
+    cantidad_pructos: cantidad_pructos.value
+  }
 
+  try{
+        const response = await axios.post('http://web.backend.com/agregarProducto', data);
+        productos.value = response.data.data; 
+        console.log(data)
 
+      } catch(error){
+        console.log(error)
+    }
+}
+
+const agregar = () => {
+  fetchData();
+  console.log(categoria_producto.value);
+}
 
 </script>
 
@@ -155,7 +190,17 @@ const precio_venta = ref();
     ". .";
 
 }
+.header {
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+    height: 4.2em;
+}
 
+.header p {
+    font-size: 20px;
+    margin-left: 17px;
+}
 /* IZQUIERDO */
 
 .checkout {
@@ -167,18 +212,25 @@ const precio_venta = ref();
   height: 100%;
 }
 
+
+.more{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .title h3 {
   margin-bottom: 20px;
 }
-
-
-.seccion {
-  border-bottom: 1px solid rgba(132, 139, 200, 0.18);
-  width: 100%;
-  margin-top: 40px;
-  margin-bottom: 40px;
+.title{
+  margin-bottom: 20px;
 }
-
+.header-check .title{
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1.2fr 0.8fr; 
+  gap: 0px 0px; 
+}
 .cuerpo {
   width: 70%;
   height: 90%;
@@ -188,6 +240,7 @@ const precio_venta = ref();
   display: flex;
   border-bottom: 1px solid rgba(132, 139, 200, 0.18);
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .data {
@@ -204,7 +257,7 @@ const precio_venta = ref();
 .precios {
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1.7fr;
   gap: 0px 20px;
   grid-template-areas:

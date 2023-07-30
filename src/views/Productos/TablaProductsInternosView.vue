@@ -8,7 +8,9 @@
         <div class="botones">
           <!-- Cada btn individual tiene su propia función stockLogic o sinStockLogic -->
           <search @input="onInput"/>
-          <add/>
+        <RouterLink :to="{name: 'addInterno'}" class="custom-link">
+            <add title="Add Item"/>
+        </RouterLink>
         </div>
         <div class="rango">
           <precios tittle1="$min" tittle2="$max"/> 
