@@ -5,29 +5,18 @@
         <div class="Titulo">
           <span class="material-symbols-outlined">delete_forever</span><h2>Citas Rechazadas</h2></div>
       <div class="filtro">
-        <label for="tipo" class="label-tipo">Filtrar por:</label>
-        <select v-model="selectedOption" id="tipo" class="select-tipo">
-          <option value="opcion1">Cliente</option>
-          <option value="opcion2">Fecha</option>
-          <option value="opcion3" selected>Reporte general</option>
-        </select>
+          <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' },{ text: 'Reporte General', value: 'opcion3' }]"/>
       </div>
+
       <div class="filtro2" v-show="status1">
-        <label for="busqueda" class="label-busqueda">Nombre(s) del cliente:</label>
-        <input type="search" name="busquedaCat" id="busqueda" class="input-search" v-model="Nombres"><br><br>
-        <label for="busquedaP" class="label-busqueda">Apellidos del cliente:</label>
-        <input type="search" name="busquedaCat" id="busquedaP" class="input-search" v-model="Apellidos"><br>
-        <button class="btn-generar" @click="ReporteCitasRechazadasCliente">Generar</button>
-      </div>
-  
-      <div class="filtro3" v-show="status2">
-        <button class="btn-generar" @click="ReporteGralCitasRechazadas">Generar</button>
+        <InputCliente tittle1="Nombres(S)" tittle2="Apellidos" @input="ReporteCitasRechazadasCliente" v-model:modelValue1="Nombres" v-model:modelValue2="Apellidos" />
       </div>
   
       <div class="filtro4" v-show="status3">
-        <label for="busquedafecha" class="label-fecha">Ingrese la fecha:</label>
-        <input type="search" name="fecha" id="busquedafecha" class="input-fecha" placeholder="       Formato: aaaa-mm-dd" v-model="FechaCons"><br>
-        <button class="btn-generar" @click="ReporteCitasRechazadasFecha">Generar</button>
+        <div class="label">
+          <p class="plabel">Fecha</p>
+          <InputsBusqueda  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons" @input="ReporteCitasRechazadasFecha" /><br>
+        </div>
       </div>
     </div>
   
@@ -137,8 +126,11 @@
   </template>
   
   <script setup>
-  import { ref, watch } from 'vue';
-  import axios from 'axios';
+ import { ref, watch, onMounted } from 'vue';
+    import axios from 'axios';
+    import InputsBusqueda from '../../components/ControlesSencillos/InputsBusqueda.vue';
+   import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
+   import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
   
   const selectedOption = ref('opcion3');
   const status1 = ref(false);
@@ -162,7 +154,6 @@
   });
 
   const General = ref([]);
-
 const ReporteGralCitasRechazadas = async () => {
  try {
  const response = await axios.post('http://www.backendorg.com/ReporteGralCitasRechazadas')
@@ -172,12 +163,10 @@ const ReporteGralCitasRechazadas = async () => {
  console.error("Error al obtener el reporte de inventario", error);
 }
 };
-
-/////////////////////////////////////////////////////////////////////////////
+onMounted(ReporteGralCitasRechazadas);
 
 const FechaCons = ref("");
 const consFecha = ref ([]);
-
 const ReporteCitasRechazadasFecha = async () => {
 try {
   const response = await axios.post('http://www.backendorg.com/ReporteCitasRechazadasFecha', {Fecha: FechaCons.value})
@@ -186,13 +175,10 @@ try {
 } catch (error) {
   console.error("Error al obtener el reporte de inventario", error);
 }
-}
-
-////////////////////////////////////////////////////////////////////////////////////
+};
 
 const Nombres = ref("");
 const Apellidos = ref("");
-
 const constCliente = ref([]);
 const ReporteCitasRechazadasCliente = async () => {
 try {
@@ -202,8 +188,7 @@ try {
 } catch (error) {
   console.error("Error al obtener el reporte de inventario", error);
 }
-}
-
+};
   </script>
   
   <style scoped>
@@ -222,78 +207,7 @@ try {
     height: 100vh;
 
   }
-  
-  :root {
-    --color-primary: #7380ec;
-  }
 
-  .label-tipo {
-    font-size: 1.2rem;
-  }
-  
-  .select-tipo {
-    border: none;
-    border-bottom: 2px solid black;
-    transition: border-color 0.3s;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    max-width: 20rem;
-  }
-  
-  .select-tipo:focus {
-    border-color: var(--color-primary);
-    background-color: transparent;
-  }
-  
-  .label-busqueda {
-    font-size: 1.2rem;
-  }
-  
-  .label-fecha {
-    font-size: 1.2rem;
-  }
-  
-  .input-search,
-  .input-fecha {
-    border: none;
-    border-bottom: 2px solid black;
-    transition: border-color 0.3s;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    width: 100%;
-    max-width: 20rem;
-  }
-  
-  .input-search:focus,
-  .input-fecha:focus {
-    border-color: var(--color-primary);
-    background-color: transparent;
-  }
-  
-  .btn-generar {
-    border: none;
-    background-color: transparent;
-    color: black;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    max-width: 10rem;
-  }
-  
-  .btn-generar:hover {
-    color: var(--color-primary);
-  transform: translateX(15px);
-  }
-  
-  .btn-generar:focus {
-    outline: none;
-  }
-  
-  .btn-generar:hover:not(:focus) {
-    transform: translateX(15px);
-  }
-  
   .pantalla {
     display: flex;
     justify-content: center;
@@ -306,22 +220,6 @@ try {
     .parametros {
       padding: 1rem;
     }
-  
-    .label-tipo,
-    .label-busqueda,
-    .label-fecha,
-    .select-tipo,
-    .input-search,
-    .input-fecha,
-    .btn-generar {
-      font-size: 1rem;
-    }
-  
-    .select-tipo,
-    .input-search,
-    .input-fecha {
-      max-width: none;
-    }
   }
   
   @media (max-width: 576px) {
@@ -332,15 +230,16 @@ try {
       gap: 0.5rem;
     }
   
-    .btn-generar {
-      max-width: none;
-    }
   }
   .Titulo{
     display: flex;
     gap: 8px;
+    justify-content: center;
   }
-    /* Estilos personalizados para la tabla */
+  .Titulo span {
+    margin-right: 1px;
+    margin-top: 5px;
+  }
     .custom-table {
     font-size: 0.9rem;
   }
@@ -376,5 +275,15 @@ try {
     font-weight: bold;
   }
   }
+  .label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plabel{
+    color: #c2c5d3;
+}
   </style>
   

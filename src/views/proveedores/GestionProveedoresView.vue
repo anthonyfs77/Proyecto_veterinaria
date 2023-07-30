@@ -137,7 +137,6 @@
 
 
 <script setup>
-/*'../../components/ControlesIndividuales/BuscarInterno.vue'*/
 import Inputs from '../../components/ControlesSencillos/Inputs.vue'
 import Buttons from '../../components/ControlesSencillos/Buttons.vue'
 import { ref, onMounted } from 'vue';
