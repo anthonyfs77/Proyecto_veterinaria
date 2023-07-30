@@ -156,7 +156,7 @@ const RegistroProveedor = async () => {
     };
     try {
       const response = await axios.post(
-        'http://www.backendorg.com/registrarProveedor',
+        'http://web.Backend.com/registrarProveedor',
         Proveedor
       );
       console.log(response.data);
@@ -169,7 +169,7 @@ const RegistroProveedor = async () => {
   const proveedores = ref([]);
   const TablaProveedor = async () => {
   try {
-  const response = await axios.post('http://www.backendorg.com/TablaProveedor')
+  const response = await axios.post('http://web.Backend.com/TablaProveedor')
   proveedores.value = response.data.data;
   console.log(response.data);
   } catch (error) {

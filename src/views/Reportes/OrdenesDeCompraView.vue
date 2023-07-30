@@ -93,7 +93,7 @@ watch(selectedOption, (newValue) => {
 const General = ref([]);
 const ReporteGeneralOrdenesCompra = async () => {
   try {
-    const response = await axios.post('http://www.backendorg.com/ReporteGeneralOrdenesCompra');
+    const response = await axios.post('http://web.Backend.com/ReporteGeneralOrdenesCompra');
     General.value = response.data.data;
     console.log(response.data);
   } catch (error) {
@@ -105,7 +105,7 @@ onMounted(ReporteGeneralOrdenesCompra);
 const Pagadas = ref([]);
 const ReporteGeneralOrdenesCompraPagadas = async () => {
   try {
-    const response = await axios.post('http://www.backendorg.com/ReporteGeneralOrdenesCompraPagadas');
+    const response = await axios.post('http://web.Backend.com/ReporteGeneralOrdenesCompraPagadas');
     Pagadas.value = response.data.data;
     console.log(response.data);
   } catch (error) {

@@ -127,7 +127,7 @@
     console.log(mascota);
     try {
       const response = await axios.post(
-        'http://www.backendorg.com/registrarMascota',
+        'http://web.Backend.com/registrarMascota',
         mascota
       );
       console.log(response.data);
@@ -150,7 +150,7 @@
   
     try {
       const response = await axios.post(
-        'http://www.backendorg.com/agendarcita',
+        'http://web.Backend.com/agendarcita',
         cita
       );
       console.log(response.data);
@@ -175,7 +175,7 @@
   const FiltroMascotas = async () => {
     try {
       const response = await axios.post(
-        'http://www.backendorg.com/MascotasUsuario',
+        'http://web.Backend.com/MascotasUsuario',
         { id_cliente: id_cliente.value }
       );
       console.log(response.data);
@@ -190,7 +190,7 @@
   const Especies = ref([]);
   const ObtenerEspecie = async () => {
     try {
-      const response = await axios.post('http://www.backendorg.com/especie');
+      const response = await axios.post('http://web.Backend.com/especie');
       console.log(response.data);
       Especies.value = response.data.data;
     } catch (error) {
@@ -202,7 +202,7 @@
   const servicios = ref([]);
   const ObtenerServicio = async () => {
     try {
-      const response = await axios.post('http://www.backendorg.com/servicio');
+      const response = await axios.post('http://web.Backend.com/servicio');
       console.log(response.data);
       servicios.value = response.data.data;
     } catch (error) {
@@ -215,7 +215,7 @@
   const tiposservicios = ref([]);
   watch(servicioSelect, async (newValue) => {
     const response = await axios.post(
-      'http://www.backendorg.com/tiposservicios',
+      'http://web.Backend.com/tiposservicios',
       { id_servicio: newValue }
     );
     tiposservicios.value = response.data.data;

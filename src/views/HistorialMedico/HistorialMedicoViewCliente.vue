@@ -73,7 +73,7 @@
   
   const generarHistorial = async () => {
     try {
-      const response = await axios.post('http://www.backendorg.com/historialMedico', { nombreMascota: nomMascota.value, cliente: id_cliente.value});
+      const response = await axios.post('http://web.Backend.com/historialMedico', { nombreMascota: nomMascota.value, cliente: id_cliente.value});
       historialMedico.value = response.data.data;
       console.log(response.data);
     } catch (error) {

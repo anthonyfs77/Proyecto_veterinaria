@@ -156,7 +156,7 @@
   const General = ref([]);
 const ReporteGralCitasRechazadas = async () => {
  try {
- const response = await axios.post('http://www.backendorg.com/ReporteGralCitasRechazadas')
+ const response = await axios.post('http://web.Backend.com/ReporteGralCitasRechazadas')
  General.value = response.data.data;
  console.log(response.data);
 } catch (error) {
@@ -169,7 +169,7 @@ const FechaCons = ref("");
 const consFecha = ref ([]);
 const ReporteCitasRechazadasFecha = async () => {
 try {
-  const response = await axios.post('http://www.backendorg.com/ReporteCitasRechazadasFecha', {Fecha: FechaCons.value})
+  const response = await axios.post('http://web.Backend.com/ReporteCitasRechazadasFecha', {Fecha: FechaCons.value})
   consFecha.value = response.data.data;
   console.log(response.data);
 } catch (error) {
@@ -182,7 +182,7 @@ const Apellidos = ref("");
 const constCliente = ref([]);
 const ReporteCitasRechazadasCliente = async () => {
 try {
-  const response = await axios.post('http://www.backendorg.com/ReporteCitasRechazadasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value})
+  const response = await axios.post('http://web.Backend.com/ReporteCitasRechazadasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value})
   constCliente.value = response.data.data;
   console.log(response.data);
 } catch (error) {

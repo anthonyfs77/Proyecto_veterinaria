@@ -202,7 +202,7 @@
   const BuscarMedicamentos = async (id) => {
    id_cita.value = id;
   try {
-  const response = await axios.post('http://www.backendorg.com/BuscarMedicamentos')
+  const response = await axios.post('http://web.Backend.com/BuscarMedicamentos')
   medicamentos.value = response.data.data;
   console.log(response.data);
   console.log(id_cita.value);
@@ -225,7 +225,7 @@
     };
     try {
       const response = await axios.post(
-        'http://www.backendorg.com/RegistroConsulta',
+        'http://web.Backend.com/RegistroConsulta',
         Consulta
       );
       console.log(response.data);
@@ -262,7 +262,7 @@
 const General = ref([]);
 const GenerarConsultas = async () => {
  try {
- const response = await axios.post('http://www.backendorg.com/GenerarConsultas')
+ const response = await axios.post('http://web.Backend.com/GenerarConsultas')
  General.value = response.data.data;
  console.log(response.data);
 } catch (error) {
@@ -278,7 +278,7 @@ const consFecha = ref ([]);
 
 const GenerarConsultasFecha = async () => {
 try {
-  const response = await axios.post('http://www.backendorg.com/GenerarConsultasFecha', {Fecha: FechaCons.value})
+  const response = await axios.post('http://web.Backend.com/GenerarConsultasFecha', {Fecha: FechaCons.value})
   consFecha.value = response.data.data;
   console.log(response.data);
 } catch (error) {
@@ -294,7 +294,7 @@ const Apellidos = ref("");
 const constCliente = ref([]);
 const GenerarConsultasCliente = async () => {
 try {
-  const response = await axios.post('http://www.backendorg.com/GenerarConsultasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value})
+  const response = await axios.post('http://web.Backend.com/GenerarConsultasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value})
   constCliente.value = response.data.data;
   console.log(response.data);
 } catch (error) {
