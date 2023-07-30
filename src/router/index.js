@@ -31,6 +31,11 @@ const routes = [
         name: 'catalogo',
         component: catalogo
       },
+      {
+        path: '/HistorialMedicoC',
+        name: 'HistorialMedicoC',
+        component: HistorialMedicoC
+      }
     ]
   },
   {
@@ -203,3 +208,4 @@ import catalogo from '../views/productos/catalogoView.vue'
 
 import consultas from '../views/Consultas/ConsultasView.vue';
 import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'
+import HistorialMedicoC from '../views/HistorialMedico/HistorialMedicoViewCliente.vue'
