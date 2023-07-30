@@ -51,6 +51,11 @@
                         <span class="material-symbols-outlined">clinical_notes</span>
                         <h4>Servicios</h4>
                     </router-link>
+                    
+                    <router-link :to="{ name: 'ordenes' }">
+                        <span class="material-symbols-outlined">shopping_bag</span>
+                        <h4>Orden Compra</h4>
+                    </router-link>
 
                     <a href="#">
                         <span class="material-symbols-outlined">summarize</span>
