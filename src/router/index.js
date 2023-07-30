@@ -143,9 +143,19 @@ const routes = [
         component: ordenes
       },
       {
-        path: '/añadir',
-        name: 'añadir',
+        path: '/add',
+        name: 'add',
         component: AgregarProductoPublicExistente
+      },
+      {
+        path: '/addInterno',
+        name: 'addInterno',
+        component: AgregarProductoInterno
+      },
+      {
+        path: '/existente',
+        name: 'existente',
+        component: ModificarProducInternoExistente
       }
     ]
   },
@@ -182,6 +192,8 @@ import gestionusAdmin from '../views/soporteyusuarios/gestionusAdmin.vue';
 import gestionusuario from '../views/soporteyusuarios/gestionusuario.vue';
 import Adminservicios from '../views/servicios/AdminServicios.vue';
 import AgregarProductoPublicExistente from '../views/productos/AgregarProductoPublicExistente.vue'
+import AgregarProductoInterno from '../views/productos/AgregarProductoInterno.vue'
+import ModificarProducInternoExistente from '../views/productos/ModificarProducInternoExistente.vue'
 // cliente
 import MenuCliente from '../views/cliente/ClienteView.vue'
 import bodyCliente from '../views/cliente/menu/menuclienteview.vue'

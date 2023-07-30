@@ -99,7 +99,7 @@ import { ref, onMounted } from 'vue'
 const productos = ref([])
 const fetchData = async () => {
     try {
-        const response = await axios.get('http://web.backend.com/productosPublicos');
+        const response = await axios.get('http://web.backend.com/productosInternos');
         productos.value = response.data.data;
     } catch (error) {
         console.log(error)
@@ -121,7 +121,7 @@ const alterCantProduct = async () => {
         cantidad_producto: cantidad_producto.value,
     })
     try {
-        const response = await axios.post('http://web.backend.com/alterProduct', producto);
+        const response = await axios.post('http://web.backend.com/alterProdInterno', producto);
         data.value = response.data.data;        
     } catch (error) {
         console.log(error)
@@ -137,7 +137,6 @@ const nombre = ref();
 const descripcion = ref();
 const proveedor = ref();
 const categoria = ref();
-const precioC = ref();
 const precioV = ref();
 const info = ref([]);
 
@@ -147,14 +146,12 @@ const alterProduct = async () => {
         descripcion: descripcion.value,
         proveedor: proveedor.value,
         categoria:categoria.value,
-        precioC: precioC.value,
         precioV: precioV.value,
     })
     try {
-        const response = await axios.post('http://web.backend.com/dataProd', Alterproducto);
+        const response = await axios.post('http://web.backend.com/alterProdInternoExistente', Alterproducto);
         info.value = response.data.data;
-            console.log("🚀 ~ file: AgregarProductoPublicExistente.vue:156 ~ alterProduct ~  info.value:",  info.value)
-              
+
     } catch (error) {
         console.log(error)
     }

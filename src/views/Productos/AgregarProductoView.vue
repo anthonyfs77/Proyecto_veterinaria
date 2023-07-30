@@ -1,7 +1,8 @@
 <template>
   <div class="cont">
     <div class="header">
-      <encabezado />
+      <p>Manage Product</p>
+
     </div>
     <div class="body">
       <div class="checkout">
@@ -13,9 +14,10 @@
               <p>Se agregara un producto no existente</p>
               </div>
               <div class="more">
-                <RouterLink :to="{name: 'añadir'}" class="custom-link">
+                <RouterLink :to="{name: 'add'}" class="custom-link">
                    <add title="Existente"/>
                 </RouterLink>
+    
               </div>
             </div>
           </div>
@@ -126,12 +128,11 @@
 </template>
 
 <script setup>
-import encabezado from '../../components/tabla/header.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 
-const nombre_producto = ref('jsjsosjojsj');
+const nombre_producto = ref('');
 const descripcion_producto = ref();
 const precio_venta = ref();
 const categoria_producto = ref();
@@ -189,7 +190,17 @@ const agregar = () => {
     ". .";
 
 }
+.header {
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+    height: 4.2em;
+}
 
+.header p {
+    font-size: 20px;
+    margin-left: 17px;
+}
 /* IZQUIERDO */
 
 .checkout {
