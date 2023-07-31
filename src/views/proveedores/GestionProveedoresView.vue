@@ -4,6 +4,8 @@
       <div class="form-container">
         <div class="card">
           <form @submit.prevent="RegistroProveedor">
+            <span class="material-symbols-outlined">store</span><label for="empresa">Empresa:</label>
+            <inputs type="text" id="empresa" name="empresa" v-model="empresa" placeholder="Empresa" /><br><br>
             <span class="material-symbols-outlined">contacts</span><label for="name">Nombre:</label>
             <inputs type="text" id="name" name="name" v-model="nombre" placeholder="Nombre" /><br><br>
             <span class="material-symbols-outlined">map</span><label for="address">Dirección:</label>
@@ -22,6 +24,8 @@
             <table class="table table-hover custom-table">
               <thead>
                 <tr>
+                  <th>Id</th>
+                  <th>Empresa</th>
                   <th><span class="material-symbols-outlined">contacts</span>Proveedor</th>
                   <th> <span class="material-symbols-outlined">map</span>Direccion</th>
                   <th><span class="material-symbols-outlined">contact_phone</span>Telefono 1</th>
@@ -29,7 +33,9 @@
                 </tr>
               </thead>
               <tbody> 
-                <tr v-for="item in proveedores" :key="item.telefono1">
+                <tr v-for="item in proveedores" :key="item.id">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.empresa }}</td>
                   <td id="Nombre">{{ item.proveedor }}</td>
                   <td>{{ item.direccion }}</td>
                   <td>{{ item.telefono1 }}</td>
@@ -130,11 +136,7 @@
     display: none;
   }
 }
-
 </style>
-
-
-
 
 <script setup>
 import Inputs from '../../components/ControlesSencillos/Inputs.vue'
@@ -142,6 +144,7 @@ import Buttons from '../../components/ControlesSencillos/Buttons.vue'
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
+const empresa = ref("");
 const nombre = ref ("");
 const phone = ref("");
 const phone2 = ref("");
@@ -149,6 +152,7 @@ const direccion = ref("");
 
 const RegistroProveedor = async () => {
     const Proveedor = {
+      empresa: empresa.value,
       nombre: nombre.value,
       direccion: direccion.value,
       telefono1: phone.value,
