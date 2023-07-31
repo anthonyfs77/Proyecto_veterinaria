@@ -6,8 +6,8 @@
       <p>{{ precio }} <span>$</span></p>
       <p>{{ iva }}</p>
       <p id="stock" :class="{
-        'text-red': status === 'sin stock',
-        'text-green': status === 'con stock'
+        'text-red': status === 'Sin stock',
+        'text-green': status === 'Stock'
       }">{{ status }}</p>
     </div>
   </div>
@@ -43,6 +43,9 @@ defineProps({
   color: #677483;
   max-height: 3em !important;
 }
+
+  
+
 
 .column {
   display: flex;

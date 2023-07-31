@@ -79,6 +79,7 @@ const filtrar = () =>{
 }
 const buscar = () =>{
   productos.value = prodInterno.state.variable;
+  
 }
 
 const onInput = () =>{

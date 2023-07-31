@@ -67,7 +67,6 @@
           <div class="desc">
             <div class="header-check">
               <div class="title">
-                <p>Vista previa del producto</p>
               </div>
             </div>
           </div>

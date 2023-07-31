@@ -49,11 +49,11 @@ import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecioPublicos.vue'
 import axios from 'axios'
 import { ref, onMounted, watch } from 'vue';
-import {useStore} from '@/stores/counter.js'
+import {useStore, productosPublicosR} from '@/stores/counter.js'
 import {StoreProdPublics} from '@/stores/counter.js'
 
 const prodPublico = StoreProdPublics();
-const store = useStore();
+const productoPublico = productosPublicosR();
 const productos = ref([])
 const nombre = ref('');
 
@@ -72,7 +72,7 @@ onMounted(fetchData);
 
 
 const filtrar = () =>{
-    productos.value = store.state.variable
+    productos.value = productoPublico.state.variable
 }
 
 const buscar = () =>{

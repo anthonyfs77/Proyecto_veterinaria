@@ -322,6 +322,29 @@ select {
   margin-bottom: 10px;
 }
 
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  background-color: #4cb8a8;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+button span {
+  font-size: 15px;
+  color: white;
+}
+
 
 select option {
   font-size: 14px;

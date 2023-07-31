@@ -96,7 +96,36 @@ export const StoreProdPublics = defineStore('prodPublico', () => {
   };
 });
 
+// productos publicos
+export const productosPublicosR = defineStore('productoPublico', () => {
+  const state = {
+    variable: '',
+  };
 
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const productosInternosR = defineStore('productoInterno', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
 
 
 

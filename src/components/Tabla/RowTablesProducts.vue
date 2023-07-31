@@ -3,12 +3,12 @@
       <div class="column">
         <p>{{ name }}</p>
         <p>{{stock}}</p>
-        <p>{{priceV}} <span>$</span></p>
-        <p>{{priceC}} <span>$</span></p>
-        <p>{{iva}} <span>$</span></p>
+        <p>{{priceV}} <span> $</span></p>
+        <p>{{priceC}} <span> $</span></p>
+        <p>{{iva}} <span> $</span></p>
         <p id="stock" :class="{
-          'text-red': status === 'sin stock',
-          'text-green': status === 'con stock'
+          'text-red': status === 'Sin stock',
+          'text-green': status === 'Stock'
         }">{{ status }}</p>
       </div>
     </div>
@@ -36,7 +36,6 @@ defineProps({
   .app {
     display: flex;
     justify-content: space-evenly;
-    
     align-items: center;
     border-bottom: 1px solid rgba(132, 139, 200, 0.18);
     color: #677483;
@@ -54,6 +53,9 @@ span{
 
   }
   
+  .column p:first-child{
+    width: 200px;
+  }
 
   p {
     display: flex;
@@ -61,7 +63,6 @@ span{
     align-items: center;
     width: 11%;
     margin-left: 60px;
-    text-align: center;
   }
   </style>
   

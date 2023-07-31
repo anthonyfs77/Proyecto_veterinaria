@@ -108,7 +108,6 @@ div {
   max-width: 800px;
   margin: 0 auto;
   background: #fff;
-    padding: 1rem;
     border-radius: 2rem;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
