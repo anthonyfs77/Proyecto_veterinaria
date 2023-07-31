@@ -3,37 +3,25 @@
 
     <div class="parametros">
         <div class="Titulo">
-          <span class="material-symbols-outlined">local_hospital</span><h2>Generar Consultas</h2></div>
+          <span class="material-symbols-outlined">local_hospital</span><h2>Generar Consultas</h2>
+        </div>
       <div class="filtro">
-        <label for="tipo" class="label-tipo">Filtrar por:</label>
-        <select v-model="selectedOption" id="tipo" class="select-tipo">
-          <option value="opcion1">Cliente</option>
-          <option value="opcion2">Fecha</option>
-          <option value="opcion3" selected>Reporte general</option>
-        </select>
+        <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' },{ text: 'Reporte General', value: 'opcion3' }]"/>
       </div>
       <div class="filtro2" v-show="status1">
-        <label for="busqueda" class="label-busqueda">Nombre(s) del cliente:</label>
-        <input type="search" name="busquedaCat" id="busqueda" class="input-search" v-model="Nombres"><br><br>
-        <label for="busquedaP" class="label-busqueda">Apellidos del cliente:</label>
-        <input type="search" name="busquedaCat" id="busquedaP" class="input-search" v-model="Apellidos"><br>
-        <button class="btn-generar" @click="GenerarConsultasCliente">Generar</button>
-      </div>
-  
-      <div class="filtro3" v-show="status2">
-        <button class="btn-generar" @click="GenerarConsultas">Generar</button>
+        <InputCliente tittle1="Nombres(S)" tittle2="Apellidos" v-model:modelValue1="Nombres" v-model:modelValue2="Apellidos" @input="GenerarConsultasCliente" />
       </div>
   
       <div class="filtro4" v-show="status3">
-        <label for="busquedafecha" class="label-fecha">Ingrese la fecha:</label>
-        <input type="search" name="fecha" id="busquedafecha" class="input-fecha" placeholder="       Formato: aaaa-mm-dd" v-model="FechaCons"><br>
-        <button class="btn-generar" @click="GenerarConsultasFecha">Generar</button>
+        <div class="label">
+          <p class="plabel">Fecha</p>
+          <InputsBusqueda  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons" @input="GenerarConsultasFecha" /><br>
+        </div>
       </div>
     </div>
   
     <div class="pantalla">
       <div class="table-container">
-      <!-- Tabla de citas generales -->
       <div class="responsive-table" v-if="selectedOption === 'opcion3' && General.length > 0">
         <table class="table table-hover custom-table">
         <thead>
@@ -158,6 +146,27 @@
             </option>
           </select>
           <br>
+          <div class="table-container2">
+            <div class="responsive-table">
+        <table class="table table-hover custom-table">
+        <thead>
+            <tr>
+              <th></th>
+              <th>Nombre</th>
+              <th>Dosis</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr v-for="medicamento in medicamentos" :key="medicamento.id">
+              <td><input type="checkbox" name="" id=""></td>
+              <td>{{ medicamento.nom_producto }}</td>
+              <td><input type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+          </div>
+          <br>
          <label for="dosis">Dosis:</label>
           <input type="text" id="dosis" v-model="dosis">
           <br>
@@ -170,9 +179,12 @@
   </template>
   
   <script setup>
-  import { ref, watch } from 'vue';
+  import { ref, watch, onMounted } from 'vue';
   import axios from 'axios';
-  
+  import InputsBusqueda from '../../components/ControlesSencillos/InputsBusqueda.vue';
+  import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
+  import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
+
   const selectedOption = ref('opcion3');
   const status1 = ref(false);
   const status2 = ref(true);
@@ -190,7 +202,7 @@
   const BuscarMedicamentos = async (id) => {
    id_cita.value = id;
   try {
-  const response = await axios.post('http://www.backendorg.com/BuscarMedicamentos')
+  const response = await axios.post('http://web.Backend.com/BuscarMedicamentos')
   medicamentos.value = response.data.data;
   console.log(response.data);
   console.log(id_cita.value);
@@ -213,7 +225,7 @@
     };
     try {
       const response = await axios.post(
-        'http://www.backendorg.com/RegistroConsulta',
+        'http://web.Backend.com/RegistroConsulta',
         Consulta
       );
       console.log(response.data);
@@ -248,16 +260,16 @@
   });
 
 const General = ref([]);
-
 const GenerarConsultas = async () => {
  try {
- const response = await axios.post('http://www.backendorg.com/GenerarConsultas')
+ const response = await axios.post('http://web.Backend.com/GenerarConsultas')
  General.value = response.data.data;
  console.log(response.data);
 } catch (error) {
  console.error("Error al obtener el reporte de inventario", error);
 }
 };
+onMounted(GenerarConsultas);
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -266,7 +278,7 @@ const consFecha = ref ([]);
 
 const GenerarConsultasFecha = async () => {
 try {
-  const response = await axios.post('http://www.backendorg.com/GenerarConsultasFecha', {Fecha: FechaCons.value})
+  const response = await axios.post('http://web.Backend.com/GenerarConsultasFecha', {Fecha: FechaCons.value})
   consFecha.value = response.data.data;
   console.log(response.data);
 } catch (error) {
@@ -277,12 +289,12 @@ try {
 ////////////////////////////////////////////////////////////////////////////////////
 
 const Nombres = ref("");
-const Apellidos = ref("");
+const Apellidos = ref("");  
 
 const constCliente = ref([]);
 const GenerarConsultasCliente = async () => {
 try {
-  const response = await axios.post('http://www.backendorg.com/GenerarConsultasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value})
+  const response = await axios.post('http://web.Backend.com/GenerarConsultasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value})
   constCliente.value = response.data.data;
   console.log(response.data);
 } catch (error) {
@@ -328,55 +340,10 @@ try {
     background-color: transparent;
   }
   
-  .label-busqueda {
-    font-size: 1.2rem;
-  }
-  
   .label-fecha {
     font-size: 1.2rem;
   }
-  
-  .input-search,
-  .input-fecha {
-    border: none;
-    border-bottom: 2px solid black;
-    transition: border-color 0.3s;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    width: 100%;
-    max-width: 20rem;
-  }
-  
-  .input-search:focus,
-  .input-fecha:focus {
-    border-color: var(--color-primary);
-    background-color: transparent;
-  }
-  
-  .btn-generar {
-    border: none;
-    background-color: transparent;
-    color: black;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    max-width: 10rem;
-  }
-  
-  .btn-generar:hover {
-    color: var(--color-primary);
-  transform: translateX(15px);
-  }
-  
-  .btn-generar:focus {
-    outline: none;
-  }
-  
-  .btn-generar:hover:not(:focus) {
-    transform: translateX(15px);
-  }
-  
+
   .pantalla {
     display: flex;
     justify-content: center;
@@ -389,22 +356,6 @@ try {
     .parametros {
       padding: 1rem;
     }
-  
-    .label-tipo,
-    .label-busqueda,
-    .label-fecha,
-    .select-tipo,
-    .input-search,
-    .input-fecha,
-    .btn-generar {
-      font-size: 1rem;
-    }
-  
-    .select-tipo,
-    .input-search,
-    .input-fecha {
-      max-width: none;
-    }
   }
   
   @media (max-width: 576px) {
@@ -414,16 +365,16 @@ try {
       align-items: flex-start;
       gap: 0.5rem;
     }
-  
-    .btn-generar {
-      max-width: none;
-    }
   }
   .Titulo{
     display: flex;
     gap: 8px;
+    justify-content: center;
   }
-    /* Estilos personalizados para la tabla */
+  .Titulo span {
+    margin-right: 1px;
+    margin-top: 5px;
+  }
     .custom-table {
     font-size: 0.9rem;
   }
@@ -521,5 +472,16 @@ try {
   form textarea {
     width: 100%;
   }
+
+  .label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plabel{
+    color: #c2c5d3;
+}
   </style>
   

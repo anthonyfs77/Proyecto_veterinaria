@@ -5,26 +5,19 @@
         <span class="material-symbols-outlined">paid</span><h2>Ventas Realizadas.</h2>
       </div>
       <div class="filtro">
-        <label for="tipo" class="label-tipo">Filtrar por:</label>
-        <select v-model="selectedOption" id="tipo" class="select-tipo">
-          <option value="opcion1" selected>General</option>
-          <option value="opcion2">Fecha</option>
-        </select>
-      </div>
-      <div class="filtro2" v-if="selectedOption === 'opcion1'">
-        <button class="btn-generar" @click="ReporteGralVentas">Generar</button>
+        <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'General', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' }]"/>
       </div>
 
       <div class="filtro3" v-if="selectedOption === 'opcion2'">
-        <label for="busquedafecha" class="label-fecha">Ingrese la fecha:</label>
-        <input type="search" name="fecha" id="busquedafecha" class="input-fecha" placeholder="Formato: aaaa-mm-dd" v-model="FechaVenta"><br>
-        <button class="btn-generar" @click="ReporteFechaVentas">Generar</button>
+        <div class="label">
+          <p class="plabel">Fecha</p>
+          <InputsBusqueda  placeholder="Formato: aaaa-mm-dd" v-model="FechaVenta" @input="ReporteFechaVentas" /><br>
+        </div>
       </div>
     </div>
 
     <div class="pantalla">
       <div class="table-container">
-      <!-- Tabla de ventas generales -->
       <div class="responsive-table" v-if="selectedOption === 'opcion1' && gralVenta.length > 0">
         <table class="table table-hover custom-table">
         <thead>
@@ -55,7 +48,6 @@
       </div>
       <p v-else-if="selectedOption === 'opcion1'">No hay datos disponibles.</p>
 
-      <!-- Tabla de ventas por fecha -->
       <div class="responsive-table" v-if="selectedOption === 'opcion2' && ventaFecha.length > 0">
         <table class="table table-hover custom-table">
         <thead>
@@ -91,8 +83,10 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import axios from 'axios';
+import InputsBusqueda from '../../components/ControlesSencillos/InputsBusqueda.vue';
+import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
 
 const selectedOption = ref('opcion1');
 const status1 = ref(true);
@@ -110,10 +104,9 @@ watch(selectedOption, (newValue) => {
 
 const FechaVenta = ref("");
 const ventaFecha = ref([]);
-
 const ReporteFechaVentas = async () => {
   try {
-    const response = await axios.post('http://www.backendorg.com/ReporteFechaVentas', { Fecha: FechaVenta.value });
+    const response = await axios.post('http://web.Backend.com/ReporteFechaVentas', { Fecha: FechaVenta.value });
     ventaFecha.value = response.data.data;
     console.log(response.data);
   } catch (error) {
@@ -124,13 +117,14 @@ const ReporteFechaVentas = async () => {
 const gralVenta = ref("");
 const ReporteGralVentas = async () => {
   try {
-    const response = await axios.post('http://www.backendorg.com/ReporteGralVentas');
+    const response = await axios.post('http://web.Backend.com/ReporteGralVentas');
     gralVenta.value = response.data.data;
     console.log(response.data);
   } catch (error) {
     console.error("Error al obtener el reporte de inventario", error);
   }
 };
+onMounted(ReporteGralVentas);
 </script>
 
 <style scoped>
@@ -148,70 +142,6 @@ const ReporteGralVentas = async () => {
   width: 100%;
   height: 100vh;
 }
-
-:root {
-  --color-primary: #e0b14b;
-}
-
-.label-tipo {
-  font-size: 1.2rem;
-}
-
-.select-tipo {
-  border: none;
-  border-bottom: 2px solid black;
-  transition: border-color 0.3s;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  max-width: 20rem;
-}
-
-.select-tipo:focus {
-  border-color: var(--color-primary);
-  background-color: transparent;
-}
-
-.label-fecha {
-  font-size: 1.2rem;
-}
-
-.input-fecha {
-  border: none;
-  border-bottom: 2px solid black;
-  transition: border-color 0.3s;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-}
-
-.input-fecha:focus {
-  border-color: var(--color-primary);
-  background-color: transparent;
-}
-
-.btn-generar {
-  border: none;
-  background-color: transparent;
-  color: black;
-  transition: border-color 0.3s, transform 0.3s;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  max-width: 10rem;
-}
-
-.btn-generar:hover {
-  color: var(--color-primary);
-  transform: translateX(15px);
-}
-
-.btn-generar:focus {
-  outline: none;
-}
-
-.btn-generar:hover:not(:focus) {
-  transform: translateX(15px);
-}
-
 .pantalla {
   display: flex;
   justify-content: center;
@@ -225,31 +155,15 @@ const ReporteGralVentas = async () => {
   overflow-x: auto;
 }
 
-/* Estilos específicos para tamaños de pantalla más pequeños */
 @media (max-width: 768px) {
   .parametros {
     padding: 1rem;
   }
-
-  .label-tipo,
-  .select-tipo,
-  .label-fecha,
-  .input-fecha,
-  .btn-generar {
-    font-size: 1rem;
-  }
-
-  .select-tipo,
-  .input-fecha {
-    max-width: none;
-  }
-
-  /* Estilos para tablas responsivas en pantallas pequeñas */
   .responsive-table table {
     font-size: 0.9rem;
   }
 }
- /* Estilos personalizados para la tabla */
+
  .custom-table {
     font-size: 0.9rem;
   }
@@ -284,5 +198,25 @@ const ReporteGralVentas = async () => {
     #Fecha {
     font-weight: bold;
   }
+  }
+  .label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plabel{
+    color: #c2c5d3;
+}
+
+.Titulo{
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  .Titulo span {
+    margin-right: 1px;
+    margin-top: 5px;
   }
 </style>
