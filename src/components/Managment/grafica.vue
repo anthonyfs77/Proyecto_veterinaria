@@ -1,7 +1,9 @@
 <template>
-  <div>
+  
+    <div>
     <canvas ref="lineChartCanvas"></canvas>
   </div>
+
 </template>
 
 <script setup>
@@ -22,7 +24,6 @@ const year = currentDate.getFullYear();
 const startDate = new Date(year, mes - 1, 1);
 const lastDayOfMonth = new Date(year, mes, 0);
 const endDate = new Date(year, mes - 1, lastDayOfMonth.getDate());
-
 const formattedStartDate = startDate.toISOString().substring(0, 10);
 const formattedEndDate = endDate.toISOString().substring(0, 10);
 
@@ -51,8 +52,8 @@ const chartData = reactive({
   datasets: [
     {
       label: 'Órdenes por día',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgb(253, 242, 78)',
+      backgroundColor: 'rgba(253, 242, 78, 0.2)',
       data: [],
       fill: true,
     },
@@ -60,7 +61,6 @@ const chartData = reactive({
 });
 
 const chartOptions = {
-  responsive: true,
   maintainAspectRatio: false,
   scales: {
     x: {
@@ -95,21 +95,25 @@ const updateChart = () => {
   }
 };
 
-onMounted(() => {  
-    fetchData();
+setInterval(() => {
+  fetchData();
     updateChart();
-});
+}, 1000);
+ 
 </script>
 
 <style scoped>
 /* Estilos opcionales para el contenedor de la gráfica */
 div {
   width: 100%;
-  max-width: 800px;
+  height: 90%;
+  max-width: 900px;
   margin: 0 auto;
   background: #fff;
     border-radius: 2rem;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
 }
+
+
 </style>

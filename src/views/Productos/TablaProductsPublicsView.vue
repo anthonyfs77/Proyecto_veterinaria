@@ -24,14 +24,13 @@
                 <h4>Nombre</h4>
                 <h4>Stock</h4>
                 <h4>Precio v</h4>
-                <h4>Precio c</h4>
                 <h4>IVA</h4>
                 <h4>Status</h4>
             </div>
             <div class="cont-table">
                 <div v-for="productos in productos" :key="productos.id">
                     <Rows :name="productos.nom_producto" :stock="productos.existencias" :priceV="productos.precio_venta" 
-                    :priceC="productos.precio_compra" :iva="productos.iva"
+                     :iva="productos.iva"
                     :status="productos.estado" />
                 </div>
             </div>
@@ -99,6 +98,7 @@ const onInput = () =>{
 
 
 <style scoped>
+    
 
 .btns{
     display: flex;

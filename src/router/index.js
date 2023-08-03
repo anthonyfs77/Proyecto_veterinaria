@@ -66,6 +66,11 @@ const routes = [
     path: '/panelAdmin',
     name: 'panelAdmin',
     component: panelAdmin,
+            // 
+// meta{
+    // variable cualquiera esto se pone dentro de una ruta  si la ponermos aqui todas las rutas hijas se van a ahacer asi
+//   requiteAuth: true,
+  // } ABAJO MAS EXPLICACION
     children: [
       {
         path: '/control',
@@ -161,10 +166,17 @@ const routes = [
         path: '/existente',
         name: 'existente',
         component: ModificarProducInternoExistente
+
       }
     ]
   },
 ]
+
+
+
+
+
+
 
 
 const router = createRouter({
@@ -209,3 +221,81 @@ import catalogo from '../views/productos/catalogoView.vue'
 import consultas from '../views/Consultas/ConsultasView.vue';
 import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'
 import HistorialMedicoC from '../views/HistorialMedico/HistorialMedicoViewCliente.vue'
+
+
+
+
+
+
+
+
+// // to = a donde
+// // from = de donde
+// // next = lugar destino
+
+
+// // Navigation guard to check if the user is already authenticated (has a token)
+// router.beforeEach((to, from, next) => {
+//   // mandar el token si ya esta authenticado y si es asi no se habre el login
+//   // se va a dashboard
+//   const authToken = useUsuarioStore().usuario._token;
+
+//   // If the user is already authenticated and tries to access the login page,
+//   // redirect them to another page (e.g., dashboard)
+//   if (to.name === 'login' && authToken) {
+//       next('/dashboard');
+//   } else {
+
+//       next();
+//   }
+// });
+
+// // Add navigation guard to check for authentication token
+// router.beforeEach((to, from, next) => {
+//   // Check if the route requires authentication
+//   if (to.matched.some((route) => route.meta.requiresAuth)) {
+//       // Get the token from the Pinia store
+//       const authToken = useUsuarioStore().usuario._token;
+
+//       // If the user is authenticated (has a token), allow access to the route
+//       if (authToken) {
+//           next();
+//       } else {
+//           // If the user is not authenticated, redirect to the login page
+//           next('/login');
+//       }
+//   } else {
+//       // For public routes, allow access without authentication
+//       next();
+//   }
+// });
+
+
+
+
+// // login
+// function login() {
+//   if (!valid.value) {
+//       return
+//   }
+//   overlay.value = true
+//   fetch('http://web.local/usuario/auth', {
+//       method: 'POST',
+//       body: JSON.stringify(usuario.value),
+//   }).then(response => response.json())
+//       .then(data => {
+//           if (data.status != 200) {
+//               alert(data.message)
+//               overlay.value = false
+//               return
+//           }
+//           // mandarlo al store de pinia
+//           usuarioStore.setUser(data.data)
+//           router.push({name: 'dashboard'})
+//           overlay.value = false
+
+//       });
+// }
+
+
+

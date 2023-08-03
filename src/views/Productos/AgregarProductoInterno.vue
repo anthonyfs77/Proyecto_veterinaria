@@ -90,11 +90,13 @@
   const proveedor = ref();
   const cantidad_pructos = ref();
   const productos = ref({});
-  
+  const tipo_producto = ref('interno');
+
   const fetchData = async () =>{
     const data = {
       nombre_producto: nombre_producto.value,
       descripcion_producto: descripcion_producto.value,
+      tipo_producto:tipo_producto.value,
       precio_venta: precio_venta.value,
       categoria_producto: categoria_producto.value,
       proveedor: proveedor.value,

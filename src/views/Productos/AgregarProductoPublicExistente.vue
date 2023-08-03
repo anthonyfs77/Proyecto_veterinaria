@@ -56,11 +56,6 @@
                                     <span>PRECIO VENTA</span>
                                     <input type="number" placeholder="$" v-model="precioV">
                                 </div>
-                                <div class="input">
-                                    <span>PRECIO COMPRA</span>
-                                    <input type="number" placeholder="$" v-model="precioC">
-                                </div>
-
                             </div>
                             <button @click="editar"><span>Agregar producto</span></button>
                         </div>
@@ -109,7 +104,7 @@ const fetchData = async () => {
 
 setInterval(fetchData, 500);
 
-//AÑADIR PRODUCTO EXISTENTE
+//MODIFICAR PRODUCTO EXISTENTE
 
 const nombre_producto = ref('');
 const cantidad_producto = ref();
@@ -137,7 +132,6 @@ const nombre = ref();
 const descripcion = ref();
 const proveedor = ref();
 const categoria = ref();
-const precioC = ref();
 const precioV = ref();
 const info = ref([]);
 
@@ -147,7 +141,6 @@ const alterProduct = async () => {
         descripcion: descripcion.value,
         proveedor: proveedor.value,
         categoria:categoria.value,
-        precioC: precioC.value,
         precioV: precioV.value,
     })
     try {
@@ -173,6 +166,9 @@ const editar = () =>{
     gap: 0px 0px;
 }
 
+.prod{
+    height: 5em;
+}
 .izquierdo {
     display: grid;
     grid-auto-columns: 1fr;
@@ -201,7 +197,6 @@ const editar = () =>{
     width: 100%;
     height: 100vh;
     border-radius: 15px 0px 0px 15px;
-    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     overflow-y: auto;
 }
 
@@ -211,7 +206,9 @@ const editar = () =>{
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid rgba(132, 139, 200, 0.18);
+    background-color: white;
 }
+
 
 .header-table {
     margin-top: 20px;

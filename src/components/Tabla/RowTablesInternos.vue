@@ -3,8 +3,7 @@
     <div class="column">
       <p>{{ name }}</p>
       <p>{{ stock }}</p>
-      <p>{{ precio }} <span>$</span></p>
-      <p>{{ iva }}</p>
+      <p>{{ descripcion }}</p>
       <p id="stock" :class="{
         'text-red': status === 'Sin stock',
         'text-green': status === 'Stock'
@@ -18,7 +17,7 @@
 import { defineProps } from 'vue';
 
 defineProps({
-  name: { type: String }, stock: { type: Number }, precio: { type: Number }, iva: { type: Number }, status: { type: String }
+  name: { type: String }, stock: { type: Number },descripcion:{type:String}, status: { type: String }
 })
 
 
@@ -62,6 +61,24 @@ p {
   width: 100%;
   margin-left: 100px;
   text-align: center;
+}
+
+.column p:nth-child(2){
+  
+  display: flex;
+  justify-content: flex-end;
+  width: 40em;
+}
+
+.column p:nth-child(3){
+  width: 250%;
+  display: flex;
+  justify-content: center;  
+}
+
+.column p:nth-child(4){
+  
+  width: 90%;
 }
 </style>
   
