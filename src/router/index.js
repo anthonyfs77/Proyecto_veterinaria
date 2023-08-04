@@ -3,8 +3,36 @@ const routes = [
   // Vistas predeterminadas
   {
     path: '/',
-    name: 'principalMain',
-    component: principalMain,
+    name: 'sinlogin',
+    component: MenuCLienteSinIniciar,
+    
+    children: [
+      {
+        path: '/catalogo',
+        name: 'catalogoSin',
+        component: catalogo
+      },
+      {
+        path: '/',
+        name: 'principalMain',
+        component: principalMain,
+      },
+      {
+        path: '/login',
+        name: 'login',
+        component: login
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: register
+      },
+      {
+        path: '/ubicacion',
+        name: 'ubicacionSin',
+        component: ubicacion,
+      },
+    ],
   },
   {
     path: '/Home',
@@ -38,6 +66,7 @@ const routes = [
       }
     ]
   },
+
   {
     path: '/login',
     name: 'login',
@@ -213,6 +242,7 @@ import AgregarProductoInterno from '../views/productos/AgregarProductoInterno.vu
 import ModificarProducInternoExistente from '../views/productos/ModificarProducInternoExistente.vue'
 // cliente
 import MenuCliente from '../views/cliente/ClienteView.vue'
+import MenuCLienteSinIniciar from '../views/cliente/SinIniciar.vue'
 import bodyCliente from '../views/cliente/menu/menuclienteview.vue'
 import ubicacion from '../views/ubicacion/MapaUbicacion.vue'
 import catalogo from '../views/productos/catalogoView.vue'
