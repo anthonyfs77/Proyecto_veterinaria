@@ -23,14 +23,14 @@ import headerMenu from '../../components/cliente/menuComponents/header.vue'
     box-sizing: border-box;
 }
 .container-fluid {
-    display: grid; 
-    grid-auto-columns: 1fr; 
+    display: grid;
+    grid-auto-columns: 1fr;
     grid-template-columns: 1fr;  /* Update this line */
-    grid-template-rows: 0.2fr 1.8fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
+    grid-template-rows: 0.2fr 1.8fr;
+    gap: 0px 0px;
+    grid-template-areas:
         "."
-        "."; 
+        ".";
 }
 
 .body {

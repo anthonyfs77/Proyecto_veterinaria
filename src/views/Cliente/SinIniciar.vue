@@ -36,5 +36,6 @@ import headerMenu from '../../components/cliente/menuComponents/headerSinLogin.v
 .body {
     margin: 0;
     padding: 0;
+    position: relative;
 }
 </style>

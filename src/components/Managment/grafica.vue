@@ -1,9 +1,7 @@
 <template>
-  
     <div>
     <canvas ref="lineChartCanvas"></canvas>
   </div>
-
 </template>
 
 <script setup>
@@ -12,7 +10,7 @@ import { Chart, LineController, LinearScale, CategoryScale, PointElement, LineEl
 import axios from 'axios';
 
 
-Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler); // Registra el complemento 'Filler'
+Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler);
 
 const lineChartCanvas = ref(null);
 const data = ref([]);
@@ -26,7 +24,8 @@ const lastDayOfMonth = new Date(year, mes, 0);
 const endDate = new Date(year, mes - 1, lastDayOfMonth.getDate());
 const formattedStartDate = startDate.toISOString().substring(0, 10);
 const formattedEndDate = endDate.toISOString().substring(0, 10);
-
+console.log(formattedStartDate);
+console.log(formattedEndDate);
 const fetchData = async () => {
   const rango = {
     fechaI: formattedStartDate,
@@ -95,11 +94,22 @@ const updateChart = () => {
   }
 };
 
-setInterval(() => {
-  fetchData();
-    updateChart();
-}, 1000);
- 
+
+onMounted(() => {
+  // Montar el gráfico una vez que el canvas esté disponible
+  const chart = new Chart(lineChartCanvas.value.getContext('2d'), {
+    type: 'line',
+    data: chartData,
+    options: chartOptions,
+  });
+
+  // Actualizar los datos del gráfico en el intervalo deseado
+  setInterval(() => {
+    fetchData();
+    updateChartData();
+    chart.update(); // Actualizar el gráfico con los nuevos datos
+  }, 300);
+});
 </script>
 
 <style scoped>
@@ -114,6 +124,4 @@ div {
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
 }
-
-
 </style>
