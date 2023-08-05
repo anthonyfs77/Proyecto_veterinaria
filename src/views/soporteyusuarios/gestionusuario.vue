@@ -102,7 +102,7 @@ async function updateUser() {
   };
     loading.value = true;
     console.log(userUpdate);
-    const response = await axios.post('http://web.veterinariaback.com/clientes/actualizar', userUpdate);
+    const response = await axios.post('http://web.Backend.com/clientes/actualizar', userUpdate);
     updatedUserInfo.value = response.data;
     if(updatedUserInfo.value && updatedUserInfo.value.message === 'Cliente actualizado exitosamente.') {
        nombreA.value = userUpdate.nombre;
