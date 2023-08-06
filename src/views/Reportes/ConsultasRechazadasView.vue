@@ -5,7 +5,7 @@
         <div class="Titulo">
           <span class="material-symbols-outlined">delete_forever</span><h2>Citas Rechazadas</h2></div>
       <div class="filtro">
-          <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' },{ text: 'Reporte General', value: 'opcion3' }]"/>
+          <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' }]"/>
       </div>
 
       <div class="filtro2" v-show="status1">
@@ -15,45 +15,14 @@
       <div class="filtro4" v-show="status3">
         <div class="label">
           <p class="plabel">Fecha</p>
-          <InputsBusqueda  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons" @input="ReporteCitasRechazadasFecha" /><br>
+          <InputFecha  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons" @input="ReporteCitasRechazadasFecha" /><br>
+          <InputFecha  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons2" @input="ReporteCitasRechazadasFecha" /><br>
         </div>
       </div>
     </div>
   
     <div class="pantalla">
       <div class="table-container">
-      <!-- Tabla de citas generales -->
-      <div class="responsive-table" v-if="selectedOption === 'opcion3' && General.length > 0">
-        <table class="table table-hover custom-table">
-        <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Especie</th>
-              <th>Raza</th>
-              <th>Genero</th>
-              <th>Dueño</th>
-              <th>Fecha</th>
-              <th>Motivo</th>
-              <th>Servicios</th>
-              <th>Servicio Solicitado</th>
-            </tr>
-          </thead>
-          <tbody> 
-            <tr v-for="item in General" :key="item.Motivo">
-              <td id="Nombre">{{ item.Nombre }}</td>
-              <td>{{ item.Especie }}</td>
-              <td>{{ item.Raza }}</td>
-              <td>{{ item.Genero }}</td>
-              <td>{{ item.Dueño }}</td>
-              <td>{{ item.Fecha }}</td>
-              <td>{{ item.Motivo }}</td>
-              <td>{{ item.Servicios }}</td>
-              <td>{{ item.Servicio_solicitado }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p v-else-if="selectedOption === 'opcion3'">No hay datos disponibles.</p>
 
       <!-- Tabla de consultas por fecha -->
       <div class="responsive-table" v-if="selectedOption === 'opcion2' && consFecha.length > 0">
@@ -126,54 +95,36 @@
   </template>
   
   <script setup>
- import { ref, watch, onMounted } from 'vue';
+ import { ref, watch } from 'vue';
     import axios from 'axios';
-    import InputsBusqueda from '../../components/ControlesSencillos/InputsBusqueda.vue';
    import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
    import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
+   import InputFecha from '../../components/ControlesSencillos/InputFecha.vue';
   
-  const selectedOption = ref('opcion3');
+  const selectedOption = ref('opcion2');
   const status1 = ref(false);
-  const status2 = ref(true);
-  const status3 = ref(false);
+  const status3 = ref(true);
   
   watch(selectedOption, (newValue) => {
     if (newValue === 'opcion1') {
       status1.value = true;
-      status2.value = false;
       status3.value = false;
     } else if (newValue === 'opcion2') {
       status1.value = false;
-      status2.value = false;
       status3.value = true;
-    } else {
-      status1.value = false;
-      status2.value = true;
-      status3.value = false;
-    }
+    } 
   });
 
-  const General = ref([]);
-const ReporteGralCitasRechazadas = async () => {
- try {
- const response = await axios.post('http://web.Backend.com/ReporteGralCitasRechazadas')
- General.value = response.data.data;
- console.log(response.data);
-} catch (error) {
- console.error("Error al obtener el reporte de inventario", error);
-}
-};
-onMounted(ReporteGralCitasRechazadas);
-
+const FechaCons2 = ref("");
 const FechaCons = ref("");
 const consFecha = ref ([]);
 const ReporteCitasRechazadasFecha = async () => {
 try {
-  const response = await axios.post('http://web.Backend.com/ReporteCitasRechazadasFecha', {Fecha: FechaCons.value})
+  const response = await axios.post('http://web.Backend.com/ReporteCitasRechazadasFecha', {Fecha: FechaCons.value, Fecha2: FechaCons2.value})
   consFecha.value = response.data.data;
   console.log(response.data);
 } catch (error) {
-  console.error("Error al obtener el reporte de inventario", error);
+  console.error(error);
 }
 };
 
