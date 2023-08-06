@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid">
         <div class="productos">
-
             <div class="title">
                 <p class="titulo">Manage Products</p>
             </div>
@@ -190,7 +189,6 @@ const fetchData = async () => {
 }
 
 
-
 h4 {
     font-size: 20px;
 }
@@ -231,6 +229,7 @@ h4 {
     justify-content: space-between;
     border-bottom: 1px solid rgba(132, 139, 200, 0.18);
     margin: 20px 0px 20px 0px;
+    max-height: 3em;
 }
 
 .prod {

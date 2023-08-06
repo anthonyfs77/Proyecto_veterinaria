@@ -7,6 +7,7 @@
                 <li><router-link :to="{name: 'catalogo'}" href="#">Productos</router-link></li>
                 <li><router-link :to="{name: 'cita'}">Citas</router-link></li>
                 <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
+                <li><router-link :to="{name: 'HistorialMedicoC'}">Historial medico</router-link></li>
                 <li><a href="#">contacto</a></li>
             </ul>
             <div class="main">
@@ -23,12 +24,12 @@
                 </ul>
             </div>
             <div class="profile">
-                <p>{{ nombre }}</p><span class="material-symbols-outlined">
+                <p v-for="persona in nombre" :key="persona.id">{{ persona.nombre }}</p><span class="material-symbols-outlined">
                     account_circle
                 </span>
             </div>
         </header>
-
+        
         <body>
 
         </body>
@@ -37,10 +38,12 @@
 
 <script setup>
 import { ref } from 'vue'
-import {useStore} from '@/stores/counter.js'
-var store = useStore()
-var nombre = ref('')
-nombre = store.state.variable;
+import {dataLog} from '@/stores/counter.js'
+var userData = dataLog()
+const nombre = ref([])
+nombre.value = userData.state.variable;
+console.log("🚀 ~ file: headerjijijijij.vue:45 ~ nombre.value :", nombre.value )
+
 
 
 var despliegue = ref(false);
@@ -137,6 +140,10 @@ header {
     padding: 5px 0;
     margin: 0px 30px;
     transition: all .50s ease;
+}
+
+.vet p{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .navbar a:hover {
@@ -249,6 +256,7 @@ header {
         width: 100%;
         display: flex;
         justify-content: center;
+        
     }
 
 }

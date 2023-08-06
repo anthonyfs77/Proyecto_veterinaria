@@ -2,71 +2,47 @@
   import {  ref, onMounted, watch   } from 'vue';
   import axios from 'axios';
   import btn from '../../components/ControlesIndividuales/BotonAntho.vue'
+  import load from '../../components/loaders/loaderPrincipal.vue'
   const provsnmid = ref([]);
-  const productosX = ref([]);
   const provedor = ref(0);
   const fpago = ref('');
   const fcompra = ref('');
-  const elegirpro = ref(0);
-  const preciocompra = ref('');
-  const totalpagado = ref('');
   const status = ref('');
-  const productoselect = ref(0);
-  const cantida = ref(0);
+  const loading =ref(false);
+  const detallar =ref(false);
 
-  watch(elegirpro, async (newVal, oldVal) => {
-    await products()
-    })
+  const emi = defineEmits(['close']);
 
-  const products = async () => {
-    productosX.value = [];
-    const pro = {
-     id_tipoproducto: elegirpro.value
-    };
-  try {
-    const response = await axios.post('http://web.Backend.com/productosXproductosinternos', pro);
-    if(response.data.data===null)
-    {
-      productosX.value=[]
-    }
-    console.log(response.data.data)
-    if (Array.isArray(response.data.data)) {
-  productosX.value = response.data.data;
-   } else {
-    productosX.value = [response.data.data];
-   }
-
-  } catch (error) {
-    console.error('Hubo un error al obtener el usuario:', error);
+  const cerra = () =>{
+    emi('close')
   }
-  
-};
-
 
 const generarorden = async () => {
+  loading.value = true;
     const pro = {
       fecha_compra: fcompra.value,
       fecha_pago: fpago.value,
-      cantidad: cantida.value,
-      precio_compra: preciocompra.value,
       estado: status.value,
       id_empleado: 1,
-      id_proveedores: provedor.value,
-      id_producto: productoselect.value,
-      precio_total: totalpagado.value,
-      id_tipoproducto: elegirpro.value
+      estatus: 'pendiente',
+      proveedor: provedor.value,
     };
+    console.log(provsnmid.value);
+    console.log(pro)
   try {
     const response = await axios.post('http://web.Backend.com/orden/compra', pro);
     if(Object.keys(response.data).length === 0) {
     console.log('No se recibió nada')
       }
 
-    console.log(response.data)
+    if (response.data.status === 200) { 
+        detallar.value = true;
+    }
   } catch (error) {
-    console.error('Hubo un error al obtener al generar orden de compra:', error);
+    console.error('Error al generar orden de compra:', error);
+    console.error('Detalle del error:', error.config);  
   }
-  
+  loading.value = false;
 };
 
   const provs = async () => {
@@ -87,32 +63,27 @@ onMounted(provs);
 
 </script>
 
-<template>
+<template>  
     <div class="card">
-      <div class="grilla">
+      <transition name="fade">
+      <div class="display2" v-if="loading">
+        <load v-if=loading class="loader"/>
+        <h2>Generando...</h2>
+      </div>
+      </transition>
+
+      <div class="grilla" v-if=!loading>
+        <button class="cerrar" @click="cerra" >X</button>
         <div class="form">
           <h2>Generar orden de compra</h2>
-      <label for="product-type">Tipo de producto:</label>
-      <select class="search-box" v-model="elegirpro">
-        <option value="1">Producto de venta</option>
-        <option value="2">Producto interno</option>
-      </select>
       <br />
       <label for="payment-date" >Fecha de Compra:</label>
       <input class="search-box" type="date" id="payment-date" v-model="fcompra"/>
       <p>Fecha seleccionada: {{fcompra}}</p>
+      <br/>
       <label for="payment-date">Fecha de Pago:</label>
       <input class="search-box" type="date" id="payment-date" v-model="fpago"/>
       <p>Fecha seleccionada: {{fpago}}</p>
-      <label>seleccionar producto:</label>
-      <select class="search-box" id="producto" v-model="productoselect">
-           <option v-for="prod in productosX" :value="prod.id" :key="prod.id">
-              {{ prod.nom_producto }}
-           </option>
-       </select>
-      <br />
-      <label for="quantity">Cantidad:</label>
-      <input class="search-box" type="number" id="quantity" v-model="cantida"/>
       <br />
       <label for="proveedor">Proveedor:</label>
       <select class="search-box" id="proveedor" v-model="provedor">
@@ -121,51 +92,83 @@ onMounted(provs);
            </option>
        </select>
       <br />
-      <label for="unit-price">Precio unitario:</label>
-      <input class="search-box" type="number" v-model="preciocompra" />
-      <br />
-      <label for="total">Total pagado:</label>
-      <input class="search-box" type="number" v-model="totalpagado" />
-      <br/>
       <label for="status">Estado:</label>
       <select class="search-box" id="status" v-model="status">
         <option value="Pagado">Pagado</option>
         <option value="Pendiente">Pendiente</option>
       </select>
-      <btn title="Generar Orden" @click="generarorden"/>
+      <br>
+      <btn v-if=!detallar title="Generar Orden" @click="generarorden"/>
+      <btn v-if="detallar" title="Detallar Orden" @click="detallarorden"/>
+      <span v-if="detallar">¡Orden de compra registrada correctamente!</span>
         </div>
       </div>
+ 
     </div>
 
 </template>
 
 <style scoped>
 
+.cerrar{
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 2em #00000013;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  border: none;
+  background-color: #00000000;
+}
+
+.loader{
+  position: relative;
+    z-index: 105;
+    width: 25%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.display2{
+  background-color: rgba(95, 95, 95, 0.4); /* fondo negro semi-transparente */
+  height: 100%;
+  width: 100%;
+  z-index: 103;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .form{
   grid-column-start: 2;
   grid-row-start: 2;
   grid-row-end: 2;
   display: grid;
-  row-gap: 8px;
+  row-gap: 8px;  
 }
     .grilla{
       width: 100%;
       height: 100%;
       display: grid;
-      grid-template-columns: 30% 40% 30%;
-      grid-template-rows: 10% 80% 10%;
+      grid-template-columns: 30% 50% 20%;
+      grid-template-rows: 10% 70% 20%;
     }
     .card {
       font-family: 'comfortaa';
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 80vh;
+      height: 90vh;
       overflow-y: auto;
       overflow-x: hidden;
-      width: 70%;
+      width: 45%;
       box-shadow: 0 0 2em #00000013;
       border: none;
+      border-radius: 20px;
     }
     .card::-webkit-scrollbar {
   width: 10px;
@@ -179,12 +182,13 @@ onMounted(provs);
   background: #cfcfcf;
 }
   
-    @media (max-width: 600px) {
+    @media (max-width: 950px) {
       .card{
-        padding: 10px;
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
+        width: 65%;
+        height: 80vh;
+      }
+      .grilla{
+        grid-template-columns: 20% 70% 10%;
       }
     }
 
@@ -201,4 +205,6 @@ onMounted(provs);
   margin-right: -2rem;
   text-align: center;
   }
+
+
 </style>

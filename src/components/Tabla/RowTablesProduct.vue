@@ -33,7 +33,6 @@ defineProps({
   .app {
     display: flex;
     justify-content: space-evenly;
-    
     align-items: center;
     border-bottom: 1px solid rgba(132, 139, 200, 0.18);
     color: #677483;
@@ -58,7 +57,6 @@ span{
     justify-content: center;
     align-items: center;
     width: 100%;
-    text-align: center;
   }
   </style>
   

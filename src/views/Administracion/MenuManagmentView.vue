@@ -95,8 +95,8 @@ onMounted(fetchData);
 .estadisticas {
     display: flex;
     justify-content: space-around;
-    width: 90%;
-
+    width: 100%;
+    
 }
 
 .vista {

@@ -30,15 +30,13 @@
         />
     </div>
       </div>
-   
-
     </div>
   </template>
   
   <script setup>
   import { ref, onMounted, watch } from 'vue';
   import axios from 'axios';
-  import btn from '../../components/ControlesIndividuales/BotonAntho.vue'
+  import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
   import InfousAdmin from '../../components/infoUsuario/InfousAdmin.vue';
   const search = ref('');
   const texto = ref("Buscar Usuario...");
@@ -119,10 +117,6 @@ const UsersCorreo = async () => {
 onMounted(fetchUsers);
 
 
-  // limpiar el buscador
-  const clearSearch = () => {
-    search.value = "";
-  }
 
   </script>
   

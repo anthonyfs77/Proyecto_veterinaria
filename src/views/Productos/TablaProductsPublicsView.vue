@@ -24,14 +24,13 @@
                 <h4>Nombre</h4>
                 <h4>Stock</h4>
                 <h4>Precio v</h4>
-                <h4>Precio c</h4>
                 <h4>IVA</h4>
                 <h4>Status</h4>
             </div>
             <div class="cont-table">
                 <div v-for="productos in productos" :key="productos.id">
                     <Rows :name="productos.nom_producto" :stock="productos.existencias" :priceV="productos.precio_venta" 
-                    :priceC="productos.precio_compra" :iva="productos.iva"
+                     :iva="productos.iva"
                     :status="productos.estado" />
                 </div>
             </div>
@@ -49,11 +48,11 @@ import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecioPublicos.vue'
 import axios from 'axios'
 import { ref, onMounted, watch } from 'vue';
-import {useStore} from '@/stores/counter.js'
+import {useStore, productosPublicosR} from '@/stores/counter.js'
 import {StoreProdPublics} from '@/stores/counter.js'
 
 const prodPublico = StoreProdPublics();
-const store = useStore();
+const productoPublico = productosPublicosR();
 const productos = ref([])
 const nombre = ref('');
 
@@ -72,7 +71,7 @@ onMounted(fetchData);
 
 
 const filtrar = () =>{
-    productos.value = store.state.variable
+    productos.value = productoPublico.state.variable
 }
 
 const buscar = () =>{
@@ -99,6 +98,7 @@ const onInput = () =>{
 
 
 <style scoped>
+    
 
 .btns{
     display: flex;

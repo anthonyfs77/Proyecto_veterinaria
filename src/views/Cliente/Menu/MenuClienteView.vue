@@ -128,7 +128,6 @@
                     <!--Productos-->
                     <section class="section product" id="shop" aria-label="product">
                         <div class="cont">
-
                             <h2 class="h2 section-title">
                                 <span class="span">Mas</span> vendidos
                             </h2>
@@ -242,36 +241,36 @@
                             <ul class="has-scrollbar">
 
                                 <li class="scrollbar-item">
-                                    <div class="brand-card img-holder" style="--width: 150; --height: 150;">
-                                        <img src="../../../assets/img/imgClient/brand-1.jpg" width="150" height="150"
+                                    <div class="brand-card img-holder" style="--width: 150;">
+                                        <img src="../../../assets/img/marcas/marca1.png" width="150" height="150"
                                             loading="lazy" alt="brand logo" class="img-cover">
                                     </div>
                                 </li>
 
                                 <li class="scrollbar-item">
-                                    <div class="brand-card img-holder" style="--width: 150; --height: 150;">
-                                        <img src="../../../assets/img/imgClient/brand-2.jpg" width="150" height="150"
+                                    <div class="brand-card img-holder" style="--width: 150;">
+                                        <img src="../../../assets/img/marcas/marca2.png" width="150" height="150"
                                             loading="lazy" alt="brand logo" class="img-cover">
                                     </div>
                                 </li>
 
                                 <li class="scrollbar-item">
-                                    <div class="brand-card img-holder" style="--width: 150; --height: 150;">
-                                        <img src="../../../assets/img/imgClient/brand-3.jpg" width="150" height="150"
+                                    <div class="brand-card img-holder" style="--width: 150; ">
+                                        <img src="../../../assets/img/marcas/marca4.png" width="150" height="150"
                                             loading="lazy" alt="brand logo" class="img-cover">
                                     </div>
                                 </li>
 
                                 <li class="scrollbar-item">
-                                    <div class="brand-card img-holder" style="--width: 150; --height: 150;">
-                                        <img src="../../../assets/img/imgClient/brand-4.jpg" width="150" height="150"
+                                    <div class="brand-card img-holder" style="--width: 150; ">
+                                        <img src="../../../assets/img/marcas/marca5.png" width="150" height="150"
                                             loading="lazy" alt="brand logo" class="img-cover">
                                     </div>
                                 </li>
 
                                 <li class="scrollbar-item">
-                                    <div class="brand-card img-holder" style="--width: 150; --height: 150;">
-                                        <img src="../../../assets/img/imgClient/brand-5.jpg" width="150" height="150"
+                                    <div class="brand-card img-holder" style="--width: 150;">
+                                        <img src="../../../assets/img/marcas/marca6.png" width="150" height="150"
                                             loading="lazy" alt="brand logo" class="img-cover">
                                     </div>
                                 </li>
@@ -401,12 +400,11 @@ body {
 }
 
 
+section.brand .img-cover {   
+ width: 170px;
+}
 
 
-
-/*-----------------------------------*\
-#REUSED STYLE
-\*-----------------------------------*/
 
 .cont {
     padding-inline: 15px;
@@ -471,9 +469,9 @@ body {
 
 .img-holder {
     aspect-ratio: var(--width) / var(--height);
-    background-color: var(--light-gray);
     overflow: hidden;
 }
+
 
 .img-cover {
     width: 100%;

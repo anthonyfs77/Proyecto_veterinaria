@@ -1,5 +1,5 @@
 <template>
-  <div>
+    <div>
     <canvas ref="lineChartCanvas"></canvas>
   </div>
 </template>
@@ -10,7 +10,7 @@ import { Chart, LineController, LinearScale, CategoryScale, PointElement, LineEl
 import axios from 'axios';
 
 
-Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler); // Registra el complemento 'Filler'
+Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler);
 
 const lineChartCanvas = ref(null);
 const data = ref([]);
@@ -22,10 +22,10 @@ const year = currentDate.getFullYear();
 const startDate = new Date(year, mes - 1, 1);
 const lastDayOfMonth = new Date(year, mes, 0);
 const endDate = new Date(year, mes - 1, lastDayOfMonth.getDate());
-
 const formattedStartDate = startDate.toISOString().substring(0, 10);
 const formattedEndDate = endDate.toISOString().substring(0, 10);
-
+console.log(formattedStartDate);
+console.log(formattedEndDate);
 const fetchData = async () => {
   const rango = {
     fechaI: formattedStartDate,
@@ -51,8 +51,8 @@ const chartData = reactive({
   datasets: [
     {
       label: 'Órdenes por día',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgb(253, 242, 78)',
+      backgroundColor: 'rgba(253, 242, 78, 0.2)',
       data: [],
       fill: true,
     },
@@ -60,7 +60,6 @@ const chartData = reactive({
 });
 
 const chartOptions = {
-  responsive: true,
   maintainAspectRatio: false,
   scales: {
     x: {
@@ -95,9 +94,21 @@ const updateChart = () => {
   }
 };
 
-onMounted(() => {  
+
+onMounted(() => {
+  // Montar el gráfico una vez que el canvas esté disponible
+  const chart = new Chart(lineChartCanvas.value.getContext('2d'), {
+    type: 'line',
+    data: chartData,
+    options: chartOptions,
+  });
+
+  // Actualizar los datos del gráfico en el intervalo deseado
+  setInterval(() => {
     fetchData();
-    updateChart();
+    updateChartData();
+    chart.update(); // Actualizar el gráfico con los nuevos datos
+  }, 300);
 });
 </script>
 
@@ -105,10 +116,10 @@ onMounted(() => {
 /* Estilos opcionales para el contenedor de la gráfica */
 div {
   width: 100%;
-  max-width: 800px;
+  height: 90%;
+  max-width: 900px;
   margin: 0 auto;
   background: #fff;
-    padding: 1rem;
     border-radius: 2rem;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;

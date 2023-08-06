@@ -9,7 +9,7 @@
                     </div>
                     <div class="message">
                         <p>{{fecha}}</p>
-                        <p>{{descripcion}}</p>
+                        <p>{{descripcion}}</p>                  
                     </div>
                 </div>
             </div>

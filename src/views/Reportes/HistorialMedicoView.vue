@@ -1,23 +1,23 @@
 <template>
   <div class="first-container">
-
     <div class="parametros">
       <div class="Titulo"> 
         <span class="material-symbols-outlined">respiratory_rate</span><h2>Hisotorial Medico</h2>
       </div>
       <div class="filtro">
-        <label for="busquedaMas" class="label-mascota">Nombre de la mascota:</label>
-        <input type="search" name="animales" id="busqueda" class="input-search" v-model="nomMascota">
+        <div class="label">
+          <p class="plabel">Nombre mascota</p>
+          <InputsBusqueda type="search" name="animales" id="busqueda"  v-model="nomMascota" @input="generarHistorial" placeholder="Nombre mascota" />
+        </div>
+        <InputCliente type="search" tittle1="Nombre(S)" tittle2="Apellidos" v-model:modelValue1="nombre"  v-model:modelValue2="apellido" @input="generarHistorial"  />
       </div>
-      <button class="btn-generar" @click="generarHistorial">Generar</button>
-    </div>
-
+      </div>
     <div class="pantalla">
       <div class="table-container">
       <div class="responsive-table" v-if="historialMedico.length > 0">
         <table class="table table-hover custom-table">
         <thead>
-          <tr>
+          <tr>  
             <th>Nombre</th>
             <th>Raza</th>
             <th>Genero</th>
@@ -54,22 +54,29 @@
         </tbody>
       </table>
     </div>
-    <p v-else id="Mensaje">No hay datos disponibles.</p>
+    <div class="Alerta" v-else>
+      <p  class="Mensaje">No hay datos disponibles.</p>
+    </div>
     </div>
   </div>
-  </div>
+  
+</div>
 </template>
   
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-
+import InputsBusqueda from '../../components/ControlesSencillos/InputsBusqueda.vue'
+import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
 const nomMascota = ref("");
 const historialMedico = ref([]);
 
+const nombre = ref("");
+const apellido = ref("");
+
 const generarHistorial = async () => {
   try {
-    const response = await axios.post('http://www.backendorg.com/historialMedico', { nombreMascota: nomMascota.value });
+    const response = await axios.post('http://web.Backend.com/historialMedicoCliente', { nombreMascota: nomMascota.value, nombres: nombre.value, apellidos: apellido.value });
     historialMedico.value = response.data.data;
     console.log(response.data);
   } catch (error) {
@@ -86,6 +93,21 @@ const generarHistorial = async () => {
   box-sizing: border-box;
 }
 
+.label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plabel{
+    color: #c2c5d3;
+}
+
+ .filtro label {
+    margin-right: 10px;
+  }
+
 .first-container, .pantalla{
     font-family: 'Comfortaa';
   }
@@ -96,75 +118,41 @@ const generarHistorial = async () => {
 
 }
 
-:root {
-  --color-primary: #7380ec;
-}
-
-.label-mascota {
-  font-size: 1.2rem;
-}
-
-.input-search {
-  border: none;
-  border-bottom: 2px solid black;
-  transition: border-color 0.3s;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  width: 100%;
-  max-width: 20rem;
-}
-
-.input-search:focus {
-  border-color: var(--color-primary);
-  background-color: transparent;
-}
-
-.btn-generar {
-  border: none;
-  background-color: transparent;
-  color: black;
-  transition: border-color 0.3s, transform 0.3s;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  max-width: 10rem;
-}
-
-.btn-generar:hover {
-  color: var(--color-primary);
-  transform: translateX(15px);
-}
-
-.btn-generar:focus {
-  outline: none;
-}
-
-.btn-generar:hover:not(:focus) {
-  transform: translateX(15px);
-}
-
 .pantalla {
   display: flex;
   justify-content: center;
-
   height: 85vh;
   font-size: 1.2rem;
 }
+
+.Alerta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.Mensaje {
+  text-align: center;
+}
+
 
 @media (max-width: 768px) {
   .parametros {
     padding: 1rem;
   }
 
-  .label-mascota,
-  .input-search,
-  .btn-generar {
+  .label-mascota
+   {
     font-size: 1rem;
   }
 
-  .input-search {
-    max-width: none;
-  }
+}
+
+.filtro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 576px) {
@@ -175,14 +163,13 @@ const generarHistorial = async () => {
     gap: 0.5rem;
   }
 
-  .btn-generar {
-    max-width: none;
-  }
+
 }
 
 .Titulo {
   display: flex;
   gap: 8px;
+  justify-content: center;
 }
 
   /* Estilos personalizados para la tabla */
@@ -217,6 +204,11 @@ const generarHistorial = async () => {
       font-weight: bold;
       text-transform: uppercase;
     }
+  }
+
+ .Titulo span {
+    margin-right: 1px;
+    margin-top: 5px;
   }
 </style>
   

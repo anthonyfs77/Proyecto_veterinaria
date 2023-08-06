@@ -51,7 +51,7 @@
 
   import axios from 'axios';
   import { ref, reactive } from 'vue'
-  import FotoUsuario from '../../components/infoUsuario/FotoUsuario.vue';
+  import FotoUsuario from '@/components/infoUsuario/FotoUsuario.vue';
 
   let fields = ['nombre', 'apellido', 'correo', 'telefono1', 'telefono2', 'contrasena'];
   let updatedUserInfo = ref(null);
