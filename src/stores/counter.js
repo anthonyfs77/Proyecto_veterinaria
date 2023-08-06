@@ -96,7 +96,84 @@ export const StoreProdPublics = defineStore('prodPublico', () => {
   };
 });
 
+// productos publicos
+export const productosPublicosR = defineStore('productoPublico', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const productosInternosR = defineStore('productoInterno', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+export const dataLog = defineStore('userData', () => {
+  const state = {
+    variable: {},
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
 
 
 
 
+
+
+
+
+// // LOCAL STORAGE PINIA 
+
+// export const useUsuarioStore = defineStore('UsuarioStore', () => {
+//   // crea la constante usuario donde se almacena el storage
+//     const usuario = ref({usuario: {correo: null}, _token: null});
+
+//     function closeSession() {
+//         window.localStorage.clear();
+//         usuario.value = {usuario: {correo: null}, _token: null}
+//     }
+
+//     function setUser(user) {
+//         window.localStorage.clear();
+//         // unir dos objetos (...)
+//         let u = {...usuario.value, ...user}
+//         usuario.value = u;
+//     }
+
+//     return {usuario, closeSession, setUser}
+// },
+// // hacerlo persistente debemos instalar para hacerlo 
+// // agregarlo npm pinia-plugin-persistentdate
+// // tambien debemos importarlo en main.js
+// // y sacar una intancia de pinia donde se mete el pinia.use(piniPluginPersistdate)
+
+// // router 
+// {persist: true})

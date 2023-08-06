@@ -243,10 +243,7 @@ const RegistroProveedor = async () => {
       telefono2: phone2.value
     };
     try {
-      const response = await axios.post(
-        'http://web.Backend.com/registrarProveedor',
-        Proveedor
-      );
+      const response = await axios.post('http://web.Backend.com/registrarProveedor',Proveedor);
       console.log(response.data);
       location.reload();
     } catch (error) {

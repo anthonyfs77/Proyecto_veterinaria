@@ -15,12 +15,6 @@
                 <RouterLink :to="{name: 'citas'}" class="custom-link">
                     <p>citas</p>
                 </RouterLink>
-                <RouterLink :to="{name: 'AgregarProducto'}" class="custom-link">
-                    <p>Agregar Productos</p>
-                </RouterLink>
-                <RouterLink :to="{name: 'GestionProveedores'}" class="custom-link">
-                    <p>proveedores</p>
-                </RouterLink>
             </div>
             <div class="aside">
                 <router-link :to="{name: 'register'}" class="custom-link">

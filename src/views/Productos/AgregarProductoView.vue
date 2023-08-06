@@ -2,7 +2,6 @@
   <div class="cont">
     <div class="header">
       <p>Manage Product</p>
-
     </div>
     <div class="body">
       <div class="checkout">
@@ -52,10 +51,6 @@
               <div class="input">
                 <span>PRECIO VENTA</span>
                 <input type="number" v-model="precio_venta" placeholder="$">
-              </div>
-              <div class="input">
-                <span>PRECIO COMPRA</span>
-                <input type="number" v-model="precio_compra" placeholder="$">
               </div>
               <div class="input">
                 <span>CANTIDAD DE PRODUCTOS</span>
@@ -132,22 +127,27 @@ import add from '../../components/ControlesIndividuales/ingresar.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 
+
+// en el front debemos de cambiar los datos a ingresar porque se cambio a tipo producto
+// en el back se debe cambiar los parametros de la consulta como tambien con el procedure
+// luego de eso serviria 
+
 const nombre_producto = ref('');
 const descripcion_producto = ref();
-const precio_venta = ref();
+const precio_venta = ref('');
 const categoria_producto = ref();
-const precio_compra = ref();
 const proveedor = ref();
 const cantidad_pructos = ref();
 const productos = ref({});
 const img_producto = ref();
+const tipo_producto = ref('venta');
 
 const fetchData = async () =>{
   const data = {
     nombre_producto: nombre_producto.value,
     descripcion_producto: descripcion_producto.value,
+    tipo_producto:tipo_producto.value,
     precio_venta: precio_venta.value,
-    precio_compra: precio_compra.value,
     categoria_producto: categoria_producto.value,
     proveedor: proveedor.value,
     cantidad_pructos: cantidad_pructos.value

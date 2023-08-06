@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useStore } from '@/stores/counter.js';
+import { productosPublicosR } from '@/stores/counter.js';
 import { ref, defineProps, onMounted, onBeforeUnmount } from 'vue';
 import axios from 'axios';
 
@@ -28,28 +28,25 @@ defineProps({
 const minPrice = ref('');
 const maxPrice = ref('');
 const filtData = ref();
-const store = useStore();
+const productoPublico = productosPublicosR();
 
 const data = async () => {
-  const rango = {
-    minPrice: minPrice.value,
-    maxPrice: maxPrice.value,
-  };
-
-  const updateVariable = () => {
-    store.setVariable(filtData);
-  };
-
-  try {
-    const response = await axios.post('http://web.backend.com/preciosPublicos', rango);
-    filtData.value = response.data;
-    updateVariable();
-    console.log(response.data);
-    console.log('publicos');
-  } catch (error) {
-    console.error(error);
-  }
-};
+    const rango = {
+      minPrice: minPrice.value,
+      maxPrice: maxPrice.value
+    }
+    const updateVariable = () =>{
+      productoPublico.setVariable(filtData)
+    }
+  
+    try {
+      const response = await axios.post('http://web.backend.com/preciosPublicos', rango);
+      filtData.value = response.data;
+      updateVariable()
+    } catch (error) {
+      console.error(error)
+    }
+}
 
 
 onMounted(data);

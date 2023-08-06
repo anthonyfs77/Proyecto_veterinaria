@@ -196,7 +196,7 @@ const editar = () =>{
 
 .card-prod {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     border-radius: 15px 0px 0px 15px;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     overflow-y: auto;
@@ -324,4 +324,28 @@ select option {
   font-size: 14px;
   color: #333;
 }
+
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    padding: 14px 20px;
+    font-size: 16px;
+    background-color: #4cb8a8;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  button span {
+    font-size: 15px;
+    color: white;
+  }
+  
 </style>

@@ -95,15 +95,16 @@
 import error from '../../components/Mensajes/Error.vue'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import {useStore} from '@/stores/counter.js'
-import axios from 'axios';
+import {dataLog} from '@/stores/counter.js'
 
+import axios from 'axios';
+const user = ref();
+const dataUser = dataLog();
 const email = ref('');
 const pass = ref('');
 const router = useRouter();
 var mostrarError = ref();
 var mostrarSuccess = ref();
-const store = useStore();
 
 const data = async () => {
     const log = {
@@ -114,11 +115,12 @@ const data = async () => {
     try {
         const response = await axios.post('http://web.backend.com/verificacion', log);
         console.log(response.data);
-        
+        user.value = response.data.data;
         if (response.data.status === 200) {                                             // acceso confirmado
             mostrarSuccess.value = true;
+            dataUser.setVariable(user.value)
+            console.log('variable que se mando ', user.value)
             redirectToPage();
-            asignarNombre();
         } else if (response.data.status === 401) {                                      // acceso denegado
             mostrarError.value = true;
             setTimeout(() => {
@@ -136,10 +138,7 @@ const redirectToPage = () => {
 };
 
 
-const asignarNombre = () =>{
-    store.setVariable(nombre_usuario.value)
-    console.log('variable mandada')
-}
+
 
 
 </script>

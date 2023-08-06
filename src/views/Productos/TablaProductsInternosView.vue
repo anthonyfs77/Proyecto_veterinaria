@@ -13,7 +13,6 @@
         </RouterLink>
         </div>
         <div class="rango">
-          <precios tittle1="$min" tittle2="$max"/> 
           
         </div>
         <div class="izquierdo">
@@ -26,15 +25,15 @@
         <div class="headerTable">
           <h4>Nombre</h4>
           <h4>Stock</h4>
-          <h4>Precio</h4>     
-          <h4>IVA</h4>
+          <h4>Descripcion</h4>
           <h4>Status</h4>
         </div>
         <div class="cont-table">
           <div v-for="producto in productos" :key="producto.id" class="fila">
             <!-- Pasa las propiedades únicas a Rows -->
             <Rows :name="producto.nom_producto" :stock="producto.existencias" 
-              :precio="producto.precio_venta" :iva="producto.iva" :status="producto.estado"/>
+            :descripcion="producto.descripcion" 
+             :status="producto.estado"/>
           </div>
         </div>
       </div>
@@ -79,6 +78,7 @@ const filtrar = () =>{
 }
 const buscar = () =>{
   productos.value = prodInterno.state.variable;
+  
 }
 
 const onInput = () =>{

@@ -31,8 +31,8 @@ const fetchData = async () => {
     try {
         const response = await axios.get('http://web.backend.com/ventasRecientes');
         productos.value = response.data.data; 
-        console.log(productos.value)
-    } catch (error) {
+        console.log(productos.value) 
+    } catch (error) { 
         console.log(error)
     }
 }
