@@ -13,7 +13,7 @@ const fecha1 = ref('');
 const fecha2 = ref('');
 const fechadesac = ref(false);
 const showModal = ref(false);
-const detal = ref(true);
+const detal = ref(false);
 
 watch(columna, () => {
   if(columna.value === 1 || columna.value === 2)
