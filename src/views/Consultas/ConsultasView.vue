@@ -15,14 +15,15 @@
       <div class="filtro4" v-show="status3">
         <div class="label">
           <p class="plabel">Fecha</p>
-          <InputsBusqueda  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons" @input="GenerarConsultasFecha" /><br>
+          <InputFecha  v-model="FechaCons" @input="GenerarConsultasFecha" /><br>
+          <InputFecha  v-model="FechaCons2" @input="GenerarConsultasFecha" /> <br>
         </div>
       </div>
     </div>
   
     <div class="pantalla">
       <div class="table-container">
-      <div class="responsive-table" v-if="selectedOption === 'opcion3' && General.length > 0">
+        <div class="responsive-table" v-if="selectedOption === 'opcion3' && General.length > 0">
         <table class="table table-hover custom-table">
         <thead>
             <tr>
@@ -55,7 +56,7 @@
         </table>
       </div>
       <p v-else-if="selectedOption === 'opcion3'">No hay datos disponibles.</p>
-
+  
       <!-- Tabla de consultas por fecha -->
       <div class="responsive-table" v-if="selectedOption === 'opcion2' && consFecha.length > 0">
         <table class="table table-hover custom-table">
@@ -70,7 +71,7 @@
               <th>Fecha</th>
               <th>Motivo</th>
               <th>Servicios</th>
-              <th>Servicio Solicitado</th>
+              <th>Servicios Solicitados</th>
             </tr>
           </thead>
           <tbody>
@@ -105,7 +106,7 @@
               <th>Fecha</th>
               <th>Motivo</th>
               <th>Servicios</th>
-              <th>Servicio Solicitado</th>
+              <th>Servicios Solicitados</th>
             </tr>
           </thead>
           <tbody>
@@ -139,12 +140,6 @@
           <input type="text" id="altura" v-model="altura"> 
           <label for="edad">Edad (meses):</label>
           <input type="text" id="edad" v-model="edad">
-          <label for="medicamentos">Medicamento a usar: </label>
-          <select  id="medicamentos" v-model="id_medicamentos">
-            <option v-for="medicamento in medicamentos" :key="medicamento.id" :value="medicamento.id">
-              {{ medicamento.nom_producto }}
-            </option>
-          </select>
           <br>
           <div class="table-container2">
             <div class="responsive-table">
@@ -153,23 +148,20 @@
             <tr>
               <th></th>
               <th>Nombre</th>
-              <th>Dosis</th>
             </tr>
           </thead>
           <tbody> 
-            <tr v-for="medicamento in medicamentos" :key="medicamento.id">
-              <td><input type="checkbox" name="" id=""></td>
+            <tr v-for="(medicamento, index ) in medicamentoCantidad">
+              <td><input type="checkbox" name="c1" id="" v-model="medicamento.Selected"  :key="index"  /></td> 
               <td>{{ medicamento.nom_producto }}</td>
-              <td><input type="text"></td>
-            </tr>
+              <td><DosisCant tittle1="Dosis" tittle2="Cant" v-model:modelValue1="medicamento.Dosis" v-model:modelValue2="medicamento.Cantidad" :key="index" /></td>
+              </tr>
           </tbody>
         </table>
       </div>
           </div>
           <br>
-         <label for="dosis">Dosis:</label>
-          <input type="text" id="dosis" v-model="dosis">
-          <br>
+          
           <button type="submit">Guardar Consulta.</button><br>
         <p id="Atras" @click="Atras">Salir</p>
       </form>
@@ -181,22 +173,24 @@
   <script setup>
   import { ref, watch, onMounted } from 'vue';
   import axios from 'axios';
-  import InputsBusqueda from '../../components/ControlesSencillos/InputsBusqueda.vue';
   import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
   import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
+  import DosisCant from '../../components/ControlesSencillos/DosisCant.vue';
+  import InputFecha from '../../components/ControlesSencillos/InputFecha.vue';
 
   const selectedOption = ref('opcion3');
   const status1 = ref(false);
   const status2 = ref(true);
   const status3 = ref(false);
 
-  const observaciones = ref("");
-  const id_medicamentos = ref("");
-  const peso = ref("");
-  const altura = ref("");
-  const edad = ref("");
-  const id_cita = ref("");
-  const dosis = ref("");
+  const observaciones = ref('');
+  const peso = ref('');
+  const altura = ref('');
+  const edad = ref('');
+  const id_cita = ref('');
+  const FiltroMedicamento = ref();
+
+  const medicamentoCantidad = ref();
 
   const medicamentos = ref([]);
   const BuscarMedicamentos = async (id) => {
@@ -204,31 +198,38 @@
   try {
   const response = await axios.post('http://web.Backend.com/BuscarMedicamentos')
   medicamentos.value = response.data.data;
-  console.log(response.data);
+  medicamentoCantidad.value = response.data.data.map(ii => ({
+    ...ii,
+    "Selected": false,
+    "Cantidad": null,
+    "Dosis": null
+  }) )
+  console.log(medicamentoCantidad.value);
   console.log(id_cita.value);
   FormFlotante();
   } catch (error) {
   console.error("Error al obtener el reporte de inventario", error);
   }
   };
-
+  
   const RegistroConsulta = async () => {
-    const Consulta = {
-      observaciones: observaciones.value,
-      id_productosInternos: id_medicamentos.value,
-      peso: peso.value,
-      altura: altura.value,
-      edad: edad.value,
-      id_cita: id_cita.value,
-      dosis: dosis.value,
-      
-    };
+   FiltroMedicamento.value = medicamentoCantidad.value.filter(objeto => objeto.Selected )
+  const Consulta = {
+    id_cita: id_cita.value,
+    observaciones: observaciones.value,
+    peso: peso.value,
+    altura: altura.value,
+    edad: edad.value,
+    id_productosInternos: FiltroMedicamento.value
+  }
     try {
+    console.log("Datos 1", Consulta);
       const response = await axios.post(
         'http://web.Backend.com/RegistroConsulta',
         Consulta
       );
-      console.log(response.data);
+      
+      console.log("respuesta",response.data);
     } catch (error) {
       console.error(error);
     }
@@ -258,8 +259,7 @@
       status3.value = false;
     }
   });
-
-const General = ref([]);
+  const General = ref([]);
 const GenerarConsultas = async () => {
  try {
  const response = await axios.post('http://web.Backend.com/GenerarConsultas')
@@ -271,26 +271,21 @@ const GenerarConsultas = async () => {
 };
 onMounted(GenerarConsultas);
 
-/////////////////////////////////////////////////////////////////////////////
-
+  const FechaCons2 = ref("");
 const FechaCons = ref("");
 const consFecha = ref ([]);
-
 const GenerarConsultasFecha = async () => {
 try {
-  const response = await axios.post('http://web.Backend.com/GenerarConsultasFecha', {Fecha: FechaCons.value})
+  const response = await axios.post('http://web.Backend.com/GenerarConsultasFecha', {Fecha: FechaCons.value, Fecha2: FechaCons2.value})
   consFecha.value = response.data.data;
   console.log(response.data);
 } catch (error) {
-  console.error("Error al obtener el reporte de inventario", error);
+  console.error(error);
 }
-}
-
-////////////////////////////////////////////////////////////////////////////////////
+};
 
 const Nombres = ref("");
 const Apellidos = ref("");  
-
 const constCliente = ref([]);
 const GenerarConsultasCliente = async () => {
 try {
@@ -300,8 +295,7 @@ try {
 } catch (error) {
   console.error("Error al obtener el reporte de inventario", error);
 }
-}
-
+};
   </script>
   
   <style scoped>
@@ -318,31 +312,7 @@ try {
     font-family: 'Comfortaa';
   }
   
-  :root {
-    --color-primary: #7380ec;
-  }
-
-  .label-tipo {
-    font-size: 1.2rem;
-  }
-  
-  .select-tipo {
-    border: none;
-    border-bottom: 2px solid black;
-    transition: border-color 0.3s;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    max-width: 20rem;
-  }
-  
-  .select-tipo:focus {
-    border-color: var(--color-primary);
-    background-color: transparent;
-  }
-  
-  .label-fecha {
-    font-size: 1.2rem;
-  }
+ 
 
   .pantalla {
     display: flex;
@@ -382,11 +352,7 @@ try {
     font-weight: bold;
     background-color: white;
   }
-  .custom-table td,
-  .custom-table th {
-    border: 1px solid #dee2e6;
-  }
-
+  
   .table-container {
     height: 500px;
     overflow: auto;

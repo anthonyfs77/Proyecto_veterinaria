@@ -24,8 +24,10 @@
             <table class="table table-hover custom-table">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Empresa</th>
+                  <th></th>
+                  <th></th>
+                  <th><span class="material-symbols-outlined">fingerprint</span>Id</th>
+                  <th><span class="material-symbols-outlined">store</span>Empresa</th>
                   <th><span class="material-symbols-outlined">contacts</span>Proveedor</th>
                   <th> <span class="material-symbols-outlined">map</span>Direccion</th>
                   <th><span class="material-symbols-outlined">contact_phone</span>Telefono 1</th>
@@ -34,6 +36,8 @@
               </thead>
               <tbody> 
                 <tr v-for="item in proveedores" :key="item.id">
+                  <td><span class="material-symbols-outlined" id="delete">delete</span></td>
+                  <td><span class="material-symbols-outlined" id="Boton" @click="FormFlotante">edit_square</span></td>
                   <td>{{ item.id }}</td>
                   <td>{{ item.empresa }}</td>
                   <td id="Nombre">{{ item.proveedor }}</td>
@@ -48,9 +52,48 @@
       </div>
     </div>
   </div>
+  <div v-if="showRegistrarMascota" class="overlay">
+    <div class="floating-form">
+      <form @submit.prevent="">
+        <span class="material-symbols-outlined">store</span><label for="empresa">Empresa:</label>
+            <inputs type="text" id="empresa" name="empresa" v-model="empresa" placeholder="Empresa" /><br><br>
+            <span class="material-symbols-outlined">contacts</span><label for="name">Nombre:</label>
+            <inputs type="text" id="name" name="name" v-model="nombre" placeholder="Nombre" /><br><br>
+            <span class="material-symbols-outlined">map</span><label for="address">Dirección:</label>
+            <inputs type="text" id="address" name="address" v-model="direccion"  placeholder="Localizacion"/><br><br>
+            <span class="material-symbols-outlined">contact_phone</span><label for="phone1">Teléfono 1:</label>
+            <inputs type="text" id="phone1" name="phone1" placeholder="Telefono 1" v-model="phone" /><br><br>
+            <span class="material-symbols-outlined">contact_phone</span><label for="phone2">Teléfono 2:</label>
+            <inputs type="text" id="phone2" name="phone2" v-model="phone2" placeholder="Telefono 2" /><br><br>
+            <Buttons  title="Actualizar" />
+            <br>
+        <p id="Atras" @click="leave">Salir</p>
+      </form>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+ .overlay {
+  font-family: 'Comfortaa';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Asegúrate de que el índice z sea mayor que el de otros elementos para que aparezca en frente */
+}
+
+.floating-form {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
 
   .container {
     display: flex;
@@ -136,6 +179,33 @@
     display: none;
   }
 }
+  #Boton:hover{
+    color: rgb(7, 135, 255);
+  }
+
+  #delete:hover{
+    color: red;
+  }
+
+  .floating-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .floating-form form div {
+    margin-bottom: 10px;
+  }
+  
+  .floating-form form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .floating-form form input,
+  form select,
+  form textarea {
+    width: 100%;
+  }
 </style>
 
 <script setup>
@@ -149,6 +219,20 @@ const nombre = ref ("");
 const phone = ref("");
 const phone2 = ref("");
 const direccion = ref("");
+
+const showRegistrarMascota = ref(false);
+  const FormFlotante = () => {
+    showEditarProveedor.value = true;
+  empresa.value = item.empresa;
+  nombre.value = item.proveedor;
+  direccion.value = item.direccion;
+  phone.value = item.telefono1;
+  phone2.value = item.telefono2;
+    
+  };
+  const leave = () => {
+    showRegistrarMascota.value = false;
+  }
 
 const RegistroProveedor = async () => {
     const Proveedor = {

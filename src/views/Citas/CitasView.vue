@@ -3,7 +3,7 @@
       <form @submit.prevent="agendarCita">
         <div>
           <label for="fechaCita">Fecha de la cita:</label>
-          <input type="date" id="fechaCita" v-model="fechaCita" />
+          <input type="datetime-local" id="fechaCita" v-model="fechaCita" />
         </div>
         <div>
           <label for="nombreMascota"  >selecciona tu mascota</label>
@@ -16,26 +16,43 @@
         </div>
         <p id="Registro" @click="FormFlotante">Registra una nueva mascota aquí.</p>
         <div>
-          <label for="estatus">Estatus:</label>
-          <select id="estatus" v-model="estatus">
-            <option value="Aceptada">Aceptada</option>
-            <option value="Rechazada">Rechazada</option>
-            <option value="Pendiente" selected>Pendiente</option>
-          </select>
         </div>
-        <div>
-          <label for="servicio">Servicio:</label>
-          <select id="servicio" v-model="servicioSelect">
-          <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.id">
-            {{ servicio.servicios }}
-          </option>
-        </select>
-        <br>
-        <label for="tiposervicio">Tipo de servicio:</label>
-        <select id="tiposervicio" v-model="tipo_servicio">
-            <option v-for="tipo_s in tiposservicios" :key="tipo_s.id" :value="tipo_s.id">{{ tipo_s.tipo_servicio }}</option>
-          </select>
-        </div>
+        <div class="Servicios">
+            <div class="responsive-table">
+        <table class="table table-hover custom-table">
+        <thead>
+            <tr>
+              <th></th>
+              <th>Servicios Clinicos</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr v-for="servC in servClinicos">
+              <td><input type="checkbox" v-model="Services" :value="servC.id" /></td> 
+              <td>{{ servC.nombre_TServicio }}</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+          </div>
+          <div class="Servicios">
+            <div class="responsive-table">
+        <table class="table table-hover custom-table">
+        <thead>
+            <tr>
+              <th></th>
+              <th>Servicios Esteticos</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr v-for="servE in servEsteticos">
+              <td><input type="checkbox" v-model="Services" :value="servE.id" /></td> 
+              <td>{{ servE.nombre_TServicio }}</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+          </div>
         <div>
           <label for="motivo">Motivo de la cita:</label>
           <textarea id="motivo" v-model="motivo"></textarea>
@@ -55,16 +72,15 @@
         <input type="text" id="razaMascota" v-model="raza"> 
 
         <label for="generoMascota">Selecciona el genero de tu mascota.</label>
-          <select id="generoMascota" v-model="GeneroCombo">
-            <option>Hembra</option>
+          <select id="generoMascota" v-model="genero">
             <option>Macho</option>
+            <option>Hembra</option>
         </select>
 
         <label for="especieMascota">Selecciona la especie de tu mascota.</label>
-          <select id="especieMascota" v-model="id_especie">
-          <option v-for="especie in Especies" :key="especie.id" :value="especie.id">
-            {{ especie.especie }}
-          </option>
+          <select id="especieMascota" v-model="especie">
+            <option>Perro</option>
+            <option>Gato</option>
         </select>
         <br>
         <button type="submit">Registrar mascota.</button><br>
@@ -76,16 +92,20 @@
   </template>
   
   <script setup>
-  import { ref, watch, onMounted } from 'vue';
+  import { ref,  onMounted } from 'vue';
   import axios from 'axios';
   
+  // Arreglo para los id's de servicios
+  const Services = ref([]);
   // Referencias a elementos del formulario
   const fechaCita = ref('');
   const id_mascota = ref('');
   const estatus = ref('Pendiente');
+  const motivo = ref('');
+
+  // Elementos para insertar en tabla de muchos a muchos
   const servicioSelect = ref('');
   const tipo_servicio = ref('');
-  const motivo = ref('');
   
   // ID del cliente (debe obtenerse del servidor)
   const id_cliente = ref(1);
@@ -94,7 +114,6 @@
   const showRegistrarMascota = ref(false);
   const FormFlotante = () => {
     showRegistrarMascota.value = true;
-    ObtenerEspecie();
   };
   const BackCitas = () => {
     showRegistrarMascota.value = false;
@@ -103,24 +122,15 @@
   // Registro de mascotas
   const nombre = ref('');
   const raza = ref('');
-  const id_especie = ref('');
+  const especie = ref('');
   const propietario = ref(id_cliente.value);
   const genero = ref('');
-  const GeneroCombo = ref('');
-  
-  watch(GeneroCombo, (newValue) => {
-    if (newValue === 'Hembra') {
-      genero.value = 'Hembra';
-    } else if (newValue === 'Macho') {
-      genero.value = 'Macho';
-    }
-  });
   
   const registrarMascota = async () => {
     const mascota = {
       nombre_: nombre.value,
       propietario_: propietario.value,
-      especie_: id_especie.value,
+      especie_: especie.value,
       raza_: raza.value,
       genero_: genero.value,
     };
@@ -131,6 +141,7 @@
         mascota
       );
       console.log(response.data);
+      location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -141,13 +152,11 @@
     const cita = {
       fechaCita: fechaCita.value,
       estatus: estatus.value,
-      tipo_servicio: tipo_servicio.value,
       motivo: motivo.value,
-      id_cliente: id_cliente.value,
       id_mascota: id_mascota.value,
-      id_servicio: servicioSelect.value,
+      servicios: Services.value
     };
-  
+    console.log(cita);
     try {
       const response = await axios.post(
         'http://web.Backend.com/agendarcita',
@@ -186,40 +195,31 @@
   };
   onMounted(FiltroMascotas);
   
-  // Obtener especies
-  const Especies = ref([]);
-  const ObtenerEspecie = async () => {
+  // Obtener servicios clinicos
+  const servClinicos = ref([]);
+  const ServiciosClinicos = async () => {
     try {
-      const response = await axios.post('http://web.Backend.com/especie');
+      const response = await axios.post('http://web.Backend.com/ServiciosClinicos');
       console.log(response.data);
-      Especies.value = response.data.data;
+      servClinicos.value = response.data.data;
     } catch (error) {
       console.error(error);
     }
   };
   
-  // Obtener servicios
-  const servicios = ref([]);
-  const ObtenerServicio = async () => {
+    // Obtener servicios esteticos
+  const servEsteticos = ref([]);
+  const ServiciosEsteticos = async () => {
     try {
-      const response = await axios.post('http://web.Backend.com/servicio');
+      const response = await axios.post('http://web.Backend.com/ServiciosEsteticos');
       console.log(response.data);
-      servicios.value = response.data.data;
+      servEsteticos.value = response.data.data;
     } catch (error) {
       console.error(error);
     }
   };
-  onMounted(ObtenerServicio);
-  
-  // Obtener tipos de servicios para el servicio seleccionado
-  const tiposservicios = ref([]);
-  watch(servicioSelect, async (newValue) => {
-    const response = await axios.post(
-      'http://web.Backend.com/tiposservicios',
-      { id_servicio: newValue }
-    );
-    tiposservicios.value = response.data.data;
-  });
+  onMounted(ServiciosClinicos);
+  onMounted(ServiciosEsteticos);
   </script>
   
   <style scoped>
@@ -314,6 +314,8 @@
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
-  
+.Servicios {
+    height: 100px;
+    overflow: auto;
+  }
   </style>
-  
