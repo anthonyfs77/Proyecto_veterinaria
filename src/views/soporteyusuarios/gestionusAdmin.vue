@@ -30,15 +30,13 @@
         />
     </div>
       </div>
-   
-
     </div>
   </template>
   
   <script setup>
   import { ref, onMounted, watch } from 'vue';
   import axios from 'axios';
-  import btn from '../../components/ControlesIndividuales/BotonAntho.vue'
+  import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
   import InfousAdmin from '../../components/infoUsuario/InfousAdmin.vue';
   const search = ref('');
   const texto = ref("Buscar Usuario...");
@@ -67,7 +65,7 @@ watch(filter, (newValue) => {
      id: search.value
     };
   try {
-    const response = await axios.post('http://web.VeterinariaBack.com/clientes/infoID', userUpdate);
+    const response = await axios.post('http://web.Backend.com/clientes/infoID', userUpdate);
     if(response.data.data===null)
     {
       users.value=[]
@@ -94,7 +92,7 @@ const UsersCorreo = async () => {
     };
     console.log(userUpdate);
   try {
-    const response = await axios.post('http://web.VeterinariaBack.com/clientes/infoCorreo', userUpdate);
+    const response = await axios.post('http://web.Backend.com/clientes/infoCorreo', userUpdate);
     if (Array.isArray(response.data.data)) {
   users.value = response.data.data;
    } else {
@@ -110,7 +108,7 @@ const UsersCorreo = async () => {
   const fetchUsers = async () => {
     users.value = [];
   try {
-    const response = await axios.get('http://web.VeterinariaBack.com/clientes/All');
+    const response = await axios.get('http://web.Backend.com/clientes/All');
     users.value = response.data.data; // Coloca la respuesta en el arreglo 'users'
   } catch (error) {
     console.error('Hubo un error al obtener los usuarios:', error);
@@ -119,10 +117,6 @@ const UsersCorreo = async () => {
 onMounted(fetchUsers);
 
 
-  // limpiar el buscador
-  const clearSearch = () => {
-    search.value = "";
-  }
 
   </script>
   

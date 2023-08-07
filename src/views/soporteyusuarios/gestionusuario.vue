@@ -51,7 +51,7 @@
 
   import axios from 'axios';
   import { ref, reactive } from 'vue'
-  import FotoUsuario from '../../components/infoUsuario/FotoUsuario.vue';
+  import FotoUsuario from '@/components/infoUsuario/FotoUsuario.vue';
 
   let fields = ['nombre', 'apellido', 'correo', 'telefono1', 'telefono2', 'contrasena'];
   let updatedUserInfo = ref(null);
@@ -102,7 +102,7 @@ async function updateUser() {
   };
     loading.value = true;
     console.log(userUpdate);
-    const response = await axios.post('http://web.veterinariaback.com/clientes/actualizar', userUpdate);
+    const response = await axios.post('http://web.Backend.com/clientes/actualizar', userUpdate);
     updatedUserInfo.value = response.data;
     if(updatedUserInfo.value && updatedUserInfo.value.message === 'Cliente actualizado exitosamente.') {
        nombreA.value = userUpdate.nombre;

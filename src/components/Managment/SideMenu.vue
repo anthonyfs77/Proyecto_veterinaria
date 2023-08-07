@@ -1,6 +1,6 @@
 <template>
     <div class="containerNorm">
-        <aside>
+        <aside class="controls">
             <div class="top">
                 <div class="logo">
                     <span class="material-symbols-outlined">sound_detection_dog_barking</span>
@@ -107,6 +107,11 @@ const onReportChange = (event) => {
 
  
 <style scoped>
+
+.controls{
+    display: grid;
+    grid-template-rows: 10% 80%;
+}
 * {
     margin: 0;
     padding: 0;
@@ -196,7 +201,7 @@ b {
     margin-left: -24px;
     backdrop-filter: blur(20px);
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.897);
+    background-color: rgba(255, 255, 255, 0.959);
 }
 
 
@@ -293,8 +298,6 @@ aside .sidebar {
 
 .admin{
     padding: 1rem;
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
   border-radius: .7rem;
   transition: all ease .3s;
   border-bottom: 1px solid rgba(132, 139, 200, 0.18);
@@ -303,7 +306,6 @@ aside .sidebar {
 
 .com{
     padding: 1rem;
-  backdrop-filter: blur(20px);
   border-radius: .7rem;
   transition: all ease .3s;
   border-bottom: 1px solid rgba(132, 139, 200, 0.18);
@@ -311,7 +313,6 @@ aside .sidebar {
 
 .reportes{
     padding: 1rem;
-  backdrop-filter: blur(20px);
   border-radius: .7rem;
   transition: all ease .3s;
   border-bottom: 1px solid rgba(132, 139, 200, 0.18);
