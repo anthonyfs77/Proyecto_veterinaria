@@ -223,6 +223,7 @@
     id_productosInternos: FiltroMedicamento.value
   }
     try {
+      console.log("CITA", id_cita.value)
     console.log("Datos 1", Consulta);
       const response = await axios.post(
         'http://web.Backend.com/RegistroConsulta',
