@@ -7,12 +7,6 @@
             <div class="cant">
                 <p>{{metodo}}</p>
             </div>
-            <div class="pice">
-                <p>{{monto}} <span>$</span></p>
-            </div>
-            <div class="tot">
-                <p>{{date}}</p>
-            </div>
         </div>
     </div>
 </template>
@@ -45,19 +39,15 @@ defineProps({
     color: #677483;
 
 }
-
 .ctn{
     padding-top: 10px;
 }
 p{
-
-    width: 240px;
     text-align: center;
 }
-
 .column{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around ;
     border-bottom: 1px solid rgba(132, 139, 200, 0.18);
 }
 </style>

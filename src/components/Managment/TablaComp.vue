@@ -6,20 +6,17 @@
                 <div class="headerTable">
                     <div>Nombre cliente</div>
                     <div>Tipo de pago</div>
-                    <div>Monto de pago</div>
-                    <div>Fecha</div>
                 </div>
                 <div class="cont-table">
-                    <recent v-for="producto in productos" :key="producto.id" 
-                    :nomClient="producto.nombre" :metodo="producto.tipo_pago" :monto="producto.monto_pagado" :date="producto.fecha"
+                    <recent v-for="producto in productos" :key="producto.id"
+                    :nomClient="producto.nombre" :metodo="producto.tipo_pago"
                     class="rec" />
                 </div>
             </div>
-            <router-link :to="{ name: 'productos' }">Show all</router-link>
         </div>
     </main>
 </template>
-  
+
 <script setup>
 import recent from '../../components/tabla/RowTablesRencent.vue'
 import axios from 'axios'
@@ -30,9 +27,9 @@ const productos = ref([])
 const fetchData = async () => {
     try {
         const response = await axios.get('http://web.backend.com/ventasRecientes');
-        productos.value = response.data.data; 
-        console.log(productos.value) 
-    } catch (error) { 
+        productos.value = response.data.data;
+        console.log(productos.value)
+    } catch (error) {
         console.log(error)
     }
 }
@@ -40,9 +37,9 @@ const fetchData = async () => {
 onMounted(fetchData);
 </script>
 
-  
-  
-  
+
+
+
 <style scoped>
 * {
     font-family: 'Comfortaa', cursive;
@@ -56,28 +53,32 @@ onMounted(fetchData);
     box-sizing: border-box;
 }
 
-
-
-
 /*=================Tabla==================*/
 
-main .recent-orders {
-    margin-top: -5rem;
+overflow-y: scroll;
+::-webkit-scrollbar {
+  width: 0.5em;
 }
 
-main .recent-orders h2 {
-    margin-bottom: 0.8rem;
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
 .table {
     background-color: #fff;
-    width: 98%;
-    border-radius: 2rem;
+
     padding: 1rem;
     text-align: center;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
+    overflow-y: scroll;
 
+    min-height: 18em;
+    max-height: 18em;
 }
 
 main .recent-orders table:hover {
@@ -105,13 +106,10 @@ main .recent-orders a {
     font-size: 30px;
 }
 
-
-
 .headerTable {
     display: flex;
     justify-content: space-around;
-    margin-top: 3em;
-    margin-bottom: 2em;
 
 }
 </style>
+

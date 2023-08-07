@@ -60,7 +60,7 @@ const nombre = ref('');
 const fetchData = async () =>{
     try{
         const response = await axios.get('http://web.backend.com/productosPublicos');
-        productos.value = response.data.data; 
+        productos.value = response.data.data;
         nombre.value =  response.data.data;
 
     } catch(error){
@@ -73,18 +73,9 @@ onMounted(fetchData);
 const filtrar = () =>{
     productos.value = productoPublico.state.variable
 }
-
-const buscar = () =>{
+const onInput = () =>{
   productos.value = prodPublico.state.variable;
 }
-
-const onInput = () =>{
-    buscar();
-}
-
-
-
-
 
 
 // Agregar un watcher para la variable "nombre"
