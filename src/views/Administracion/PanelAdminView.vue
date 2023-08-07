@@ -6,7 +6,7 @@
     <button class="burger-menu" @click="toggleSideMenu" v-show="isMobile">&#9776;</button>
     <div class="main">
       <!--Pantall donde se ve las vistas de los elementos del sidebar -->
-      <router-view></router-view>
+      <router-view class="fondo"></router-view>
     </div>
     <div class="overlay" v-show="pantalla"></div>
   </div>

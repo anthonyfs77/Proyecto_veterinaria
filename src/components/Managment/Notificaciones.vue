@@ -42,14 +42,13 @@ descripcion: {
   }
 
   .right .recent-updates .updates{
-    margin-bottom: 10px;
-    margin-top: 10px;
     background: #fff;
     padding: 1.2rem;
-    border-radius:  2rem;
-    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
+    border-radius:  1rem;
+    box-shadow: 0 1rem 1rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
     width: 100%;
+    cursor: pointer;
   }
   
   .right .recent-updates .updates:hover{
@@ -63,7 +62,7 @@ descripcion: {
   }
 
   span{
-    color: red;
+    color: blue;
   }
 
   .message p:first-child{

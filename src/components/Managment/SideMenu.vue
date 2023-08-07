@@ -121,6 +121,7 @@ const onReportChange = (event) => {
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+  color: white;
 }
 
 
@@ -142,14 +143,14 @@ body {
     width: 100vw;
     height: 100vh;
     font-size: 0.88rem;
-    background-color: #f6f6f9;
+    background-color: #202237;
     user-select: none;
     overflow-x: hidden;
     color: #363949;
 }
 
 option {
-    background-color: white;
+    background-color: #202237;
 }
 
 a {
@@ -201,13 +202,14 @@ b {
     margin-left: -24px;
     backdrop-filter: blur(20px);
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.959);
+    background-color: #16171e;
 }
 
 
 aside {
     height: 100vh;
-    width: 123%; 
+    width: 123%;
+
 }
 
 aside .top {
@@ -227,7 +229,6 @@ aside .top {
     padding: 1rem;
     transition: all 300ms ease;
       border-bottom: 1px solid rgba(132, 139, 200, 0.18);
-
 }
 
 aside .logo img {
@@ -245,7 +246,7 @@ aside .close {
 
 aside .sidebar a {
     display: flex;
-    color: black;
+    color: white;
     margin-left: 2rem;
     gap: 1rem;
     align-items: center;
@@ -274,7 +275,7 @@ aside .sidebar a:hover span {
 }
 
 aside .sidebar {
-    color: #fff;
+    color: #202237;
     padding: 2px 24px;
     font-size: 11px;
     border-radius: 0.4rem;
@@ -282,7 +283,7 @@ aside .sidebar {
 
 .sidebar-select {
     display: flex;
-    color: black;
+    color: white;
     gap: 1rem;
     align-items: center;
     position: relative;

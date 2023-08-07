@@ -8,7 +8,7 @@
         <div class="botones">
           <!-- Cada btn individual tiene su propia función stockLogic o sinStockLogic -->
           <search @input="onInput"/>
-        <RouterLink :to="{name: 'addInterno'}" class="custom-link">
+        <RouterLink :to="{name: 'AgregarProducto'}" class="custom-link">
             <add title="Add Item"/>
         </RouterLink>
         </div>
