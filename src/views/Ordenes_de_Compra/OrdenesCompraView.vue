@@ -1,140 +1,304 @@
+<script setup>
+import { ref, onMounted, watch } from 'vue';
+import axios from 'axios';
+import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
+import btn2 from '../../components/ControlesIndividuales/BotonAntho.vue';
+import ord from '../../components/ordenescompras/OrdenFile.vue';
+import genord from '../../components/ordenescompras/OrdenForm.vue';
+import detaform from '../../components/ordenescompras/DetallarForm.vue';
+
+let ordenes = ref([]);
+const columna = ref(1);
+const fecha1 = ref('');
+const fecha2 = ref('');
+const fechadesac = ref(false);
+const showModal = ref(false);
+const detal = ref(false);
+
+watch(columna, () => {
+  if(columna.value === 1 || columna.value === 2)
+  {
+    fechadesac.value = false;
+  }else if(columna.value === 3 || columna.value === 4)
+  {
+    fechadesac.value = true;
+  }
+});
+
+const activar= async () => {
+  if(showModal.value === false)
+  {
+    showModal.value = true;
+  } else if (showModal.value === true)
+  {
+    showModal.value = false;
+    location.reload();
+  }
+}
+const buscar = async () => {
+  if(columna.value === 1 || columna.value === 2)
+  {
+   await buscarOrdenesPorFecha();
+  } else if (columna.value === 3 || columna.value === 4)
+  {
+    await buscarOrdenesPorEstado();
+  }
+}
+
+
+const obtenerOrdenesPendientes = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/orden/pendientes')
+        if (Array.isArray(response.data.data)) {
+            ordenes.value = response.data.data;
+        } else {
+            ordenes.value = [response.data.data];
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+// Llamar a la función al iniciar el componente
+onMounted(obtenerOrdenesPendientes)
+
+async function buscarOrdenesPorFecha() {
+  ordenes.value = [];
+  try {
+    const data = {
+      columna: columna.value,
+      fecha1: fecha1.value,
+      fecha2: fecha2.value
+    };
+    const response = await axios.post('http://web.Backend.com/orden/porfecha', data);
+    if (Array.isArray(response.data.data)) {
+            ordenes.value = response.data.data;
+        } else {
+            ordenes.value = [response.data.data];
+        }
+  } catch (error) {
+    console.error('Hubo un error al realizar la búsqueda:', error);
+  }
+}
+
+
+async function buscarOrdenesPorEstado() {
+  ordenes.value = [];
+  try {
+    const data = {
+      columna: columna.value
+    };
+    console.log(data);
+    const response = await axios.post('http://web.Backend.com/orden/porestado', data);
+    if (Array.isArray(response.data.data)) {
+            ordenes.value = response.data.data;
+        } else {
+            ordenes.value = [response.data.data];
+        }
+  } catch (error) {
+    console.error('Hubo un error al realizar la búsqueda:', error);
+  }
+}
+
+
+</script>
+
 <template>
   <div class="container">
-    <div class="card">
-      <div class="grilla">
-        <div class="form">
-          <h2>Generar orden de compra</h2>
-      <label for="product-type">Tipo de producto:</label>
-      <select class="search-box" id="product-type">
-        <option value="sale">Producto de venta</option>
-        <option value="internal">Producto interno</option>
-      </select>
-      <br />
-      <label for="payment-date" >Fecha de Compra:</label>
-      <input class="search-box" type="date" id="payment-date" v-model="fechacompra"/>
-      <br />
-      <label for="payment-date">Fecha de Pago:</label>
-      <input class="search-box" type="date" id="payment-date" v-model="fechapago"/>
-      <br />
-      <label>seleccionar producto:</label>
-      <select class="search-box">
-            <option >correo</option>
-            <option >ID</option>
-          </select>
-      <br />
-      <label for="quantity">Cantidad:</label>
-      <input class="search-box" type="number" id="quantity" />
-      <br />
-      <label for="proveedor">Proveedor:</label>
-      <select class="search-box" id="proveedor" v-model="selectedProvider">
-           <option v-for="prov in provsnmid" :value="prov.id" :key="prov.id">
-              {{ prov.id + ' ' + prov.proveedor }}
-           </option>
-       </select>
-      <br />
-      <label for="unit-price">Precio unitario:</label>
-      <input class="search-box" type="number" id="unit-price" />
-      <br />
-      <label for="total">Total pagado:</label>
-      <input class="search-box" type="number" id="total" />
-      <br/>
-      <label for="status">Estado:</label>
-      <select class="search-box" id="status">
-        <option value="paid">Pagado</option>
-        <option value="pending">Pendiente</option>
-      </select>
-      <btn title="Generar Orden"/>
+    <transition name="fade">
+    <div v-if="showModal" class="modal">
+    </div>
+</transition>
+<div class="modal-content" v-if="showModal">
+        <genord @close="activar"/>
+      </div>
+      <div class="modal-content" v-if="detal"> 
+          <detaform/>
         </div>
+        <transition name="fade">
+    <div v-if="detal" class="modal">
+    </div>
+</transition>
+    <div class="divi">
+      <div class="titu">
+         <h3>
+          Ordenes de Compra
+         </h3>
+      </div>
+      <div class="controls">
+        <div class="tituor">
+          <h4 class="tit">Buscar Orden</h4>
+        </div>
+        <div class="busca">
+          <input class="search-box" type="date" id="payment-date" v-model="fecha1" :disabled="fechadesac"/>
+          <h6></h6>
+          <h6>a:</h6>
+        <input class="search-box" type="date" id="payment-date" v-model="fecha2" :disabled="fechadesac"/>
+          <btn class="btn" title="Buscar" @click="buscar"></btn>
+           Por:
+           <select class="search-box" id="filterBy" v-model="columna">
+            <option :value=1>Fecha Compra</option>
+            <option :value=2>Fecha Pago</option>
+            <option :value=3>Pendiente</option>
+            <option :value=4>Pagado</option>
+          </select>
+        </div>
+        <div class="genor">
+            <btn2 class="btn" title="Generar" @click="activar"></btn2>
+          </div>
+          <div class="titor">
+            <h5>Generar Nueva Orden</h5>
+          </div>
+      </div>
+      <span>Aqui se mostraran todas las ordenes de compra pendientes por entregar:</span>
+      <div class="pendien">
+        <div class="columns">
+          <div class="file">
+            <h5>
+              Fecha Compra
+            </h5>
+          </div>
+          <div class="file">
+            <h5>
+              Fecha de Pago
+            </h5>
+          </div>
+          <div class="file">
+            <h5>
+              Proveedor
+            </h5>
+          </div>
+          <div class="file">
+            <h5>
+              estado de pago
+            </h5>
+          </div>
+          <div class="file">
+            <h5>
+              Gestion
+            </h5>
+          </div>
+        </div>
+        <div class="regis">
+          <ord 
+        v-for="orden in ordenes"
+        :FechaCompra="orden.fecha_compra"
+        :FechaPago="orden.fecha_pago"
+        :Proveedor="orden.proveedor"
+        :Estado="orden.estado"
+        :key="orden.id"
+        />
+        </div>
+
       </div>
     </div>
   </div>
  
   </template>
   
-  <script setup>
-  import {  ref, onMounted   } from 'vue';
-  import axios from 'axios';
-  import btn from '../../components/ControlesIndividuales/BotonAntho.vue'
-  const provsnmid = ref([]);
-  const selectedProvider = ref('');
-  
-  const provs = async () => {
-    provsnmid.value = [];
-  try {
-    const response = await axios.get('http://web.VeterinariaBack.com/Proveedores/NombreID');
-    if (Array.isArray(response.data.data)) {
-    provsnmid.value = response.data.data;
-    } else {
-    provsnmid.value = [response.data.data];
-    }  
-    console.log(provsnmid)
-  } catch (error) {
-    console.error('Hubo un error al obtener los nombre e id de los proveedores:', error);
-  }
-};
-onMounted(provs);
-
-
-  </script>
-  
   <style scoped>
 
+  .deta{
+    z-index: 110;
+  }
 
-.form{
-  grid-column-start: 2;
-  grid-row-start: 2;
-  grid-row-end: 2;
-  display: grid;
-  row-gap: 8px;
+.modal-content {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+.modal {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: center;
+  z-index: 98;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* fondo negro semi-transparente */
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
-    .grilla{
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 30% 40% 30%;
-      grid-template-rows: 10% 80% 10%;
-    }
+ 
 
-    .container{
-      display: flex;
-      width: 100%;
-      height: 100vh;
-    }
-    .card {
-      font-family: 'comfortaa';
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 80vh;
-      overflow-y: auto;
-      overflow-x: hidden;
-      width: 70%;
-      box-shadow: 0 0 2em #00000013;
-      border: none;
-    }
-    .card::-webkit-scrollbar {
-  width: 10px;
-}
+  .file{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  grid-column: span 1;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0rem 4rem rgba(132, 139, 200, 0.18);
+  }
 
-.card::-webkit-scrollbar-track {
-  background-color: white;
-}
+  .columns{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    height: 8vh;
+  }
+  .tit{
+    grid-column-start: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
 
-.card::-webkit-scrollbar-thumb {
-  background: #cfcfcf;
-}
+  .filtra{
+    grid-column-start: 3;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+  }
+
+  .titor{
+    display: flex;
+    align-items: flex-end;
+    justify-content:flex-end;
+    grid-row-start: 2;
+    grid-column-start: 4;
+  }
   
-    @media (max-width: 600px) {
-      .card{
-        padding: 10px;
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
-      }
-    }
+  .genor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row-start: 3;
+    grid-column-start: 4;
+  }
+  .tituor{
+    display: grid;
+    grid-template-columns: 50% 20% 30%;
+    width: 100%;
+    height: 100%;
+    grid-column-start: 2;
+    grid-row-start: 2;
 
-    .search-box{
+  }
+
+  .busca{
+    grid-column-start: 2;
+    grid-row-start: 3;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+      .search-box{
     font-family: inherit;
   font-size: inherit;
   box-shadow: 0 0 1em #00000013;
@@ -142,10 +306,73 @@ onMounted(provs);
   color: #646464;
   padding: 0.7rem 1rem;
   border-radius: 30px;
-  width: 17em;
-  transition: all ease-in-out .5s;
+  height: 3em;
+  width: 11em;
   margin-right: -2rem;
   text-align: center;
   }
+  .divi{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 10% 25% 5% 55% 5%;
+
+  }
+   .container{
+      display: flex;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .controls{
+      display: grid;
+      grid-template-columns: 5% 65% 5% 20% 5%;
+      grid-template-rows: 25% 20% 30% 25%;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      box-shadow: 0 1rem 4rem rgba(132, 139, 200, 0.18);
+    }
+
+    .regis{
+      width: 100%;
+      height: 100%;
+      overflow:auto;
+    }
+    .regis::-webkit-scrollbar {
+  width: 20px;
+}
+
+.regis::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+.regis::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+}
+    .pendien{
+      display: flex;
+      grid-row-start: 4;
+      border-radius: 15px;
+      overflow:auto;
+      box-shadow: 0 1rem 4rem rgba(132, 139, 200, 0.18);
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      row-gap: 5%;
+    }
+
+    .titu{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .h4{
+      align-items: center;
+      justify-content: center;
+    }
   </style>
   

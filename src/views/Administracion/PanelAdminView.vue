@@ -103,6 +103,7 @@ onBeforeUnmount(() => {
     transform: translateX(0);
     height: auto;
     width: auto;
+    z-index: 1;
   }
 
   .burger-menu {
@@ -116,8 +117,7 @@ onBeforeUnmount(() => {
   box-shadow: 0 1px 25px rgba(0,0,0,0.2);
   background-color: white;
   border-radius: 20px 20px 0px 0px;
-  width: 103%;
-  right: 23px;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -140,6 +140,6 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 2;
+  z-index: 1;
 }
 </style>

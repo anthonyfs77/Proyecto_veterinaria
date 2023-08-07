@@ -32,6 +32,7 @@
             <th>Observaciones medicas</th>
             <th>Medicacion</th>
             <th>Dosis</th>
+            <th>Cantidad</th>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
             <td>{{ item.Observaciones }}</td>
             <td>{{ item.Medicacion }}</td>
             <td>{{ item.Dosis }}</td>
+            <td>{{ item.Cantidad }}</td>
           </tr>
         </tbody>
       </table>
