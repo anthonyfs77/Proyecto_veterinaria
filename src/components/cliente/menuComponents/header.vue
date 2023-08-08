@@ -8,6 +8,7 @@
                 <li><router-link :to="{name: 'cita'}">Citas</router-link></li>
                 <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
                 <li><router-link :to="{name: 'HistorialMedicoC'}">Historial medico</router-link></li>
+              <li><router-link :to="{name: 'citasPendientesC'}">Citas pendientes</router-link></li>
                 <li><a href="#">contacto</a></li>
             </ul>
             <div class="main">
@@ -19,6 +20,8 @@
                     <li><router-link :to="{name: 'catalogo'}" href="#">Productos</router-link></li>
                     <li><router-link :to="{name: 'cita'}">Citas</router-link></li>
                     <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
+                  <li><router-link :to="{name: 'HistorialMedicoC'}">Historial medico</router-link></li>
+                  <li><router-link :to="{name: 'citasPendientesC'}">Citas pendientes</router-link></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Perfil</a></li>
                 </ul>

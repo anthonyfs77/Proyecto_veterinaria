@@ -208,7 +208,7 @@
   console.log(id_cita.value);
   FormFlotante();
   } catch (error) {
-  console.error("Error al obtener el reporte de inventario", error);
+  console.error(error);
   }
   };
   
