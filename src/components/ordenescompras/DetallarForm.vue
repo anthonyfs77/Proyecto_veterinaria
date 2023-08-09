@@ -67,15 +67,6 @@ obtenerproductos();
     <div class="card">
         <div class="grilla" v-if=!loading>
           <div class="form">
-           <div class="combo">
-            <div class="select" v-for="producto in productos" :key="producto.id">
-      <span>{{ producto.id }}</span>
-      <span>{{ producto.nom_producto }}</span>
-      <input type="number" v-model="producto.cantidad" placeholder="Cantidad" />
-      <input type="number" v-model="producto.precio" placeholder="Precio" />
-      <input type="checkbox" v-model="producto.seleccionado" @change="agregarAlArray(producto)" />
-    </div>
-           </div>
             <btn @click="sendPostRequest" title="Generar Detalles"/>
           </div>
         </div>
@@ -119,30 +110,6 @@ input{
   background: #cfcfcf;
 }
 
-.select{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.combo::-webkit-scrollbar {
-  width: 15px;
-}
-
-.combo::-webkit-scrollbar-track {
-  background-color: white;
-}
-
-.combo::-webkit-scrollbar-thumb {
-  background: #cfcfcf;
-}
-.combo{
-  width: 100%;
-  height: 50%;
-  overflow: auto;
-
-}
 
 .form{
   grid-column-start: 2;

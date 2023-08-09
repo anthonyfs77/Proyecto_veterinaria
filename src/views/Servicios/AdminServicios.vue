@@ -1,5 +1,12 @@
 <template>
     <div class="pantalla">
+      <transition name="fade">
+    <div v-if="showModal" class="modal">
+    </div>
+</transition>
+<div class="modal-content" v-if="showModal">
+        <genser @close="activar"/>
+      </div>
         <div class="header">
             <h4 class="texto">
                 SERVICIOS
@@ -12,7 +19,7 @@
                         NO PUBLICOS
                     </div>
                     <div class="agreg">
-                        <btn title="Agregar +"/>
+                        <btn title="Agregar +" @click="activar"/>
                     </div>
                 </div>
                 <div class="content">
@@ -52,7 +59,21 @@
   import axios from 'axios';
   import CardService from '../../components/servicios/CardService.vue';
   import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
-  
+  import genser from '@/components/servicios/ServiceForm.vue';
+
+  const showModal = ref(false);
+
+  const activar= async () => {
+  if(showModal.value === false)
+  {
+    showModal.value = true;
+  } else if (showModal.value === true)
+  {
+    showModal.value = false;
+    location.reload();
+  }
+}
+
   let services = ref([
    {
     id: 1,
@@ -88,6 +109,33 @@
   </script>
   
   <style scoped>
+
+.modal-content {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+.modal {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: center;
+  z-index: 98;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* fondo negro semi-transparente */
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 
   .tit{
     display: flex;
