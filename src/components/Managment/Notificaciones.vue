@@ -32,7 +32,7 @@ descripcion: {
 
 
 </script>
-  
+
 <style scoped>
 
   .updates{
@@ -48,13 +48,14 @@ descripcion: {
     box-shadow: 0 1rem 1rem rgba(132, 139, 200, 0.18);
     transition: all 300ms ease;
     width: 100%;
+    height: 7em;
     cursor: pointer;
   }
-  
+
   .right .recent-updates .updates:hover{
     box-shadow: none;
   }
-  
+
   .right .recent-updates .updates .update{
     display: grid;
     grid-template-columns: 2.5rem auto;
@@ -68,5 +69,5 @@ descripcion: {
   .message p:first-child{
     font-weight: 600;
   }
-  
+
   </style>

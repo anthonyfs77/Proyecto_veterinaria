@@ -50,7 +50,9 @@
           <TablaComp />
         </div>
         <div class="extra">
+          <div class="compras">
 
+          </div>
         </div>
       </div>
     </div>
@@ -81,7 +83,7 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
 import grafica from '../../components/managment/grafica.vue'
 import estadisticas from '../../components/Managment/estadisticas.vue'
 import info_card from '../../components/Managment/InfoCard.vue'
-import InfoCard from "@/components/Managment/InfoCard.vue";
+import rowCitas from '../../components/Tabla/RowTableCompras.vue'
 
 
 const citas = ref([])
@@ -95,6 +97,7 @@ const fetchData = async () => {
   }
 }
 
+
 const productos = ref([])
 const bajaProd = async () => {
   try {
@@ -105,7 +108,6 @@ const bajaProd = async () => {
     console.log(error)
   }
 }
-
 
 
 const ventas = ref([]);
@@ -166,7 +168,11 @@ onMounted(estadisticas_positivo_negativo)
   box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.1);
   transition: all 300ms ease;
   max-width: 25em;
+  min-height: 30em;
   max-height: 30em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .pequenas{
   display: grid;
@@ -176,11 +182,28 @@ onMounted(estadisticas_positivo_negativo)
   height: 2em;
 }
 .pequenas div{
-
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.comp{
+  max-height: 3em;
+}
+.extra{
+  height: 90%;
+}
+.extra{
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 0.3fr 1.8fr;
+  gap: 0px 0px;
+}
 
+.compras{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 .top-menu{
   display: flex;
@@ -246,12 +269,7 @@ onMounted(estadisticas_positivo_negativo)
   border-radius: 10px 0px 10px 0px;
 }
 
-.right{
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-template-rows: 1.4fr 1.3fr;
-  gap: 0px 0px;
-}
+
 
 .tabla h1{
   font-weight: 300;

@@ -143,8 +143,50 @@ export const dataLog = defineStore('userData', () => {
   };
 });
 
+export const citas = defineStore('cita', () => {
+  const state = {
+    variable: {},
+  };
 
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
 
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const card = defineStore('card', () => {
+  const state = {
+    variable: {},
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const citaID = defineStore('cita_id', () => {
+  const state = {
+    variable: {},
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
 
 
 
