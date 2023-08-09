@@ -22,11 +22,6 @@
                         <span class="material-symbols-outlined">inventory</span>
                         <h4>Productos</h4>
                     </router-link>
-
-                    <router-link :to="{ name: 'GestionProveedores' }">
-                        <span class="material-symbols-outlined">productivity</span>
-                        <h4>Proveedores</h4>
-                    </router-link>
                 </div>
 
                 <div class="com">
@@ -50,11 +45,6 @@
                     <router-link :to="{ name: 'AdminServicios' }">
                         <span class="material-symbols-outlined">medical_services</span>
                         <h4>Servicios</h4>
-                    </router-link>
-                    
-                    <router-link :to="{ name: 'ordenes' }">
-                        <span class="material-symbols-outlined">shopping_bag</span>
-                        <h4>Orden Compra</h4>
                     </router-link>
 
                     <a href="#">

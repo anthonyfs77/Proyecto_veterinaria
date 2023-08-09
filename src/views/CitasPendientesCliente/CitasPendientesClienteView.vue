@@ -1,7 +1,7 @@
 <template>
   <div class="first-container">
     <div class="second-container">
-      <div class="carta" v-for="cita in citas" :key="cita.nombre">
+      <div class="carta" v-for="cita in citas">
         <div class="decoracion">
         </div>
         <ul>

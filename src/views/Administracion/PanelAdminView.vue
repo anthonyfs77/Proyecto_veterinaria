@@ -85,6 +85,8 @@ onBeforeUnmount(() => {
 @media screen and (max-width: 1300px) {
   .burger-menu {
     display: block;
+    background-color: rgba(255, 255, 255, 0);
+
   }
 }
 
@@ -108,6 +110,7 @@ onBeforeUnmount(() => {
 
   .burger-menu {
     display: none;
+
   }
 }
 
