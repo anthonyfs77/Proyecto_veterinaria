@@ -100,7 +100,7 @@
   // Referencias a elementos del formulario
   const fechaCita = ref('');
   const id_mascota = ref('');
-  const estatus = ref('Pendiente');
+  const estatus = ref('Aceptada');
   const motivo = ref('');
 
   // Elementos para insertar en tabla de muchos a muchos
@@ -173,7 +173,7 @@
   const cleanForm = () => {
     fechaCita.value = '';
     id_mascota.value = '';
-    estatus.value = 'Pendiente';
+    estatus.value = 'Aceptada';
     servicioSelect.value = '';
     tipo_servicio.value = '';
     motivo.value = '';

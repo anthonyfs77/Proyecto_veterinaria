@@ -63,6 +63,11 @@ const routes = [
         path: '/HistorialMedicoC',
         name: 'HistorialMedicoC',
         component: HistorialMedicoC
+      },
+      {
+        path: '/citasPendientesC',
+        name: 'citasPendientesC',
+        component: citasPendientesC
       }
     ]
   },
@@ -241,7 +246,7 @@ import AgregarProductoExistente from '../views/productos/AgregarProductoExistent
 import consultas from '../views/Consultas/ConsultasView.vue';
 import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'
 import HistorialMedicoC from '../views/HistorialMedico/HistorialMedicoViewCliente.vue'
-
+import citasPendientesC from '../views/CitasPendientesCliente/CitasPendientesClienteView.vue';
 
 
 
