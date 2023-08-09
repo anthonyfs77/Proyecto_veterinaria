@@ -107,6 +107,16 @@ const routes = [
         component: control
       },
       {
+        path: '/citasTotales',
+        name: 'citasTotales',
+        component:citasTotales
+      },
+      {
+        path: '/CitasAceptadas',
+        name: 'CitasAceptadas',
+        component: citasAceptadas
+      },
+      {
         path: '/compras',
         name: 'compras',
         component: compras
@@ -237,7 +247,8 @@ import AgregarProducto from '../views/Productos/AgregarProducto.vue';
 import AgregarProductoExistente from '../views/productos/AgregarProductoExistente.vue'
 
 
-
+import citasTotales from '../views/Citas/CitasTotales.vue'
+import citasAceptadas from '../views/citas/CitasAceptadas.vue'
 import consultas from '../views/Consultas/ConsultasView.vue';
 import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'
 import HistorialMedicoC from '../views/HistorialMedico/HistorialMedicoViewCliente.vue'
