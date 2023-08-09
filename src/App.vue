@@ -9,8 +9,9 @@
 .container-fluid {
   height: 100vh;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
-
 </style>
 <script setup>
 //import GestionusAdmin from './views/soporteyusuarios/gestionusAdmin.vue';

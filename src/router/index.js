@@ -184,19 +184,9 @@ const routes = [
       {
         path: '/add',
         name: 'add',
-        component: AgregarProductoPublicExistente
-      },
-      {
-        path: '/addInterno',
-        name: 'addInterno',
-        component: AgregarProductoInterno
-      },
-      {
-        path: '/existente',
-        name: 'existente',
-        component: ModificarProducInternoExistente
-
+        component: AgregarProductoExistente
       }
+
     ]
   },
 ]
@@ -231,15 +221,11 @@ import login from '../views/forms/loginView.vue';
 import register from '../views/forms/RegisterView.vue';
 import soporteyayuda from '../views/soporteyusuarios/soporteyayuda.vue';
 import GestionProveedores from '../views/proveedores/GestionProveedoresView.vue';
-import AgregarProducto from '../views/Productos/AgregarProductoView.vue';
 import citas from '../views/Citas/CitasView.vue';
 import compras from '../views/compras/ComprasManagmen.vue';
 import gestionusAdmin from '../views/soporteyusuarios/gestionusAdmin.vue';
 import gestionusuario from '../views/soporteyusuarios/gestionusuario.vue';
 import Adminservicios from '../views/servicios/AdminServicios.vue';
-import AgregarProductoPublicExistente from '../views/productos/AgregarProductoPublicExistente.vue'
-import AgregarProductoInterno from '../views/productos/AgregarProductoInterno.vue'
-import ModificarProducInternoExistente from '../views/productos/ModificarProducInternoExistente.vue'
 // cliente
 import MenuCliente from '../views/cliente/ClienteView.vue'
 import MenuCLienteSinIniciar from '../views/cliente/SinIniciar.vue'
@@ -247,6 +233,10 @@ import bodyCliente from '../views/cliente/menu/menuclienteview.vue'
 import ubicacion from '../views/ubicacion/MapaUbicacion.vue'
 import catalogo from '../views/productos/catalogoView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
+import AgregarProducto from '../views/Productos/AgregarProducto.vue';
+import AgregarProductoExistente from '../views/productos/AgregarProductoExistente.vue'
+
+
 
 import consultas from '../views/Consultas/ConsultasView.vue';
 import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'

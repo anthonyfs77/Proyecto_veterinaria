@@ -1,34 +1,33 @@
-# veterinaria
+# Proyecto de Administración para Veterinaria 🐾
 
-This template should help get you started developing with Vue 3 in Vite.
+![Veterinaria](https://github.com/MarcoChavezB/Proyecto_veterinaria/assets/123757334/755533ab-8037-49e6-9dac-4ba58b02e252)
 
-## Recommended IDE Setup
+## Descripción 📋
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Este es un proyecto de software diseñado para ayudar a administrar una veterinaria, simplificando tareas y mejorando la eficiencia en la gestión de pacientes, historiales médicos, citas y productos. El sistema busca facilitar la vida del personal de la veterinaria, proporcionando una plataforma amigable y funcional para llevar a cabo las operaciones diarias.
 
-## Customize configuration
+## Características ⭐
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Gestión de pacientes 🐶: Registro, edición y visualización de información de los pacientes.
+- Historiales médicos 🏥: Almacenamiento y consulta de historiales médicos de los pacientes.
+- Citas 📅: Programación y seguimiento de citas con recordatorios.
+- Inventario 📦: Control de inventario de productos y medicamentos.
+- Facturación 💰: Generación de facturas y seguimiento de pagos.
+- Reportes 📊: Informes y estadísticas para tomar decisiones informadas.
 
-## Project Setup
+## Capturas de Pantalla 📸
 
-```sh
-npm install
-```
+![Captura 1](https://github.com/MarcoChavezB/Proyecto_veterinaria/assets/123757334/5f0fe1a1-c735-412f-b325-53f3f0601862)
 
-### Compile and Hot-Reload for Development
+## Tecnologías Utilizadas 💻
 
-```sh
-npm run dev
-```
+- Lenguaje de Programación: [JavaScript]
+- Framework web: [Vue.js]
+- Base de Datos: [MariaDB]
 
-### Compile and Minify for Production
+## Autores 👥
 
-```sh
-npm run build
-```
-# Proyecto_veterinaria
-# Proyecto_veterinaria
-# Proyecto_veterinaria
-# Proyecto_veterinaria
-# Proyecto_veterinaria
+- [AAReynosoG](https://github.com/AAReynosoG)
+- [anthonyfs77](https://github.com/anthonyfs77)
+- [Saramarque](https://github.com/Saramarque)
+- [MarcoChavez](https://github.com/MarcoChavezB)
