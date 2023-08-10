@@ -18,15 +18,17 @@
                   </div>
             </div>
       </div>
+      <!-- <footer></footer> -->
 </template>
   
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+// import footer from '@\components\cliente\menuComponents\footer.vue';
 const productos =ref([]);
 const obtenerproductos = async () => {
     try {
-        const response = await axios.get('http://web.Backend.com/productosAll')
+        const response = await axios.get('http://web.Backend.com/productosInternos')
       //   if (Array.isArray(response.data.data)) {
       //       productos.value = response.data.data;
       //       console.log(response.data.data);
@@ -43,17 +45,24 @@ onMounted(obtenerproductos);
 </script>
   
 <style scoped>
-#card-total
+.row
 {
       width: 100%;
+      display: grid;
+      margin: auto;
+      grid-template-columns: auto auto auto auto;
+}
+#card-total
+{
+      width: 80%;
 }
 #card-body
 {
-      width: 19rem;
+      width: 16rem;
       height: 25rem;
       border: 1px solid rgb(119, 119, 119);
       border-radius: 12px;
-      font-size: 26px;
+      font-size: 19px;
       padding: 18px;
       margin-bottom: 30px;
 }
@@ -67,8 +76,8 @@ onMounted(obtenerproductos);
       transform: translateY(-20px);
       transition: all 0.3s;
       box-shadow: 5px 5px 3px black;
-      font-size: 30px;
-      background-color: rgb(187, 187, 187);
+      font-size: 26px;
+      background-color: rgb(230, 230, 230);
 }
 
 
@@ -78,16 +87,13 @@ onMounted(obtenerproductos);
 }
 .card-title
 {
-      font-size: 40px
+      font-size: 27px
 }
-#contenedor
-{
-      display: grid;
-      grid-template-columns: auto auto auto;
-}
+
+
 .container
 {
-      width: 100%;
+      width: 90%;
       height: 100%;
       margin: auto;
       display: flex;
