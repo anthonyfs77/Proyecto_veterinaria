@@ -6,96 +6,104 @@
             <br>
             <br>
             <div class="row">
-                  <div class="col-lg-4 " v-for="producto in productos" :key="producto.id">
-                        <!-- <div class="card-body">
-                              <h5 class="card-title">{{ producto.nombre }}</h5>
-                              <p class="card-text">{{ producto.descripcion }}</p>
-                              <p class="card-title">{{ producto.precio }}</p>
-                        </div> -->
-                        <div class="card card-small">
-                              <div class="image-container">
-                                    <img :src="producto.imagen" class="card-img-top custom-image" :alt="producto.nombre">
-                              </div>
-                              <div class="card-body">
-                                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                  <div class="col-lg-4" id="contenedor" v-for="producto in productos" :key="productos.id">
+                        <div id="card-total">
+                              <div id="card-body">
+                                    <h5 class="card-title"> {{ producto.nom_producto }}</h5>
+                                    <img src="{{ producto.imagen }}" alt="imagen">
                                     <p class="card-text">{{ producto.descripcion }}</p>
-                                    <p class="card-text">Precio: {{ producto.precio }}</p>
+                                    <p class="card-text" id="precio-producto">Precio: ${{ producto.precio_venta }}</p>
                               </div>
                         </div>
-                        <!-- <div id="dialog-cita">
-                              <div id="title">
-                                    <h3>AGENDAR UNA NUEVA CITA</h3>
-                              </div>
-                              <div id="card-body">
-                                    <div class="input">
-                                          <span></span>
-                                          <input type="text">
-                                    </div>
-                              </div>
-                        </div> -->
                   </div>
             </div>
       </div>
 </template>
   
 <script setup>
-
-const productos = [
-      {
-            id: 1,
-            nombre: 'Cama para Perro',
-            descripcion: 'Resistente, Confortable, con Relleno Suave, Medidas y Color a Elegir (Small, Marino/Gris)',
-            precio: 299,
-            imagen: 'https://m.media-amazon.com/images/I/61rl+xIe2HL._AC_SX679_.jpg'
-      },
-      {
-            id: 2,
-            nombre: 'Jaula para Mascota',
-            descripcion: ' hasta 5kg, IATA, Resistente, de fácil transportación',
-            precio: 399.50,
-            imagen: 'https://m.media-amazon.com/images/I/41LbL2i91kL._AC_.jpg'
-      },
-      {
-            id: 3,
-            nombre: ' comedero para mascotas',
-            descripcion: '  alimentador automático para mascotas, gravedad automática, gran capacidad',
-            precio: 600,
-            imagen: 'https://m.media-amazon.com/images/I/81bPs2S3ZwL.__AC_SX300_SY300_QL70_ML2_.jpg'
-      },
-      {
-            id: 4,
-            nombre: 'Cama para Perro',
-            descripcion: 'Resistente, Confortable, con Relleno Suave, Medidas y Color a Elegir (Small, Marino/Gris)',
-            precio: 299,
-            imagen: 'https://m.media-amazon.com/images/I/61rl+xIe2HL._AC_SX679_.jpg'
-      },
-      {
-            id: 5,
-            nombre: 'Jaula para Mascota',
-            descripcion: ' hasta 5kg, IATA, Resistente, de fácil transportación',
-            precio: 399.50,
-            imagen: 'https://m.media-amazon.com/images/I/41LbL2i91kL._AC_.jpg'
-      },
-      {
-            id: 6,
-            nombre: ' comedero para mascotas',
-            descripcion: ' alimentador automático para mascotas, gravedad automática, gran capacidad',
-            precio: 600,
-            imagen: 'https://m.media-amazon.com/images/I/81bPs2S3ZwL.__AC_SX300_SY300_QL70_ML2_.jpg'
-      }
-];
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+const productos =ref([]);
+const obtenerproductos = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/productosAll')
+      //   if (Array.isArray(response.data.data)) {
+      //       productos.value = response.data.data;
+      //       console.log(response.data.data);
+      //   } 
+      //   else {
+      //       productos.value = [response.data.data];
+      //   }
+      productos.value = response.data.data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+onMounted(obtenerproductos);
 </script>
   
-<style>
+<style scoped>
+#card-total
+{
+      width: 100%;
+}
+#card-body
+{
+      width: 19rem;
+      height: 25rem;
+      border: 1px solid rgb(119, 119, 119);
+      border-radius: 12px;
+      font-size: 26px;
+      padding: 18px;
+      margin-bottom: 30px;
+}
+#card-body img
+{
+      width: 90%;
+}
+
+#card-body:hover
+{
+      transform: translateY(-20px);
+      transition: all 0.3s;
+      box-shadow: 5px 5px 3px black;
+      font-size: 30px;
+      background-color: rgb(187, 187, 187);
+}
+
+
+#card-body #precio-producto:hover
+{
+      color: #008000;
+}
+.card-title
+{
+      font-size: 40px
+}
+#contenedor
+{
+      display: grid;
+      grid-template-columns: auto auto auto;
+}
+.container
+{
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+}
 h1 
 {
-      margin: 20px;
+      margin-top: 120px;
 }
 
 .card.card-small 
 {
-      width: 300px;
-      height: 350px;
+      width: 30%;
+      height: 30%;
 }
 
 .custom-image 

@@ -28,38 +28,38 @@ import InputFecha from "@/components/ControlesSencillos/InputFecha.vue";
                                                 <h4>DATOS DEL CLIENTE</h4>
                                                 <div class="input">
                                                       <span>NOMBRE</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="nombre">
                                                 </div>
                                                 <div class="input">
                                                       <span>APELLIDOS</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="apellidos">
                                                 </div>
                                                 <div class="input">
                                                       <span>TELÉFONO1</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="telefono1">
                                                 </div>
                                                 <div class="input">
                                                       <span>TELÉFONO2</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="telefono2">
                                                 </div>
                                           </div>
                                           <div id="form-mascota">
                                                 <h4>DATOS DE LA MASCOTA</h4>
                                                 <div class="input">
                                                       <span>NOMBRE</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="anima.nombre">
                                                 </div>
                                                 <div class="input">
                                                       <span>ESPECIE</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="animal.especie">
                                                 </div>
                                                 <div class="input">
                                                       <span>RAZA</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="animal.raza">
                                                 </div>
                                                 <div class="input">
                                                       <span>GENERO</span>
-                                                      <input type="text">
+                                                      <input type="text" v-model="animal.genero">
                                                 </div>
                                           </div>
                                     </div>
