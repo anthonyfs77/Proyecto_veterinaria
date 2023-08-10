@@ -26,7 +26,7 @@ const citas = ref([]);
 
 const citaPendientes = async () => {
   try {
-    const response = await axios.post('http://web.Backend.com/CitasPendientesCliente', {id_cliente: id_cliente.value} )
+    const response = await axios.get('http://web.Backend.com/CitasPendientesCliente', {id_cliente: id_cliente.value} )
     citas.value = response.data.data;
     console.log(response.data);
   }catch (error) {
