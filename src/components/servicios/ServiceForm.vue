@@ -112,6 +112,7 @@ const productocadena = async () => {
         console.error(error)
     }
 }
+
 obtenerproductos();
 
 </script>

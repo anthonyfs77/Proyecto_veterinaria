@@ -10,7 +10,7 @@
                         <div id="card-total">
                               <div id="card-body">
                                     <h5 class="card-title"> {{ producto.nom_producto }}</h5>
-                                    <img src="{{ producto.imagen }}" alt="imagen">
+                                    <img :src="producto.imagen" alt="imagen">
                                     <p class="card-text">{{ producto.descripcion }}</p>
                                     <p class="card-text" id="precio-producto">Precio: ${{ producto.precio_venta }}</p>
                               </div>
@@ -124,7 +124,6 @@ h1
       justify-content: center;
       align-items: center;
       height: 200px;
-      /* Ajusta la altura deseada del contenedor de la imagen */
       margin: 2px;
 }
 
