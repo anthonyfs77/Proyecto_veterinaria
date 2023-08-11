@@ -24,13 +24,15 @@
                 </div>
                 <div class="content">
                     <div class="services">
-                    <CardService @ide="editService"       
+                    <CardService @ide="publicar"       
                     v-for="service in services"
                     :Id="service.id"
-                    :Service="service.tipo_servicio"
+                    :Service="service.nombre_TServicio"
                     :Type="service.id_servicio"
                     :image="service.image"
-                    :Description="service.descripcion"/>
+                    :Description="service.descripcion"
+                    :precio="service.precio"
+                    />
                     </div>
                 </div>
             </div>
@@ -41,12 +43,14 @@
                 <div class="content">
                     <div class="services">
                     <CardService           
-                    v-for="service in services"
-                    :Id="service.id"
-                    :Service="service.tipo_servicio"
-                    :Type="service.id_servicio"
-                    :image="service.image"
-                    :Description="service.descripcion"/>
+                    v-for="serviceP in servicesP"
+                    :Id="serviceP.id"
+                    :Service="serviceP.nombre_TServicio"
+                    :Type="serviceP.id_servicio"
+                    :image="serviceP.image"
+                    :Description="serviceP.descripcion"
+                    :precio="serviceP.precio"
+                    />
                 </div>
                 </div>
             </div>
@@ -55,7 +59,7 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import axios from 'axios';
   import CardService from '../../components/servicios/CardService.vue';
   import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
@@ -74,38 +78,38 @@
   }
 }
 
-  let services = ref([
-   {
-    id: 1,
-    tipo_servicio: 'Servicio 1',
-    descripcion: 'Descripción del Servicio 1',
-    image: 'url_a_la_imagen_del_servicio_1',
-    id_servicio: 0 
-   },
-   {
-    id: 2,
-    tipo_servicio: 'Servicio 2',
-    descripcion: 'Descripción del Servicio 2',
-    image: 'url_a_la_imagen_del_servicio_1',
-    id_servicio: 1 
-   },
-   {
-    id: 2,
-    tipo_servicio: 'Servicio 2',
-    descripcion: 'Descripción del Servicio 2',
-    image: 'url_a_la_imagen_del_servicio_1',
-    id_servicio: 1 
-   }
-  ]);
-  
-  
-  const editService = (elid) =>{
-    
-  }
-  
-  function saveService() {
+  const services = ref([]);
+  const servicesP = ref([]);
 
-  }
+  const serviciospriv = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/serviciosprivados')
+        if (Array.isArray(response.data.data)) {
+            services.value = response.data.data;
+        } else {
+            services.value = [response.data.data];
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const serviciospub = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/serviciospublicos')
+        if (Array.isArray(response.data.data)) {
+            servicesP.value = response.data.data;
+        } else {
+            servicesP.value = [response.data.data];
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+onMounted(serviciospriv);
+onMounted(serviciospub);
+
+
   </script>
   
   <style scoped>
@@ -127,7 +131,7 @@
   z-index: 98;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4); /* fondo negro semi-transparente */
+  background-color: rgba(0,0,0,0.4);
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
@@ -156,6 +160,7 @@
     background: linear-gradient(rgb(104, 68, 235), rgb(255, 255, 255));
     border-radius: 15px;
     font-weight: bold;
+    height: 20vh;
   }
   .titulo2{
     display: flex;
@@ -166,6 +171,7 @@
     background: linear-gradient(rgb(44, 135, 209), rgb(255, 255, 255));
     border-radius: 15px;
     font-weight: bold;
+    height: 20vh;
   }
 
   .services{
@@ -173,24 +179,38 @@
     grid-template-columns: 1fr;
     gap: 5rem;
   }
+  
 
   .content {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   width: 100%;
   height: 100%;
   flex-wrap:wrap-reverse;
-  overflow:initial;
+  overflow:auto;
 }
-  .servi{
+.servi{
     display: grid;
     grid-template-rows: 1fr 9fr;
     margin: 20px ;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     border-radius: 15px;
-    overflow:initial;
+    overflow:hidden;
+    height: 90%;
   }
+  .content::-webkit-scrollbar {
+  width: 20px;
+}
+
+.content::-webkit-scrollbar-track {
+  background-color: white;
+}
+  
+
+.content::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+}
   .header{
     display: flex;
     align-items: center;

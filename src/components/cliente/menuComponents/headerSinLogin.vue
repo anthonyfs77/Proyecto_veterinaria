@@ -9,6 +9,7 @@
                 <li><a href="#">contacto</a></li>
                 <li><router-link :to="{name: 'login'}">Iniciar sesion</router-link></li>
                 <li><router-link :to="{name: 'register'}">Registrarse</router-link></li>
+                <li><router-link :to="{name: 'servicios'}">Servicios</router-link></li>
             </ul>
             <div class="main">
             

@@ -32,6 +32,11 @@ const routes = [
         name: 'ubicacionSin',
         component: ubicacion,
       },
+      {
+        path: '/servicios',
+        name: 'servicios',
+        component: servicios
+      }
     ],
   },
   {
@@ -68,6 +73,11 @@ const routes = [
         path: '/citasPendientesC',
         name: 'citasPendientesC',
         component: citasPendientesC
+      },
+      {
+        path: '/servicios',
+        name: 'servicios',
+        component: servicios
       }
     ]
   },
@@ -93,7 +103,12 @@ const routes = [
     component: citas
     
   },
-
+  {
+    path: '/servicios',
+    name: 'servicios',
+    component: servicios
+  }
+,
   {
 
     // el router view 
@@ -250,7 +265,7 @@ import catalogo from '../views/productos/catalogoView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 import AgregarProducto from '../views/Productos/AgregarProducto.vue';
 import AgregarProductoExistente from '../views/productos/AgregarProductoExistente.vue'
-
+import servicios from '../views/servicios/servicios.vue'
 
 import citasTotales from '../views/Citas/CitasTotales.vue'
 import citasAceptadas from '../views/citas/CitasAceptadas.vue'

@@ -1,5 +1,5 @@
 <script setup>
-import {ref, defineProps} from 'vue';
+import {ref, defineProps, watch, computed, toRefs} from 'vue';
 import BotonConEstilo from '../ControlesIndividuales/BotonAntho.vue';
 const props = defineProps({
   Service: {
@@ -12,7 +12,7 @@ const props = defineProps({
   },
   Type: {
     type: Number,
-    default: 0
+    default: 1
   },
   Id: {
     type: Number,
@@ -21,13 +21,24 @@ const props = defineProps({
   Foto: {
     type: String,
     default: '../src/assets/img/FotosServicios/estetico1.jpeg'
+  },
+  precio: {
+    type: Number,
+    default: 0
   }
 });
 
-let { Description, Service, Type, Id, Foto } = props;
+let { Description, Service, Id, Foto } = props;
 const emits = defineEmits(['ide'])
-
-
+const { Type } = toRefs(props);
+const computedType = computed(() => {
+    switch(Type.value) {
+        case 1:
+            return 'Clínico';
+        case 2:
+            return 'Estético';
+    }
+});
 const editService = (value) =>{
     emits('ide', value);
 }
@@ -39,16 +50,19 @@ const editService = (value) =>{
         <div class="service-image" :style="{ backgroundImage: `url(${Foto})` }" ></div>
         <div class="info">
             <div class="texto">
-                <h3 class="grilla" >Nombre: {{ Service }}</h3>
+                <h3 class="grilla" >{{ Service }}</h3>
             </div>
             <div class="texto">
-                <p class="text">Servicio: {{ Type }}</p>
+                <p class="text">Servicio: {{ computedType }}</p>
             </div>
             <div class="texto">
                 <p class="text">Descripción: {{ Description }}</p>
             </div>
+            <div class="texto">
+                <p class="text">Precio: $ {{ precio }}</p>
+            </div>
             <div  class="boton">
-                <BotonConEstilo @click="editService(Id)" title="Editar Servicio" />
+                <BotonConEstilo @click="editService(Id)" title="Publicar" />
             </div>
       </div>
     </div>
@@ -100,7 +114,7 @@ const editService = (value) =>{
 .info{
     grid-row-start: 3;
     display: grid;
-    grid-template-rows: 15% 10% 45% 5% 20% 5%;
+    grid-template-rows: 15% 10% 35% 15% 20% 5%;
 }
 
 </style>
