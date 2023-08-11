@@ -1,74 +1,4 @@
-<template>
-      <div class="pantalla">
-            <div id="imagen-services">
-                  <!-- <img src="../src/assets/img/imagen-servicios-veterinaria" alt="imagen-servicios"> -->
-                  <h4>SERVICIOS</h4>
-            </div>
-            <div id="tipe-service-select">
-                  <router-link class="link-services" to="/serviciosesteticos"><button>Esteticos</button></router-link>
-                  <router-link class="link-services" to="/serviciosclinicos"><button>Clinicos</button></router-link>
-            </div>
-            <RouterView/>
-            
-      </div>
-</template>
-  
-<script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import { RouterLink } from 'vue-router';
-import { RouterView } from 'vue-router';
-
-import CardService from '../../components/servicios/CardService.vue';
-import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
-
-// var opcion1 = ref(true);
-// var opcion2 = ref(false);
-
-// function mostrartabla1()
-// {
-//       opcion1 == false;
-// }
-
-// function mostrartabla2()
-// {
-//       opcion2 == true;
-// }
-// -----------------------------------
-
-const servicios =ref([]);
-const obtenerservicios = async () => {
-    try {
-        const response = await axios.get('http://web.Backend.com/serviciosPEsteticos')
-      
-      console.log(response.data);
-      servicios.value = response.data.data;
-    } catch (error) {
-        console.error(error)
-    }
-}
-onMounted(obtenerservicios);
-
-const servicioscli =ref([]);
-const obtenerservicioscli = async () => {
-    try {
-        const response = await axios.get('http://web.Backend.com/serviciosPClinicos')
-      
-      console.log(response.data);
-      servicioscli.value = response.data.data;
-    } catch (error) {
-        console.error(error)
-    }
-}
-onMounted(obtenerservicioscli);
-</script>
-  
 <style scoped>
-.link-services
-{
-      text-decoration: none;
-      list-style: none;
-}
 .pantalla {
       display: flex;
       flex-direction: column;
@@ -76,7 +6,7 @@ onMounted(obtenerservicioscli);
       align-items: center;
       gap: 25px;
       width: 100%;
-      height: 95vh;
+      height: 100vh;
 }
 /* #imagen-services h4
 {
@@ -273,4 +203,42 @@ h4
       text-justify: center;
 }
 </style>
-  
+<template>
+      <div class="body">
+                 <div class="card-services">
+                        <table>
+                              <thead>
+                                    <tr id="services-titles">
+                                          <th>Servici2o</th>
+                                          <th>Descripción</th>
+                                          <th>Precio</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="filas-servicios" v-for="serviciocli in servicioscli" :key="serviciocli.id">
+                                          <td>{{ serviciocli.nombre_TServicio }}</td>
+                                          <td>{{ serviciocli.descripcion }}</td>
+                                          <td>${{ serviciocli.precio }}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                 </div>
+            </div>
+</template>
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+const servicioscli =ref([]);
+const obtenerservicioscli = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/serviciosPClinicos')
+      
+      console.log(response.data);
+      servicioscli.value = response.data.data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+onMounted(obtenerservicioscli);
+</script>
