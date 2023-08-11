@@ -5,10 +5,10 @@
                   <h4>SERVICIOS</h4>
             </div>
             <div id="tipe-service-select">
-                  <button v-on:click=cambiartabla>Clínico</button>
-                  <button v-on:click=cambiartabla>Estético</button>
+                  <button v-on:click="(mostrartabla1 = !mostrartabla1)">Estético</button>
+                  <button v-on:click="(mostrartabla2 = !mostrartabla2)">Clínico</button>
             </div>
-            <div class="body" v-show=mostrartabla>
+            <div class="body" v-show=mostrartabla1>
                  <div class="card-services">
                         <table>
                               <thead>
@@ -28,6 +28,26 @@
                         </table>
                  </div>
             </div>
+            <div class="body" v-show=mostrartabla2>
+                 <div class="card-services">
+                        <table>
+                              <thead>
+                                    <tr id="services-titles">
+                                          <th>Servicio</th>
+                                          <th>Descripción</th>
+                                          <th>Precio</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr id="filas-servicios" v-for="serviciocli in servicioscli" :key="serviciocli.id">
+                                          <td>{{ serviciocli.nombre_TServicio }}</td>
+                                          <td>{{ serviciocli.descripcion }}</td>
+                                          <td>${{ serviciocli.precio }}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                 </div>
+            </div>
       </div>
 </template>
   
@@ -37,21 +57,27 @@ import axios from 'axios';
 import CardService from '../../components/servicios/CardService.vue';
 import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
 
-var mostrartabla =ref(true);
-
-function cambiartabla()
-{
-      if(mostrartabla = true)
-      {
-            mostrartabla = false;
-      }
-}
+var mostrartabla1 =ref(true);
+var mostrartabla2 =ref(true);
 // -----------------------------------
 
 const servicios =ref([]);
 const obtenerservicios = async () => {
     try {
         const response = await axios.get('http://web.Backend.com/serviciosPEsteticos')
+      
+      console.log(response.data);
+      servicios.value = response.data.data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+onMounted(obtenerservicios);
+
+const servicioscli =ref([]);
+const obtenerservicioscli = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/serviciosPClinicos')
       //   if (Array.isArray(response.data.data)) {
       //       productos.value = response.data.data;
       //       console.log(response.data.data);
@@ -60,12 +86,12 @@ const obtenerservicios = async () => {
       //       productos.value = [response.data.data];
       //   }
       console.log(response.data);
-      servicios.value = response.data.data;
+      servicioscli.value = response.data.data;
     } catch (error) {
         console.error(error)
     }
 }
-onMounted(obtenerservicios);
+onMounted(obtenerservicioscli);
 </script>
   
 <style scoped>
