@@ -3,8 +3,8 @@ import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
 import btn2 from '../../components/ControlesIndividuales/BotonAntho.vue';
-import ord from '../../components/ordenescompras/OrdenFile.vue';
-import genord from '../../components/ordenescompras/OrdenForm.vue';
+import ord from '@/components/ordenescompras/OrdenFile.vue';
+import genord from '@/components/ordenescompras/OrdenForm.vue';
 import detaform from '../../components/ordenescompras/DetallarForm.vue';
 
 let ordenes = ref([]);
@@ -185,7 +185,7 @@ async function buscarOrdenesPorEstado() {
         :FechaCompra="orden.fecha_compra"
         :FechaPago="orden.fecha_pago"
         :Proveedor="orden.proveedor"
-        :Estado="orden.estado"
+        :Estado="orden.estado_pago"
         :key="orden.id"
         />
         </div>

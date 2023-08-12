@@ -30,18 +30,23 @@ import { defineProps, computed } from 'vue';
 const props = defineProps({
   cardStyle: {
     type: String,
+    default: 'estilo-negativo',
   },
   icono: {
     type: String,
+    default: '...',
   },
   name: {
     type: String,
+    default: 'NoData',
   },
   number: {
     type: Number,
+    default: 'NoData',
   },
   porcentaje: {
     type: Number,
+    default: 'NoData',
   },
   status:{
     type: String,

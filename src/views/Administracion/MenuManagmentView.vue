@@ -44,13 +44,18 @@
                           :number="citas.citas_mes_actual"
                           :arrow="arrow_citas"/></div>
         </div>
+        <div id="confirmar" >
+          <confirmar_salida v-if="mostrar"/>
+        </div>
       </div>
       <div class="tabla">
         <div class="table">
           <TablaComp />
         </div>
         <div class="extra">
+          <div class="compras">
 
+          </div>
         </div>
       </div>
     </div>
@@ -75,17 +80,31 @@
 
 <script setup>
 import { ref, onMounted, } from 'vue'
+import {useGlobalStore} from "@/stores/counter.js";
 import axios from 'axios'
+import {logout} from "@/stores/counter.js"
 import Notificaciones from '../../components/Managment/Notificaciones.vue'
 import TablaComp from '../../components/Managment/TablaComp.vue'
 import grafica from '../../components/managment/grafica.vue'
 import estadisticas from '../../components/Managment/estadisticas.vue'
 import info_card from '../../components/Managment/InfoCard.vue'
-import InfoCard from "@/components/Managment/InfoCard.vue";
+import confirmar_salida from '../../components/Mensajes/confirmarSalida.vue'
 
+
+const globalStore = useGlobalStore();
+const valorAlmacenado = globalStore.state.variable;
+var log = logout()
+var mostrar = ref()
+
+const intervalMessage = () =>{
+  mostrar.value = log.state.variable;
+}
+
+setInterval(intervalMessage,100)
+
+// variabel apra mo stra la etiqueta con el if neecsito una funcion que leea cuando se dio click
 
 const citas = ref([])
-
 const fetchData = async () => {
   try {
     const response = await axios.get('http://web.backend.com/citasPendientes');
@@ -94,6 +113,7 @@ const fetchData = async () => {
     console.log(error)
   }
 }
+
 
 const productos = ref([])
 const bajaProd = async () => {
@@ -105,7 +125,6 @@ const bajaProd = async () => {
     console.log(error)
   }
 }
-
 
 
 const ventas = ref([]);
@@ -166,7 +185,11 @@ onMounted(estadisticas_positivo_negativo)
   box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.1);
   transition: all 300ms ease;
   max-width: 25em;
+  min-height: 30em;
   max-height: 30em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .pequenas{
   display: grid;
@@ -176,11 +199,35 @@ onMounted(estadisticas_positivo_negativo)
   height: 2em;
 }
 .pequenas div{
-
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.comp{
+  max-height: 3em;
+}
+.extra{
+  height: 90%;
+}
+.extra{
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 0.3fr 1.8fr;
+  gap: 0px 0px;
+}
 
+.compras{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+#confirmar{
+  position: fixed;
+  margin-left: 30%;
+  margin-top: 15%;
+  z-index: 9999;
 }
 .top-menu{
   display: flex;
@@ -246,12 +293,7 @@ onMounted(estadisticas_positivo_negativo)
   border-radius: 10px 0px 10px 0px;
 }
 
-.right{
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-template-rows: 1.4fr 1.3fr;
-  gap: 0px 0px;
-}
+
 
 .tabla h1{
   font-weight: 300;

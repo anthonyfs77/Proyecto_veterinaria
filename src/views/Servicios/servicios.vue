@@ -1,64 +1,46 @@
 <template>
       <div class="pantalla">
             <div id="imagen-services">
-                  <img src="../src/assets/img/imagen-servicios-veterinaria" alt="imagen-servicios">
+                  <!-- <img src="../src/assets/img/imagen-servicios-veterinaria" alt="imagen-servicios"> -->
                   <h4>SERVICIOS</h4>
             </div>
             <div id="tipe-service-select">
-                  <button v-on:click=cambiartabla>Clínico</button>
-                  <button v-on:click=cambiartabla>Estético</button>
+                  <router-link class="link-services" to="/serviciosesteticos"><button>Esteticos</button></router-link>
+                  <router-link class="link-services" to="/serviciosclinicos"><button>Clinicos</button></router-link>
             </div>
-            <div class="body" v-show=mostrartabla>
-                 <div class="card-services">
-                        <table>
-                              <thead>
-                                    <tr id="services-titles">
-                                          <th>Servicio</th>
-                                          <th>Descripción</th>
-                                          <th>Precio</th>
-                                    </tr>
-                              </thead>
-                              <tbody>
-                                    <tr id="filas-servicios" v-for="servicio in servicios" :key="servicio.id">
-                                          <td>{{ servicio.nombre_TServicio }}</td>
-                                          <td>{{ servicio.descripcion }}</td>
-                                          <td>${{ servicio.precio }}</td>
-                                    </tr>
-                              </tbody>
-                        </table>
-                 </div>
-            </div>
+            <RouterView/>
+            
       </div>
 </template>
   
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { RouterLink } from 'vue-router';
+import { RouterView } from 'vue-router';
+
 import CardService from '../../components/servicios/CardService.vue';
 import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
 
-var mostrartabla =ref(true);
+// var opcion1 = ref(true);
+// var opcion2 = ref(false);
 
-function cambiartabla()
-{
-      if(mostrartabla = true)
-      {
-            mostrartabla = false;
-      }
-}
+// function mostrartabla1()
+// {
+//       opcion1 == false;
+// }
+
+// function mostrartabla2()
+// {
+//       opcion2 == true;
+// }
 // -----------------------------------
 
 const servicios =ref([]);
 const obtenerservicios = async () => {
     try {
         const response = await axios.get('http://web.Backend.com/serviciosPEsteticos')
-      //   if (Array.isArray(response.data.data)) {
-      //       productos.value = response.data.data;
-      //       console.log(response.data.data);
-      //   } 
-      //   else {
-      //       productos.value = [response.data.data];
-      //   }
+      
       console.log(response.data);
       servicios.value = response.data.data;
     } catch (error) {
@@ -66,9 +48,27 @@ const obtenerservicios = async () => {
     }
 }
 onMounted(obtenerservicios);
+
+const servicioscli =ref([]);
+const obtenerservicioscli = async () => {
+    try {
+        const response = await axios.get('http://web.Backend.com/serviciosPClinicos')
+      
+      console.log(response.data);
+      servicioscli.value = response.data.data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+onMounted(obtenerservicioscli);
 </script>
   
 <style scoped>
+.link-services
+{
+      text-decoration: none;
+      list-style: none;
+}
 .pantalla {
       display: flex;
       flex-direction: column;
@@ -76,7 +76,7 @@ onMounted(obtenerservicios);
       align-items: center;
       gap: 25px;
       width: 100%;
-      height: 100vh;
+      height: 95vh;
 }
 /* #imagen-services h4
 {

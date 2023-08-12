@@ -143,6 +143,131 @@ export const dataLog = defineStore('userData', () => {
   };
 });
 
+export const citas = defineStore('cita', () => {
+  const state = {
+    variable: {},
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const card = defineStore('card', () => {
+  const state = {
+    variable: {},
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const citaID = defineStore('cita_id', () => {
+  const state = {
+    variable: {},
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+
+// variables booleanas
+export const useGlobalStore = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const logout = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+
+export const quitarProd = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+export const cantProducto = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const idProducto = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
 
 
 

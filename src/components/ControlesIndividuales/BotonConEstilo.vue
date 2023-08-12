@@ -37,7 +37,8 @@ defineProps({
 .button:hover{
   box-shadow: 0 0 2em #00000013;
   transform: scale(1.03);
-  color: black;
+  color: whitesmoke;
+  background-color: black;
   font-weight: 600;
 }
 .button__text {

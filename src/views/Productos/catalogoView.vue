@@ -1,9 +1,16 @@
 <template>
       <div class="container">
+            
             <h1> <span class="material-symbols-outlined" style="font-size: 60px; padding:15px ;">
                         sound_detection_dog_barking
                   </span>Catálogo de productos </h1>
             <br>
+            <br>
+            <div>
+                  <div class="control">
+                        <input v-model="search" type="text" @input="productocadena">
+                  </div>
+            </div>
             <br>
             <div class="row">
                   <div class="col-lg-4" id="contenedor" v-for="producto in productos" :key="productos.id">
@@ -26,25 +33,53 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 // import footer from '@\components\cliente\menuComponents\footer.vue';
 const productos =ref([]);
-const obtenerproductos = async () => {
-    try {
-        const response = await axios.get('http://web.Backend.com/productosInternos')
-      //   if (Array.isArray(response.data.data)) {
-      //       productos.value = response.data.data;
-      //       console.log(response.data.data);
-      //   } 
-      //   else {
-      //       productos.value = [response.data.data];
-      //   }
+const search = ref([]);
+const obtenerproductos = async () => 
+{
+      productos.value = [];
+    try 
+    {
+        const response = await axios.get('http://web.Backend.com/productosPublicos')
+         if (Array.isArray(response.data.data)) {
+             productos.value = response.data.data;
+             console.log(response.data.data);
+         } 
+         else {
+             productos.value = [response.data.data];
+         }
       productos.value = response.data.data;
     } catch (error) {
         console.error(error)
     }
 }
 onMounted(obtenerproductos);
+
+
+const productocadena = async () => {
+    productos.value = [];
+    try {
+      const data = {
+      cadena: search.value,
+    };
+        const response = await axios.post('http://web.Backend.com/productopublicoporcadena', data)
+        if (Array.isArray(response.data.data)) {
+            productos.value = response.data.data;
+        } else {
+            productos.value = [response.data.data];
+        }
+        console.log(productos.value)
+    } catch (error) {
+        console.error(error)
+    }
+}
 </script>
   
 <style scoped>
+.control
+{
+      padding: 10px;
+      font-size: 40px;
+}
 .row
 {
       width: 100%;

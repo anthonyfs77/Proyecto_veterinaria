@@ -4,12 +4,12 @@
             <br><br>
             <div class="table">
                 <div class="headerTable">
-                    <div>Nombre cliente</div>
-                    <div>Tipo de pago</div>
+                    <div>Motivo</div>
+                    <div>Fecha de cita</div>
                 </div>
                 <div class="cont-table">
-                    <recent v-for="producto in productos" :key="producto.id"
-                    :nomClient="producto.nombre" :metodo="producto.tipo_pago"
+                    <recent v-for="citas in info" :key="citas.id"
+                    :motivo="citas.estatus" :fecha="citas.fecha_cita"
                     class="rec" />
                 </div>
             </div>
@@ -22,23 +22,20 @@ import recent from '../../components/tabla/RowTablesRencent.vue'
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
 
-const productos = ref([])
-
-const fetchData = async () => {
-    try {
-        const response = await axios.get('http://web.backend.com/ventasRecientes');
-        productos.value = response.data.data;
-        console.log(productos.value)
-    } catch (error) {
-        console.log(error)
-    }
+// CITAS
+const info = ref([])
+const infoCitas = async () => {
+  try {
+    const response = await axios.get('http://web.backend.com/citas_total');
+    info.value = response.data.data;
+    console.log(info.value)
+  } catch(error) {
+    console.log(error)
+  }
 }
 
-onMounted(fetchData);
+onMounted(infoCitas);
 </script>
-
-
-
 
 <style scoped>
 * {

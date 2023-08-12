@@ -135,7 +135,7 @@ const confirmacion =    ref('');
 var mostrarError =      ref();
 var mostrarSuccess =    ref();
 const router =          useRouter();
-
+const tipo_usuario = ref('Cliente')
 
 
 const registro = () => {
