@@ -43,6 +43,9 @@ const routes = [
     path: '/Home',
     name: 'MenuCliente',
     component: MenuCliente,
+    meta: {
+      requiresAuth: true
+    },
     children:[
       {
         path: '/Home',
@@ -115,11 +118,9 @@ const routes = [
     path: '/panelAdmin',
     name: 'panelAdmin',
     component: panelAdmin,
-            // 
-// meta{
-    // variable cualquiera esto se pone dentro de una ruta  si la ponermos aqui todas las rutas hijas se van a ahacer asi
-//   requiteAuth: true,
-  // } ABAJO MAS EXPLICACION
+    meta:{
+      requiresAuth: true
+    },
     children: [
       {
         path: '/control',
@@ -338,4 +339,38 @@ import citasPendientesC from '../views/CitasPendientesCliente/CitasPendientesCli
 // }
 
 
+import {useUsuarioStore} from "@/stores/UsuariosStore";
+
+// Navigation guard to check if the user is already authenticated (has a token)
+router.beforeEach((to, from, next) => {
+  const authToken = useUsuarioStore().usuario._token;
+
+  // If the user is already authenticated and tries to access the login page,
+  // redirect them to another page (e.g., dashboard)
+  if (to.name === 'login' && authToken) {
+    next('/Home');
+  } else {
+    next();
+  }
+});
+
+// Add navigation guard to check for authentication token
+router.beforeEach((to, from, next) => {
+  // Check if the route requires authentication
+  if (to.matched.some((route) => route.meta.requiresAuth)) {
+    // Get the token from the Pinia store
+    const authToken = useUsuarioStore().usuario._token;
+
+    // If the user is authenticated (has a token), allow access to the route
+    if (authToken) {
+      next();
+    } else {
+      // If the user is not authenticated, redirect to the login page
+      next('/login');
+    }
+  } else {
+    // For public routes, allow access without authentication
+    next();
+  }
+});
 

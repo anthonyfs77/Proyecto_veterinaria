@@ -35,13 +35,11 @@
               <th>Dueño</th>
               <th>Fecha</th>
               <th>Motivo</th>
-              <th>Servicios</th>
-              <th>Servicio Solicitado</th>
             </tr>
           </thead>
           <tbody> 
             <tr v-for="item in General" :key="item.id">
-              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos(item.id)">local_hospital</span></td>
+              <td><span class="material-symbols-outlined" id="Boton" @click="TServicios(item.id)">local_hospital</span></td>
               <td id="Nombre">{{ item.Nombre }}</td>
               <td>{{ item.Especie }}</td>
               <td>{{ item.Raza }}</td>
@@ -49,8 +47,6 @@
               <td>{{ item.Dueño }}</td>
               <td>{{ item.Fecha }}</td>
               <td>{{ item.Motivo }}</td>
-              <td>{{ item.Servicios }}</td>
-              <td>{{ item.Servicio_solicitado }}</td>
             </tr>
           </tbody>
         </table>
@@ -70,13 +66,11 @@
               <th>Dueño</th>
               <th>Fecha</th>
               <th>Motivo</th>
-              <th>Servicios</th>
-              <th>Servicios Solicitados</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in consFecha" :key="item.id">
-              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos(item.id)">local_hospital</span></td>
+              <td><span class="material-symbols-outlined" id="Boton" @click="TServicios(item.id)">local_hospital</span></td>
               <td id="Nombre">{{ item.Nombre }}</td>
               <td>{{ item.Especie }}</td>
               <td>{{ item.Raza }}</td>
@@ -84,8 +78,6 @@
               <td>{{ item.Dueño }}</td>
               <td>{{ item.Fecha }}</td>
               <td>{{ item.Motivo }}</td>
-              <td>{{ item.Servicios }}</td>
-              <td>{{ item.Servicio_solicitado }}</td>
             </tr>
           </tbody>
         </table>
@@ -105,13 +97,11 @@
               <th>Dueño</th>
               <th>Fecha</th>
               <th>Motivo</th>
-              <th>Servicios</th>
-              <th>Servicios Solicitados</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in constCliente" :key="item.id">
-              <td><span class="material-symbols-outlined" id="Boton" @click="BuscarMedicamentos(item.id)">local_hospital</span></td>
+              <td><span class="material-symbols-outlined" id="Boton" @click="TServicios(item.id)">local_hospital</span></td>
               <td id="Nombre">{{ item.Nombre }}</td>
               <td>{{ item.Especie }}</td>
               <td>{{ item.Raza }}</td>
@@ -119,8 +109,6 @@
               <td>{{ item.Dueño }}</td>
               <td>{{ item.Fecha }}</td>
               <td>{{ item.Motivo }}</td>
-              <td>{{ item.Servicios }}</td>
-              <td>{{ item.Servicio_solicitado }}</td>
             </tr>
           </tbody>
         </table>
@@ -147,21 +135,20 @@
         <thead>
             <tr>
               <th></th>
-              <th>Nombre</th>
+              <th>Servicios</th>
             </tr>
           </thead>
           <tbody> 
-            <tr v-for="(medicamento, index ) in medicamentoCantidad">
-              <td><input type="checkbox" name="c1" id="" v-model="medicamento.Selected"  :key="index"  /></td> 
-              <td>{{ medicamento.nom_producto }}</td>
-              <td><DosisCant tittle1="Dosis" tittle2="Cant" v-model:modelValue1="medicamento.Dosis" v-model:modelValue2="medicamento.Cantidad" :key="index" /></td>
+            <tr v-for="servicio in servicios">
+              <td><input type="checkbox"  v-model="services"  :value="servicio.id" :key="servicio.id"  /></td> 
+              <td>{{ servicio.nombre_TServicio }}</td>
               </tr>
           </tbody>
         </table>
       </div>
           </div>
           <br>
-          
+        
           <button type="submit">Guardar Consulta.</button><br>
         <p id="Atras" @click="Atras">Salir</p>
       </form>
@@ -175,7 +162,6 @@
   import axios from 'axios';
   import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
   import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
-  import DosisCant from '../../components/ControlesSencillos/DosisCant.vue';
   import InputFecha from '../../components/ControlesSencillos/InputFecha.vue';
 
   const selectedOption = ref('opcion3');
@@ -188,39 +174,30 @@
   const altura = ref('');
   const edad = ref('');
   const id_cita = ref('');
-  const FiltroMedicamento = ref();
+  const services = ref([]);
 
-  const medicamentoCantidad = ref();
 
-  const medicamentos = ref([]);
-  const BuscarMedicamentos = async (id) => {
+  const servicios = ref([]);
+  const TServicios = async (id) => {
    id_cita.value = id;
   try {
-  const response = await axios.post('http://web.Backend.com/BuscarMedicamentos')
-  medicamentos.value = response.data.data;
-  medicamentoCantidad.value = response.data.data.map(ii => ({
-    ...ii,
-    "Selected": false,
-    "Cantidad": null,
-    "Dosis": null
-  }) )
-  console.log(medicamentoCantidad.value);
+  const response = await axios.post('http://web.Backend.com/TServicios')
+  servicios.value = response.data.data;
   console.log(id_cita.value);
   FormFlotante();
   } catch (error) {
   console.error(error);
   }
   };
-  
+
   const RegistroConsulta = async () => {
-   FiltroMedicamento.value = medicamentoCantidad.value.filter(objeto => objeto.Selected )
   const Consulta = {
     id_cita: id_cita.value,
     observaciones: observaciones.value,
     peso: peso.value,
     altura: altura.value,
     edad: edad.value,
-    id_productosInternos: FiltroMedicamento.value
+    servicios_id: services.value
   }
     try {
       console.log("CITA", id_cita.value)
@@ -229,7 +206,7 @@
         'http://web.Backend.com/RegistroConsulta',
         Consulta
       );
-      
+      location.reload();
       console.log("respuesta",response.data);
     } catch (error) {
       console.error(error);
@@ -297,6 +274,22 @@ try {
   console.error("Error al obtener el reporte de inventario", error);
 }
 };
+
+
+const ticket = ref(false);
+const ticketWindow = () => {
+  ticket.value = true;
+};
+
+
+const precios = ref([]);
+const costos = async () => {
+  try {
+    const response = await axios.post('')
+  }catch (error){
+    console.error(error);
+  }
+}
   </script>
   
   <style scoped>

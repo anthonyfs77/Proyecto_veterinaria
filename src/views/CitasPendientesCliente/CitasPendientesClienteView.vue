@@ -8,8 +8,6 @@
           <li>Mascota: {{cita.Nombre}}</li>
           <li>Fecha: {{cita.Fecha}}</li>
           <li>Motivo: {{cita.Motivo}}</li>
-          <li>Servicios: {{cita.Servicios}}</li>
-          <li>Servicios solicitados: {{cita.Servicio_solicitado}}</li>
         </ul>
       </div>
 
@@ -20,13 +18,16 @@
 <script setup>
 import {  ref, onMounted  } from 'vue';
 import axios from "axios";
+import {useUsuarioStore} from "@/stores/UsuariosStore";
 
-const id_cliente = ref(1);
-const citas = ref([]);
+let usuarioStore = useUsuarioStore();
+
+const id_cliente = ref(usuarioStore.usuario.usuario.id);
+const citas = ref([]);  
 
 const citaPendientes = async () => {
   try {
-    const response = await axios.get('http://web.Backend.com/CitasPendientesCliente', {id_cliente: id_cliente.value} )
+    const response = await axios.post('http://web.Backend.com/CitasPendientesCliente', {id_cliente: id_cliente.value} )
     citas.value = response.data.data;
     console.log(response.data);
   }catch (error) {
@@ -50,8 +51,8 @@ onMounted(citaPendientes);
 
 .carta{
   border-radius: 8px;
-  width: 450px;
-  height: 250px;
+  width: 390px;
+  height: 150px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 
 }
@@ -67,5 +68,6 @@ onMounted(citaPendientes);
 .decoracion{
   height: 20px;
   background-color: #f3ae23;
+
 }
 </style>

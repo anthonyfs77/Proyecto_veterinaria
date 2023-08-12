@@ -49,7 +49,7 @@
                         <span class="span">Olvidaste tu contraseña?</span>
                     </div>
                     <!-- <router-link :to="{name: 'MenuCliente'}"> -->
-                    <button @click="data" class="button-submit">Sign In</button>
+                    <button @click="login" class="button-submit">Sign In</button>
                     <!-- </router-link> -->
                     <p class="p">No tienes una cuenta?
                         <router-link :to="{ name: 'register' }" class="custom-link">
@@ -106,39 +106,39 @@ const router = useRouter();
 var mostrarError = ref();
 var mostrarSuccess = ref();
 
-const data = async () => {
-    const log = {
-        correo: email.value,
-        contrasena: pass.value,
-    };
-
-    try {
-        const response = await axios.post('http://web.backend.com/verificacion', log);
-        console.log(response.data);
-        user.value = response.data.data;
-        if (response.data.status === 200) {                                             // acceso confirmado
-            mostrarSuccess.value = true;
-            dataUser.setVariable(user.value)
-            console.log('variable que se mando ', user.value)
-            redirectToPage();
-        } else if (response.data.status === 401) {                                      // acceso denegado
-            mostrarError.value = true;
-            setTimeout(() => {
-                mostrarError.value = false;
-            }, 5000);
-        }
-    } catch (error) {
-        console.error(error);
-    }
-
-};
-
 const redirectToPage = () => {                                            
     router.push('/Home');
 };
 
 
+import {useUsuarioStore} from "@/stores/UsuariosStore";
 
+let usuarioStore = useUsuarioStore();
+let valid = ref(true)
+
+function login() {
+  if (!valid.value) {
+    return
+  }
+  let usuario = ref({
+    correo: email.value,
+    contra: pass.value
+  })
+  fetch('http://web.backend.com/auth', {
+    method: 'POST',
+    body: JSON.stringify(usuario.value),
+  }).then(response => response.json())
+      .then(data => {
+        if (data.status != 200) {
+          console.log(usuario.value)
+          console.log(data)
+          alert(data.message)
+          return
+        }
+        usuarioStore.setUser(data.data)
+        redirectToPage();
+      });
+}
 
 
 </script>

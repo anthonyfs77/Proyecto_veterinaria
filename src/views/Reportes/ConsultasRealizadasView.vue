@@ -4,124 +4,58 @@
       <div class="parametros">
           <div class="Titulo">
             <span class="material-symbols-outlined">pet_supplies</span><h2>Consultas Realizadas</h2></div>
-        <div class="filtro">
-          <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' }]"/>
-        </div>
         
-        <div class="filtro2" v-show="status1">
-          <InputCliente tittle1="Nombres(S)" tittle2="Apellidos" @input="obtenerConsultasClientes" v-model:modelValue1="Nombres" v-model:modelValue2="Apellidos" /> 
+        <div class="filtro2">
+          <InputCliente tittle1="Nombres(S)" tittle2="Apellidos" @input="ReporteConsultas" v-model:modelValue1="nomC" v-model:modelValue2="apellidos" />
           <div class="label">
-          <p class="plabel">Fecha</p>
-          <InputFecha  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons1" @input="obtenerConsultasClientes" /><br>
-          <InputFecha  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons2" @input="obtenerConsultasClientes" /><br>
+            <p class="plabel">Nombre mascota</p>
+            <Inputs placeholder="Nombre mascota" v-model="nomM" @input="ReporteConsultas"/>
+          </div>
         </div>
-        </div>
+        <br>
 
-        <div class="filtro4" v-show="status3">
-          <div class="label">
-          <p class="plabel">Fecha</p>
-          <InputFecha  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons" @input="obtenerConsultasFecha" /><br>
-          <InputFecha  placeholder="Formato: aaaa-mm-dd" v-model="FechaCons3" @input="obtenerConsultasFecha" /><br>
-        </div>
-        </div>
-      </div>
-    
-      <div class="pantalla">
+        <div class="pantalla">
         <div class="table-container">
 
-        <div class="responsive-table" v-if="selectedOption === 'opcion2' && consFecha.length > 0">
-          <table class="table table-hover custom-table">
-        <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Especie</th>
-                <th>Raza</th>
-                <th>Genero</th>
-                <th>Dueño</th>
-                <th>Fecha</th>
-                <th>Motivo</th>
-                <th>Servicios</th>
-                <th>Servicio Solicitado</th>
-                <th>Peso</th>
-                <th>Altura</th>
-                <th>Edad</th>
-                <th>Observaciones</th>
-                <th>Medicacion</th>
-                <th>Dosis</th>
-                <th>Cantidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in consFecha" :key="item.Motivo">
-                <td id="Nombre">{{ item.Nombre }}</td>
-                <td>{{ item.Especie }}</td>
-                <td>{{ item.Raza }}</td>
-                <td>{{ item.Genero }}</td>
-                <td>{{ item.Dueño }}</td>
-                <td>{{ item.Fecha }}</td>
-                <td>{{ item.Motivo }}</td>
-                <td>{{ item.Servicios }}</td>
-                <td>{{ item.Servicio_solicitado }}</td>
-                <td>{{ item.Peso }} kg</td>
-                <td>{{ item.Altura }} mts</td>
-                <td>{{ item.Edad }} meses</td>
-                <td>{{ item.Observaciones }}</td>
-                <td>{{ item.Medicacion }}</td>
-                <td>{{ item.Dosis }}</td>
-                <td>{{ item.Cantidad }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
-  
-        <div class="responsive-table" v-if="selectedOption === 'opcion1' && constCliente.length > 0">
+        <div class="responsive-table"  v-show="status1">
           <table class="table table-hover custom-table">
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Especie</th>
-                <th>Raza</th>
-                <th>Genero</th>
-                <th>Dueño</th>
                 <th>Fecha</th>
                 <th>Motivo</th>
                 <th>Servicios</th>
-                <th>Servicio Solicitado</th>
+                <th>Servicios prestados</th>
                 <th>Peso</th>
                 <th>Altura</th>
                 <th>Edad</th>
                 <th>Observaciones</th>
                 <th>Medicacion</th>
-                <th>Dosis</th>
                 <th>Cantidad</th>
+                <th>Costo de los servicios ofrecidos</th>
+                <th>Costo de los productos</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in constCliente" :key="item.Motivo">
-                <td id="Nombre">{{ item.Nombre }}</td>
-                <td>{{ item.Especie }}</td>
-                <td>{{ item.Raza }}</td>
-                <td>{{ item.Genero }}</td>
-                <td>{{ item.Dueño }}</td>
-                <td>{{ item.Fecha }}</td>
-                <td>{{ item.Motivo }}</td>
-                <td>{{ item.Servicios }}</td>
-                <td>{{ item.Servicio_solicitado }}</td>
-                <td>{{ item.Peso }} kg</td>
-                <td>{{ item.Altura }} mts</td>
-                <td>{{ item.Edad }} meses</td>
-                <td>{{ item.Observaciones }}</td>
-                <td>{{ item.Medicacion }}</td>
-                <td>{{ item.Dosis }}</td>
-                <td>{{ item.Dosis }}</td>
+              <tr v-for="consulta in consultas" :key="consulta.id">
+                <td id="Nombre">{{ consulta.Fecha }}</td>
+                <td>{{ consulta.Motivo }}</td>
+                <td>{{ consulta.Servicios }}</td>
+                <td>{{ consulta.Servicio_solicitado }}</td>
+                <td>{{ consulta.Peso }}</td>
+                <td>{{ consulta.Altura }}</td>
+                <td>{{ consulta.Edad }}</td>
+                <td>{{ consulta.Observaciones }}</td>
+                <td>{{ consulta.Medicacion }}</td>
+                <td>{{ consulta.Cantidad }}</td>
+                <td>${{consulta.costo_servicios}} + costo de la cita</td>
+                <td>${{consulta.costo_productos}}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p v-else-if="selectedOption === 'opcion1'">No hay datos disponibles.</p>
       </div>
       </div>
+    </div>
     </div>
     </template>
     
@@ -129,50 +63,29 @@
     import { ref, watch } from 'vue';
     import axios from 'axios';
    import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
-   import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
-   import InputFecha from '../../components/ControlesSencillos/InputFecha.vue';
+   import Inputs from "@/components/ControlesSencillos/Inputs.vue";
 
-    const selectedOption = ref('opcion2');
-    const status1 = ref(false);
-    const status3 = ref(true);
-    
-    watch(selectedOption, (newValue) => {
-      if (newValue === 'opcion1') {
-        status1.value = true;
-        status3.value = false;
-      } else if (newValue === 'opcion2') {
-        status1.value = false;
-        status3.value = true;
-      } 
-    });
-  
-  const FechaCons3 = ref("");
-  const FechaCons = ref("");
-  const consFecha = ref ([]);
-  const obtenerConsultasFecha = async () => {
-  try {
-    const response = await axios.post('http://web.Backend.com/ReporteConsultasFecha', {Fecha: FechaCons.value, Fecha2: FechaCons3.value})
-    consFecha.value = response.data.data;
-    console.log(response.data);
-  } catch (error) {
-    console.error("Error al obtener el reporte de inventario", error);
-  }
-  };
-  
-  const FechaCons1 = ref("");
-  const FechaCons2 = ref("");
-  const Nombres = ref("");
-  const Apellidos = ref("");
-  const constCliente = ref([]);
-  const obtenerConsultasClientes = async () => {
-  try {
-    const response = await axios.post('http://web.Backend.com/ReporteConsultasCliente', {Nombre: Nombres.value, Apellido: Apellidos.value, Fecha: FechaCons1.value, Fecha2: FechaCons2.value})
-    constCliente.value = response.data.data;
-    console.log(response.data);
-  } catch (error) {
-    console.error("Error al obtener el reporte de inventario", error);
-  }
-  };
+   const nomC = ref("");
+   const nomM = ref("");
+   const apellidos = ref("");
+
+   const status1 = ref(false);
+   const consultas = ref([]);
+
+   const ReporteConsultas = async () => {
+     const data = {
+       nomC: nomC.value,
+       apellidos: apellidos.value,
+       nomM: nomM.value
+     };
+     try {
+       const response = await axios.post('http://web.Backend.com/ReporteConsultas', data)
+       consultas.value = response.data.data
+       status1.value = true;
+     }catch (error){
+       console.error(error)
+     }
+   }
     </script>
     
     <style scoped>
