@@ -96,15 +96,11 @@ const routes = [
 
   {
 
-    // el router view 
     path: '/panelAdmin',
     name: 'panelAdmin',
     component: panelAdmin,
             // 
-// meta{
-    // variable cualquiera esto se pone dentro de una ruta  si la ponermos aqui todas las rutas hijas se van a ahacer asi
-//   requiteAuth: true,
-  // } ABAJO MAS EXPLICACION
+
     children: [
       {
         path: '/control',
@@ -115,6 +111,11 @@ const routes = [
         path: '/citasTotales',
         name: 'citasTotales',
         component:citasTotales
+      },
+      {
+        path: '/calendario',
+        name: 'calendar',
+        component: calendar
       },
       {
         path: '/CitasAceptadas',
@@ -221,6 +222,7 @@ const router = createRouter({
 export default router
 
 import { createRouter, createWebHistory } from 'vue-router'
+import calendar from '../views/Calendar/Calendario.vue'
 import principalMain from '../../src/views/Inicio/MainInicio.vue'
 import control from '../views/Administracion/MenuManagmentView.vue'; 
 import panelAdmin from '../views/Administracion/PanelAdminView.vue';

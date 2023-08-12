@@ -44,6 +44,9 @@
                           :number="citas.citas_mes_actual"
                           :arrow="arrow_citas"/></div>
         </div>
+        <div id="confirmar" >
+          <confirmar_salida v-if="mostrar"/>
+        </div>
       </div>
       <div class="tabla">
         <div class="table">
@@ -77,17 +80,31 @@
 
 <script setup>
 import { ref, onMounted, } from 'vue'
+import {useGlobalStore} from "@/stores/counter.js";
 import axios from 'axios'
+import {logout} from "@/stores/counter.js"
 import Notificaciones from '../../components/Managment/Notificaciones.vue'
 import TablaComp from '../../components/Managment/TablaComp.vue'
 import grafica from '../../components/managment/grafica.vue'
 import estadisticas from '../../components/Managment/estadisticas.vue'
 import info_card from '../../components/Managment/InfoCard.vue'
-import rowCitas from '../../components/Tabla/RowTableCompras.vue'
+import confirmar_salida from '../../components/Mensajes/confirmarSalida.vue'
 
+
+const globalStore = useGlobalStore();
+const valorAlmacenado = globalStore.state.variable;
+var log = logout()
+var mostrar = ref()
+
+const intervalMessage = () =>{
+  mostrar.value = log.state.variable;
+}
+
+setInterval(intervalMessage,100)
+
+// variabel apra mo stra la etiqueta con el if neecsito una funcion que leea cuando se dio click
 
 const citas = ref([])
-
 const fetchData = async () => {
   try {
     const response = await axios.get('http://web.backend.com/citasPendientes');
@@ -204,6 +221,13 @@ onMounted(estadisticas_positivo_negativo)
   align-items: flex-end;
   justify-content: center;
   margin-bottom: 15px;
+}
+
+#confirmar{
+  position: fixed;
+  margin-left: 30%;
+  margin-top: 15%;
+  z-index: 9999;
 }
 .top-menu{
   display: flex;

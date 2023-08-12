@@ -190,6 +190,89 @@ export const citaID = defineStore('cita_id', () => {
 
 
 
+// variables booleanas
+export const useGlobalStore = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const logout = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+
+export const quitarProd = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+export const cantProducto = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+export const idProducto = defineStore('global', () => {
+  const state = {
+    variable: '',
+  };
+
+  const setVariable = (newValue) => {
+    state.variable = newValue;
+  };
+
+  return {
+    state,
+    setVariable,
+  };
+});
+
+
+
+
+
 
 
 // // LOCAL STORAGE PINIA 

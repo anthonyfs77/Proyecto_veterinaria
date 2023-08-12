@@ -135,7 +135,7 @@ const confirmacion =    ref('');
 var mostrarError =      ref();
 var mostrarSuccess =    ref();
 const router =          useRouter();
-
+const tipo_usuario = ref('Cliente')
 
 
 const registro = () => {
@@ -175,6 +175,7 @@ const data = async () => {
         correo: correo.value,
         tel1: tel1.value,
         tel2: tel2.value,
+        tipo_usuario: tipo_usuario.value,
     };
 
     try {

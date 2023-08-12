@@ -1,0 +1,19 @@
+1 dia = nombre e integrantes
+2 dia = descripcipn del negocio 
+3 dia = descripcion del proceso del negocio (diagrama de casos de uso) explicacion del proceso  en el negocio no en el sistema
+
+4 dia = justificacion del proyecto comentar del porque de las necesidades del proyecto despues enseñar como lo hace el negocio sin sistema
+el porque de las cosas
+y aque el momento de crear una venta se apunta en una libreta este se puede perder
+
+5 dia = objetivos - necesidades que se quieren alcanzar cosas que se deben cumplir para el sistema ejemplo: que las personas no tengan perdida a la hora de registro
+
+llegar a tener el constrol y no desfase de las cuentas
+
+6 dia = propuesta = sistema 
+describir lo que hace el sistema  a grandes rasgos 
+
+7 dia = detalle de los procesos (casos de uso - diargama de clases)
+hacer el diagrama de secuencia de los procesos en el sistema dos procesos 
+
+8 dia = mostrar la descripcion de las tareas asignadas cirtos apartados que les toco individualmente 

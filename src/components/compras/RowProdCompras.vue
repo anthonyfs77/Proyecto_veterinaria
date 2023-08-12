@@ -1,10 +1,10 @@
 <template>
     <div class="app">
         <div class="column">
-            <p>{{ img }}</p>
+            <p>{{id}}</p>
             <p>{{ name }}</p>
             <p>{{ precio }} <span>$</span></p>
-            <p>{{ cant }}</p>
+            <p>{{numero}}</p>
             <div class="btns">
                 <button @click="mandarTrue">
                     <span class="material-symbols-outlined">
@@ -25,29 +25,45 @@
 <script setup>
 import { defineProps, ref } from 'vue';
 import { StorePublics } from '@/stores/counter.js'
+import {quitarProd} from '@/stores/counter.js'
+import {cantProducto} from '@/stores/counter.js'
+const cantidad = cantProducto()
+const mandarCant = ref();
+
+const quitar = quitarProd()
+const productoR = ref();
+
 
 
 defineProps({
     name: { type: String },
     precio: { type: Number }, 
     img: { type: String }, 
-    cant:{ type: Number}
+    cant:{ type: Number},
+    id:{type: Number},
+
 })
 
 const store = StorePublics();
-var numero = ref(0)
+var numero = ref(1)
 
 
 const mandarTrue =  () =>{
     numero.value ++;
+    mandarCant.value = numero.value
     store.setVariable(numero)
-    console.log(store)
+    cantidad.setVariable(mandarCant.value)
 }
 
 const mandarFalse =  () =>{
+  if (numero.value >= 2){
     numero.value --;
+    mandarCant.value = numero.value
     store.setVariable(numero)
-    console.log(store)
+    cantidad.setVariable(mandarCant.value)
+  } else {
+    return numero.value
+  }
 }
 
 
@@ -79,14 +95,6 @@ const mandarFalse =  () =>{
       width: 100%;
       margin-left: 100px;
       text-align: center;
-  }
-
-  .column p:first-child{
-    min-width: 0px;
-    width: 300px;
-    background-color: #fd1853;
-    border-radius: 50%;
-    background-size: contain;
   }
 
 
