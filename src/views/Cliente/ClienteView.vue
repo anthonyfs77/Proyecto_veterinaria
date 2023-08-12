@@ -4,7 +4,7 @@
             <headerMenu/>
         </div>
         <div class="body">
-            <RouterLink/>
+            <router-view></router-view>
         </div>
     </div>
 </template>
