@@ -74,6 +74,10 @@
         </div>
       </div>
     </div>
+    <div class="alertas">
+        <successAlert name="Cita aceptada" v-if="mostrarAlertSuccess"/>
+        <errorAlert name="Cita rechazada" v-if="mostrarAlertError"/>
+    </div>
   </div>
 </template>
 
@@ -82,6 +86,8 @@ import { onMounted, ref } from 'vue'
 import { card, citaID } from '@/stores/counter.js'
 import axios from 'axios'
 import loader from '../loaders/loaderPrincipal.vue'
+import successAlert from '../../components/Mensajes/BarAlertSuccess.vue'
+import errorAlert from '../../components/Mensajes/BarAlertError.vue'
 
 
 const monthNames = [
@@ -96,8 +102,10 @@ var esconder = ref(true)
 var show = recibirShow.state.variable
 var citaid = citaID()
 var id = citaid.state.variable
-
+var mostrarAlertSuccess= ref(false);
+var mostrarAlertError = ref(false);
 const citasdata = ref([])
+
 const cita_id = {
   cita_id: id
 }
@@ -124,6 +132,13 @@ var CitaResponse = ref();
 const respuesta = (seleccion) =>{
   CitaResponse.value = seleccion;
   CitaResponse.value = CitaResponse.value === 1 ? 'Rechazada' : CitaResponse.value === 2 ? 'Aceptada' : 'otro_valor';
+  if (CitaResponse.value === 'Aceptada'){
+    mostrarAlertSuccess.value = true
+    mostrarAlertError.value = false
+  } else if(CitaResponse.value === 'Rechazada'){
+    mostrarAlertError.value = true
+    mostrarAlertSuccess.value = false
+  }
   citaResponse();
 }
 
@@ -258,10 +273,18 @@ const salir = () => {
   height: 100%;
 }
 
+.alertas{
 
+
+  background-color: red;
+
+  z-index: 9999;
+  position: fixed;
+  width: 83%;
+
+}
 
 .body-card{
-
   height: 65%;
 }
 .text-area{

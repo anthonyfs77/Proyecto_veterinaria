@@ -209,7 +209,7 @@ h4
                         <table>
                               <thead>
                                     <tr id="services-titles">
-                                          <th>Servici2o</th>
+                                          <th>Servicio</th>
                                           <th>Descripción</th>
                                           <th>Precio</th>
                                     </tr>
@@ -232,7 +232,7 @@ import axios from 'axios';
 const servicioscli =ref([]);
 const obtenerservicioscli = async () => {
     try {
-        const response = await axios.get('http://web.Backend.com/serviciosPClinicos')
+        const response = await axios.get('http://web.Backend.com/serviciospublicosclinicos')
       
       console.log(response.data);
       servicioscli.value = response.data.data;

@@ -29,5 +29,4 @@ Este es un proyecto de software diseñado para ayudar a administrar una veterina
 
 - [AAReynosoG](https://github.com/AAReynosoG)
 - [anthonyfs77](https://github.com/anthonyfs77)
-- [JeronimoMartínez](https://github.com/jerocen)
 - [MarcoChavez](https://github.com/MarcoChavezB)

@@ -8,6 +8,7 @@
       <!--Pantall donde se ve las vistas de los elementos del sidebar -->
       <router-view class="fondo"></router-view>
     </div>
+    <cardAlert/>
     <div class="overlay" v-show="pantalla"></div>
   </div>
 </template>
@@ -15,6 +16,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import SideMenu from '../../components/Managment/SideMenu.vue'
+import cardAlert from '../../components/Mensajes/confirmarSalida.vue'
 
 let pantalla = ref(false);
 let isSideMenuVisible = ref(true);

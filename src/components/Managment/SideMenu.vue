@@ -22,6 +22,11 @@
                         <span class="material-symbols-outlined">inventory</span>
                         <h4>Productos</h4>
                     </router-link>
+
+                      <router-link :to="{ name: '' }">
+                        <span class="material-symbols-outlined">inventory</span>
+                        <h4>Calendario</h4>
+                      </router-link>
                 </div>
 
                 <div class="com">
@@ -61,11 +66,10 @@
                 </div>
 
                 </div>
-
-                <router-link :to="{ name: 'principalMain' }" id="salir">
-                    <span class="material-symbols-outlined">logout</span>
-                    <h4>Salir</h4>
-                </router-link>
+                <div :to="{ name: 'principalMain' }" id="salir" @click="salir">
+                  <span class="material-symbols-outlined">logout</span>
+                  <h4>Salir</h4>
+                </div>
 
             </div>
         </aside>
@@ -75,11 +79,11 @@
 
 <script setup>
 import { ref } from 'vue';
-
-
+import {logout} from "@/stores/counter.js"
 import { useRouter } from 'vue-router';
 const router = useRouter();
-
+var varSalir = logout()
+var mandarVariable = ref(false);
 const selectedOption = ref('');
 
 const resetSelect = () => {
@@ -92,10 +96,23 @@ const onReportChange = (event) => {
         resetSelect();
     })
 }
+
+const salir = () =>{
+  if (mandarVariable.value === true){
+    mandarVariable.value = false;
+    console.log(mandarVariable)
+    varSalir.setVariable(mandarVariable.value);
+  }else if (mandarVariable.value === false ){
+    mandarVariable.value = true;
+    varSalir.setVariable(mandarVariable.value);
+  }
+}
+
+
 </script>
 
 
- 
+
 <style scoped>
 
 .controls{
@@ -129,6 +146,15 @@ html {
     font-size: 14px;
 }
 
+#salir{
+  width: 20%;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  gap: 10px;
+  display: flex;
+}
+
 body {
     width: 100vw;
     height: 100vh;
@@ -138,6 +164,7 @@ body {
     overflow-x: hidden;
     color: #363949;
 }
+
 
 option {
     background-color: #202237;
@@ -228,7 +255,7 @@ aside .logo img {
 
 aside .close {
     display: none;
-    
+
 }
 
 /*======================side bar===========================*/
@@ -315,7 +342,7 @@ aside .sidebar {
     justify-content: center;
     flex-direction: column;
     height: 73vh;
-    
+
 }
 
 </style>

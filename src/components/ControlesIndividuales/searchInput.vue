@@ -19,11 +19,16 @@ import axios from 'axios'
 import { ref, watch} from 'vue'
 import {useStore} from '@/stores/counter.js'
 import Row from '../tabla/ResultadosBusqueda.vue'
+import {idProducto} from "@/stores/counter.js";
+
 var nombre = ref('');
 var productos = ref([]);
 var productosBusqueda = ref([]);
 const store = useStore()
+const id_producto = idProducto();
 const mostrar = ref(false);
+const idProd = ref();
+
 
 const fetchData = async () => {
   try {
@@ -31,22 +36,24 @@ const fetchData = async () => {
     productos.value = response.data.data;
     productosBusqueda.value = response.data.data;
     updateVariable();
-    console.log(productos.value);
   } catch (error) {
     console.log(error);
   }
 }
 
 
+
+
 const updateVariable = () =>{
   store.setVariable(productos)
-
+  id_producto.setVariable(idProd)
 }
 
 // Agregar un watcher para la variable "nombre"
 watch(nombre, (newValue) => {
-  console.log(newValue);
+
   fetchData()
+  prodId()
 });
 
 setInterval(() => {

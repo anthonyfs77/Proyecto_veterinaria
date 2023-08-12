@@ -42,6 +42,9 @@ const routes = [
             path: '/Home',
             name: 'MenuCliente',
             component: MenuCliente,
+            meta: {
+              requiresAuth: true
+            },
             children: [
                   {
                         path: '/Home',
@@ -132,6 +135,9 @@ const routes = [
             // variable cualquiera esto se pone dentro de una ruta  si la ponermos aqui todas las rutas hijas se van a ahacer asi
             //   requiteAuth: true,
             // } ABAJO MAS EXPLICACION
+            meta: {
+              requiresAuth: true
+            },
             children: [
                   {
                         path: '/control',
@@ -238,6 +244,7 @@ const router = createRouter({
 export default router
 
 import { createRouter, createWebHistory } from 'vue-router'
+import calendar from '../views/Calendar/Calendario.vue'
 import principalMain from '../../src/views/Inicio/MainInicio.vue'
 import control from '../views/Administracion/MenuManagmentView.vue';
 import panelAdmin from '../views/Administracion/PanelAdminView.vue';
