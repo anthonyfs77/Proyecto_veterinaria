@@ -9,6 +9,7 @@
                 <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
                 <li><router-link :to="{name: 'HistorialMedicoC'}">Historial medico</router-link></li>
               <li><router-link :to="{name: 'citasPendientesC'}">Citas pendientes</router-link></li>
+              <li><router-link :to="{name: 'servicios'}">Servicios</router-link></li>
                 <li><a href="#">contacto</a></li>
             </ul>
             <div class="main">

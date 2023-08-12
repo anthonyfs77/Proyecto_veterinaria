@@ -26,6 +26,8 @@
   watch(nombre, () => {
     updateVariable();
   });
+
+  
   </script>
   
   

@@ -1,9 +1,16 @@
 <template>
       <div class="container">
+            
             <h1> <span class="material-symbols-outlined" style="font-size: 60px; padding:15px ;">
                         sound_detection_dog_barking
                   </span>Catálogo de productos </h1>
             <br>
+            <br>
+            <div>
+                  <div class="control">
+                        <input v-model="search" type="text" @input="productocadena">
+                  </div>
+            </div>
             <br>
             <div class="row">
                   <div class="col-lg-4" id="contenedor" v-for="producto in productos" :key="productos.id">
@@ -18,42 +25,79 @@
                   </div>
             </div>
       </div>
+      <!-- <footer></footer> -->
 </template>
   
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+// import footer from '@\components\cliente\menuComponents\footer.vue';
 const productos =ref([]);
-const obtenerproductos = async () => {
-    try {
-        const response = await axios.get('http://web.Backend.com/productosAll')
-      //   if (Array.isArray(response.data.data)) {
-      //       productos.value = response.data.data;
-      //       console.log(response.data.data);
-      //   } 
-      //   else {
-      //       productos.value = [response.data.data];
-      //   }
+const search = ref([]);
+const obtenerproductos = async () => 
+{
+      productos.value = [];
+    try 
+    {
+        const response = await axios.get('http://web.Backend.com/productosPublicos')
+         if (Array.isArray(response.data.data)) {
+             productos.value = response.data.data;
+             console.log(response.data.data);
+         } 
+         else {
+             productos.value = [response.data.data];
+         }
       productos.value = response.data.data;
     } catch (error) {
         console.error(error)
     }
 }
 onMounted(obtenerproductos);
+
+
+const productocadena = async () => {
+    productos.value = [];
+    try {
+      const data = {
+      cadena: search.value,
+    };
+        const response = await axios.post('http://web.Backend.com/productopublicoporcadena', data)
+        if (Array.isArray(response.data.data)) {
+            productos.value = response.data.data;
+        } else {
+            productos.value = [response.data.data];
+        }
+        console.log(productos.value)
+    } catch (error) {
+        console.error(error)
+    }
+}
 </script>
   
 <style scoped>
-#card-total
+.control
+{
+      padding: 10px;
+      font-size: 40px;
+}
+.row
 {
       width: 100%;
+      display: grid;
+      margin: auto;
+      grid-template-columns: auto auto auto auto;
+}
+#card-total
+{
+      width: 80%;
 }
 #card-body
 {
-      width: 19rem;
+      width: 16rem;
       height: 25rem;
       border: 1px solid rgb(119, 119, 119);
       border-radius: 12px;
-      font-size: 26px;
+      font-size: 19px;
       padding: 18px;
       margin-bottom: 30px;
 }
@@ -67,8 +111,8 @@ onMounted(obtenerproductos);
       transform: translateY(-20px);
       transition: all 0.3s;
       box-shadow: 5px 5px 3px black;
-      font-size: 30px;
-      background-color: rgb(187, 187, 187);
+      font-size: 26px;
+      background-color: rgb(230, 230, 230);
 }
 
 
@@ -78,16 +122,13 @@ onMounted(obtenerproductos);
 }
 .card-title
 {
-      font-size: 40px
+      font-size: 27px
 }
-#contenedor
-{
-      display: grid;
-      grid-template-columns: auto auto auto;
-}
+
+
 .container
 {
-      width: 100%;
+      width: 90%;
       height: 100%;
       margin: auto;
       display: flex;

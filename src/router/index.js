@@ -1,77 +1,130 @@
 
 const routes = [
-  // Vistas predeterminadas
-  {
-    path: '/',
-    name: 'sinlogin',
-    component: MenuCLienteSinIniciar,
-    
-    children: [
+      // Vistas predeterminadas
       {
-        path: '/catalogo',
-        name: 'catalogoSin',
-        component: catalogo
-      },
-      {
-        path: '/',
-        name: 'principalMain',
-        component: principalMain,
-      },
-      {
-        path: '/login',
-        name: 'login',
-        component: login
-      },
-      {
-        path: '/register',
-        name: 'register',
-        component: register
-      },
-      {
-        path: '/ubicacion',
-        name: 'ubicacionSin',
-        component: ubicacion,
-      },
-    ],
-  },
-  {
-    path: '/Home',
-    name: 'MenuCliente',
-    component: MenuCliente,
-    children:[
-      {
-        path: '/Home',
-        name: 'cuerpo',
-        component: bodyCliente,
-      },
-      {
-        path: '/cita',
-        name: 'cita',
-        component: citas,
-      },
-      {
-        path: '/ubicacion',
-        name: 'ubicacion',
-        component: ubicacion,
-      },
-      {
-        path: '/catalogo',
-        name: 'catalogo',
-        component: catalogo
-      },
-      {
-        path: '/HistorialMedicoC',
-        name: 'HistorialMedicoC',
-        component: HistorialMedicoC
-      },
-      {
-        path: '/citasPendientesC',
-        name: 'citasPendientesC',
-        component: citasPendientesC
-      }
-    ]
-  },
+            path: '/',
+            name: 'sinlogin',
+            component: MenuCLienteSinIniciar,
 
+            children: [
+                  {
+                        path: '/catalogo',
+                        name: 'catalogoSin',
+                        component: catalogo
+                  },
+                  {
+                        path: '/',
+                        name: 'principalMain',
+                        component: principalMain,
+                  },
+                  {
+                        path: '/login',
+                        name: 'login',
+                        component: login
+                  },
+                  {
+                        path: '/register',
+                        name: 'register',
+                        component: register
+                  },
+                  {
+                        path: '/ubicacion',
+                        name: 'ubicacionSin',
+                        component: ubicacion,
+                  },
+                  {
+                        path: '/servicios',
+                        name: 'servicios',
+                        component: servicios
+                  }
+            ],
+      },
+      {
+            path: '/Home',
+            name: 'MenuCliente',
+            component: MenuCliente,
+            children: [
+                  {
+                        path: '/Home',
+                        name: 'cuerpo',
+                        component: bodyCliente,
+                  },
+                  {
+                        path: '/cita',
+                        name: 'cita',
+                        component: citas,
+                  },
+                  {
+                        path: '/ubicacion',
+                        name: 'ubicacion',
+                        component: ubicacion,
+                  },
+                  {
+                        path: '/catalogo',
+                        name: 'catalogo',
+                        component: catalogo
+                  },
+                  {
+                        path: '/HistorialMedicoC',
+                        name: 'HistorialMedicoC',
+                        component: HistorialMedicoC
+                  },
+                  {
+                        path: '/citasPendientesC',
+                        name: 'citasPendientesC',
+                        component: citasPendientesC
+                  },
+                  {
+                        path: '/servicios',
+                        name: 'servicios',
+                        component: servicios
+                  }
+            ]
+      },
+
+      {
+            path: '/login',
+            name: 'login',
+            component: login
+      },
+      {
+            path: '/register',
+            name: 'register',
+            component: register
+      },
+      {
+            path: '/soporteyayuda',
+            name: 'soporteyayuda',
+            component: soporteyayuda
+      },
+      {
+            path: '/citas',
+            name: 'citas',
+            component: citas
+
+      },
+      {
+            path: '/servicios',
+            name: 'servicios',
+            component: servicios,
+            children:
+                  [
+                        {
+                              path: '/serviciosesteticos',
+                              name: 'serviciosesteticos',
+                              component: serviciosesteticos
+                        },
+                        {
+                              path: '/serviciosclinicos',
+                              name: 'serviciosclinicos',
+                              component: serviciosclinicos
+                        }
+                  ]
+      }
+      ,
+      {
+
+<<<<<<< HEAD
   {
     path: '/login',
     name: 'login',
@@ -202,9 +255,106 @@ const routes = [
         name: 'add',
         component: AgregarProductoExistente
       }
+=======
+            // el router view 
+            path: '/panelAdmin',
+            name: 'panelAdmin',
+            component: panelAdmin,
+            // 
+            // meta{
+            // variable cualquiera esto se pone dentro de una ruta  si la ponermos aqui todas las rutas hijas se van a ahacer asi
+            //   requiteAuth: true,
+            // } ABAJO MAS EXPLICACION
+            children: [
+                  {
+                        path: '/control',
+                        name: 'control',
+                        component: control
+                  },
+                  {
+                        path: '/compras',
+                        name: 'compras',
+                        component: compras
+                  },
+                  {
+                        path: '/productos',
+                        name: 'productos',
+                        component: productos,
+                  },
+                  {
+                        path: '/productosInternos',
+                        name: 'productosInternos',
+                        component: productosInternos
+                  },
+                  {
+                        path: '/AgregarProducto',
+                        name: 'AgregarProducto',
+                        component: AgregarProducto
+                  },
+                  {
+                        path: '/productosPublicos',
+                        name: 'productosPublicos',
+                        component: productosPublicos
+                  },
+                  {
+                        path: '/historialMedico',
+                        name: 'reportehistorialmedico',
+                        component: historialMedico
+                  },
+                  {
+                        path: '/consultasHechas',
+                        name: 'reportconsultasrealizadas',
+                        component: consultasHechas
+                  },
+                  {
+                        path: '/consultasRechazadas',
+                        name: 'reportconsultasrechazadas',
+                        component: consultasRechazadas
+                  },
+                  {
+                        path: '/ordenesCompra',
+                        name: 'reportordenescompra',
+                        component: ordenesCompra
+                  },
+                  {
+                        path: '/reporteVentas',
+                        name: 'reporteventas',
+                        component: reporteVentas
+                  },
+                  {
+                        path: '/consultas',
+                        name: 'consultas',
+                        component: consultas
+                  },
+                  {
+                        path: '/GestionProveedores',
+                        name: 'GestionProveedores',
+                        component: GestionProveedores
+                  },
+                  {
+                        path: '/GestionUsuarios',
+                        name: 'GestionUsuarios',
+                        component: gestionusAdmin
+                  },
+                  {
+                        path: '/AdminServicios',
+                        name: 'AdminServicios',
+                        component: Adminservicios
+                  },
+                  {
+                        path: '/ordenes',
+                        name: 'ordenes',
+                        component: ordenes
+                  },
+                  {
+                        path: '/add',
+                        name: 'add',
+                        component: AgregarProductoExistente
+                  }
+>>>>>>> 5d9ff0bc982c5629c674e59c29d6d1c44e93089c
 
-    ]
-  },
+            ]
+      },
 ]
 
 
@@ -215,8 +365,8 @@ const routes = [
 
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+      history: createWebHistory(import.meta.env.BASE_URL),
+      routes
 })
 
 export default router
@@ -224,11 +374,11 @@ export default router
 import { createRouter, createWebHistory } from 'vue-router'
 import calendar from '../views/Calendar/Calendario.vue'
 import principalMain from '../../src/views/Inicio/MainInicio.vue'
-import control from '../views/Administracion/MenuManagmentView.vue'; 
+import control from '../views/Administracion/MenuManagmentView.vue';
 import panelAdmin from '../views/Administracion/PanelAdminView.vue';
-import productos from '../views/Productos/TablaProductsPublicsView.vue'; 
-import productosInternos from '../views/Productos/TablaProductsInternosView.vue'; 
-import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue'; 
+import productos from '../views/Productos/TablaProductsPublicsView.vue';
+import productosInternos from '../views/Productos/TablaProductsInternosView.vue';
+import productosPublicos from '../views/Productos/TablaProductsPublicsView.vue';
 import historialMedico from '../views/Reportes/HistorialMedicoView.vue';
 import consultasHechas from '../views/Reportes/ConsultasRealizadasView.vue';
 import consultasRechazadas from '../views/Reportes/ConsultasRechazadasView.vue';
@@ -252,7 +402,7 @@ import catalogo from '../views/productos/catalogoView.vue'
 //import sidebar from '../views/Administracion/PanelAdminView.vue'
 import AgregarProducto from '../views/Productos/AgregarProducto.vue';
 import AgregarProductoExistente from '../views/productos/AgregarProductoExistente.vue'
-
+import servicios from '../views/servicios/servicios.vue'
 
 import citasTotales from '../views/Citas/CitasTotales.vue'
 import citasAceptadas from '../views/citas/CitasAceptadas.vue'
@@ -261,8 +411,8 @@ import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'
 import HistorialMedicoC from '../views/HistorialMedico/HistorialMedicoViewCliente.vue'
 import citasPendientesC from '../views/CitasPendientesCliente/CitasPendientesClienteView.vue';
 
-
-
+import serviciosesteticos from '../views/Servicios/serviciosesteticos.vue'
+import serviciosclinicos from '../views/Servicios/serviciosclinicos.vue'
 
 
 
