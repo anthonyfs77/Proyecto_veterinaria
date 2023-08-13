@@ -379,5 +379,45 @@ onMounted(estadisticas_positivo_negativo)
 h1 {
   font-size: 30px;
 }
+
+
+
+
+
+@media (max-width: 680px) {
+  .cont {
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+
+  .top-menu h3 {
+    font-size: 18px;
+  }
+
+  .vista {
+    grid-template-columns: 1fr;
+  }
+
+  .pequenas {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .pequenas div {
+    justify-content: flex-start;
+  }
+
+  .panel {
+    grid-gap: 20px;
+  }
+
+
+  .tabla {
+    margin-bottom: 20px;
+    width: 200%;
+  }
+}
 </style>
 

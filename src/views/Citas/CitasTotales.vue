@@ -11,22 +11,24 @@
         </div>
       </div>
       <div class="table">
-        <div class="headerTable">
-          <h4>Nombre</h4>
-          <h4>Telefono</h4>
-          <h4>Fecha cita</h4>
-          <h4>Estatus</h4>
-          <h4>Raza</h4>
-        </div>
-        <div class="cont-table">
-          <div v-for="citas in citas" :key="citas.id" class="fila" >
-            <!-- Pasa las propiedades únicas a Rows -->
-            <Rows @click="seleccion(citas.id)" :nombre="citas.nombre" :telefono="citas.telefono1"
-                  :fecha_cita="citas.fecha_cita" :estatus="citas.estatus"
-                  :raza="citas.raza"/>
+        <div class="tableCel">
+          <div class="headerTable">
+            <h4>Nombre</h4>
+            <h4>Telefono</h4>
+            <h4>Fecha cita</h4>
+            <h4>Estatus</h4>
+            <h4>Raza</h4>
           </div>
-          <div>
-            <mensaje v-if="inicial"/>
+          <div class="cont-table">
+            <div v-for="citas in citas" :key="citas.id" class="fila" >
+              <!-- Pasa las propiedades únicas a Rows -->
+              <Rows @click="seleccion(citas.id)" :nombre="citas.nombre" :telefono="citas.telefono1"
+                    :fecha_cita="citas.fecha_cita" :estatus="citas.estatus"
+                    :raza="citas.raza"/>
+            </div>
+            <div>
+              <mensaje v-if="inicial"/>
+            </div>
           </div>
         </div>
       </div>
@@ -200,5 +202,30 @@ button:focus {
 
 button:active .icon svg {
   transform: scale(0.8);
+}
+
+
+
+@media (max-width: 680px) {
+  .controles {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+    align-items: center;
+  }
+  .headerTable {
+    width: 40em;
+
+  }
+
+ .tableCel{
+   width: 80em;
+   background-color: green;
+ }
+
+  .fila {
+
+    padding: 0.5rem;
+  }
 }
 </style>

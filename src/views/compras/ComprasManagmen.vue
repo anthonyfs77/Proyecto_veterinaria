@@ -252,8 +252,6 @@ const formatDate = (id, dateTimeString) => {
     grid-template-columns: 1.1fr 0.5fr;
     grid-template-rows: 1fr;
     gap: 0px 0px;
-    grid-template-areas:
-        ". .";
 }
 
 h4 {
@@ -467,7 +465,28 @@ h4 {
     }
 }
 
-.input:focus {
-    animation: input-focus 0.3s ease;
+/* Media query para tamaños pequeños (max-width: 680px) */
+@media (max-width: 680px) {
+  .container-fluid {
+    grid-template-rows: 1fr 0.5fr;
+    grid-template-columns: 1fr;
+  }
+
+  .productos {
+    padding: 0.5rem;
+  }
+
+  .controles {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .prod {
+    margin-top: 1rem;
+  }
 }
+
+
+
+
 </style>

@@ -1282,10 +1282,6 @@ width: 170px;
 
 
 
-/**
-* responsive for large than 1200px screen
-*/
-
 @media (min-width: 1200px) {
 
   /**

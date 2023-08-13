@@ -180,7 +180,46 @@ strong {
     border-bottom: 3px solid #ffd800;
 }
 
-.header {
-    margin-top: 0px;
+@media (max-width: 680px) {
+
+  h3 {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  .controles {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 0;
+    height: auto;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 10px;
+  }
+
+
+  #black {
+    background-color: black;
+    color: white;
+  }
+
+  .rango {
+    justify-content: flex-start;
+  }
+
+  .botones {
+    flex-direction: column;
+    gap: 10px 0;
+    align-items: flex-start;
+  }
+
+  .headerTable {
+    justify-content: space-evenly;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
 }
+
+
 </style>
