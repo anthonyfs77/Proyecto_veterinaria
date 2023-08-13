@@ -21,9 +21,8 @@
         </div>
         <div class="time  d-flex justify-content-center align-items-center">
           <div class="tiempo-1 d-flex justify-content-center align-items-center flex-column">
-            <div class="hour d-flex gap-3">
+            <div class="hour d-flex gap-3 ">
               <h2>{{formatDate(1,citasdata.data.length > 0 ? citasdata.data[0].fecha_registro : '') }}</h2>
-
             </div>
             <p>{{formatDate(3,citasdata.data.length > 0 ? citasdata.data[0].fecha_registro : '') }}</p>
           </div>
@@ -62,9 +61,9 @@
               </div>
               <div class="Aceptar d-flex justify-content-center align-items-end">
                 <button class="select" @click="respuesta(2)">
-                  <span class="text">Aceptar</span>
-                  <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"></svg>
+                  <span class="text">Realizada</span>
+                  <span class="icon green">
+
                     <span class="material-symbols-outlined">done</span>
                   </span>
                 </button>
@@ -75,8 +74,8 @@
       </div>
     </div>
     <div class="alertas">
-        <successAlert name="Cita aceptada" v-if="mostrarAlertSuccess"/>
-        <errorAlert name="Cita rechazada" v-if="mostrarAlertError"/>
+      <successAlert name="Cita Realizada" v-if="mostrarAlertSuccess"/>
+      <errorAlert name="Cita rechazada" v-if="mostrarAlertError"/>
     </div>
   </div>
 </template>
@@ -133,8 +132,8 @@ const dataCita = async () => {
 var CitaResponse = ref();
 const respuesta = (seleccion) =>{
   CitaResponse.value = seleccion;
-  CitaResponse.value = CitaResponse.value === 1 ? 'Rechazada' : CitaResponse.value === 2 ? 'Aceptada' : 'otro_valor';
-  if (CitaResponse.value === 'Aceptada'){
+  CitaResponse.value = CitaResponse.value === 1 ? 'Rechazada' : CitaResponse.value === 2 ? 'Realizada' : 'otro_valor';
+  if (CitaResponse.value === 'Realizada'){
     mostrarAlertSuccess.value = true
     mostrarAlertError.value = false
   } else if(CitaResponse.value === 'Rechazada'){
@@ -150,7 +149,7 @@ const citaResponse = async () => {
       cita_id: id,
       cita_respuesta: CitaResponse.value
     }
-    const response = await axios.post('http://web.backend.com/citasResponse', data)
+    const response = await axios.post('http://web.backend.com/citasAceptadasResponse', data)
     console.log(response)
     isLoading.value = false
   } catch (error) {
@@ -164,8 +163,7 @@ const citaResponse = async () => {
 // 1 horas y minutos formato
 // 2 solo año formato
 // 3 mes con dia formato
-// 4 solo dia
-// 5 solo mes
+
 const formatDate = (id, dateTimeString) => {
   if (!dateTimeString) {
     return 'No hay datos';
@@ -222,6 +220,10 @@ const salir = () => {
   transform: translate(-20%, -50%);
 }
 
+.green{
+  color: white;
+}
+
 #load{
   position: fixed;
   top: 50%;
@@ -231,6 +233,7 @@ const salir = () => {
   z-index: 90;
   transform: translate(20%, -10%);
 }
+
 
 #salir{
   cursor:pointer;
@@ -364,7 +367,6 @@ button .text {
 
 button .icon {
   position: absolute;
-  border-left: 1px solid #c41b1b;
   transform: translateX(110px);
   height: 40px;
   width: 40px;

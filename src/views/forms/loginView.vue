@@ -107,7 +107,7 @@ var mostrarError = ref();
 var mostrarSuccess = ref();
 
 const redirectToPage = () => {                                            
-    router.push('/Home');
+    router.push('/cuerpo');
 };
 
 

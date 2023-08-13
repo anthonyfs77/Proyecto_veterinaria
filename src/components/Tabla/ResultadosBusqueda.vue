@@ -31,7 +31,6 @@
   .text-green {
     color: green;
   }
-  
   .app{
     display: flex;
     flex-direction: column;

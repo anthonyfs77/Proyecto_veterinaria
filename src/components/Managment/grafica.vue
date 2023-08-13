@@ -6,10 +6,10 @@
 
 <script setup>
 import { onMounted, ref, reactive } from 'vue';
-import { Chart, LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler } from 'chart.js'; // Importa el complemento 'Filler'
+import { Chart, LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler, Tooltip } from 'chart.js';
 import axios from 'axios';
 
-Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler);
+Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement, Title, Filler, Tooltip);
 
 const lineChartCanvas = ref(null);
 const data = ref([]);
@@ -24,7 +24,6 @@ const lastDayOfMonth = new Date(year, mes, 0);
 const endDate = new Date(year, mes - 1, lastDayOfMonth.getDate());
 const formattedStartDate = startDate.toISOString().substring(0, 10);
 const formattedEndDate = endDate.toISOString().substring(0, 10);
-
 
 const fetchData = async () => {
   const rango = {
@@ -62,16 +61,16 @@ const chartData = reactive({
     {
       label: 'Órdenes por día',
       borderColor: 'rgb(163, 39, 240)',
-      backgroundColor: 'rgba(163, 39, 240, 0.3)',
+      backgroundColor: 'rgba(163, 39, 240, 0.2)',
       data: [],
-      fill: false,
+      fill: true,
     },
     {
       label: 'Órdenes del mes pasado',
       borderColor: 'rgba(255, 99, 132, 0.3)',
       backgroundColor: 'rgba(255, 99, 132, 0.1)',
       data: [],
-      fill: false,
+      fill: true,
     },
   ],
 });
@@ -92,9 +91,15 @@ const chartOptions = {
         display: true,
         text: 'Órdenes',
       },
-      grid:{
-        display:true,
-      }
+      grid: {
+        display: true,
+      },
+    },
+  },
+  plugins: {
+    tooltip: {
+      mode: 'index',
+      intersect: false,
     },
   },
 };
@@ -123,11 +128,10 @@ onMounted(() => {
     options: chartOptions,
   });
 
-  // Actualizar los datos del gráfico en el intervalo deseado
   setInterval(() => {
     fetchData();
     updateChartData();
-    chart.update(); // Actualizar el gráfico con los nuevos datos
+    chart.update();
   }, 300);
 });
 </script>

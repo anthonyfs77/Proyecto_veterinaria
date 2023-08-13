@@ -18,7 +18,7 @@
         <div class="izquierdo">
           <div class="btns"></div>
                 <btn2 @click="filtrar" title="Aplicar"/> 
-                <btn2  @click="fetchData" title="Limpiar"/>
+                <btn2 id="black"  @click="fetchData" title="Limpiar"/>
           </div>
       </div>
       <div class="table">
@@ -44,7 +44,7 @@
 <script setup>
 import Rows from '../../components/Tabla/RowTablesInternos.vue'
 import encabezado from '../../components/Tabla/header.vue'
-import search from '../../components/ControlesIndividuales/BuscarInterno.vue'
+import search from '../../components/ControlesIndividuales/BuscarPublicos.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
 import axios from 'axios'
@@ -146,6 +146,10 @@ span {
     height: 100vh;
 }
 
+#black{
+  background-color: black;
+  color: white;
+}
 
 .header {
     display: flex;

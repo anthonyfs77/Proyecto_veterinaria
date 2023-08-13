@@ -14,17 +14,27 @@
   <script setup>
   import axios from 'axios'
   import { ref, watch} from 'vue'
+  import {StoreProdPublics} from '@/stores/counter.js'
+  const prodPublico = StoreProdPublics();
+  const productos = ref([])
+
 
   const nombre = ref('');
 
-  const updateVariable = () => {
-    // Emitir un evento personalizado con el valor del nombre
-    emit('input', nombre.value);
+  const fetchData = async () =>{
+    try{
+     // productos.value = response.data.data;
+      const response = await axios.post('http://web.backend.com/buscar', {nombre: nombre.value});
+      productos.value = response.data.data
+      prodPublico.setVariable(productos.value)
+      console.log(productos.value)
+    } catch(error){
+      console.log(error)
+    }
   }
 
-  // Agregar un watcher para el valor "nombre" para emitir el evento "input"
   watch(nombre, () => {
-    updateVariable();
+    fetchData()
   });
 
   

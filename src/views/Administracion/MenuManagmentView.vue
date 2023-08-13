@@ -33,10 +33,10 @@
                           :porcentaje="ventas.porcentaje_crecimiento"
                           :arrow="arrow_ventas"/></div>
 
-          <div>
-            <info_card icono="payments" name="Ganancia" porcentaje="21"
+          <div v-for="monto in montoT" :key="monto.monto_mes_actual">
+            <info_card icono="payments" name="Ganancia" :porcentaje="monto.porcentaje_crecimiento"
                           cardStyle="estilo3" status="estilo-positivo"
-                          number="21"/></div>
+                          :number="monto.monto_mes_actual"/></div>
 
           <div v-for="citas in citasR" :key="citas.citas_mes_actual">
             <info_card icono="pets" name="Citas tot." :porcentaje="citas.porcentaje_crecimiento"
@@ -44,9 +44,7 @@
                           :number="citas.citas_mes_actual"
                           :arrow="arrow_citas"/></div>
         </div>
-        <div id="confirmar" >
-          <confirmar_salida v-if="mostrar"/>
-        </div>
+
       </div>
       <div class="tabla">
         <div class="table">
@@ -54,7 +52,7 @@
         </div>
         <div class="extra">
           <div class="compras">
-
+              <graf/>
           </div>
         </div>
       </div>
@@ -88,7 +86,6 @@ import TablaComp from '../../components/Managment/TablaComp.vue'
 import grafica from '../../components/managment/grafica.vue'
 import estadisticas from '../../components/Managment/estadisticas.vue'
 import info_card from '../../components/Managment/InfoCard.vue'
-import confirmar_salida from '../../components/Mensajes/confirmarSalida.vue'
 
 
 const globalStore = useGlobalStore();
@@ -129,12 +126,15 @@ const bajaProd = async () => {
 
 const ventas = ref([]);
 const citasR = ref([])
+const montoT = ref([])
 const cantidadVentas = async () => {
   try {
     const response = await axios.get('http://web.backend.com/total_ventas');
     ventas.value = response.data.data;
     const citasResponse = await axios.get('http://web.backend.com/total_citas');
     citasR.value = citasResponse.data.data;
+    const montoTotal = await axios.get('http://web.backend.com/monto_total');
+    montoT.value = montoTotal.data.data
   } catch (error) {
     console.log(error)
   }
@@ -212,8 +212,8 @@ onMounted(estadisticas_positivo_negativo)
 .extra{
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-rows: 0.3fr 1.8fr;
   gap: 0px 0px;
+  max-height: 20.5em;
 }
 
 .compras{
@@ -221,6 +221,7 @@ onMounted(estadisticas_positivo_negativo)
   align-items: flex-end;
   justify-content: center;
   margin-bottom: 15px;
+
 }
 
 #confirmar{
@@ -280,14 +281,14 @@ onMounted(estadisticas_positivo_negativo)
   gap: 20px;
 }
 .red div{
-  background-color: red;
+  background-color: rgba(255, 99, 132, 0.5);
   width: 20px;
   height: 20px;
   border-radius: 10px 0px 10px 0px;
 }
 
 .purple div{
-  background-color: purple;
+  background-color: rgba(163, 39, 240, 0.5);
   width: 20px;
   height: 20px;
   border-radius: 10px 0px 10px 0px;

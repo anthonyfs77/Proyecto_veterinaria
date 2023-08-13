@@ -6,7 +6,7 @@
             <p>{{ precio }} <span>$</span></p>
             <p>{{numero}}</p>
             <div class="btns">
-                <button @click="mandarTrue">
+                <button @click="mandarTrue(1)">
                     <span class="material-symbols-outlined">
                         add
                     </span>
@@ -37,23 +37,29 @@ const productoR = ref();
 
 defineProps({
     name: { type: String },
-    precio: { type: Number }, 
-    img: { type: String }, 
+    precio: { type: Number },
+    img: { type: String },
     cant:{ type: Number},
     id:{type: Number},
 
 })
 
 const store = StorePublics();
-var numero = ref(1)
+var numero = ref(0)
 
 
-const mandarTrue =  () =>{
+const mandarTrue =  (a) =>{
+  if (a === 1){
     numero.value ++;
+
+  }else{
     mandarCant.value = numero.value
     store.setVariable(numero)
     cantidad.setVariable(mandarCant.value)
+  }
 }
+
+
 
 const mandarFalse =  () =>{
   if (numero.value >= 2){
@@ -67,9 +73,12 @@ const mandarFalse =  () =>{
 }
 
 
+
+setInterval(mandarTrue, 1000)
+
 </script>
     
-<style scoped>  
+<style scoped>
 .app {
       display: flex;
       justify-content: center;
