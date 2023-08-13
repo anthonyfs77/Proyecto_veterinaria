@@ -13,58 +13,22 @@
   <div v-if="ShowWindow" class="overlay">
     <div class="floating-form">
       <form>
-        <InputFecha v-model="fecha" @input="HistorialMedicoFecha"/>
-        <br>
         <div class="table-container2">
-          <div class="responsive-table" v-show="ShowTable2">
-            <table class="table table-hover custom-table">
-              <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Motivo</th>
-                <th>Servicios</th>
-                <th>Servicio_solicitado</th>
-                <th>Peso</th>
-                <th>Altura</th>
-                <th>Edad</th>
-                <th>Observaciones</th>
-                <th>Medicacion</th>
-                <th>Cantidad</th>
-                <th>Dosis</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr v-for="datos in HistorialM2">
-                <td>{{datos.Fecha}}</td>
-                <td>{{datos.Motivo}}</td>
-                <td>{{datos.Servicios}}</td>
-                <td>{{datos.Servicio_solicitado}}</td>
-                <td>{{datos.Peso}}</td>
-                <td>{{datos.Altura}}</td>
-                <td>{{datos.Edad}}</td>
-                <td>{{datos.Observaciones}}</td>
-                <td>{{datos.Medicacion}}</td>
-                <td>{{datos.Cantidad}}</td>
-                <td>{{datos.Dosis}}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
           <div class="responsive-table" v-show="ShowTable1">
             <table class="table table-hover custom-table">
               <thead>
               <tr>
                 <th>Fecha</th>
-                <th>Motivo</th>
-                <th>Servicios</th>
-                <th>Servicio_solicitado</th>
+                <th>Motivo por el cual se agendo la cita</th>
+                <th>Servicios ofrecidos</th>
                 <th>Peso</th>
                 <th>Altura</th>
                 <th>Edad</th>
                 <th>Observaciones</th>
                 <th>Medicacion</th>
                 <th>Cantidad</th>
-                <th>Dosis</th>
+                <th>Costo de los servicios ofrecidos</th>
+                <th>Costo de los productos</th>
               </tr>
               </thead>
               <tbody>
@@ -72,20 +36,20 @@
                 <td>{{datos.Fecha}}</td>
                 <td>{{datos.Motivo}}</td>
                 <td>{{datos.Servicios}}</td>
-                <td>{{datos.Servicio_solicitado}}</td>
                 <td>{{datos.Peso}}</td>
                 <td>{{datos.Altura}}</td>
                 <td>{{datos.Edad}}</td>
                 <td>{{datos.Observaciones}}</td>
                 <td>{{datos.Medicacion}}</td>
                 <td>{{datos.Cantidad}}</td>
-                <td>{{datos.Dosis}}</td>
+                <td>${{consulta.costo_servicios}} + costo de la cita</td>
+                <td>${{consulta.costo_productos}}</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
-
+        <br><br><br><br>
         <p id="Atras" @click="CloseWindow">Salir</p>
       </form>
     </div>
@@ -95,13 +59,13 @@
   <script setup>
   import { ref, onMounted, watch } from 'vue';
   import axios from 'axios';
-  import InputFecha from "@/components/ControlesSencillos/InputFecha.vue";
+  import {useUsuarioStore} from "@/stores/UsuariosStore";
 
-  const id_cliente = ref("1");
+  let usuarioStore = useUsuarioStore();
+
+  const id_cliente = ref(usuarioStore.usuario.usuario.id);
 
   const ShowTable1 = ref(true);
-  const ShowTable2 = ref(false);
-
   const ShowWindow = ref(false);
 
   const DisplayWindow = (id) => {
@@ -131,22 +95,7 @@
   onMounted(FiltroMascotas);
 
   const id_animal = ref("");
-  const fecha = ref("");
-  const HistorialM1 = ref ([]);
-  const HistorialMedicoFecha = async () => {
-    ShowTable1.value = false;
-    ShowTable2.value = true;
-    try {
-  const response = await axios.post('http://web.Backend.com/HistorialMedicoIDFecha', {Fecha: fecha.value, id_animal: id_animal.value} )
-  HistorialM1.value = response.data.data;
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-  };
-  watch(fecha, (newValue) => {
-    HistorialMedicoFecha();
-  });
+
 
   const HistorialM2 = ref([]);
   const HistorialMedicoIDMascota = async () => {
@@ -210,6 +159,7 @@
   color: #ffffff;
   transform: translateY(-4px); 
   border-color: #dfb704;
+  cursor: pointer;
 }
   .overlay {
     font-family: 'Comfortaa';
@@ -229,6 +179,8 @@
     background-color: white;
     border-radius: 10px;
     padding: 20px;
+    height: 50%;
+    width: 80%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
 
@@ -252,9 +204,16 @@
     width: 100%;
   }
   .table-container2 {
-    height: 100px;
+    height: 300px;
     overflow: auto;
   }
+th{
+  background-color: #f3ae23;
+  color: #ffffff;
+}
 
+#Atras{
+  cursor: pointer;
+}
   </style>
     

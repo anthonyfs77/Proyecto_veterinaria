@@ -76,9 +76,9 @@ onBeforeUnmount(() => {
   left: 10px;
   width: 5vh;
   height: 5vh;
-  background-color: white;
-  border-color: rgba(0, 255, 255, 0);
-  box-shadow: 0 2rem 3rem rgba(53, 54, 58, 0.18);
+  background-color: rgb(255, 255, 255);
+  border-color: rgba(255, 255, 255, 0);
+  box-shadow: 0 0rem 2rem rgba(77, 75, 75, 0.514);
   z-index: 4;
   display: none;
 }
@@ -86,7 +86,7 @@ onBeforeUnmount(() => {
 @media screen and (max-width: 1300px) {
   .burger-menu {
     display: block;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.438);
 
   }
 }

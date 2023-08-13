@@ -140,8 +140,8 @@ var mostrarError =      ref();
 var mostrarSuccess =    ref();
 var mostrarErrorRegistro = ref()
 const router =          useRouter();
-const tipo_usuario = ref('Cliente')
-const respuesta =       ref()
+
+
 
 const registro = () => {
     if (
@@ -193,17 +193,18 @@ const verificarCorreo = async () => {
 
 const data = async () => {
     const reg = {
-        nombre: nombre.value,
-        last: last.value,
-        contrasena: contrasena.value,
+        nombres: nombre.value,
+        apellidos: last.value,
+        password: contrasena.value,
         correo: correo.value,
         tel1: tel1.value,
         tel2: tel2.value,
-        tipo_usuario: tipo_usuario.value,
+        ts: "Cliente"
     };
 
     try {
-        const response = await axios.post('http://web.backend.com/registro', reg);
+        const response = await axios.post('http://web.backend.com/signin', reg);
+        console.log(response.data); 
     } catch (error) {
         console.error(error);
     }

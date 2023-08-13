@@ -10,6 +10,7 @@
                 <li><router-link :to="{name: 'login'}">Iniciar sesion</router-link></li>
                 <li><router-link :to="{name: 'register'}">Registrarse</router-link></li>
                 <li><router-link :to="{name: 'servicios'}">Servicios</router-link></li>
+
             </ul>
             <div class="main">
             
@@ -24,6 +25,7 @@
                     <li><a href="#">Contacto</a></li>
                     <li><router-link :to="{name: 'login'}">Iniciar sesion</router-link></li>
                 <li><router-link :to="{name: 'register'}">Registrarse</router-link></li>
+
                 </ul>
             </div>
             <router-link :to="{name: 'control'}">
@@ -44,6 +46,9 @@
 <script setup>
 import { ref } from 'vue'
 import {dataLog} from '@/stores/counter.js'
+import router from "@/router";
+import {RouterLink} from "vue-router";
+
 var userData = dataLog()
 const nombre = ref([])
 nombre.value = userData.state.variable;

@@ -1,6 +1,7 @@
 <template>
       <div class="pantalla">
             <div id="imagen-services">
+                  <img src="@\assets\img\imagen-servicios-veterinaria.png" alt="imagen-servicios">
                   <!-- <img src="../src/assets/img/imagen-servicios-veterinaria" alt="imagen-servicios"> -->
                   <h4>SERVICIOS</h4>
             </div>

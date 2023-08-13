@@ -10,6 +10,7 @@
                 <li><router-link :to="{name: 'HistorialMedicoC'}">Historial medico</router-link></li>
               <li><router-link :to="{name: 'citasPendientesC'}">Citas pendientes</router-link></li>
               <li><router-link :to="{name: 'servicios'}">Servicios</router-link></li>
+              <li @click="cerrarSession">Cerrar Sesion</li>
                 <li><a href="#">contacto</a></li>
             </ul>
             <div class="main">
@@ -23,6 +24,7 @@
                     <li><router-link :to="{name: 'ubicacion'}">Ubicacion</router-link></li>
                   <li><router-link :to="{name: 'HistorialMedicoC'}">Historial medico</router-link></li>
                   <li><router-link :to="{name: 'citasPendientesC'}">Citas pendientes</router-link></li>
+                  <li @click="cerrarSession">Cerrar Sesion</li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Perfil</a></li>
                 </ul>
@@ -43,6 +45,8 @@
 <script setup>
 import { ref } from 'vue'
 import {dataLog} from '@/stores/counter.js'
+import {useUsuarioStore} from "@/stores/UsuariosStore";
+import router from "@/router";
 var userData = dataLog()
 const nombre = ref([])
 nombre.value = userData.state.variable;
@@ -62,6 +66,12 @@ const menu = () => {
         console.log('false')
     }
 }
+
+const UsuarioStore = useUsuarioStore();
+const cerrarSession = () => {
+  UsuarioStore.closeSession();
+  router.push('/login');
+};
 
 
 </script>
