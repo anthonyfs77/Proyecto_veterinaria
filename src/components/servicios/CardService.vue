@@ -1,6 +1,7 @@
 <script setup>
-import {ref, defineProps, watch, computed, toRefs} from 'vue';
+import {ref, defineProps, watch, computed, toRefs, onMounted} from 'vue';
 import BotonConEstilo from '../ControlesIndividuales/BotonAntho.vue';
+import RangoPrecioPublicos from '../ControlesIndividuales/RangoPrecioPublicos.vue';
 const props = defineProps({
   Service: {
     type: String,
@@ -25,10 +26,13 @@ const props = defineProps({
   precio: {
     type: Number,
     default: 0
+  },
+  ispublic: {
+    type: Boolean
   }
 });
 
-let { Description, Service, Id, Foto } = props;
+let { Description, Service, Foto } = props;
 const emits = defineEmits(['ide'])
 const { Type } = toRefs(props);
 const computedType = computed(() => {
@@ -39,9 +43,12 @@ const computedType = computed(() => {
             return 'Estético';
     }
 });
-const editService = (value) =>{
-    emits('ide', value);
+const editService = (id, isPublic) => {
+  emits('ide', { id, isPublic });
 }
+
+const { ispublic, Id } = toRefs(props);
+
 </script>
 
 
@@ -62,7 +69,8 @@ const editService = (value) =>{
                 <p class="text">Precio: $ {{ precio }}</p>
             </div>
             <div  class="boton">
-                <BotonConEstilo @click="editService(Id)" title="Publicar" />
+                <BotonConEstilo @click="editService(Id, ispublic)" title="Publicar" v-show="ispublic" />
+                <BotonConEstilo @click="editService(Id, ispublic)" title="Despublicar" v-show="!ispublic" />
             </div>
       </div>
     </div>
