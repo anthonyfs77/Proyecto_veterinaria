@@ -316,7 +316,8 @@ import citasPendientesC from '../views/CitasPendientesCliente/CitasPendientesCli
 
 import serviciosesteticos from '../views/Servicios/serviciosesteticos.vue'
 import serviciosclinicos from '../views/Servicios/serviciosclinicos.vue'
-
+import citasTotales from '../views/citas/citasTotales.vue'
+import citasAceptadas from '../views/citas/citasAceptadas.vue'
 
 
 
