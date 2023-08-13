@@ -6,7 +6,7 @@
           <span class="material-symbols-outlined">pet_supplies</span><h2>Consultas Realizadas</h2></div>
       
       <div class="filtro2">
-        <InputCliente tittle1="Nombres(S)" tittle2="Apellidos" @input="ReporteConsultas" v-model:modelValue1="nomC" v-model:modelValue2="apellidos" />
+        <InputCliente tittle1="Nombre del cliente atendido" tittle2="Apellidos del cliente atendido" @input="ReporteConsultas" v-model:modelValue1="nomC" v-model:modelValue2="apellidos" />
         <div class="label">
           <p class="plabel">Nombre mascota</p>
           <Inputs placeholder="Nombre mascota" v-model="nomM" @input="ReporteConsultas"/>
@@ -64,6 +64,8 @@
   import axios from 'axios';
  import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
  import Inputs from "@/components/ControlesSencillos/Inputs.vue";
+ import Router from "@/router";
+  import router from "@/router";
 
  const nomC = ref("");
  const nomM = ref("");
@@ -86,6 +88,7 @@
      console.error(error)
    }
  }
+
   </script>
   
   <style scoped>
@@ -98,7 +101,11 @@
   .first-container, .pantalla{
     font-family: 'Comfortaa';
 }
-
+  @media (max-width: 767px) {
+    .table-container::-webkit-scrollbar{ /*Oculta la barra deslizadora en navegadores como Chrome, Safari, Internet Explorer y Edge */
+      display: none;
+    }
+  }
   .first-container{
     width: 100%;
     height: 100vh;
@@ -155,24 +162,7 @@
   overflow: auto;
 }
 
-@media (max-width: 767px) {
-  .custom-table thead {
-    display: none;
-  }
-  .custom-table td {
-    display: block;
-    text-align: right;
-  }
-  .custom-table td:before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  #Nombre {
-  font-weight: bold;
-}
-}
+
 
 .label{
   display: flex;

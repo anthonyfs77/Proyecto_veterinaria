@@ -287,7 +287,6 @@ import serviciosclinicos from '../views/Servicios/serviciosclinicos.vue'
 
 
 
-
 // // to = a donde
 // // from = de donde
 // // next = lugar destino

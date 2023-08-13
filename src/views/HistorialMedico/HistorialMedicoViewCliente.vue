@@ -42,14 +42,14 @@
                 <td>{{datos.Observaciones}}</td>
                 <td>{{datos.Medicacion}}</td>
                 <td>{{datos.Cantidad}}</td>
-                <td>${{consulta.costo_servicios}} + costo de la cita</td>
-                <td>${{consulta.costo_productos}}</td>
+                <td>${{datos.costo_servicios}} + costo de la cita</td>
+                <td>${{datos.costo_productos}}</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <p id="Atras" @click="CloseWindow">Salir</p>
       </form>
     </div>
@@ -115,6 +115,10 @@
   <style scoped>
   * {
     box-sizing: border-box;
+  }
+
+  .table-container::-webkit-scrollbar{ /*Oculta la barra deslizadora en navegadores como Chrome, Safari, Internet Explorer y Edge */
+    display: none;
   }
   
   .first-container {
@@ -214,6 +218,13 @@ th{
 
 #Atras{
   cursor: pointer;
+  color: red;
 }
+
+  @media (max-width: 767px) {
+    .table-container2::-webkit-scrollbar{ /*Oculta la barra deslizadora en navegadores como Chrome, Safari, Internet Explorer y Edge */
+      display: none;
+    }
+  }
   </style>
     

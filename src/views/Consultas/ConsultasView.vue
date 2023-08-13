@@ -6,19 +6,12 @@
           <span class="material-symbols-outlined">local_hospital</span><h2>Generar Consultas</h2>
         </div>
       <div class="filtro">
-        <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Fecha', value: 'opcion2' },{ text: 'Reporte General', value: 'opcion3' }]"/>
+        <ComboBox v-model="selectedOption" title="Filtrar por:" :options="[{ text: 'Cliente', value: 'opcion1' },{ text: 'Reporte General', value: 'opcion3' }]"/>
       </div>
       <div class="filtro2" v-show="status1">
         <InputCliente tittle1="Nombres(S)" tittle2="Apellidos" v-model:modelValue1="Nombres" v-model:modelValue2="Apellidos" @input="GenerarConsultasCliente" />
       </div>
-  
-      <div class="filtro4" v-show="status3">
-        <div class="label">
-          <p class="plabel">Fecha</p>
-          <InputFecha  v-model="FechaCons" @input="GenerarConsultasFecha" /><br>
-          <InputFecha  v-model="FechaCons2" @input="GenerarConsultasFecha" /> <br>
-        </div>
-      </div>
+
     </div>
   
     <div class="pantalla">
@@ -52,37 +45,6 @@
         </table>
       </div>
       <p v-else-if="selectedOption === 'opcion3'">No hay datos disponibles.</p>
-  
-      <!-- Tabla de consultas por fecha -->
-      <div class="responsive-table" v-if="selectedOption === 'opcion2' && consFecha.length > 0">
-        <table class="table table-hover custom-table">
-        <thead>
-            <tr>
-              <th></th>
-              <th>Nombre</th>
-              <th>Especie</th>
-              <th>Raza</th>
-              <th>Genero</th>
-              <th>Dueño</th>
-              <th>Fecha</th>
-              <th>Motivo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in consFecha" :key="item.id">
-              <td><span class="material-symbols-outlined" id="Boton" @click="TServicios(item.id)">local_hospital</span></td>
-              <td id="Nombre">{{ item.Nombre }}</td>
-              <td>{{ item.Especie }}</td>
-              <td>{{ item.Raza }}</td>
-              <td>{{ item.Genero }}</td>
-              <td>{{ item.Dueño }}</td>
-              <td>{{ item.Fecha }}</td>
-              <td>{{ item.Motivo }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p v-else-if="selectedOption === 'opcion2'">No hay datos disponibles.</p>
 
       <!-- Tabla de consultas por cliente -->
       <div class="responsive-table" v-if="selectedOption === 'opcion1' && constCliente.length > 0">
@@ -146,9 +108,12 @@
           </tbody>
         </table>
       </div>
+            <br>
           </div>
-          <br>
-        
+        <router-link :to="{ name: 'reportconsultasrealizadas' }">
+          <p>Puedes ver los costos de las consultas en tu apartado de reportes</p>
+        </router-link>
+        <br>
           <button type="submit">Guardar Consulta.</button><br>
         <p id="Atras" @click="Atras">Salir</p>
       </form>
@@ -163,6 +128,8 @@
   import InputCliente from '../../components/ControlesSencillos/InputCliente.vue';
   import ComboBox from '../../components/ControlesSencillos/ComboBox.vue'
   import InputFecha from '../../components/ControlesSencillos/InputFecha.vue';
+  import router from "@/router";
+  import { useRouter } from 'vue-router';
 
   const selectedOption = ref('opcion3');
   const status1 = ref(false);
@@ -206,8 +173,8 @@
         'http://web.Backend.com/RegistroConsulta',
         Consulta
       );
-      location.reload();
       console.log("respuesta",response.data);
+      router.push('/consultasHechas')
     } catch (error) {
       console.error(error);
     }
@@ -249,18 +216,6 @@ const GenerarConsultas = async () => {
 };
 onMounted(GenerarConsultas);
 
-  const FechaCons2 = ref("");
-const FechaCons = ref("");
-const consFecha = ref ([]);
-const GenerarConsultasFecha = async () => {
-try {
-  const response = await axios.post('http://web.Backend.com/GenerarConsultasFecha', {Fecha: FechaCons.value, Fecha2: FechaCons2.value})
-  consFecha.value = response.data.data;
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-};
 
 const Nombres = ref("");
 const Apellidos = ref("");  
@@ -275,21 +230,6 @@ try {
 }
 };
 
-
-const ticket = ref(false);
-const ticketWindow = () => {
-  ticket.value = true;
-};
-
-
-const precios = ref([]);
-const costos = async () => {
-  try {
-    const response = await axios.post('')
-  }catch (error){
-    console.error(error);
-  }
-}
   </script>
   
   <style scoped>
@@ -358,21 +298,8 @@ const costos = async () => {
   }
 
   @media (max-width: 767px) {
-    .custom-table thead {
-      display: none;
-    }
-    .custom-table td {
-      display: block;
-      text-align: right;
-    }
-    .custom-table td:before {
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    #Nombre {
-    font-weight: bold;
+    .table-container::-webkit-scrollbar{ /*Oculta la barra deslizadora en navegadores como Chrome, Safari, Internet Explorer y Edge */
+    display: none;
   }
   }
   #Boton{
@@ -404,8 +331,7 @@ const costos = async () => {
 }
 
 #Atras:hover{
-    width: 22%;
-    border-bottom: 1px solid red;
+    
     cursor: pointer;
   }
   
