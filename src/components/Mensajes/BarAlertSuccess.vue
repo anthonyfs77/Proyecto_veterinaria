@@ -37,12 +37,12 @@ defineProps({
 })
 
 const isVisible = ref(true);
-const customClass = ref('slide-out');
+
 
 onMounted(() => {
     setTimeout(() => {
-      customClass.value = 'slide-out';
-    }, 200);
+      isVisible.value = false
+    }, 2000);
 });
 </script>
 

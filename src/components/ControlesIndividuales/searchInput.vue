@@ -53,7 +53,6 @@ const updateVariable = () =>{
 watch(nombre, (newValue) => {
 
   fetchData()
-  prodId()
 });
 
 setInterval(() => {
@@ -74,6 +73,7 @@ setInterval(() => {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+
 }
 .recomendaciones{
   z-index: 9999;
@@ -93,6 +93,7 @@ setInterval(() => {
 
 .search__input:hover, .search__input:focus {
   box-shadow: 0 0 1em #00000013;
+
 }
 
 .search__input:focus {
@@ -119,9 +120,5 @@ setInterval(() => {
   cursor: pointer;
 }
 
-.search__icon {
-  height: 1.3em;
-  width: 1.3em;
-  fill: #b4b4b4;
-}
+
 </style>

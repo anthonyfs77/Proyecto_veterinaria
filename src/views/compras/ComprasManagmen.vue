@@ -11,29 +11,43 @@
             <div class="prod">
                 <div class="cont-productos">
                     <producto @click="mandarIdProd(productoArray[0].id)" v-for="productoArray in productosEnPantalla" :key="productoArray[0].id"
-                      :id="productoArray[0].id"  :name="productoArray[0].nom_producto" :precio="productoArray[0].precio_venta" />
-
+                      :id="productoArray[0].existencias"  :name="productoArray[0].nom_producto" :precio="productoArray[0].precio_venta" />
                 </div>
             </div>
         </div>
         <div class="izquierdo">
 
             <div class="seccion">
-                <div class="titulo">
-                    <p class="sec-titulo">Estadisticas de productos</p>
-                </div>
+
                 <div class="cuerpo">
                     <div class="tiket">
-                        <div class="precios">
                             <div class="total-orders">
-                                <p>Cantidad absoluta de productos :</p>
-                                <h4>{{ productos_comprados }}</h4>
+                                <div class="fecha  d-flex justify-content-center align-items-center flex-column">
+                                  <h2 class="num">{{ mesActual }}</h2>
+                                  <p class="day">{{ diaActual }}</p>
+                                </div>
+                                <div class="info_prod">
+                                    <div class="id-cita d-flex gap-3">
+                                     <p>Id venta: </p>{{ tiketData.length > 0 ? tiketData[0].venta_id : '--' }}
+                                    </div>
+                                  <div class="tipo-pago d-flex gap-3">
+                                    <p>Tipo de pago: </p>{{ tiketData.length > 0 ? tiketData[0].tipo_pago : '--' }}
+                                  </div>
+                                  <div class="Products ">
+                                    <h3>Productos</h3>
+
+                                    <div class=" "  v-for="tiket in tiketData" :key="tiket.nombre_producto">
+                                      <row_tiket_producto
+                                          :nombre="tiket.nombre_producto"
+                                          :cantidad="tiket.cantidad_vendida"
+                                          :precio="tiket.precio_unitario"/>
+                                    </div>
+                                  </div>
+                                  <div class="precios d-flex gap-5 m-3">
+                                    <p>Monto Total: </p>{{ tiketData.length > 0 ? tiketData[0].monto_total : '---' }}
+                                  </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="total-orders">
-                            <p>Precio total</p>
-                            <h4><span>$</span>{{ precioTotal }}</h4>
-                        </div>
                     </div>
                     <div class="btns">
                       <div class="mtdPago">
@@ -66,20 +80,23 @@ import { useStore } from '@/stores/counter.js'
 import axios from 'axios'
 import {idProducto} from "@/stores/counter.js";
 import {cantProducto} from "@/stores/counter.js";
-
+import row_tiket_producto from '../../components/compras/RowTiketProd.vue'
 const id_producto = idProducto();
 const idProd = ref();
+
+
 
 // CALL venta_productos('efectivo', '[ [1, 3], [2,4], [3,4]]');
 const metodo_pago_total = ref('');
 const productos_compra = ref([])
 
 const cantidad = cantProducto();
-const recibirCantidad = ref(1);
+const recibirCantidad = ref()
 
 const imprimir = () =>{
-  recibirCantidad.value = cantidad.state.variable;
+  recibirCantidad.value = cantidad.state.variable
 }
+
 
 
 setInterval(imprimir, 1000)
@@ -89,12 +106,8 @@ const productosEnPantalla = ref([])
 const precioTotal = ref(0)
 const subTotal = ref(0)
 const data = ref([])
-const fecha_compra = ref();
-const nombre_cliente = ref('');
-const nombre_empleado = ref('')
 const metodo_pago = ref('')
 const productos_comprados = ref(0)
-const producto_id = ref([]);
 
 // METODO DE PAGO
 const declararTransferencia = ()=>{
@@ -118,30 +131,14 @@ const datas = {
 
 const agregar = () => {
   const newProduct = store.state.variable;
+  newProduct.cantidad = recibirCantidad.value; // Agregar la cantidad al objeto del producto
   productosEnPantalla.value.push(newProduct);
 
-  for (const productoArray of productosEnPantalla.value) {
-    const producto_id = parseFloat(productoArray[0].id);
-  }
-  productos_comprados.value ++
-  idProd.value = id_producto.state.variable; ////////
-  precioSum()
-  calcularSubtotal()
+  productos_comprados.value++;
+  idProd.value = id_producto.state.variable;
+
+  calcularSubtotal();
 }
-
-const precioSum = () => {
-  let total = 0;
-
-  for (const productoArray of productosEnPantalla.value){
-    total += recibirCantidad.value * productoArray[0].precio_venta || productoArray[0].precio_venta;
-  }
-
-  precioTotal.value = total;
-}
-
-setInterval(precioSum, 1000)
-
-
 
 
 const calcularSubtotal = () => {
@@ -158,27 +155,21 @@ const calcularSubtotal = () => {
     totalSinIva = subtotal - iva;
     subTotal.value = totalSinIva;
 }
+const tiketData = ref([])
+
 
 const reload = () =>{
   location.reload()
 }
-
-// mandar la informacion
 const terminar = async () => {
+
   const productosInfo = productosEnPantalla.value.map(producto => [producto[0].id, recibirCantidad.value]);
   const jsonData = {
     metodo_pago: metodo_pago.value,
     productos: JSON.stringify(productosInfo)
   };
-
-
-
-// Parsear la cadena JSON en un array
   const parsedProductos = JSON.parse(jsonData.productos);
-
-// Convertir los números de tipo string a números enteros
   const productosInfoParsed = parsedProductos.map(producto => [parseInt(producto[0]), parseInt(producto[1])]);
-
   const jsonDataFormatted = {
     metodo_pago: jsonData.metodo_pago,
     productos: productosInfoParsed
@@ -186,16 +177,67 @@ const terminar = async () => {
 
   console.log(jsonDataFormatted);
 
-
   try {
     const response = await axios.post('http://web.backend.com/venta', jsonDataFormatted);
     console.log(response)
   } catch (error) {
     console.log(error);
   }
+
+  try {
+    const GenerarTiket = await axios.get('http://web.backend.com/GenerarTiket');
+    tiketData.value = GenerarTiket.data.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
+
+const monthNames = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
+const fechaActual = new Date();
+
+// Obtener el día y el mes de la fecha actual
+const diaActual = fechaActual.getDate();
+const mesActual = monthNames[fechaActual.getMonth()];
+
+// 1 horas y minutos formato
+// 2 solo año formato
+// 3 mes con dia formato
+// 4 solo dia
+// 5 solo mes
+const formatDate = (id, dateTimeString) => {
+  if (!dateTimeString) {
+    return '--';
+  }
+  switch (id) {
+    case 1:
+      const dateTime = new Date(dateTimeString);
+      const hours = dateTime.getHours();
+      const minutes = dateTime.getMinutes();
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    case 2:
+      const year = new Date(dateTimeString).getFullYear();
+      return year.toString();
+    case 3:
+      const dateTimeMonth = new Date(dateTimeString);
+      const month = dateTimeMonth.getMonth();
+      const day = dateTimeMonth.getDate() + 1 ;
+
+      const formattedDate = `${monthNames[month]}, ${day}`;
+      return formattedDate;
+    case 4:
+      const dayOnly = new Date(dateTimeString).getDate() + 1;
+      return dayOnly.toString();
+    case 5:
+      const monthOnly = new Date(dateTimeString).getMonth();
+      return monthNames[monthOnly];
+    default:
+      return ' ';
+  }
+}
 
 
 </script>
@@ -214,11 +256,16 @@ const terminar = async () => {
         ". .";
 }
 
-
 h4 {
     font-size: 20px;
 }
 
+.Products{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 70%;
+}
 .term{
 
   height: 10em;
@@ -243,14 +290,6 @@ h4 {
 }
 
 .productos {
-    display: grid;
-    grid-auto-columns: 1fr;
-
-    grid-template-rows: 0.2fr 0.1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "."
-        ".";
 
 }
 
@@ -277,6 +316,8 @@ h4 {
 
 .cont-productos {
     width: 90%;
+    max-height: 66em;
+  overflow-y: auto;
     height: 90%;
 }
 
@@ -286,7 +327,10 @@ h4 {
 
 
 /* IZQUIERDO */
+.fecha{
+  border-bottom: 1px dashed rgba(132, 139, 200, 0.18);
 
+}
 
 .izquierdo {
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
@@ -294,6 +338,7 @@ h4 {
 
 .btns {
     width: 90%;
+    height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -327,7 +372,7 @@ h4 {
 
 .cuerpo {
     width: 100%;
-    height: 86%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -345,8 +390,12 @@ h4 {
 }
 
 .total-orders {
-    display: flex;
-    justify-content: space-between;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 1fr 5fr;
+  gap: 0px 0px;
+  width: 100%;
+  height: 35em;
 }
 
 /* Nombre */

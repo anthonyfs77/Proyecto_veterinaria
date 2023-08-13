@@ -271,6 +271,19 @@ export const idProducto = defineStore('global', () => {
 
 
 
+// estore para gestionar un boton
+
+export const useButtonStore = defineStore('button', {
+  state: () => ({
+    isVisible: false,
+  }),
+  actions: {
+    toggleVisibility() {
+      this.isVisible = !this.isVisible;
+    },
+  },
+});
+
 
 
 

@@ -8,7 +8,6 @@
       <!--Pantall donde se ve las vistas de los elementos del sidebar -->
       <router-view class="fondo"></router-view>
     </div>
-    <cardAlert/>
     <div class="overlay" v-show="pantalla"></div>
   </div>
 </template>

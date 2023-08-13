@@ -4,13 +4,12 @@
             <headerMenu/>
         </div>
         <div class="body">
-            <router-view></router-view>
+          <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
 import headerMenu from '../../components/cliente/menuComponents/header.vue'
 </script>
 
