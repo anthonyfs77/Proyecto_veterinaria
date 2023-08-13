@@ -1,11 +1,13 @@
 <template>
-  <div class="app">
+  <div class="pantalla">
+    <div class="app">
     <div class="title">
-      <encabezado />
+      <encabezado /> 
     </div>
     <div class="app">
       <div class="controles">
         <div class="botones">
+          <btnn title="Agendar Cita" @click="agendar"/>
         </div>
       </div>
       <div class="table">
@@ -30,20 +32,27 @@
       </div>
     </div>
   </div>
+
+  </div>
 </template>
 
 <script setup>
 import Rows from '../../components/citasComp/RowTableCitas.vue'
 import encabezado from '../../components/citasComp/CitasHeadre.vue'
-import mensaje from '../../components/citasComp/AceptacionCard.vue'
+import mensaje from '@/components/citasComp/AceptacionCard.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
+import Btnn from '@/components/ControlesIndividuales/BotonAntho.vue';
+import cita from '@/components/componentesCitas/citasLocales.vue';
 import axios from 'axios'
+import load from '../../components/loaders/loaderPrincipal.vue'
 import {ref} from 'vue'
 import {useStore} from '@/stores/counter.js'
 import {StoreProdInternos} from '@/stores/counter.js'
 import {card, citaID} from '@/stores/counter.js'
 
 
+const loading = ref(false);
+const showModal = ref(true);
 const carta = card()
 const cita_id = citaID()
 const msgID = ref()
@@ -76,6 +85,11 @@ const seleccion = (id) => {
 
 
 setInterval(fetchData, 600)
+
+
+const agendar =()=>{
+  showModal.value = true;
+}
 </script>
 
 
@@ -83,6 +97,51 @@ setInterval(fetchData, 600)
 
 <style scoped>
 
+.pantalla{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.loader{
+  position: relative;
+    z-index: 300;
+    width: 25%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.display2{
+  background-color: rgba(95, 95, 95, 0.4);
+  height: 100%;
+  width: 100%;
+  z-index: 299;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal-content {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+.modal {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: center;
+  z-index: 98;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
 
 .controles{
   display: grid;

@@ -6,6 +6,10 @@
         <h2>Generando...</h2>
       </div>
       </transition>
+      <transition name="fade">
+    <div v-if="showModal" class="modal">
+    </div>
+</transition>
 <div class="modal-content" v-if="showModal">
         <genser @close="activar"/>
       </div>

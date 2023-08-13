@@ -313,6 +313,8 @@ import consultas from '../views/Consultas/ConsultasView.vue';
 import ordenes from '../views/Ordenes_de_Compra/OrdenesCompraView.vue'
 import HistorialMedicoC from '../views/HistorialMedico/HistorialMedicoViewCliente.vue'
 import citasPendientesC from '../views/CitasPendientesCliente/CitasPendientesClienteView.vue';
+import citasTotales from '../views/Citas/CitasTotales.vue';
+import citasAceptadas from '../views/Citas/CitasAceptadas.vue';
 
 import serviciosesteticos from '../views/Servicios/serviciosesteticos.vue'
 import serviciosclinicos from '../views/Servicios/serviciosclinicos.vue'
