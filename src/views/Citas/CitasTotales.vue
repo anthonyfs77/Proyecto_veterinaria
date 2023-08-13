@@ -6,9 +6,6 @@
     <div class="app">
       <div class="controles">
         <div class="botones">
-          <RouterLink :to="{name: 'AgregarProducto'}" class="custom-link">
-            <add title="Agregar cita"/>
-          </RouterLink>
         </div>
       </div>
       <div class="table">
@@ -73,7 +70,8 @@ const seleccion = (id) => {
   inicial.value = true;
 
   cita_id.setVariable(msgID.value);
-  console.log('variable mandada ', msgID.value);
+  mandarEstatus.setVariable();
+  console.log('90909090',inicial.value)
 };
 
 

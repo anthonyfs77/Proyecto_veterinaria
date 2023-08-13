@@ -95,7 +95,7 @@ const data = async () => {
 
     try {
         const response = await axios.post('http://web.backend.com/verificacion', log);
-        console.log(response.data);
+        console.log(response.data.data);
         
         user.value = response.data.data;
         if (response.data.status === 200) {                                             // acceso confirmado
@@ -116,7 +116,7 @@ const data = async () => {
 };
 
 const redirectToPage = () => {                                            
-    router.push('/Home');
+    router.push('/cuerpo');
 };
 
 

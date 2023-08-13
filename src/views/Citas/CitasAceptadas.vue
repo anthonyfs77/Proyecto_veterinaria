@@ -6,9 +6,6 @@
     <div class="app">
       <div class="controles">
         <div class="botones">
-          <RouterLink :to="{name: 'AgregarProducto'}" class="custom-link">
-            <add title="Agregar cita"/>
-          </RouterLink>
         </div>
       </div>
       <div class="table">
@@ -38,7 +35,7 @@
 <script setup>
 import Rows from '../../components/citasComp/RowTableCitas.vue'
 import encabezado from '../../components/citasComp/CitasHeadre.vue'
-import mensaje from '../../components/citasComp/AceptacionCard.vue'
+import mensaje from '../../components/citasComp/CardAceptadas.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
 import axios from 'axios'
 import {ref} from 'vue'
@@ -68,12 +65,9 @@ const fetchData = async () => {
 
 const seleccion = (id) => {
   msgID.value = id;
-
-  // Cambiar el valor entre false y true
   inicial.value = true;
-
   cita_id.setVariable(msgID.value);
-  console.log('variable mandada ', msgID.value);
+  console.log('variable mandada cota', msgID.value);
 };
 
 

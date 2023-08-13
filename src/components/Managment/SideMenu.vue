@@ -23,9 +23,9 @@
                         <h4>Productos</h4>
                     </router-link>
 
-                      <router-link :to="{ name: '' }">
-                        <span class="material-symbols-outlined">inventory</span>
-                        <h4>Calendario</h4>
+                      <router-link :to="{ name: 'citasTotales' }">
+                        <span class="material-symbols-outlined">description</span>
+                        <h4>Citas</h4>
                       </router-link>
                 </div>
 
@@ -66,10 +66,10 @@
                 </div>
 
                 </div>
-                <div :to="{ name: 'principalMain' }" id="salir" @click="salir">
+                <router-link :to="{ name: 'principalMain' }" id="salir" @click="salir">
                   <span class="material-symbols-outlined">logout</span>
                   <h4>Salir</h4>
-                </div>
+                </router-link>
 
             </div>
         </aside>

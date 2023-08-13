@@ -1,9 +1,6 @@
 <template>
   <div class="app" @click="seleccion">
     <div class="column">
-      <div id="seleccion">
-        <input type="radio">
-      </div>
       <div>
         <p>{{ nombre }}</p>
       </div>

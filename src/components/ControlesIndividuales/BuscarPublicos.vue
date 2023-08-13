@@ -14,39 +14,29 @@
   <script setup>
   import axios from 'axios'
   import { ref, watch} from 'vue'
-  import {useStore} from '@/stores/counter.js'
-  import {StoreProdPublics, StoreSearch} from '@/stores/counter.js'
-  
-  
-  var nombre = ref();
-  var productos = ref([]);
-  const store = useStore()
-  const prodPublico = StoreProdPublics();
-  const find = StoreSearch();
-  
-  const fetchData = async () => {
-    try {
-      var response = await axios.post('http://web.backend.com/buscar', { nombre: nombre.value });
-      productos.value = response.data.data;
-      updateVariable();
-      console.log(productos.value);
-    } catch (error) {
-      console.log(error);
+  import {StoreProdInternos} from '@/stores/counter.js'
+  const prodPublico = StoreProdInternos();
+  const productos = ref([])
+
+
+  const nombre = ref('');
+
+  const fetchData = async () =>{
+    try{
+      // productos.value = response.data.data;
+      const response = await axios.post('http://web.backend.com/buscarInterno', {nombre: nombre.value});
+      productos.value = response.data.data
+      prodPublico.setVariable(productos.value)
+      console.log(productos.value)
+    } catch(error){
+      console.log(error)
     }
   }
-  
-  const updateVariable = () =>{
-    store.setVariable(productos)
-    prodPublico.setVariable(productos)
-    find.setVariable(nombre)
-  }
-  
-  
-  // Agregar un watcher para la variable "nombre"
-  watch(nombre, (newValue) => {
-    console.log(newValue);
+
+  watch(nombre, () => {
     fetchData()
   });
+
   </script>
   
   

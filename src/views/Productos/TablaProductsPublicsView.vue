@@ -16,7 +16,7 @@
             </div>
             <div class="izquierdo">
                 <div class="btns"></div>
-                <btn2 @click="filtrar" title="Aplicar"/><btn2  @click="fetchData" title="Limpiar"/>
+                <btn2 @click="filtrar" title="Aplicar"/><btn2  id="black" @click="fetchData" title="Limpiar"/>
             </div>
         </div>
         <div class="table">
@@ -43,12 +43,11 @@ import Rows from '../../components/Tabla/RowTablesProducts.vue';
 import search from '../../components/ControlesIndividuales/BuscarInterno.vue'
 import encabezado from '../../components/Tabla/header.vue'
 import add from '../../components/ControlesIndividuales/ingresar.vue'
-import btn from '../../components/ControlesIndividuales/BotonSencillo.vue'
 import btn2 from '../../components/ControlesIndividuales/BotonConEstilo.vue'
 import precios from '../../components/ControlesIndividuales/RangoPrecioPublicos.vue'
 import axios from 'axios'
-import { ref, onMounted, watch } from 'vue';
-import {useStore, productosPublicosR} from '@/stores/counter.js'
+import { ref, onMounted} from 'vue';
+import {productosPublicosR} from '@/stores/counter.js'
 import {StoreProdPublics} from '@/stores/counter.js'
 
 const prodPublico = StoreProdPublics();
@@ -112,6 +111,11 @@ const onInput = () =>{
 .izquierdo {
     display: flex;
     align-items: flex-end;
+}
+
+#black {
+  background-color: black;
+  color: white;
 }
 
 .rango {

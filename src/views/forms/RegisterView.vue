@@ -92,7 +92,7 @@
                         </div>
                         <span class="span">Olvidaste tu contraseña?</span>
                     </div>
-                    <button @click="registro" class="button-submit">Sign In</button>
+                    <button @click="verificarCorreo" class="button-submit">Sign In</button>
                     <p class="p">Ya tienes una cuenta?
                         <router-link :to="{ name: 'login' }" class="custom-link">
                             <span class="span">inicia sesion</span>
@@ -105,6 +105,10 @@
 
             <div v-if="mostrarError" class="err">
                 <error title="No se registro el usuario" />
+            </div>
+
+            <div v-if="mostrarErrorRegistro" class="err">
+                <error title="El correo ya existe" />
             </div>
 
 
@@ -134,9 +138,10 @@ const contrasena =      ref('');
 const confirmacion =    ref('');
 var mostrarError =      ref();
 var mostrarSuccess =    ref();
+var mostrarErrorRegistro = ref()
 const router =          useRouter();
 const tipo_usuario = ref('Cliente')
-
+const respuesta =       ref()
 
 const registro = () => {
     if (
@@ -146,7 +151,6 @@ const registro = () => {
         correo.value != '' &&
         tel1.value != ''
     ) {
-        console.log("Registro");
         data();
         mostrarSuccess.value = true;
 
@@ -157,15 +161,35 @@ const registro = () => {
 
 
     } else {
-        mostrarError.value = true;
-
+      mostrarError.value = true;
         setTimeout(() => {
-            mostrarError.value = false;
+          mostrarError.value = false;
         }, 5000);
-
-        console.log("campos sin verificar", mostrarError.value);
     }
 };
+
+const verificarCorreo = async () => {
+  try {
+    const response = await axios.post('http://web.backend.com/verificarCorreoR', {correo: correo.value});
+    respuesta.value = response.data.data
+
+    if (response.data.data.data) {
+      mostrarErrorRegistro.value = true;
+      setTimeout(() => {
+        mostrarErrorRegistro.value = false;
+      }, 5000);
+
+    } else {
+      registro()
+    }
+
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 
 const data = async () => {
     const reg = {
@@ -180,7 +204,6 @@ const data = async () => {
 
     try {
         const response = await axios.post('http://web.backend.com/registro', reg);
-        console.log(response.data);
     } catch (error) {
         console.error(error);
     }
