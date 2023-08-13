@@ -1,5 +1,6 @@
 <script>
 import InputFecha from "@/components/ControlesSencillos/InputFecha.vue";
+
 </script>
 <template>
       <div id="dialog-cita" style="border: 1px solid blue; width: 900px;">

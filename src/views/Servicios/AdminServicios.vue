@@ -1,12 +1,35 @@
 <template>
     <div class="pantalla">
       <transition name="fade">
+      <div class="display2" v-if="loading">
+        <load v-if=loading class="loader"/>
+        <h2>Generando...</h2>
+      </div>
+      </transition>
+      <transition name="fade">
     <div v-if="showModal" class="modal">
     </div>
 </transition>
 <div class="modal-content" v-if="showModal">
         <genser @close="activar"/>
       </div>
+ <transition name="fade">
+    <div v-if="segurar" class="modal">
+    </div>
+</transition>
+<div class="modal-content" v-if="segurar">
+  <div class="mesage">
+    <div class="asegurar">
+      <div class="msj">
+        <h5>¿Estas segur@ de {{ valorP }} este servicio?</h5>
+      </div>
+      <div class="botones">
+        <btn title="Cancelar" @click="cancelar"/>
+      <btnverde title="Continuar" @click="continuar"/>
+      </div>
+    </div>
+  </div>
+</div>
         <div class="header">
             <h4 class="texto">
                 SERVICIOS
@@ -22,7 +45,7 @@
                         <btn title="Agregar +" @click="activar"/>
                     </div>
                 </div>
-                <div class="content">
+                <div class="content" ref="contentPrivate">
                     <div class="services">
                     <CardService @ide="publicar"       
                     v-for="service in services"
@@ -32,6 +55,7 @@
                     :image="service.image"
                     :Description="service.descripcion"
                     :precio="service.precio"
+                    :ispublic="true"
                     />
                     </div>
                 </div>
@@ -40,9 +64,9 @@
                 <div class="titulo2">
                     PUBLICOS
                 </div>
-                <div class="content">
+                <div class="content" ref="contentPublic">
                     <div class="services">
-                    <CardService           
+                    <CardService @ide="publicar" 
                     v-for="serviceP in servicesP"
                     :Id="serviceP.id"
                     :Service="serviceP.nombre_TServicio"
@@ -50,6 +74,7 @@
                     :image="serviceP.image"
                     :Description="serviceP.descripcion"
                     :precio="serviceP.precio"
+                    :ispublic="false"
                     />
                 </div>
                 </div>
@@ -63,9 +88,18 @@
   import axios from 'axios';
   import CardService from '../../components/servicios/CardService.vue';
   import btn from '../../components/ControlesIndividuales/BotonBlanco.vue';
+  import btnverde from '../../components/ControlesIndividuales/BotonAntho.vue';
   import genser from '@/components/servicios/ServiceForm.vue';
+  import load from '../../components/loaders/loaderPrincipal.vue'
 
   const showModal = ref(false);
+const segurar = ref(false);
+const ispublic = ref(false);
+const idd = ref(0);
+const valorP = ref('');
+const loading =ref(false);
+
+
 
   const activar= async () => {
   if(showModal.value === false)
@@ -109,11 +143,101 @@ const serviciospub = async () => {
 onMounted(serviciospriv);
 onMounted(serviciospub);
 
+const publicar = (data) =>{
+  const { id, isPublic } = data;
+  ispublic.value = isPublic
+  idd.value = id
+  segurar.value = true
+  if(isPublic === true){
+    valorP.value = 'publicar';
+  }else if(isPublic === false){
+    valorP.value = 'despublicar';
+  }
+}
+
+const cancelar = () =>{
+  segurar.value = false
+}
+
+const continuar = async () => {
+  loading.value=true;
+  try {
+    const jsonData = {
+      id_servicio: idd.value
+    };
+    const response = await axios.post('http://web.Backend.com/publicarono', jsonData);
+    if(response.status === 200){
+      segurar.value = false;
+      location.reload();
+      if(ispublic.value === true){
+        msg.value = 'se publico correctamente';
+      } else if (ispublic.value === false){
+        msg.value = 'se despublico correctamente';
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  loading.value=false;
+};
+
+
+
 
   </script>
   
   <style scoped>
 
+.exito{
+  color: rgb(72, 255, 66);
+}
+
+.loader{
+  position: relative;
+    z-index: 300;
+    width: 25%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.display2{
+  background-color: rgba(95, 95, 95, 0.4);
+  height: 100%;
+  width: 100%;
+  z-index: 299;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+  .botones{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row-start: 2;
+
+  height: 100%;
+  width: 100%;
+  }
+
+.msj{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row-start: 1;
+  height: 100%;
+  width: 100%;
+}
+.mesage{
+  width: 40%;
+  height: 20vh;
+  display: grid;
+  border-radius: 30px;
+  box-shadow: 0 2rem 3rem rgba(255, 255, 255, 0.363);
+  background-color: rgb(241, 241, 241);
+  grid-template-rows: 50% 50% ;
+}
 .modal-content {
   display: flex;
   position: absolute;
@@ -121,7 +245,7 @@ onMounted(serviciospub);
   justify-content: center;
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 200;
 }
 .modal {
   display: flex;
@@ -161,6 +285,7 @@ onMounted(serviciospub);
     border-radius: 15px;
     font-weight: bold;
     height: 20vh;
+    grid-row-start: 1;
   }
   .titulo2{
     display: flex;
@@ -172,9 +297,11 @@ onMounted(serviciospub);
     border-radius: 15px;
     font-weight: bold;
     height: 20vh;
+    grid-row-start: 1;
   }
 
   .services{
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 5rem;
@@ -182,13 +309,13 @@ onMounted(serviciospub);
   
 
   .content {
+    flex-direction: column;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
-  width: 100%;
   height: 100%;
-  flex-wrap:wrap-reverse;
-  overflow:auto;
+  overflow:scroll;
+  grid-row-start: 2;
 }
 .servi{
     display: grid;
@@ -196,7 +323,7 @@ onMounted(serviciospub);
     margin: 20px ;
     box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     border-radius: 15px;
-    overflow:hidden;
+    overflow:auto;
     height: 90%;
   }
   .content::-webkit-scrollbar {
@@ -235,6 +362,8 @@ onMounted(serviciospub);
     height: 100vh;
     grid-template-rows: 8% 92%;
     grid-template-columns: 1fr;
+    font-family: 'comfortaa';
+    font-size: small;
   }
 
 

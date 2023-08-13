@@ -92,7 +92,7 @@ function login() {
     correo: email.value,
     contra: pass.value
   })
-  fetch('http://web.backend.com/auth', {
+  fetch('http://web.Backend.com/auth', {
     method: 'POST',
     body: JSON.stringify(usuario.value),
   }).then(response => response.json())

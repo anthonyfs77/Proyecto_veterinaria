@@ -47,6 +47,10 @@
           <option>Gato</option>
       </select>
       <br>
+      <span id="Warning" class="material-symbols-outlined">warning</span><label for="Warning" class="w">No se atienden especies más allá de las establecidas
+      en las opciones</label>
+      <label class="w2" for="Warning">En caso de emergencia, puedes contactarnos a través de nuestros medios de contacto</label>
+      <br>
       <button type="submit">Registrar mascota.</button><br>
       <p id="BackCitas" @click="BackCitas">Salir</p>
     </form>
@@ -197,34 +201,29 @@ form textarea {
   width: 100%;
 }
 #Exit:hover{
-  width: 22%;
-  border-bottom: 1px solid #f6bb46;
-  cursor: pointer;
-}
-#Buscar:hover{
-  width:59%;
-  border-bottom: 1px solid #f6bb46;
+  color: #f6bb46;
   cursor: pointer;
 }
 
+
 #Registro:hover{
-  width:51%;
-  border-bottom: 1px solid #40a0ee; /*40a0ee f6bb46*/
+
+  color: #0890b9; /*40a0ee f6bb46*/
   cursor: pointer;
 }
 
 #Registro{
-  color: #40a0ee;
+  color: #002bff;
 }
 
 #BackCitas:hover{
   width: 13%;
-  border-bottom: 1px solid red;
+  color: #ff0000;
   cursor: pointer;
 }
 
 #BackCitas{
-  color: red;
+  color: #600202;
 }
 @media (max-width: 600px) {
   .card {
@@ -257,8 +256,9 @@ border-radius: 10px;
 padding: 20px;
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
-.Servicios {
-  height: 100px;
-  overflow: auto;
+
+#Warning, .w, .w2{
+  color: red;
 }
+
 </style>

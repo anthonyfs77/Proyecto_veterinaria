@@ -5,9 +5,19 @@
         <div class="decoracion">
         </div>
         <ul>
-          <li>Mascota: {{cita.Nombre}}</li>
-          <li>Fecha: {{cita.Fecha}}</li>
-          <li>Motivo: {{cita.Motivo}}</li>
+          <li id="li1"><label class="labels" for="li1">Mascota:</label> {{cita.Nombre}}</li>
+          <li id="li2"><label class="labels" for="li2">Fecha:</label> {{cita.Fecha}}</li>
+          <li id="li3"><label class="labels" for="li3">Motivo:</label> {{cita.Motivo}}</li>
+          <li id="li4"><label class="labels" for="li4">Estatus:</label>
+            <span :style="{
+                            'background-color': cita.Estatus === 'Aceptada' ? 'green' : (cita.Estatus === 'Pendiente' ? 'grey' : 'transparent'),
+                            'color': cita.Estatus === 'Aceptada' || cita.Estatus === 'Pendiente' ? 'white' : 'black'
+                          }">
+                  {{ cita.Estatus }}
+            </span>
+          </li>
+          <br>
+          <li id="li5"><label class="labels" for="li5">En caso de que quieras cancelar tu cita, contáctanos</label></li>
         </ul>
       </div>
 
@@ -51,8 +61,8 @@ onMounted(citaPendientes);
 
 .carta{
   border-radius: 8px;
-  width: 390px;
-  height: 150px;
+  width: 395px;
+  height: 250px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 
 }
@@ -69,5 +79,8 @@ onMounted(citaPendientes);
   height: 20px;
   background-color: #f3ae23;
 
+}
+.labels{
+  font-weight: bold;
 }
 </style>
