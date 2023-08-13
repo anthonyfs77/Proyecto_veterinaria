@@ -3,7 +3,11 @@
     <form @submit.prevent="agendarCita">
       <div>
         <label for="fechaCita">Fecha de la cita:</label>
-        <input type="datetime-local" id="fechaCita" v-model="fechaCita" />
+        <input type="datetime-local" id="fechaCita" v-model="fechaCita" @input="validarFecha" />
+      </div>
+      <div v-show="showFechaOcupada" class="error-message">
+        Ya existe una cita para esta fecha.
+        Puedes seleccionar una con una hora de diferencia
       </div>
       <div>
         <label for="nombreMascota"  >selecciona tu mascota</label>
@@ -21,7 +25,7 @@
         <label for="motivo">Motivo de la cita:</label>
         <textarea id="motivo" v-model="motivo"></textarea>
       </div>
-      <button type="submit">Agendar cita</button><br>
+      <button type="submit" v-show="showButton">Agendar cita</button><br>
       <RouterLink  :to="{name: 'cuerpo'}" class="custom-link"><p id="Exit">Volver al inicio</p></RouterLink>
     </form>
   </div>
@@ -167,6 +171,32 @@ const FiltroMascotas = async () => {
 };
 onMounted(FiltroMascotas);
 
+const showFechaOcupada = ref(false);
+const showButton = ref(true);
+
+const validarFecha = async () => {
+  const fechaSeleccionada = new Date(fechaCita.value)
+  try {
+    const response = await axios.post('http://web.Backend.com/ValidacionFechas');
+    const fechasValidadas = response.data.data;
+    const fechasExistentes = fechasValidadas.some(cita => new Date(cita.fecha_cita).getTime() === fechaSeleccionada.getTime())
+    console.log(fechasExistentes);
+
+    if (fechasExistentes){
+      showFechaOcupada.value = true;
+      showButton.value = false;
+    }else{
+      showFechaOcupada.value = false;
+      showButton.value = true;
+    }
+
+  }catch (error){
+    console.error(error);
+  }
+}
+
+
+
 </script>
 
 <style scoped>
@@ -258,6 +288,10 @@ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 #Warning, .w, .w2{
+  color: red;
+}
+
+.error-message{
   color: red;
 }
 
